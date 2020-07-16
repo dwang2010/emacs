@@ -61,6 +61,9 @@
 ;; remove emacs bell noise
 (setq-default visible-bell 1)
 
+;; disable visible bell flashing
+(setq-default ring-bell-function 'ignore)
+
 ;; ------------------------------------------------------------------------
 ;; adjusted key bindings
 ;; ------------------------------------------------------------------------
@@ -121,6 +124,7 @@
 
 ;; default font face
 (set-face-attribute 'default nil :family "Consolas" :height 100)
+(setq-default line-spacing 0.1)
 
 ;; non-terminal display customization
 (if (display-graphic-p)
@@ -128,10 +132,10 @@
       (load-theme 'sanityinc-tomorrow-eighties)
       (setq default-frame-alist ; change default frame parameters
             '(
-              (width . 100)              ; window width (chars, less line numbers)
-              (height . 50)              ; window height (rows)
+              (width . 105)              ; window width (chars, less line numbers)
+              (height . 55)              ; window height (rows)
               (cursor-type . bar)        ; vertical bar cursor
-              (cursor-color . "#fd9d4f") ; orange cursor color
+              (cursor-color . "#ff7f00") ; orange cursor color
               (left-fringe . 6)          ; half width left fringe width (def: 8)
               (right-fringe . 0)         ; effectively disable right fringe
               )
