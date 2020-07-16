@@ -1,0 +1,8 @@
+# Folders
+auto-save-list
+elpa
+transient
+
+# Temp
+*desktop*
+session*
