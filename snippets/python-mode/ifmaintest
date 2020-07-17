@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: ifmaintest
+# key: ifmt
+# --
+if (__name__ == '__main__'):
+   test = Solution()
+   print(test.${1:function}(${2:args}))

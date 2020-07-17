@@ -11,7 +11,14 @@
  '(custom-safe-themes
    (quote
     ("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default)))
- '(package-selected-packages (quote (python iy-go-to-char magit ahk-mode org))))
+ '(package-selected-packages
+   (quote
+    (yasnippet
+     python
+     iy-go-to-char
+     magit
+     ahk-mode
+     org))))
 
 ;; ------------------------------------------------------------------------
 ;; default behaviors
@@ -86,10 +93,19 @@
 (global-set-key (kbd "C-c f") 'iy-go-to-char)
 (global-set-key (kbd "C-c b") 'iy-go-to-char-backward)
 
+;; unbind ctrl-z hotkey to suspend frame
+(global-unset-key (kbd "C-z"))
+
+;; ------------------------------------------------------------------------
+;; yasnippet settings
+;; ------------------------------------------------------------------------
+;; enable yasnippets; use default folder ~/.emacs.d/snippets
+(yas-global-mode 1)
+
 ;; ------------------------------------------------------------------------
 ;; magit settings
 ;; ------------------------------------------------------------------------
-(setq magit-refresh-status-buffer nil)
+;(setq magit-refresh-status-buffer nil)
 
 ;; ------------------------------------------------------------------------
 ;; verilog-mode settings
