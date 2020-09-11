@@ -3,5 +3,6 @@
 # key: ifmt
 # --
 if (__name__ == '__main__'):
+   print ("test")
    test = Solution()
    print(test.${1:function}(${2:args}))
