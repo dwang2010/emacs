@@ -96,6 +96,9 @@
 ;; unbind ctrl-z hotkey to suspend frame
 (global-unset-key (kbd "C-z"))
 
+;; hideshow toggle block
+(global-set-key (kbd "<C-tab>") 'hs-toggle-hiding)
+
 ;; ------------------------------------------------------------------------
 ;; yasnippet settings
 ;; ------------------------------------------------------------------------
@@ -130,6 +133,11 @@
 ;; python related settings
 ;; ------------------------------------------------------------------------
 (setq python-shell-interpreter "/usr/bin/python3")
+
+;; ------------------------------------------------------------------------
+;; hideshow related settings
+;; ------------------------------------------------------------------------
+(add-hook 'prog-mode-hook #'hs-minor-mode)
 
 ;; ------------------------------------------------------------------------
 ;; display customization
