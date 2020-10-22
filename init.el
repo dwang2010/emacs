@@ -90,8 +90,8 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; iy-go-to-char
-(global-set-key (kbd "C-c f") 'iy-go-to-char)
-(global-set-key (kbd "C-c b") 'iy-go-to-char-backward)
+(global-set-key (kbd "C-f") 'iy-go-to-char)
+(global-set-key (kbd "C-b") 'iy-go-to-char-backward)
 
 ;; unbind ctrl-z hotkey to suspend frame
 (global-unset-key (kbd "C-z"))
