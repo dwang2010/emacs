@@ -71,6 +71,10 @@
 ;; disable visible bell flashing
 (setq-default ring-bell-function 'ignore)
 
+;; allow region uppercase / lowercase
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
 ;; ------------------------------------------------------------------------
 ;; adjusted key bindings
 ;; ------------------------------------------------------------------------
@@ -98,6 +102,9 @@
 
 ;; hideshow toggle block
 (global-set-key (kbd "<C-tab>") 'hs-toggle-hiding)
+
+;; change C-x s to same as C-x C-s
+(global-set-key (kbd "C-x s") 'save-buffer)
 
 ;; ------------------------------------------------------------------------
 ;; yasnippet settings
