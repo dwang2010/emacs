@@ -13,12 +13,7 @@
     ("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default)))
  '(package-selected-packages
    (quote
-    (yasnippet
-     python
-     iy-go-to-char
-     magit
-     ahk-mode
-     org))))
+    (dumb-jump yasnippet python iy-go-to-char magit ahk-mode org))))
 
 ;; ------------------------------------------------------------------------
 ;; default behaviors
@@ -116,6 +111,11 @@
 ;; magit settings
 ;; ------------------------------------------------------------------------
 ;(setq magit-refresh-status-buffer nil)
+
+;; ------------------------------------------------------------------------
+;; dumbjump settings
+;; ------------------------------------------------------------------------
+(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
 ;; ------------------------------------------------------------------------
 ;; verilog-mode settings
