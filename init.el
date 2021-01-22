@@ -71,6 +71,14 @@
 (put 'upcase-region 'disabled nil)
 
 ;; ------------------------------------------------------------------------
+;; date display in mode bar, without mail notice, without load average
+;; ------------------------------------------------------------------------
+(setq-default display-time-format "%Y/%m/%d")
+(setq-default display-time-mail-string "")
+(setq-default display-time-default-load-average nil)
+(display-time-mode t)
+
+;; ------------------------------------------------------------------------
 ;; adjusted key bindings
 ;; ------------------------------------------------------------------------
 ;; bind align-regexp
