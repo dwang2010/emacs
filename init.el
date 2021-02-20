@@ -13,7 +13,7 @@
     ("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default)))
  '(package-selected-packages
    (quote
-    (dumb-jump yasnippet python iy-go-to-char magit ahk-mode org))))
+    (avy dumb-jump yasnippet python magit ahk-mode org))))
 
 ;; ------------------------------------------------------------------------
 ;; default behaviors
@@ -96,9 +96,8 @@
 ;; magit status
 (global-set-key (kbd "C-x g") 'magit-status)
 
-;; iy-go-to-char
-(global-set-key (kbd "C-f") 'iy-go-to-char)
-(global-set-key (kbd "C-b") 'iy-go-to-char-backward)
+;; avy char jump
+(global-set-key (kbd "C-f") 'avy-goto-char)
 
 ;; unbind ctrl-z hotkey to suspend frame
 (global-unset-key (kbd "C-z"))
@@ -114,11 +113,6 @@
 ;; ------------------------------------------------------------------------
 ;; enable yasnippets; use default folder ~/.emacs.d/snippets
 (yas-global-mode 1)
-
-;; ------------------------------------------------------------------------
-;; magit settings
-;; ------------------------------------------------------------------------
-;(setq magit-refresh-status-buffer nil)
 
 ;; ------------------------------------------------------------------------
 ;; dumbjump settings
@@ -190,3 +184,7 @@
   (message "emacs startup in %s."
            (format "%.2f seconds"
                    (float-time (time-subtract after-init-time before-init-time)))))
+(custom-set-faces
+ '(avy-lead-face ((t (:background "dark red" :foreground "white"))))
+ '(avy-lead-face-0 ((t (:background "brown" :foreground "white"))))
+ '(avy-lead-face-2 ((t (:background "OrangeRed2" :foreground "white")))))
