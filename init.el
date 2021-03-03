@@ -99,8 +99,9 @@
 ;; avy char jump
 (global-set-key (kbd "C-f") 'avy-goto-char)
 
-;; unbind ctrl-z hotkey to suspend frame
+;; unbind hotkeys to suspend frame
 (global-unset-key (kbd "C-z"))
+(global-unset-key (kbd "C-x C-z"))
 
 ;; hideshow toggle block
 (global-set-key (kbd "<C-tab>") 'hs-toggle-hiding)
