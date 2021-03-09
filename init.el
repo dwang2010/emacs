@@ -116,6 +116,13 @@
 (global-set-key (kbd "<C-M-down>") 'windmove-down)
 
 ;; ------------------------------------------------------------------------
+;; avy settings
+;; ------------------------------------------------------------------------
+(setq-default avy-keys '(?a ?s ?d ?f ?j ?k ?l ?\;))
+(setq-default avy-style 'de-bruijn)
+(setq-default avy-background nil)
+
+;; ------------------------------------------------------------------------
 ;; yasnippet settings
 ;; ------------------------------------------------------------------------
 ;; enable yasnippets; use default folder ~/.emacs.d/snippets
@@ -192,6 +199,6 @@
            (format "%.2f seconds"
                    (float-time (time-subtract after-init-time before-init-time)))))
 (custom-set-faces
- '(avy-lead-face ((t (:background "dark red" :foreground "white"))))
- '(avy-lead-face-0 ((t (:background "brown" :foreground "white"))))
- '(avy-lead-face-2 ((t (:background "OrangeRed2" :foreground "white")))))
+ '(avy-lead-face ((t (:background "red2" :foreground "white"))))
+ '(avy-lead-face-0 ((t (:background "saddle brown" :foreground "white"))))
+ '(avy-lead-face-2 ((t (:background "saddle brown" :foreground "white")))))
