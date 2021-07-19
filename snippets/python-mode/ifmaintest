@@ -6,7 +6,8 @@ if (__name__ == '__main__'):
    print ("test")
    test = Solution()
 
-   t0 = []
+   t0 = [ (),
+   ]
 
    for ${1:args},res in t0:
        tmp = test.${2:function}($1)

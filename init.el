@@ -97,7 +97,7 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; avy char jump
-(global-set-key (kbd "C-f") 'avy-goto-char)
+(global-set-key (kbd "C-f") 'avy-goto-char-2)
 
 ;; unbind hotkeys to suspend frame
 (global-unset-key (kbd "C-z"))
