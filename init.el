@@ -179,8 +179,8 @@
       (load-theme 'sanityinc-tomorrow-eighties)
       (setq default-frame-alist ; change default frame parameters
             '(
-              (width . 105)              ; window width (chars, less line numbers)
-              (height . 55)              ; window height (rows)
+              (width . 65)              ; window width (chars, less line numbers)
+              (height . 35)              ; window height (rows)
               (cursor-type . bar)        ; vertical bar cursor
               (cursor-color . "#ff7f00") ; orange cursor color
               (left-fringe . 6)          ; half width left fringe width (def: 8)
