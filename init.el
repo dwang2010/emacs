@@ -1,6 +1,10 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa-stable" . "https://melpa.org/packages/") t)
 
+(when (and (equal emacs-version "27.2")
+           (eql system-type 'darwin))
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
+
 ;; reduce number of garbage collections to reduce startup time
 (setq gc-cons-threshold 50000000) ; 50MB
 
@@ -9,11 +13,9 @@
 ;; ------------------------------------------------------------------------
 (custom-set-variables
  '(custom-safe-themes
-   (quote
-    ("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default)))
+   '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   (quote
-    (avy dumb-jump yasnippet python magit ahk-mode org))))
+   '(emojify avy dumb-jump yasnippet python magit org)))
 
 ;; ------------------------------------------------------------------------
 ;; default behaviors
@@ -115,6 +117,16 @@
 (global-set-key (kbd "<C-M-up>") 'windmove-up)
 (global-set-key (kbd "<C-M-down>") 'windmove-down)
 
+;; mac specific keybinds
+(if (eql system-type 'darwin)
+    (progn
+      (setq-default mac-option-modifier 'meta)
+      (setq-default mac-command-modifier 'hyper)
+      (global-set-key [(hyper f)] 'toggle-frame-fullscreen)
+      (global-set-key [(hyper m)] 'toggle-frame-maximized)
+      )
+  )
+
 ;; ------------------------------------------------------------------------
 ;; avy settings
 ;; ------------------------------------------------------------------------
@@ -132,6 +144,11 @@
 ;; dumbjump settings
 ;; ------------------------------------------------------------------------
 (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+
+;; ------------------------------------------------------------------------
+;; emojify settings
+;; ------------------------------------------------------------------------
+(add-hook 'after-init-hook #'global-emojify-mode)
 
 ;; ------------------------------------------------------------------------
 ;; verilog-mode settings
@@ -155,7 +172,9 @@
 ;; ------------------------------------------------------------------------
 ;; python related settings
 ;; ------------------------------------------------------------------------
-(setq python-shell-interpreter "/usr/bin/python3")
+(if (eql system-type 'darwin)
+    (setq python-shell-interpreter "/usr/local/bin/python3")
+    (setq python-shell-interpreter "/usr/bin/python3"))
 
 ;; ------------------------------------------------------------------------
 ;; hideshow related settings
@@ -169,8 +188,10 @@
 (add-to-list 'load-path "~/.emacs.d/themes/")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
-;; default font face
-(set-face-attribute 'default nil :family "Consolas" :height 100)
+;; default font face, based on OS
+(if (eql system-type 'darwin)
+    (set-face-attribute 'default nil :family "Consolas" :height 125)
+    (set-face-attribute 'default nil :family "Consolas" :height 100))
 (setq-default line-spacing 0.1)
 
 ;; non-terminal display customization
@@ -179,8 +200,8 @@
       (load-theme 'sanityinc-tomorrow-eighties)
       (setq default-frame-alist ; change default frame parameters
             '(
-              (width . 65)              ; window width (chars, less line numbers)
-              (height . 35)              ; window height (rows)
+              (width . 85)               ; window width (chars, less line numbers)
+              (height . 50)              ; window height (rows)
               (cursor-type . bar)        ; vertical bar cursor
               (cursor-color . "#ff7f00") ; orange cursor color
               (left-fringe . 6)          ; half width left fringe width (def: 8)
