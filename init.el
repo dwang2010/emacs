@@ -130,7 +130,7 @@
 ;; ------------------------------------------------------------------------
 ;; avy settings
 ;; ------------------------------------------------------------------------
-(setq-default avy-keys '(?a ?s ?d ?f ?j ?k ?l ?\;))
+(setq-default avy-keys '(?a ?s ?d ?f ?j ?k ?l ?u ?i ?o))
 (setq-default avy-style 'de-bruijn)
 (setq-default avy-background nil)
 
