@@ -1,5 +1,5 @@
 (package-initialize)
-(add-to-list 'package-archives '("melpa-stable" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 (when (and (equal emacs-version "27.2")
            (eql system-type 'darwin))
@@ -15,7 +15,7 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   '(emojify avy dumb-jump yasnippet python magit org)))
+   '(highlight-indent-guides emojify avy dumb-jump yasnippet python magit org)))
 
 ;; ------------------------------------------------------------------------
 ;; default behaviors
@@ -72,6 +72,9 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
+;; mouse settings
+(setq-default mouse-wheel-progressive-speed nil)
+
 ;; ------------------------------------------------------------------------
 ;; date display in mode bar, without mail notice, without load average
 ;; ------------------------------------------------------------------------
@@ -99,7 +102,7 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; avy char jump
-(global-set-key (kbd "C-f") 'avy-goto-char-2)
+(global-set-key (kbd "C-f") 'avy-goto-char)
 
 ;; unbind hotkeys to suspend frame
 (global-unset-key (kbd "C-z"))
@@ -135,9 +138,8 @@
 (setq-default avy-background nil)
 
 ;; ------------------------------------------------------------------------
-;; yasnippet settings
+;; yasnippet settings - use default folder ~/.emacs.d/snippets
 ;; ------------------------------------------------------------------------
-;; enable yasnippets; use default folder ~/.emacs.d/snippets
 (yas-global-mode 1)
 
 ;; ------------------------------------------------------------------------
@@ -149,6 +151,15 @@
 ;; emojify settings
 ;; ------------------------------------------------------------------------
 (add-hook 'after-init-hook #'global-emojify-mode)
+
+;; ------------------------------------------------------------------------
+;; highlight indentation / indent guides settings
+;; ------------------------------------------------------------------------
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(setq-default highlight-indent-guides-method 'column)
+
+;(with-eval-after-load 'highlight-indentation
+;  (set-face-background 'highlight-indentation-face "#c3b3b3"))
 
 ;; ------------------------------------------------------------------------
 ;; verilog-mode settings
@@ -179,7 +190,7 @@
 ;; ------------------------------------------------------------------------
 ;; hideshow related settings
 ;; ------------------------------------------------------------------------
-(add-hook 'prog-mode-hook #'hs-minor-mode)
+(add-hook 'prog-mode-hook 'hs-minor-mode)
 
 ;; ------------------------------------------------------------------------
 ;; display customization
