@@ -72,6 +72,9 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
+;; allow dired-find-alternate-file
+(put 'dired-find-alternate-file 'disabled nil)
+
 ;; mouse settings
 (setq-default mouse-wheel-progressive-speed nil)
 
@@ -101,15 +104,9 @@
 ;; magit status
 (global-set-key (kbd "C-x g") 'magit-status)
 
-;; avy char jump
-(global-set-key (kbd "C-f") 'avy-goto-char)
-
 ;; unbind hotkeys to suspend frame
 (global-unset-key (kbd "C-z"))
 (global-unset-key (kbd "C-x C-z"))
-
-;; hideshow toggle block
-(global-set-key (kbd "<C-tab>") 'hs-toggle-hiding)
 
 ;; change C-x s to same as C-x C-s
 (global-set-key (kbd "C-x s") 'save-buffer)
@@ -131,11 +128,23 @@
   )
 
 ;; ------------------------------------------------------------------------
-;; avy settings
+;; avy settings (jump to char!)
 ;; ------------------------------------------------------------------------
-(setq-default avy-keys '(?a ?s ?d ?f ?j ?k ?l ?u ?i ?o))
+(global-set-key (kbd "C-f") 'avy-goto-char)
+(setq-default avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 (setq-default avy-style 'de-bruijn)
-(setq-default avy-background nil)
+(setq-default avy-background t)
+
+;; ------------------------------------------------------------------------
+;; paren mode - highlight matching braces!
+;; ------------------------------------------------------------------------
+(defun cfg-paren-matching ()
+  (setq-default show-paren-delay 0)
+  (show-paren-mode 1)
+  (set-face-attribute 'show-paren-match nil
+                      :background "#00ffff"
+                      :foreground "#000000"))
+(add-hook 'after-init-hook 'cfg-paren-matching)
 
 ;; ------------------------------------------------------------------------
 ;; yasnippet settings - use default folder ~/.emacs.d/snippets
@@ -143,7 +152,7 @@
 (yas-global-mode 1)
 
 ;; ------------------------------------------------------------------------
-;; dumbjump settings
+;; dumbjump settings - jump to definition!
 ;; ------------------------------------------------------------------------
 (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
@@ -160,6 +169,26 @@
 
 ;(with-eval-after-load 'highlight-indentation
 ;  (set-face-background 'highlight-indentation-face "#c3b3b3"))
+
+;; ------------------------------------------------------------------------
+;; hideshow settings - code folding!
+;; ------------------------------------------------------------------------
+(add-hook 'prog-mode-hook #'hs-minor-mode)
+
+(global-set-key (kbd "<C-tab>") 'hs-toggle-hiding)
+(global-set-key (kbd "<C-M-tab>") 'hs-hide-all)
+
+;; ------------------------------------------------------------------------
+;; company mode - complete anything!
+;; ------------------------------------------------------------------------
+(add-hook 'after-init-hook 'global-company-mode)
+
+;; ------------------------------------------------------------------------
+;; python related settings
+;; ------------------------------------------------------------------------
+(if (eql system-type 'darwin)
+    (setq python-shell-interpreter "/usr/local/bin/python3")
+    (setq python-shell-interpreter "/usr/bin/python3"))
 
 ;; ------------------------------------------------------------------------
 ;; verilog-mode settings
@@ -179,18 +208,6 @@
 (setq-default verilog-indent-level-module 3)
 (setq-default verilog-indent-lists t)
 (setq-default verilog-minimum-comment-distance 20)
-
-;; ------------------------------------------------------------------------
-;; python related settings
-;; ------------------------------------------------------------------------
-(if (eql system-type 'darwin)
-    (setq python-shell-interpreter "/usr/local/bin/python3")
-    (setq python-shell-interpreter "/usr/bin/python3"))
-
-;; ------------------------------------------------------------------------
-;; hideshow related settings
-;; ------------------------------------------------------------------------
-(add-hook 'prog-mode-hook 'hs-minor-mode)
 
 ;; ------------------------------------------------------------------------
 ;; display customization
@@ -233,4 +250,5 @@
 (custom-set-faces
  '(avy-lead-face ((t (:background "red2" :foreground "white"))))
  '(avy-lead-face-0 ((t (:background "saddle brown" :foreground "white"))))
+ '(avy-lead-face-1 ((t (:background "#008b8b" :foreground "black"))))
  '(avy-lead-face-2 ((t (:background "saddle brown" :foreground "white")))))
