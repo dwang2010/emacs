@@ -267,3 +267,18 @@
  '(avy-lead-face-0 ((t (:background "saddle brown" :foreground "white"))))
  '(avy-lead-face-1 ((t (:background "#008b8b" :foreground "black"))))
  '(avy-lead-face-2 ((t (:background "saddle brown" :foreground "white")))))
+
+;; -----------------------------------------
+;; notes for when you forget
+;; -----------------------------------------
+; (from source code)
+; M-. : jump to function definition (xref-find-definitions)
+; M-, : return to last position     (xref-pop-marker-stack)
+; M-? : jump to function invocation (xref-find-references)
+
+; (in xref buffer)
+; C-o : open file in new pane, but stay in xref buffer (xref-show-location-at-point)
+
+; (general searching)
+; C-s C-w : search for word after current mark
+; C-w     : subsequent presses increases search with additional words
