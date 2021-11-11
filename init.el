@@ -75,6 +75,9 @@
 ;; allow dired-find-alternate-file
 (put 'dired-find-alternate-file 'disabled nil)
 
+;; backups in emacs directory
+(setq-default backup-directory-alist '(("." . "~/.emacs.d/backups")))
+
 ;; mouse settings
 (setq-default mouse-wheel-progressive-speed nil)
 
@@ -110,6 +113,7 @@
 ;; unbind hotkeys to suspend frame
 (global-unset-key (kbd "C-z"))
 (global-unset-key (kbd "C-x C-z"))
+(global-unset-key (kbd "C-x C-d"))
 
 ;; change C-x s to same as C-x C-s
 (global-set-key (kbd "C-x s") 'save-buffer)
