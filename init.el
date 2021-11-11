@@ -185,6 +185,18 @@
 ;; company mode - complete anything!
 ;; ------------------------------------------------------------------------
 (add-hook 'after-init-hook 'global-company-mode)
+;; ------------------------------------------------------------------------
+;; org-mode related settings
+;; ------------------------------------------------------------------------
+(setq-default org-hide-emphasis-markers t)
+
+(setq org-emphasis-alist
+  '(("*" (bold :foreground "Orange"))
+    ("/" italic)
+    ("_" underline)
+    ("=" (:background "maroon" :foreground "white"))
+    ("~" (:background "deep sky blue" :foreground "MidnightBlue"))
+    ("+" (:strike-through t))))
 
 ;; ------------------------------------------------------------------------
 ;; python related settings
