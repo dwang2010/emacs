@@ -78,6 +78,9 @@
 ;; mouse settings
 (setq-default mouse-wheel-progressive-speed nil)
 
+;; increase xref highlight fade delay time
+(setq-default pulse-delay 0.09)
+
 ;; ------------------------------------------------------------------------
 ;; date display in mode bar, without mail notice, without load average
 ;; ------------------------------------------------------------------------
