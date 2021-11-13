@@ -15,7 +15,7 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   '(highlight-indent-guides emojify avy dumb-jump yasnippet python magit org)))
+   '(company highlight-indent-guides emojify avy dumb-jump yasnippet python magit org)))
 
 ;; ------------------------------------------------------------------------
 ;; default behaviors
@@ -86,6 +86,13 @@
 
 ;; exit confirmation (since slippery fingers sometimes)
 (setq-default confirm-kill-emacs 'y-or-n-p)
+
+;; ensure scrollbars don't appear when creating new frames
+(defun rmv-scroll-bars (frame)
+  (modify-frame-parameters frame
+                           '((vertical-scroll-bars . nil)
+                             (horizontal-scroll-bars . nil))))
+(add-hook 'after-make-frame-functions 'rmv-scroll-bars)
 
 ;; ------------------------------------------------------------------------
 ;; date display in mode bar, without mail notice, without load average
