@@ -84,6 +84,9 @@
 ;; increase xref highlight fade delay time
 (setq-default pulse-delay 0.09)
 
+;; exit confirmation (since slippery fingers sometimes)
+(setq-default confirm-kill-emacs 'y-or-n-p)
+
 ;; ------------------------------------------------------------------------
 ;; date display in mode bar, without mail notice, without load average
 ;; ------------------------------------------------------------------------
@@ -140,7 +143,7 @@
 (global-set-key (kbd "C-f") 'avy-goto-char)
 (setq-default avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 (setq-default avy-style 'de-bruijn)
-(setq-default avy-background t)
+(setq-default avy-background nil)
 
 ;; ------------------------------------------------------------------------
 ;; paren mode - highlight matching braces!
@@ -156,7 +159,7 @@
 ;; ------------------------------------------------------------------------
 ;; yasnippet settings - use default folder ~/.emacs.d/snippets
 ;; ------------------------------------------------------------------------
-(yas-global-mode 1)
+;(yas-global-mode 1)
 
 ;; ------------------------------------------------------------------------
 ;; dumbjump settings - jump to definition!
