@@ -323,3 +323,7 @@
 ; (general searching)
 ; C-s C-w : search for word after current mark
 ; C-w     : subsequent presses increases search with additional words
+
+; (helpful commands)
+; list-faces-display : show current font face definition (color / style)
+; list-colors-display : show displayable colors
