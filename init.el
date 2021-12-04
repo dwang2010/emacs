@@ -181,13 +181,8 @@
 ;; ------------------------------------------------------------------------
 ;; paren mode - highlight matching braces!
 ;; ------------------------------------------------------------------------
-(defun cfg-paren-matching ()
-  (setq-default show-paren-delay 0)
-  (show-paren-mode 1)
-  (set-face-attribute 'show-paren-match nil
-                      :background "#00ffff"
-                      :foreground "#000000"))
-(add-hook 'after-init-hook 'cfg-paren-matching)
+(show-paren-mode 1)
+(setq-default show-paren-delay 0)
 
 ;; ------------------------------------------------------------------------
 ;; yasnippet settings - use default folder ~/.emacs.d/snippets
@@ -307,7 +302,8 @@
  '(avy-lead-face ((t (:background "red2" :foreground "white"))))
  '(avy-lead-face-0 ((t (:background "saddle brown" :foreground "white"))))
  '(avy-lead-face-1 ((t (:background "#008b8b" :foreground "black"))))
- '(avy-lead-face-2 ((t (:background "saddle brown" :foreground "white")))))
+ '(avy-lead-face-2 ((t (:background "saddle brown" :foreground "white"))))
+ '(show-paren-match ((t (:background "#00ffff" :foreground "#2d2d2d")))))
 
 ;; -----------------------------------------
 ;; notes for when you forget
