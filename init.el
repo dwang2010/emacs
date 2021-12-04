@@ -94,10 +94,10 @@
 ;; ------------------------------------------------------------------------
 ;; mode line customization
 ;; ------------------------------------------------------------------------
-;; (setq-default display-time-format "(%Y/%m/%d) %I:%M%p") ; display time + date format
-;; (setq-default display-time-mail-string "")           ; remove mail notice
-;; (setq-default display-time-default-load-average nil) ; remove load average
-;; (display-time-mode t)
+(setq-default display-time-format "(%a, %m/%d) | %I:%M %p") ; display time
+(setq-default display-time-mail-string "")           ; remove mail notice
+(setq-default display-time-default-load-average nil) ; remove load average
+(display-time-mode nil)
 
 (let ((standard-mode-line-format
        (list "%e"
@@ -109,19 +109,16 @@
 	     'mode-line-frame-identification
 	     ;'mode-line-buffer-identification
 	     ;"   "
-             '(:eval (propertize "%b  "
-                                 'face 'mode-line-buffer-id))
+             '(:eval (propertize "%b  " 'face 'mode-line-buffer-id))
              ;'mode-line-position
              "(%l,%c)  "
              ;'(:eval (propertize "(%l,%c)  " 'face 'mode-line))
 	     ;'(vc-mode vc-mode)
 	     ;"  "
 	     ;'mode-line-modes
-             '(:eval (propertize "%m  "
-                                 'face 'shadow))
-	     ;'mode-line-misc-info
-             '(:eval (propertize (format-time-string "(%a, %m/%d | %I:%M %p)")
-                                 'face 'shadow))
+             '(:eval (propertize "%m  " 'face 'shadow))
+	     'mode-line-misc-info
+             ;'(:eval (propertize (format-time-string "(%a, %m/%d | %I:%M %p)") 'face 'shadow))
 	     'mode-line-end-spaces)))
   (setq-default mode-line-format standard-mode-line-format))
 
