@@ -72,9 +72,6 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-;; allow dired-find-alternate-file
-(put 'dired-find-alternate-file 'disabled nil)
-
 ;; backups in emacs directory
 (setq-default backup-directory-alist '(("." . "~/.emacs.d/backups")))
 
@@ -177,6 +174,17 @@
 (setq-default avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 (setq-default avy-style 'de-bruijn)
 (setq-default avy-background nil)
+
+;; ------------------------------------------------------------------------
+;; dired settings
+;; ------------------------------------------------------------------------
+(global-set-key (kbd "C-x C-d") 'dired)
+(put 'dired-find-alternate-file 'disabled nil)
+(setq-default dired-dwim-target t)
+
+(require 'ls-lisp)
+(setq-default ls-lisp-use-insert-directory-program nil)
+(setq-default ls-lisp-dirs-first t)
 
 ;; ------------------------------------------------------------------------
 ;; paren mode - highlight matching braces!
