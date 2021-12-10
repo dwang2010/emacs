@@ -186,8 +186,8 @@
 ;; ------------------------------------------------------------------------
 ;; paren mode - highlight matching braces!
 ;; ------------------------------------------------------------------------
-(show-paren-mode 1)
 (setq-default show-paren-delay 0)
+(show-paren-mode 1)
 
 ;; ------------------------------------------------------------------------
 ;; yasnippet settings - use default folder ~/.emacs.d/snippets
@@ -216,7 +216,7 @@
 ;; ------------------------------------------------------------------------
 ;; hideshow settings - code folding!
 ;; ------------------------------------------------------------------------
-(add-hook 'prog-mode-hook #'hs-minor-mode)
+(add-hook 'after-init-hook #'hs-minor-mode)
 
 (global-set-key (kbd "<C-tab>") 'hs-toggle-hiding)
 (global-set-key (kbd "<C-M-tab>") 'hs-hide-all)
