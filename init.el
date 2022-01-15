@@ -265,9 +265,12 @@
 
 ;; default font face, based on OS
 (if (eql system-type 'darwin)
-    (set-face-attribute 'default nil :family "Consolas" :height 125)
-    (set-face-attribute 'default nil :family "Consolas" :height 100))
-(setq-default line-spacing 0.1)
+    (progn
+      (set-face-attribute 'default nil :family "Consolas" :height 125)
+      (setq-default line-spacing 0.1))
+  (progn
+    (set-face-attribute 'default nil :family "Consolas" :height 115)
+    (setq-default line-spacing 0.05)))
 
 ;; non-terminal display customization
 (if (display-graphic-p)
