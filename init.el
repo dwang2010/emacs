@@ -207,7 +207,7 @@
 ;; ------------------------------------------------------------------------
 ;; hideshow settings - code folding!
 ;; ------------------------------------------------------------------------
-(add-hook 'after-init-hook #'hs-minor-mode)
+(add-hook 'prog-mode-hook #'hs-minor-mode)
 
 (global-set-key (kbd "<C-tab>") 'hs-toggle-hiding)
 (global-set-key (kbd "<C-M-tab>") 'hs-hide-all)
