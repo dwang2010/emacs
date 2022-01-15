@@ -15,7 +15,7 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   '(company highlight-indent-guides emojify avy dumb-jump yasnippet python magit org)))
+   '(company emojify avy dumb-jump yasnippet python magit org)))
 
 ;; ------------------------------------------------------------------------
 ;; default behaviors
@@ -203,15 +203,6 @@
 ;; emojify settings
 ;; ------------------------------------------------------------------------
 (add-hook 'after-init-hook #'global-emojify-mode)
-
-;; ------------------------------------------------------------------------
-;; highlight indentation / indent guides settings
-;; ------------------------------------------------------------------------
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-(setq-default highlight-indent-guides-method 'column)
-
-;(with-eval-after-load 'highlight-indentation
-;  (set-face-background 'highlight-indentation-face "#c3b3b3"))
 
 ;; ------------------------------------------------------------------------
 ;; hideshow settings - code folding!
