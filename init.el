@@ -137,6 +137,9 @@
 ;; bind string-rectangle
 (global-set-key (kbd "C-c r") 'string-rectangle)
 
+;; toggle flyspell for spellchecking (assuming ispell installed)
+(global-set-key (kbd "C-c C-f") 'flyspell-mode)
+
 ;; bind ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
@@ -200,6 +203,11 @@
 ;; emojify settings
 ;; ------------------------------------------------------------------------
 (add-hook 'after-init-hook #'global-emojify-mode)
+
+;; ------------------------------------------------------------------------
+;; flyspell settings
+;; ------------------------------------------------------------------------
+(setq-default flyspell-issue-message-flag nil)
 
 ;; ------------------------------------------------------------------------
 ;; hideshow settings - code folding!
