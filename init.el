@@ -84,6 +84,9 @@
 ;; exit confirmation (since slippery fingers sometimes)
 (setq-default confirm-kill-emacs 'y-or-n-p)
 
+;; have completions minibuffer sort stuff vertically
+(setq-default completions-format 'vertical)
+
 ;; ensure scrollbars don't appear when creating new frames
 (defun rmv-scroll-bars (frame)
   (modify-frame-parameters frame
