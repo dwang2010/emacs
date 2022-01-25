@@ -234,6 +234,21 @@
     ("~" (:background "deep sky blue" :foreground "MidnightBlue"))
     ("+" (:strike-through t))))
 
+
+;; ------------------------------------------------------------------------
+;; protobuf related settings
+;; ------------------------------------------------------------------------
+; 4-space indent
+(defconst my-protobuf-style
+  '((c-basic-offset . 4)
+    (indent-tabs-mode . nil)))
+
+(add-hook 'protobuf-mode-hook
+          (lambda () (c-add-style "my-style" my-protobuf-style t)))
+
+; ensure hideshow minor mode for proto files
+(add-hook 'c-mode-common-hook 'hs-minor-mode)
+
 ;; ------------------------------------------------------------------------
 ;; python related settings
 ;; ------------------------------------------------------------------------
