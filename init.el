@@ -186,12 +186,6 @@
 (setq-default ls-lisp-use-insert-directory-program nil)
 (setq-default ls-lisp-dirs-first t)
 
-;; ------------------------------------------------------------------------
-;; additional options for displaying buffers
-;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Choosing-Window-Options.html
-;; ------------------------------------------------------------------------
-(setq-default split-height-threshold nil) ; new window below
-(setq-default split-width-threshold 120)  ; new window to right
 
 ;; ------------------------------------------------------------------------
 ;; paren mode - highlight matching braces!
