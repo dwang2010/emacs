@@ -137,8 +137,8 @@
 ;; bind string-rectangle
 (global-set-key (kbd "C-c r") 'string-rectangle)
 
-;; toggle flyspell for spellchecking (assuming ispell installed)
-(global-set-key (kbd "C-c C-f") 'flyspell-mode)
+;; toggle flyspell for spellchecking (assuming ispell / aspell installed)
+(global-set-key (kbd "C-c C-4") 'flyspell-mode)
 
 ;; bind ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
