@@ -176,6 +176,11 @@
 (setq-default avy-background nil)
 
 ;; ------------------------------------------------------------------------
+;; company mode - complete anything!
+;; ------------------------------------------------------------------------
+(add-hook 'prog-mode-hook 'company-mode)
+
+;; ------------------------------------------------------------------------
 ;; dired settings
 ;; ------------------------------------------------------------------------
 (global-set-key (kbd "C-x C-d") 'dired)
@@ -185,18 +190,6 @@
 (require 'ls-lisp)
 (setq-default ls-lisp-use-insert-directory-program nil)
 (setq-default ls-lisp-dirs-first t)
-
-
-;; ------------------------------------------------------------------------
-;; paren mode - highlight matching braces!
-;; ------------------------------------------------------------------------
-(setq-default show-paren-delay 0)
-(show-paren-mode 1)
-
-;; ------------------------------------------------------------------------
-;; yasnippet settings - use default folder ~/.emacs.d/snippets
-;; ------------------------------------------------------------------------
-;(yas-global-mode 1)
 
 ;; ------------------------------------------------------------------------
 ;; dumbjump settings - jump to definition!
@@ -217,9 +210,9 @@
 (global-set-key (kbd "<C-M-tab>") 'hs-hide-all)
 
 ;; ------------------------------------------------------------------------
-;; company mode - complete anything!
+;; magit related
 ;; ------------------------------------------------------------------------
-(add-hook 'prog-mode-hook 'company-mode)
+(setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
 
 ;; ------------------------------------------------------------------------
 ;; org-mode related settings
@@ -234,6 +227,11 @@
     ("~" (:background "deep sky blue" :foreground "MidnightBlue"))
     ("+" (:strike-through t))))
 
+;; ------------------------------------------------------------------------
+;; paren mode - highlight matching braces!
+;; ------------------------------------------------------------------------
+(setq-default show-paren-delay 0)
+(show-paren-mode 1)
 
 ;; ------------------------------------------------------------------------
 ;; protobuf related settings
@@ -274,6 +272,11 @@
 (setq-default verilog-indent-level-module 3)
 (setq-default verilog-indent-lists t)
 (setq-default verilog-minimum-comment-distance 20)
+
+;; ------------------------------------------------------------------------
+;; yasnippet settings - use default folder ~/.emacs.d/snippets
+;; ------------------------------------------------------------------------
+;(yas-global-mode 1)
 
 ;; ------------------------------------------------------------------------
 ;; display customization
