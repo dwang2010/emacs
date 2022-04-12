@@ -388,7 +388,7 @@
  '(avy-lead-face-0 ((t (:background "saddle brown" :foreground "white"))))
  '(avy-lead-face-1 ((t (:background "#008b8b" :foreground "black"))))
  '(avy-lead-face-2 ((t (:background "saddle brown" :foreground "white"))))
- '(show-paren-match ((t (:background "#00ffff" :foreground "#2d2d2d")))))
+ '(show-paren-match ((t (:background "#2d2d2d" :foreground "#00ffff")))))
 
 ;; -----------------------------------------
 ;; notes for when you forget
