@@ -15,7 +15,7 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   '(company emojify avy dumb-jump yasnippet python magit org)))
+   '(go-mode yaml-mode company emojify avy dumb-jump yasnippet python magit org)))
 
 ;; ------------------------------------------------------------------------
 ;; default behaviors
@@ -75,7 +75,7 @@
 ;; backups in emacs directory
 (setq-default backup-directory-alist '(("." . "~/.emacs.d/backups")))
 
-;; mouse settings
+;; adjust mouse settings
 (setq-default mouse-wheel-progressive-speed nil)
 
 ;; increase xref highlight fade delay time
@@ -93,6 +93,12 @@
                            '((vertical-scroll-bars . nil)
                              (horizontal-scroll-bars . nil))))
 (add-hook 'after-make-frame-functions 'rmv-scroll-bars)
+
+;; turn on hl-line
+(global-hl-line-mode 1)
+
+;; remove window retiling gaps
+(setq-default frame-resize-pixelwise t)
 
 ;; ------------------------------------------------------------------------
 ;; mode line customization
@@ -171,9 +177,54 @@
   )
 
 ;; ------------------------------------------------------------------------
+;; additional control for displaying buffers
+;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Choosing-Window-Options.html
+;; ------------------------------------------------------------------------
+;(setq-default split-height-threshold nil) ; new window below
+;(setq-default split-width-threshold 80)  ; new window to right
+
+;; Fix annoying vertical window splitting.
+;; https://lists.gnu.org/archive/html/help-gnu-emacs/2015-08/msg00339.html
+(with-eval-after-load "window"
+  (defcustom split-window-below nil
+    "If non-nil, vertical splits produce new windows below."
+    :group 'windows
+    :type 'boolean)
+
+  (defcustom split-window-right nil
+    "If non-nil, horizontal splits produce new windows to the right."
+    :group 'windows
+    :type 'boolean)
+
+  (fmakunbound #'split-window-sensibly)
+
+  (defun split-window-sensibly
+      (&optional window)
+    (setq window (or window (selected-window)))
+    (or (and (window-splittable-p window t)
+             ;; Split window horizontally.
+             (split-window window nil (if split-window-right 'left  'right)))
+        (and (window-splittable-p window)
+             ;; Split window vertically.
+             (split-window window nil (if split-window-below 'above 'below)))
+        (and (eq window (frame-root-window (window-frame window)))
+             (not (window-minibuffer-p window))
+             ;; If WINDOW is the only window on its frame and is not the
+             ;; minibuffer window, try to split it horizontally disregarding the
+             ;; value of `split-width-threshold'.
+             (let ((split-width-threshold 0))
+               (when (window-splittable-p window t)
+                 (split-window window nil (if split-window-right
+                                              'left
+                                            'right))))))))
+
+(setq-default split-height-threshold  4
+              split-width-threshold   160) ; the reasonable limit for horizontal splits
+
+;; ------------------------------------------------------------------------
 ;; avy settings (jump to char!)
 ;; ------------------------------------------------------------------------
-(global-set-key (kbd "C-f") 'avy-goto-char)
+(global-set-key (kbd "C-f") 'avy-goto-char-2)
 (setq-default avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 (setq-default avy-style 'de-bruijn)
 (setq-default avy-background nil)
@@ -181,7 +232,7 @@
 ;; ------------------------------------------------------------------------
 ;; company mode - complete anything!
 ;; ------------------------------------------------------------------------
-(add-hook 'prog-mode-hook 'company-mode)
+;(add-hook 'prog-mode-hook 'company-mode)
 
 ;; ------------------------------------------------------------------------
 ;; dired settings
@@ -202,7 +253,7 @@
 ;; ------------------------------------------------------------------------
 ;; emojify settings
 ;; ------------------------------------------------------------------------
-(add-hook 'after-init-hook #'global-emojify-mode)
+;(add-hook 'after-init-hook #'global-emojify-mode)
 
 ;; ------------------------------------------------------------------------
 ;; flyspell settings
@@ -216,6 +267,11 @@
 
 (global-set-key (kbd "<C-tab>") 'hs-toggle-hiding)
 (global-set-key (kbd "<C-M-tab>") 'hs-hide-all)
+
+;; ------------------------------------------------------------------------
+;; js-mode settings
+;; ------------------------------------------------------------------------
+(setq js-indent-level 2)
 
 ;; ------------------------------------------------------------------------
 ;; magit related
@@ -297,7 +353,7 @@
 (if (eql system-type 'darwin)
     (progn
       (set-face-attribute 'default nil :family "Consolas" :height 125)
-      (setq-default line-spacing 0.1))
+      (setq-default line-spacing 0.05))
   (progn
     (set-face-attribute 'default nil :family "Consolas" :height 115)
     (setq-default line-spacing 0.05)))
