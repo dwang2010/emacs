@@ -15,7 +15,7 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   '(go-mode yaml-mode company emojify avy dumb-jump yasnippet python magit org)))
+   '(swiper go-mode yaml-mode company emojify avy dumb-jump yasnippet python magit org)))
 
 ;; ------------------------------------------------------------------------
 ;; default behaviors
@@ -317,6 +317,13 @@
 (if (eql system-type 'darwin)
     (setq python-shell-interpreter "/usr/local/bin/python3")
     (setq python-shell-interpreter "/usr/bin/python3"))
+
+;; ------------------------------------------------------------------------
+;; ivy / swiper settings
+;; ------------------------------------------------------------------------
+(ivy-mode 1)
+(global-set-key (kbd "C-s") 'swiper-isearch)
+(global-set-key (kbd "C-r") 'swiper-backward)
 
 ;; ------------------------------------------------------------------------
 ;; verilog-mode settings
