@@ -15,7 +15,9 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   '(swiper go-mode yaml-mode company emojify avy dumb-jump yasnippet python magit org)))
+   '(swiper go-mode yaml-mode company emojify avy dumb-jump yasnippet python magit org))
+ '(swiper-faces
+   '(swiper-match-face-2 swiper-match-face-2 swiper-match-face-2 swiper-match-face-2)))
 
 ;; ------------------------------------------------------------------------
 ;; default behaviors
@@ -324,6 +326,10 @@
 (ivy-mode 1)
 (global-set-key (kbd "C-s") 'swiper-isearch)
 (global-set-key (kbd "C-r") 'swiper-backward)
+(global-set-key (kbd "C-c C-w") 'swiper-isearch-thing-at-point)
+(setq-default ivy-on-del-error-function #'ignore)
+(setq-default ivy-display-style 'fancy)
+(setq-default ivy-height 5)
 
 ;; ------------------------------------------------------------------------
 ;; verilog-mode settings
@@ -395,7 +401,10 @@
  '(avy-lead-face-0 ((t (:background "saddle brown" :foreground "white"))))
  '(avy-lead-face-1 ((t (:background "#008b8b" :foreground "black"))))
  '(avy-lead-face-2 ((t (:background "saddle brown" :foreground "white"))))
- '(show-paren-match ((t (:background "#2d2d2d" :foreground "#00ffff")))))
+ '(isearch ((t (:background "#515151" :foreground "#ffcc66" :inverse-video t))))
+ '(show-paren-match ((t (:background "#2d2d2d" :foreground "#00ffff"))))
+ '(swiper-background-match-face-2 ((t (:inherit swiper-match-face-1))))
+ '(swiper-line-face ((t (:underline nil)))))
 
 ;; -----------------------------------------
 ;; notes for when you forget
