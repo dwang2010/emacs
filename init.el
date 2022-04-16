@@ -227,7 +227,8 @@
 ;; ------------------------------------------------------------------------
 ;; avy settings (jump to char!)
 ;; ------------------------------------------------------------------------
-(global-set-key (kbd "C-f") 'avy-goto-char-2)
+(global-set-key (kbd "C-f") 'avy-goto-char-timer)
+(setq-default avy-timeout-seconds 0.25)
 (setq-default avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 (setq-default avy-style 'de-bruijn)
 (setq-default avy-background nil)
