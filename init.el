@@ -17,7 +17,8 @@
  '(package-selected-packages
    '(swiper go-mode yaml-mode company emojify avy dumb-jump yasnippet python magit org))
  '(swiper-faces
-   '(swiper-match-face-2 swiper-match-face-2 swiper-match-face-2 swiper-match-face-2)))
+   '(swiper-match-face-2 swiper-match-face-2 swiper-match-face-2 swiper-match-face-2))
+ '(warning-suppress-log-types '((comp))))
 
 ;; ------------------------------------------------------------------------
 ;; default behaviors
@@ -293,6 +294,25 @@
     ("~" (:background "deep sky blue" :foreground "MidnightBlue"))
     ("+" (:strike-through t))))
 
+;; no indents on code block
+(setq-default org-src-preserve-indentation t)
+
+;; babel configuration to load languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)))
+
+;; configure python interpretter based on system
+(if (eql system-type 'darwin)
+    (setq python-shell-interpreter "/usr/local/bin/python3")
+  (setq python-shell-interpreter "/usr/bin/python3"))
+
+;; set org-babel for desired python executable
+(setq org-babel-python-command "python3")
+
+;; potentially risky: remove confirmation when executing code blocks
+(setq-default org-confirm-babel-evaluate nil)
+
 ;; ------------------------------------------------------------------------
 ;; paren mode - highlight matching braces!
 ;; ------------------------------------------------------------------------
@@ -312,13 +332,6 @@
 
 ; ensure hideshow minor mode for proto files
 (add-hook 'c-mode-common-hook 'hs-minor-mode)
-
-;; ------------------------------------------------------------------------
-;; python related settings
-;; ------------------------------------------------------------------------
-(if (eql system-type 'darwin)
-    (setq python-shell-interpreter "/usr/local/bin/python3")
-    (setq python-shell-interpreter "/usr/bin/python3"))
 
 ;; ------------------------------------------------------------------------
 ;; ivy / swiper settings
