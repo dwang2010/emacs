@@ -15,7 +15,7 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   '(swiper go-mode yaml-mode company emojify avy dumb-jump yasnippet python magit org))
+   '(cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode company avy dumb-jump yasnippet python magit org))
  '(swiper-faces
    '(swiper-match-face-2 swiper-match-face-2 swiper-match-face-2 swiper-match-face-2))
  '(warning-suppress-log-types '((comp))))
@@ -78,9 +78,6 @@
 ;; backups in emacs directory
 (setq-default backup-directory-alist '(("." . "~/.emacs.d/backups")))
 
-;; adjust mouse settings
-(setq-default mouse-wheel-progressive-speed nil)
-
 ;; increase xref highlight fade delay time
 (setq-default pulse-delay 0.09)
 
@@ -102,6 +99,12 @@
 
 ;; remove window retiling gaps
 (setq-default frame-resize-pixelwise t)
+
+;; ------------------------------------------------------------------------
+;; mouse behavior
+;; ------------------------------------------------------------------------
+(setq-default mouse-wheel-progressive-speed nil)
+(if (not (eql system-type 'darwin)) (setq-default mouse-wheel-scroll-amount '(5)))
 
 ;; ------------------------------------------------------------------------
 ;; mode line customization
@@ -146,14 +149,8 @@
 ;; bind string-rectangle
 (global-set-key (kbd "C-c r") 'string-rectangle)
 
-;; toggle flyspell for spellchecking (assuming ispell / aspell installed)
-(global-set-key (kbd "C-c C-4") 'flyspell-mode)
-
 ;; bind ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-
-;; magit status
-(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; unbind hotkeys to suspend frame
 (global-unset-key (kbd "C-z"))
@@ -183,9 +180,6 @@
 ;; additional control for displaying buffers
 ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Choosing-Window-Options.html
 ;; ------------------------------------------------------------------------
-;(setq-default split-height-threshold nil) ; new window below
-;(setq-default split-width-threshold 80)  ; new window to right
-
 ;; Fix annoying vertical window splitting.
 ;; https://lists.gnu.org/archive/html/help-gnu-emacs/2015-08/msg00339.html
 (with-eval-after-load "window"
@@ -255,20 +249,15 @@
 (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
 ;; ------------------------------------------------------------------------
-;; emojify settings
-;; ------------------------------------------------------------------------
-;(add-hook 'after-init-hook #'global-emojify-mode)
-
-;; ------------------------------------------------------------------------
 ;; flyspell settings
 ;; ------------------------------------------------------------------------
 (setq-default flyspell-issue-message-flag nil)
+(global-set-key (kbd "C-c C-4") 'flyspell-mode)
 
 ;; ------------------------------------------------------------------------
 ;; hideshow settings - code folding!
 ;; ------------------------------------------------------------------------
 (add-hook 'prog-mode-hook #'hs-minor-mode)
-
 (global-set-key (kbd "<C-tab>") 'hs-toggle-hiding)
 (global-set-key (kbd "<C-M-tab>") 'hs-hide-all)
 
@@ -281,6 +270,7 @@
 ;; magit related
 ;; ------------------------------------------------------------------------
 (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; ------------------------------------------------------------------------
 ;; org-mode related settings
