@@ -375,23 +375,15 @@
     (set-face-attribute 'default nil :family "Consolas" :height 115)
     (setq-default line-spacing 0.05)))
 
-;; non-terminal display customization
-(if (display-graphic-p)
-    (progn
-      (load-theme 'sanityinc-tomorrow-eighties)
-      (setq default-frame-alist ; change default frame parameters
-            '(
-              (width . 85)               ; window width (chars, less line numbers)
-              (height . 50)              ; window height (rows)
-              (cursor-type . bar)        ; vertical bar cursor
-              (cursor-color . "#ff7f00") ; orange cursor color
-              (left-fringe . 6)          ; half width left fringe width (def: 8)
-              (right-fringe . 0)         ; effectively disable right fringe
-              )
-            )
-      )
-  ;; terminal specific customization (if desired below)
-  )
+;; default frame parameters
+(load-theme 'sanityinc-tomorrow-eighties)
+(setq-default default-frame-alist
+              '((width . 100)              ; window width (chars, less line numbers)
+                (height . 50)              ; window height (rows)
+                (cursor-type . bar)        ; vertical bar cursor
+                (cursor-color . "#ff7f00") ; orange cursor color
+                (left-fringe . 6)          ; half width left fringe width (def: 8)
+                (right-fringe . 0)))       ; effectively disable right fringe
 
 ;; startup time init display, revert to more frequent garbage collection
 (add-hook 'emacs-startup-hook 'my-startup-chk)
