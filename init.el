@@ -15,7 +15,7 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   '(cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode company avy dumb-jump yasnippet python magit org))
+   '(salt-mode markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode company avy dumb-jump yasnippet python magit org))
  '(swiper-faces
    '(swiper-match-face-2 swiper-match-face-2 swiper-match-face-2 swiper-match-face-2))
  '(warning-suppress-log-types '((comp))))
@@ -82,7 +82,7 @@
 (setq-default pulse-delay 0.09)
 
 ;; exit confirmation (since slippery fingers sometimes)
-(setq-default confirm-kill-emacs 'y-or-n-p)
+(setq-default confirm-kill-emacs #'y-or-n-p)
 
 ;; have completions minibuffer sort stuff vertically
 (setq-default completions-format 'vertical)
@@ -152,10 +152,11 @@
 ;; bind ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-;; unbind hotkeys to suspend frame
+;; unbind unused hotkeys
 (global-unset-key (kbd "C-z"))
 (global-unset-key (kbd "C-x C-z"))
 (global-unset-key (kbd "C-x C-d"))
+(global-unset-key (kbd "C-x C-c"))
 
 ;; change C-x s to same as C-x C-s
 (global-set-key (kbd "C-x s") 'save-buffer)
@@ -166,6 +167,10 @@
 (global-set-key (kbd "<C-M-up>") 'windmove-up)
 (global-set-key (kbd "<C-M-down>") 'windmove-down)
 
+;; end key to end of line rather than end of buffer
+(global-set-key (kbd "<home>") 'move-beginning-of-line)
+(global-set-key (kbd "<end>") 'move-end-of-line)
+
 ;; mac specific keybinds
 (if (eql system-type 'darwin)
     (progn
@@ -175,6 +180,12 @@
       (global-set-key [(hyper m)] 'toggle-frame-maximized)
       )
   )
+
+;; ------------------------------------------------------------------------
+;; tree sitter syntax highlighting config
+;; ------------------------------------------------------------------------
+(global-tree-sitter-mode)
+(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
 ;; ------------------------------------------------------------------------
 ;; additional control for displaying buffers
@@ -262,6 +273,12 @@
 (global-set-key (kbd "<C-M-tab>") 'hs-hide-all)
 
 ;; ------------------------------------------------------------------------
+;; golang related settings
+;; ------------------------------------------------------------------------
+(setq-default tab-width 4)
+(add-hook 'before-save-hook 'gofmt-before-save)
+
+;; ------------------------------------------------------------------------
 ;; js-mode settings
 ;; ------------------------------------------------------------------------
 (setq js-indent-level 2)
@@ -333,7 +350,7 @@
 (global-set-key (kbd "C-c C-w") 'swiper-isearch-thing-at-point)
 (setq-default ivy-on-del-error-function #'ignore)
 (setq-default ivy-display-style 'fancy)
-(setq-default ivy-height 5)
+(setq-default ivy-height 4)
 
 ;; ------------------------------------------------------------------------
 ;; verilog-mode settings
@@ -398,6 +415,7 @@
  '(avy-lead-face-1 ((t (:background "#008b8b" :foreground "black"))))
  '(avy-lead-face-2 ((t (:background "saddle brown" :foreground "white"))))
  '(isearch ((t (:background "#515151" :foreground "#ffcc66" :inverse-video t))))
+ '(match ((t (:background "#2d2d2d" :foreground "#6699cc" :inverse-video nil))))
  '(show-paren-match ((t (:background "#2d2d2d" :foreground "#00ffff"))))
  '(swiper-background-match-face-2 ((t (:inherit swiper-match-face-1))))
  '(swiper-line-face ((t (:underline nil)))))
