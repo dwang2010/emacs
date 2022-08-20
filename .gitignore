@@ -1,8 +1,12 @@
 # Folders
 auto-save-list
+bookmarks
 elpa
+elpy
+projects
 transient
 emojis
+url
 
 # Temp
 network*

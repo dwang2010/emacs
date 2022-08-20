@@ -1,7 +1,7 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
-(when (and (equal emacs-version "27.2")
+(when (and (equal emacs-version "28.1")
            (eql system-type 'darwin))
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
 
@@ -277,6 +277,14 @@
 ;; ------------------------------------------------------------------------
 (setq-default tab-width 4)
 (add-hook 'before-save-hook 'gofmt-before-save)
+
+; env related workaround
+(if (eql system-type 'darwin)
+    (progn
+      (setenv "PATH" (concat (getenv "PATH") ":/opt/homebrew/bin"))
+      (setq-default exec-path (append exec-path '("/opt/homebrew/bin")))
+      )
+  )
 
 ;; ------------------------------------------------------------------------
 ;; js-mode settings
