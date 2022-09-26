@@ -265,6 +265,8 @@
 ;; flycheck requires local installation of external programs to work
 ;; https://www.flycheck.org/en/latest/languages.html#python
 (global-set-key (kbd "C-c ! !") 'flycheck-mode)
+(add-hook 'python-mode-hook 'flycheck-mode)
+(setq-default flycheck-relevant-error-other-file-show nil)
 
 ;; handy shortcuts:
 ;; C-c ! v = verify setup
