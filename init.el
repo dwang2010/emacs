@@ -15,7 +15,7 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   '(salt-mode markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode company avy dumb-jump yasnippet python magit org))
+   '(flycheck salt-mode markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode company avy dumb-jump yasnippet python magit org))
  '(swiper-faces
    '(swiper-match-face-2 swiper-match-face-2 swiper-match-face-2 swiper-match-face-2))
  '(warning-suppress-log-types '((comp))))
@@ -260,8 +260,20 @@
 (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
 ;; ------------------------------------------------------------------------
+;; flycheck settings
+;; ------------------------------------------------------------------------
+;; flycheck requires local installation of external programs to work
+;; https://www.flycheck.org/en/latest/languages.html#python
+(global-set-key (kbd "C-c ! !") 'flycheck-mode)
+
+;; handy shortcuts:
+;; C-c ! v = verify setup
+;; C-c ! l = list of errors in buffer
+
+;; ------------------------------------------------------------------------
 ;; flyspell settings
 ;; ------------------------------------------------------------------------
+;; ispell needs to be locally installed (not a part of emacs)
 (setq-default flyspell-issue-message-flag nil)
 (global-set-key (kbd "C-c C-4") 'flyspell-mode)
 
@@ -358,7 +370,7 @@
 (global-set-key (kbd "C-c C-w") 'swiper-isearch-thing-at-point)
 (setq-default ivy-on-del-error-function #'ignore)
 (setq-default ivy-display-style 'fancy)
-(setq-default ivy-height 4)
+(setq-default ivy-height 3)
 
 ;; ------------------------------------------------------------------------
 ;; verilog-mode settings
@@ -407,7 +419,7 @@
                 (height . 50)              ; window height (rows)
                 (cursor-type . bar)        ; vertical bar cursor
                 (cursor-color . "#ff7f00") ; orange cursor color
-                (left-fringe . 6)          ; half width left fringe width (def: 8)
+                (left-fringe . 8)          ; half width left fringe width (def: 8)
                 (right-fringe . 0)))       ; effectively disable right fringe
 
 ;; startup time init display, revert to more frequent garbage collection
