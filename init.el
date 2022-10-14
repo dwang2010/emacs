@@ -394,6 +394,13 @@
 (setq-default verilog-minimum-comment-distance 20)
 
 ;; ------------------------------------------------------------------------
+;; vterm configuration
+;; https://github.com/akermu/emacs-libvterm
+;; ------------------------------------------------------------------------
+(setq-default vterm-copy-exclude-prompt t)
+(global-set-key (kbd "C-x C-v") 'vterm)
+
+;; ------------------------------------------------------------------------
 ;; yasnippet settings - use default folder ~/.emacs.d/snippets
 ;; ------------------------------------------------------------------------
 ;(yas-global-mode 1)
