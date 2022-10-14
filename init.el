@@ -15,7 +15,7 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   '(flycheck salt-mode markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode company avy dumb-jump yasnippet python magit org))
+   '(lsp-ui lsp-mode flycheck salt-mode markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode company avy dumb-jump yasnippet python magit org))
  '(swiper-faces
    '(swiper-match-face-2 swiper-match-face-2 swiper-match-face-2 swiper-match-face-2))
  '(warning-suppress-log-types '((comp))))
@@ -257,7 +257,7 @@
 ;; ------------------------------------------------------------------------
 ;; dumbjump settings - jump to definition!
 ;; ------------------------------------------------------------------------
-(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+;; (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
 ;; ------------------------------------------------------------------------
 ;; flycheck settings
@@ -304,6 +304,31 @@
 ;; js-mode settings
 ;; ------------------------------------------------------------------------
 (setq js-indent-level 2)
+
+;; ------------------------------------------------------------------------
+;; emacs lsp related
+;; ------------------------------------------------------------------------
+;; (setq-default lsp-enable-symbol-highlighting nil)
+(setq-default lsp-keymap-prefix "C-c l")
+
+(setq-default lsp-lens-enable nil)
+(setq-default lsp-ui-doc-enable nil)
+(setq-default lsp-ui-sideline-enable nil)
+
+(setq-default lsp-modeline-code-actions-enable nil)
+
+(setq-default lsp-diagnostics-provider :none)
+(setq-default lsp-modeline-diagnostics-enable nil)
+
+(setq-default lsp-completion-provider :none)
+(setq-default lsp-completion-show-detail nil)
+(setq-default lsp-completion-show-kind nil)
+
+(require 'lsp-mode)
+(add-hook 'python-mode-hook #'lsp)
+
+(global-set-key (kbd "M-.") 'lsp-find-definition)
+(global-set-key (kbd "M-?") 'lsp-ui-peek-find-references)
 
 ;; ------------------------------------------------------------------------
 ;; magit related
@@ -444,6 +469,8 @@
  '(avy-lead-face-1 ((t (:background "#008b8b" :foreground "black"))))
  '(avy-lead-face-2 ((t (:background "saddle brown" :foreground "white"))))
  '(isearch ((t (:background "#515151" :foreground "#ffcc66" :inverse-video t))))
+ '(lsp-face-highlight-read ((t (:inherit highlight :background "SlateBlue3" :foreground "gray90"))))
+ '(lsp-face-highlight-write ((t (:inherit highlight :background "SlateBlue3" :foreground "gray90"))))
  '(match ((t (:background "#2d2d2d" :foreground "#6699cc" :inverse-video nil))))
  '(show-paren-match ((t (:background "#2d2d2d" :foreground "#00ffff"))))
  '(swiper-background-match-face-2 ((t (:inherit swiper-match-face-1))))
