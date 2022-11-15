@@ -6,7 +6,8 @@
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
 
 ;; reduce number of garbage collections to reduce startup time
-(setq gc-cons-threshold 50000000) ; 50MB
+(setq gc-cons-threshold 100000000)  ; 100MB
+(setq read-process-output-max (* 1024 1024))  ; 1mb
 
 ;; ------------------------------------------------------------------------
 ;; custom set configuration
@@ -15,7 +16,7 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   '(lsp-ui lsp-mode flycheck salt-mode markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode company avy dumb-jump yasnippet python magit org))
+   '(projectile lsp-mode flycheck salt-mode markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode company avy dumb-jump yasnippet python magit org))
  '(swiper-faces
    '(swiper-match-face-2 swiper-match-face-2 swiper-match-face-2 swiper-match-face-2))
  '(warning-suppress-log-types '((comp))))
@@ -233,7 +234,7 @@
 ;; avy settings (jump to char!)
 ;; ------------------------------------------------------------------------
 (global-set-key (kbd "C-f") 'avy-goto-char-timer)
-(setq-default avy-timeout-seconds 0.25)
+(setq-default avy-timeout-seconds 0.20)
 (setq-default avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 (setq-default avy-style 'de-bruijn)
 (setq-default avy-background nil)
@@ -265,8 +266,12 @@
 ;; flycheck requires local installation of external programs to work
 ;; https://www.flycheck.org/en/latest/languages.html#python
 (global-set-key (kbd "C-c ! !") 'flycheck-mode)
+
 (add-hook 'python-mode-hook 'flycheck-mode)
+(add-hook 'go-mode-hook 'flycheck-mode)
+
 (setq-default flycheck-relevant-error-other-file-show nil)
+(setq-default flycheck-check-syntax-automatically '(mode-enabled save))
 
 ;; handy shortcuts:
 ;; C-c ! v = verify setup
@@ -303,32 +308,44 @@
 ;; ------------------------------------------------------------------------
 ;; js-mode settings
 ;; ------------------------------------------------------------------------
-(setq js-indent-level 2)
+(setq js-indent-level 4)
 
 ;; ------------------------------------------------------------------------
 ;; emacs lsp related
 ;; ------------------------------------------------------------------------
-;; (setq-default lsp-enable-symbol-highlighting nil)
 (setq-default lsp-keymap-prefix "C-c l")
 
+;; (setq-default lsp-enable-symbol-highlighting nil)
+(setq lsp-log-io nil) ; if set to true can cause a performance hit
 (setq-default lsp-lens-enable nil)
-(setq-default lsp-ui-doc-enable nil)
-(setq-default lsp-ui-sideline-enable nil)
-
+; (setq lsp-headerline-breadcrumb-enable nil)
+; (setq-default lsp-ui-doc-enable nil)
+; (setq-default lsp-ui-sideline-enable nil)
 (setq-default lsp-modeline-code-actions-enable nil)
-
 (setq-default lsp-diagnostics-provider :none)
 (setq-default lsp-modeline-diagnostics-enable nil)
-
+(setq-default lsp-signature-render-documentation nil)
 (setq-default lsp-completion-provider :none)
 (setq-default lsp-completion-show-detail nil)
 (setq-default lsp-completion-show-kind nil)
 
 (require 'lsp-mode)
 (add-hook 'python-mode-hook #'lsp)
+(add-hook 'go-mode-hook #'lsp)
 
 (global-set-key (kbd "M-.") 'lsp-find-definition)
-(global-set-key (kbd "M-?") 'lsp-ui-peek-find-references)
+(global-set-key (kbd "M-?") 'lsp-find-references)
+; (global-set-key (kbd "M-?") 'lsp-ui-peek-find-references)
+
+;; disable lsp-mode right click menu
+(with-eval-after-load 'lsp-mode
+  (define-key lsp-mode-map (kbd "<mouse-3>") nil))
+
+;; ------------------------------------------------------------------------
+;; projectile related
+;; ------------------------------------------------------------------------
+(projectile-mode +1)
+(global-set-key (kbd "C-x p") 'projectile-command-map)
 
 ;; ------------------------------------------------------------------------
 ;; magit related
@@ -368,6 +385,14 @@
 ;; potentially risky: remove confirmation when executing code blocks
 (setq-default org-confirm-babel-evaluate nil)
 
+;; C-c C-o opens link in same buffer rather than new buffer
+(setq org-link-frame-setup
+   '((vm . vm-visit-folder-other-frame)
+     (vm-imap . vm-visit-imap-folder-other-frame)
+     (gnus . org-gnus-no-new-news)
+     (file . find-file)
+     (wl . wl-other-frame)))
+
 ;; ------------------------------------------------------------------------
 ;; paren mode - highlight matching braces!
 ;; ------------------------------------------------------------------------
@@ -397,7 +422,7 @@
 (global-set-key (kbd "C-c C-w") 'swiper-isearch-thing-at-point)
 (setq-default ivy-on-del-error-function #'ignore)
 (setq-default ivy-display-style 'fancy)
-(setq-default ivy-height 3)
+(setq-default ivy-height 4)
 
 ;; ------------------------------------------------------------------------
 ;; verilog-mode settings
@@ -423,7 +448,6 @@
 ;; https://github.com/akermu/emacs-libvterm
 ;; ------------------------------------------------------------------------
 (setq-default vterm-copy-exclude-prompt t)
-(global-set-key (kbd "C-x C-v") 'vterm)
 
 ;; ------------------------------------------------------------------------
 ;; yasnippet settings - use default folder ~/.emacs.d/snippets
@@ -456,21 +480,14 @@
                 (left-fringe . 8)          ; half width left fringe width (def: 8)
                 (right-fringe . 0)))       ; effectively disable right fringe
 
-;; startup time init display, revert to more frequent garbage collection
-(add-hook 'emacs-startup-hook 'my-startup-chk)
-(defun my-startup-chk ()
-  (setq gc-cons-threshold 800000) ; 800kB
-  (message "emacs startup in %s."
-           (format "%.2f seconds"
-                   (float-time (time-subtract after-init-time before-init-time)))))
 (custom-set-faces
  '(avy-lead-face ((t (:background "red2" :foreground "white"))))
  '(avy-lead-face-0 ((t (:background "saddle brown" :foreground "white"))))
  '(avy-lead-face-1 ((t (:background "#008b8b" :foreground "black"))))
  '(avy-lead-face-2 ((t (:background "saddle brown" :foreground "white"))))
  '(isearch ((t (:background "#515151" :foreground "#ffcc66" :inverse-video t))))
- '(lsp-face-highlight-read ((t (:inherit highlight :background "SlateBlue3" :foreground "gray90"))))
- '(lsp-face-highlight-write ((t (:inherit highlight :background "SlateBlue3" :foreground "gray90"))))
+ '(lsp-face-highlight-read ((t (:inherit highlight :background "SlateBlue4" :foreground "gray90"))))
+ '(lsp-face-highlight-write ((t (:inherit highlight :background "SlateBlue4" :foreground "gray90"))))
  '(match ((t (:background "#2d2d2d" :foreground "#6699cc" :inverse-video nil))))
  '(show-paren-match ((t (:background "#2d2d2d" :foreground "#00ffff"))))
  '(swiper-background-match-face-2 ((t (:inherit swiper-match-face-1))))
