@@ -250,6 +250,7 @@
 (global-set-key (kbd "C-x C-d") 'dired)
 (put 'dired-find-alternate-file 'disabled nil)
 (setq-default dired-dwim-target t)
+(setq-default dired-listing-switches "-laGh --group-directories-first -v")
 
 (require 'ls-lisp)
 (setq-default ls-lisp-use-insert-directory-program nil)
@@ -425,25 +426,6 @@
 (setq-default ivy-height 4)
 
 ;; ------------------------------------------------------------------------
-;; verilog-mode settings
-;; (https://www.veripool.org/projects/verilog-mode/wiki/Verilog-mode-Help)
-;; ------------------------------------------------------------------------
-(setq-default verilog-align-ifelse nil)
-(setq-default verilog-auto-indent-on-newline t)
-(setq-default verilog-auto-lineup (quote all))
-(setq-default verilog-auto-newline nil)
-(setq-default verilog-case-indent 3)
-(setq-default verilog-cexp-indent 3)
-(setq-default verilog-indent-begin-after-if nil)
-(setq-default verilog-indent-level 3)
-(setq-default verilog-indent-level-behavioral 3)
-(setq-default verilog-indent-level-declaration 3)
-(setq-default verilog-indent-level-directive 0)
-(setq-default verilog-indent-level-module 3)
-(setq-default verilog-indent-lists t)
-(setq-default verilog-minimum-comment-distance 20)
-
-;; ------------------------------------------------------------------------
 ;; vterm configuration
 ;; https://github.com/akermu/emacs-libvterm
 ;; ------------------------------------------------------------------------
@@ -503,10 +485,6 @@
 
 ; (in xref buffer)
 ; C-o : open file in new pane, but stay in xref buffer (xref-show-location-at-point)
-
-; (general searching)
-; C-s C-w : search for word after current mark
-; C-w     : subsequent presses increases search with additional words
 
 ; (helpful commands)
 ; list-faces-display : show current font face definition (color / style)
