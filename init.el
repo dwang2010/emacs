@@ -301,8 +301,8 @@
 ; env related workaround
 (if (eql system-type 'darwin)
     (progn
-      (setenv "PATH" (concat (getenv "PATH") ":/opt/homebrew/bin"))
-      (setq-default exec-path (append exec-path '("/opt/homebrew/bin")))
+      (setenv "PATH" (concat (getenv "PATH") ":/Users/darrenw/go/bin"))
+      (setq-default exec-path (append exec-path '("/Users/darrenw/go/bin")))
       )
   )
 
@@ -336,7 +336,6 @@
 
 (global-set-key (kbd "M-.") 'lsp-find-definition)
 (global-set-key (kbd "M-?") 'lsp-find-references)
-; (global-set-key (kbd "M-?") 'lsp-ui-peek-find-references)
 
 ;; disable lsp-mode right click menu
 (with-eval-after-load 'lsp-mode
