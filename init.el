@@ -101,6 +101,9 @@
 ;; remove window retiling gaps
 (setq-default frame-resize-pixelwise t)
 
+;; truncate lines (do not line wrap)
+(setq-default truncate-lines t)
+
 ;; ------------------------------------------------------------------------
 ;; mouse behavior
 ;; ------------------------------------------------------------------------
@@ -296,7 +299,7 @@
 ;; golang related settings
 ;; ------------------------------------------------------------------------
 (setq-default tab-width 4)
-(add-hook 'before-save-hook 'gofmt-before-save)
+(if (eql system-type 'darwin) (add-hook 'before-save-hook 'gofmt-before-save))
 
 ; env related workaround
 (if (eql system-type 'darwin)
