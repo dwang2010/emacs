@@ -6,7 +6,7 @@
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
 
 ;; reduce number of garbage collections to reduce startup time
-(setq gc-cons-threshold 100000000)  ; 100MB
+(setq gc-cons-threshold 200000000)  ; 200MB
 (setq read-process-output-max (* 1024 1024))  ; 1mb
 
 ;; ------------------------------------------------------------------------
@@ -16,7 +16,7 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   '(projectile lsp-mode flycheck salt-mode markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode company avy dumb-jump yasnippet python magit org))
+   '(lsp-ui projectile lsp-mode flycheck salt-mode markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode company avy dumb-jump yasnippet python magit org))
  '(swiper-faces
    '(swiper-match-face-2 swiper-match-face-2 swiper-match-face-2 swiper-match-face-2))
  '(warning-suppress-log-types '((comp))))
@@ -320,18 +320,24 @@
 (setq-default lsp-keymap-prefix "C-c l")
 
 ;; (setq-default lsp-enable-symbol-highlighting nil)
-(setq lsp-log-io nil) ; if set to true can cause a performance hit
+;; (setq-default lsp-headerline-breadcrumb-enable nil)
+
+(setq-default lsp-log-io nil) ; if set to true can cause a performance hit
 (setq-default lsp-lens-enable nil)
-; (setq lsp-headerline-breadcrumb-enable nil)
-; (setq-default lsp-ui-doc-enable nil)
-; (setq-default lsp-ui-sideline-enable nil)
+
+(setq-default lsp-ui-doc-enable nil)
+(setq-default lsp-ui-sideline-enable nil)
 (setq-default lsp-modeline-code-actions-enable nil)
-(setq-default lsp-diagnostics-provider :none)
 (setq-default lsp-modeline-diagnostics-enable nil)
+(setq-default lsp-modeline-workspace-status-enable nil)
 (setq-default lsp-signature-render-documentation nil)
+(setq-default lsp-diagnostics-provider :none)
 (setq-default lsp-completion-provider :none)
 (setq-default lsp-completion-show-detail nil)
 (setq-default lsp-completion-show-kind nil)
+(setq-default lsp-headerline-breadcrumb-enable-diagnostics nil)
+
+(if (eql system-type 'darwin) (setq-default lsp-pyls-server-command "/opt/homebrew/bin/pylsp"))
 
 (require 'lsp-mode)
 (add-hook 'python-mode-hook #'lsp)
