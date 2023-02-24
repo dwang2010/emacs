@@ -454,6 +454,25 @@
 ;(yas-global-mode 1)
 
 ;; ------------------------------------------------------------------------
+;; copy file name to clipboard
+;; ------------------------------------------------------------------------
+(defun copy-file-name-to-clipboard (do-not-strip-prefix)
+  "Copy the current buffer file name to the clipboard. The path
+   will be relative to the project's root directory, if
+   set. Invoking with a prefix argument copies the full path."
+  (interactive "P")
+  (letrec
+      ((fullname (if (equal major-mode 'dired-mode) default-directory (buffer-file-name)))
+       (root (project-root (project-current)))
+       (relname (file-relative-name fullname root))
+       (should-strip (and root (not do-not-strip-prefix)))
+       (filename (if should-strip relname fullname)))
+    (kill-new filename)
+    (message "Copied buffer file name '%s' to the clipboard." filename)))
+
+(global-set-key (kbd "C-c C-y") #'copy-file-name-to-clipboard)
+
+;; ------------------------------------------------------------------------
 ;; display customization
 ;; ------------------------------------------------------------------------
 ;; theme locations
