@@ -16,7 +16,7 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   '(projectile lsp-mode flycheck salt-mode markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode company avy dumb-jump yasnippet python magit org))
+   '(expand-region projectile lsp-mode flycheck salt-mode markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode company avy dumb-jump yasnippet python magit org))
  '(swiper-faces
    '(swiper-match-face-2 swiper-match-face-2 swiper-match-face-2 swiper-match-face-2))
  '(warning-suppress-log-types '((comp))))
@@ -260,9 +260,13 @@
 (setq-default ls-lisp-dirs-first t)
 
 ;; ------------------------------------------------------------------------
-;; dumbjump settings - jump to definition!
+;; expand region
 ;; ------------------------------------------------------------------------
-;; (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+;; overwrite currently selected region
+(delete-selection-mode 1)
 
 ;; ------------------------------------------------------------------------
 ;; flycheck settings
