@@ -304,8 +304,8 @@
 ; env related workaround
 (if (eql system-type 'darwin)
     (progn
-      (setenv "PATH" (concat (getenv "PATH") ":/Users/darrenw/go/bin"))
-      (setq-default exec-path (append exec-path '("/Users/darrenw/go/bin")))
+      (setenv "PATH" (concat (getenv "PATH") ":/opt/homebrew/bin/go"))
+      (setq-default exec-path (append exec-path '("/opt/homebrew/bin/go")))
       )
   )
 
