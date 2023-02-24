@@ -16,7 +16,7 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   '(lsp-ui projectile lsp-mode flycheck salt-mode markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode company avy dumb-jump yasnippet python magit org))
+   '(projectile lsp-mode flycheck salt-mode markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode company avy dumb-jump yasnippet python magit org))
  '(swiper-faces
    '(swiper-match-face-2 swiper-match-face-2 swiper-match-face-2 swiper-match-face-2))
  '(warning-suppress-log-types '((comp))))
@@ -335,8 +335,13 @@
 (setq-default lsp-completion-provider :none)
 (setq-default lsp-completion-show-detail nil)
 (setq-default lsp-completion-show-kind nil)
+(setq-default lsp-completion-enable nil)
 (setq-default lsp-headerline-breadcrumb-enable-diagnostics nil)
 
+;; lsp-mode doesn't seem to respect flycheck-check-syntax-automatically
+;; linting continually occurs while typing, and produces distracting visual artifacts
+(setq-default lsp-pylsp-plugins-flake8-enabled nil)
+(setq-default lsp-pylsp-plugins-mccabe-enabled nil)
 (if (eql system-type 'darwin) (setq-default lsp-pyls-server-command "/opt/homebrew/bin/pylsp"))
 
 (require 'lsp-mode)
