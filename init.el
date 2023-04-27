@@ -36,6 +36,9 @@
 ;; remove trailing whitespace on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;; ensure newline at end of file if not present
+(setq-default require-final-newline nil)
+
 ;; default coding system
 (prefer-coding-system 'utf-8)
 
@@ -292,6 +295,9 @@
 (setq-default flyspell-issue-message-flag nil)
 (global-set-key (kbd "C-c C-4") 'flyspell-mode)
 
+;; M-$ = Check and correct spelling of the word at point
+;; flyspell-buffer to check spelling of entire buffer
+
 ;; ------------------------------------------------------------------------
 ;; hideshow settings - code folding!
 ;; ------------------------------------------------------------------------
@@ -308,8 +314,8 @@
 ; env related workaround
 (if (eql system-type 'darwin)
     (progn
-      (setenv "PATH" (concat (getenv "PATH") ":/opt/homebrew/bin/go"))
-      (setq-default exec-path (append exec-path '("/opt/homebrew/bin/go")))
+      (setenv "PATH" (concat (getenv "PATH") ":/opt/homebrew/bin/"))
+      (setq-default exec-path (append exec-path '("/opt/homebrew/bin/")))
       )
   )
 
@@ -505,6 +511,7 @@
  '(avy-lead-face-2 ((t (:background "saddle brown" :foreground "white"))))
  '(isearch ((t (:background "#515151" :foreground "#ffcc66" :inverse-video t))))
  '(lsp-face-highlight-read ((t (:inherit highlight :background "SlateBlue4" :foreground "gray90"))))
+ '(lsp-face-highlight-textual ((t (:inherit highlight :background "SlateBlue4" :foreground "gray90"))))
  '(lsp-face-highlight-write ((t (:inherit highlight :background "SlateBlue4" :foreground "gray90"))))
  '(match ((t (:background "#2d2d2d" :foreground "#6699cc" :inverse-video nil))))
  '(show-paren-match ((t (:background "#2d2d2d" :foreground "#00ffff"))))
@@ -525,3 +532,6 @@
 ; (helpful commands)
 ; list-faces-display : show current font face definition (color / style)
 ; list-colors-display : show displayable colors
+
+; (misc)
+; M-= : display word / character count
