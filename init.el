@@ -107,6 +107,9 @@
 ;; truncate lines (do not line wrap)
 (setq-default truncate-lines t)
 
+;; default number of spaces for tab
+(setq-default tab-width 4)
+
 ;; ------------------------------------------------------------------------
 ;; mouse behavior
 ;; ------------------------------------------------------------------------
@@ -174,7 +177,7 @@
 (global-set-key (kbd "<C-M-up>") 'windmove-up)
 (global-set-key (kbd "<C-M-down>") 'windmove-down)
 
-;; end key to end of line rather than end of buffer
+;; home / end keys to start / end of line instead of buffer
 (global-set-key (kbd "<home>") 'move-beginning-of-line)
 (global-set-key (kbd "<end>") 'move-end-of-line)
 
@@ -303,7 +306,6 @@
 ;; ------------------------------------------------------------------------
 ;; golang related settings
 ;; ------------------------------------------------------------------------
-(setq-default tab-width 4)
 (if (eql system-type 'darwin) (add-hook 'before-save-hook 'gofmt-before-save))
 
 ; env related workaround
