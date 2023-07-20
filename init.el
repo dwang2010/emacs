@@ -16,7 +16,7 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   '(expand-region projectile lsp-mode flycheck salt-mode markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode company avy dumb-jump yasnippet python magit org))
+   '(expand-region projectile lsp-mode flycheck salt-mode markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode avy python magit org))
  '(swiper-faces
    '(swiper-match-face-2 swiper-match-face-2 swiper-match-face-2 swiper-match-face-2))
  '(warning-suppress-log-types '((comp))))
@@ -246,11 +246,6 @@
 (setq-default avy-background nil)
 
 ;; ------------------------------------------------------------------------
-;; company mode - complete anything!
-;; ------------------------------------------------------------------------
-;(add-hook 'prog-mode-hook 'company-mode)
-
-;; ------------------------------------------------------------------------
 ;; dired settings
 ;; ------------------------------------------------------------------------
 (global-set-key (kbd "C-x C-d") 'dired)
@@ -453,11 +448,6 @@
 ;; https://github.com/akermu/emacs-libvterm
 ;; ------------------------------------------------------------------------
 (setq-default vterm-copy-exclude-prompt t)
-
-;; ------------------------------------------------------------------------
-;; yasnippet settings - use default folder ~/.emacs.d/snippets
-;; ------------------------------------------------------------------------
-;(yas-global-mode 1)
 
 ;; ------------------------------------------------------------------------
 ;; copy file name to clipboard
