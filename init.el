@@ -43,7 +43,7 @@
 (prefer-coding-system 'utf-8)
 
 ;; enable line numbers
-(global-linum-mode 1)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;; remove startup screen
 (setq-default inhibit-startup-screen t)
