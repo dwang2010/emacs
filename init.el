@@ -16,7 +16,7 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   '(expand-region projectile lsp-mode flycheck salt-mode markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode yaml-mode avy python magit org))
+   '(osx-plist expand-region projectile lsp-mode flycheck markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode avy python magit org))
  '(swiper-faces
    '(swiper-match-face-2 swiper-match-face-2 swiper-match-face-2 swiper-match-face-2))
  '(warning-suppress-log-types '((comp))))
@@ -276,8 +276,8 @@
 ;; https://www.flycheck.org/en/latest/languages.html#python
 (global-set-key (kbd "C-c ! !") 'flycheck-mode)
 
-(add-hook 'python-mode-hook 'flycheck-mode)
-(add-hook 'go-mode-hook 'flycheck-mode)
+;(add-hook 'python-mode-hook 'flycheck-mode)
+;(add-hook 'go-mode-hook 'flycheck-mode)
 
 (setq-default flycheck-relevant-error-other-file-show nil)
 (setq-default flycheck-check-syntax-automatically '(mode-enabled save))
@@ -306,7 +306,7 @@
 ;; ------------------------------------------------------------------------
 ;; golang related settings
 ;; ------------------------------------------------------------------------
-(if (eql system-type 'darwin) (add-hook 'before-save-hook 'gofmt-before-save))
+;(if (eql system-type 'darwin) (add-hook 'before-save-hook 'gofmt-before-save))
 
 ; env related workaround
 (if (eql system-type 'darwin)
@@ -349,7 +349,7 @@
 ;; linting continually occurs while typing, and produces distracting visual artifacts
 (setq-default lsp-pylsp-plugins-flake8-enabled nil)
 (setq-default lsp-pylsp-plugins-mccabe-enabled nil)
-(if (eql system-type 'darwin) (setq-default lsp-pyls-server-command "/opt/homebrew/bin/pylsp"))
+;(if (eql system-type 'darwin) (setq-default lsp-pyls-server-command "/opt/homebrew/bin/pylsp"))
 
 (require 'lsp-mode)
 (add-hook 'python-mode-hook #'lsp)
@@ -395,11 +395,6 @@
  'org-babel-load-languages
  '((python . t)))
 
-;; configure python interpretter based on system
-(if (eql system-type 'darwin)
-    (setq python-shell-interpreter "/usr/local/bin/python3")
-  (setq python-shell-interpreter "/usr/bin/python3"))
-
 ;; set org-babel for desired python executable
 (setq org-babel-python-command "python3")
 
@@ -413,6 +408,16 @@
      (gnus . org-gnus-no-new-news)
      (file . find-file)
      (wl . wl-other-frame)))
+
+;; ------------------------------------------------------------------------
+;; python settings
+;; ------------------------------------------------------------------------
+;; configure location of python interpretter (system dependent)
+(if (eql system-type 'darwin)
+    (setq python-shell-interpreter "/opt/homebrew/bin/python3.10")
+  (setq python-shell-interpreter "/usr/bin/python3"))
+
+(setq python-shell-completion-native-enable nil)
 
 ;; ------------------------------------------------------------------------
 ;; paren mode - highlight matching braces!
