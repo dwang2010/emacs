@@ -485,7 +485,7 @@
 ;; default font face, based on OS
 (if (eql system-type 'darwin)
     (progn
-      (set-face-attribute 'default nil :family "Consolas" :height 125)
+      (set-face-attribute 'default nil :family "Consolas" :height 145)
       (setq-default line-spacing 0.05))
   (progn
     (set-face-attribute 'default nil :family "Consolas" :height 115)
