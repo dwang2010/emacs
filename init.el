@@ -1,28 +1,27 @@
-(package-initialize)
+(require 'package)
+
+;; add melpa repo for packages
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
-(when (and (equal emacs-version "28.1")
-           (eql system-type 'darwin))
-  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
+;; reduce frequency of garbage collection; happen on 50MB of allocated data
+(setq gc-cons-threshold 50000000)  ; 50MB
 
-;; reduce number of garbage collections to reduce startup time
-(setq gc-cons-threshold 200000000)  ; 200MB
+;; increase data which emacs reads (lsp server)
 (setq read-process-output-max (* 1024 1024))  ; 1mb
 
-;; ------------------------------------------------------------------------
-;; custom set configuration
-;; ------------------------------------------------------------------------
-(custom-set-variables
- '(custom-safe-themes
-   '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
- '(package-selected-packages
-   '(deadgrep osx-plist expand-region projectile lsp-mode flycheck markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode avy python magit org))
- '(swiper-faces
-   '(swiper-match-face-2 swiper-match-face-2 swiper-match-face-2 swiper-match-face-2))
- '(warning-suppress-log-types '((comp))))
+;; make sure use-package is installed
+(unless (package-installed-p 'use-package) (package-install 'use-package))
+
+;; if in GUI, load base color theme (to modify)
+(when (display-graphic-p)
+  (setq-default custom-safe-themes t)
+  (add-to-list 'load-path "~/.emacs.d/themes/")
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+  (load-theme 'sanityinc-tomorrow-eighties t)
+  )
 
 ;; ------------------------------------------------------------------------
-;; default behaviors
+;; modify default behaviors
 ;; ------------------------------------------------------------------------
 ;; disable menu bar
 (menu-bar-mode -1)
@@ -37,7 +36,7 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; ensure newline at end of file if not present
-(setq-default require-final-newline nil)
+(setq-default require-final-newline t)
 
 ;; default coding system
 (prefer-coding-system 'utf-8)
@@ -56,6 +55,9 @@
 
 ;; spaces instead of tabs when indenting
 (setq-default indent-tabs-mode nil)
+
+;; default number of spaces for tab
+(setq-default tab-width 4)
 
 ;; show filename in title bar
 (setq-default frame-title-format "%b")
@@ -107,8 +109,8 @@
 ;; truncate lines (do not line wrap)
 (setq-default truncate-lines t)
 
-;; default number of spaces for tab
-(setq-default tab-width 4)
+;; overwrite currently selected region - handy for expand region
+(delete-selection-mode t)
 
 ;; ------------------------------------------------------------------------
 ;; mouse behavior
@@ -126,25 +128,25 @@
 
 (let ((standard-mode-line-format
        (list "%e"
-	     'mode-line-front-space
-	     'mode-line-mule-info
-	     'mode-line-client
-	     'mode-line-modified
-	     'mode-line-remote
-	     'mode-line-frame-identification
-	     ;'mode-line-buffer-identification
-	     ;"   "
+             'mode-line-front-space
+             'mode-line-mule-info
+             'mode-line-client
+             'mode-line-modified
+             'mode-line-remote
+             'mode-line-frame-identification
+             ;'mode-line-buffer-identification
+             ;"   "
              '(:eval (propertize "%b  " 'face 'mode-line-buffer-id))
              ;'mode-line-position
              "(%l,%c)  "
              ;'(:eval (propertize "(%l,%c)  " 'face 'mode-line))
-	     ;'(vc-mode vc-mode)
-	     ;"  "
-	     ;'mode-line-modes
+             ;'(vc-mode vc-mode)
+             ;"  "
+             ;'mode-line-modes
              '(:eval (propertize "%m  " 'face 'shadow))
-	     'mode-line-misc-info
+             'mode-line-misc-info
              ;'(:eval (propertize (format-time-string "(%a, %m/%d | %I:%M %p)") 'face 'shadow))
-	     'mode-line-end-spaces)))
+             'mode-line-end-spaces)))
   (setq-default mode-line-format standard-mode-line-format))
 
 ;; ------------------------------------------------------------------------
@@ -168,6 +170,9 @@
 (global-unset-key (kbd "C-x C-d"))
 (global-unset-key (kbd "C-x C-c"))
 
+;; also have C-x C-d bound to dired (for lazy hands)
+(global-set-key (kbd "C-x C-d") 'dired)
+
 ;; change C-x s to same as C-x C-s
 (global-set-key (kbd "C-x s") 'save-buffer)
 
@@ -181,130 +186,255 @@
 (global-set-key (kbd "<home>") 'move-beginning-of-line)
 (global-set-key (kbd "<end>") 'move-end-of-line)
 
+;; use hippie-expand instead of dabbrev (built-in expansion / completion)
+;; https://www.masteringemacs.org/article/text-expansion-hippie-expand
+(global-set-key (kbd "M-/") 'hippie-expand)
+
 ;; mac specific keybinds
 (if (eql system-type 'darwin)
     (progn
       (setq-default mac-option-modifier 'meta)
       (setq-default mac-command-modifier 'hyper)
       (global-set-key [(hyper f)] 'toggle-frame-fullscreen)
-      (global-set-key [(hyper m)] 'toggle-frame-maximized)
-      )
-  )
+      (global-set-key [(hyper m)] 'toggle-frame-maximized)))
 
 ;; ------------------------------------------------------------------------
-;; tree sitter syntax highlighting config
+;; use package configs
 ;; ------------------------------------------------------------------------
-(global-tree-sitter-mode)
-(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+(require 'use-package)
+(setq use-package-verbose t)
 
 ;; ------------------------------------------------------------------------
-;; additional control for displaying buffers
-;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Choosing-Window-Options.html
+;; paren mode - highlight matching braces! (native)
 ;; ------------------------------------------------------------------------
-;; Fix annoying vertical window splitting.
-;; https://lists.gnu.org/archive/html/help-gnu-emacs/2015-08/msg00339.html
-(with-eval-after-load "window"
-  (defcustom split-window-below nil
-    "If non-nil, vertical splits produce new windows below."
-    :group 'windows
-    :type 'boolean)
-
-  (defcustom split-window-right nil
-    "If non-nil, horizontal splits produce new windows to the right."
-    :group 'windows
-    :type 'boolean)
-
-  (fmakunbound #'split-window-sensibly)
-
-  (defun split-window-sensibly
-      (&optional window)
-    (setq window (or window (selected-window)))
-    (or (and (window-splittable-p window t)
-             ;; Split window horizontally.
-             (split-window window nil (if split-window-right 'left  'right)))
-        (and (window-splittable-p window)
-             ;; Split window vertically.
-             (split-window window nil (if split-window-below 'above 'below)))
-        (and (eq window (frame-root-window (window-frame window)))
-             (not (window-minibuffer-p window))
-             ;; If WINDOW is the only window on its frame and is not the
-             ;; minibuffer window, try to split it horizontally disregarding the
-             ;; value of `split-width-threshold'.
-             (let ((split-width-threshold 0))
-               (when (window-splittable-p window t)
-                 (split-window window nil (if split-window-right
-                                              'left
-                                            'right))))))))
-
-(setq-default split-height-threshold  4
-              split-width-threshold   160) ; the reasonable limit for horizontal splits
+(use-package paren
+  :config (show-paren-mode 1)
+  (setq-default show-paren-delay 0)
+  (set-face-attribute 'show-paren-match nil :background "#2d2d2d" :foreground "#00ffff"))
 
 ;; ------------------------------------------------------------------------
-;; avy settings (jump to char!)
+;; dired settings (native)
 ;; ------------------------------------------------------------------------
-(global-set-key (kbd "C-f") 'avy-goto-char-timer)
-(setq-default avy-timeout-seconds 0.20)
-(setq-default avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-(setq-default avy-style 'de-bruijn)
-(setq-default avy-background nil)
-
-;; ------------------------------------------------------------------------
-;; dired settings
-;; ------------------------------------------------------------------------
-(global-set-key (kbd "C-x C-d") 'dired)
-(put 'dired-find-alternate-file 'disabled nil)
-(setq-default dired-dwim-target t)
-(setq-default dired-listing-switches "-laGh --group-directories-first -v")
+(use-package dired
+  :config (put 'dired-find-alternate-file 'disabled nil) ; reuse current buffer pressing "a"
+  (setq-default dired-dwim-target t) ; target operation to other dired window
+  (setq-default dired-listing-switches "-laGh --group-directories-first -v"))
 
 (require 'ls-lisp)
 (setq-default ls-lisp-use-insert-directory-program nil)
 (setq-default ls-lisp-dirs-first t)
 
 ;; ------------------------------------------------------------------------
+;; hideshow settings - code folding! (native)
+;; ------------------------------------------------------------------------
+(use-package hideshow
+  :bind (("<C-tab>" . hs-toggle-hiding)
+         ("<C-M-tab>" . 'hs-hide-all))
+  :hook ((prog-mode . hs-minor-mode)
+         (c-mode-common . hs-minor-mode)))
+
+;; ------------------------------------------------------------------------
+;; flyspell settings (native)
+;; ispell needs to be locally installed (not a part of emacs)
+;; ------------------------------------------------------------------------
+(use-package flyspell
+  :bind ("C-c C-4" . 'flyspell-mode)
+  :config (setq-default flyspell-issue-message-flag nil))
+
+;; M-$ = Check and correct spelling of the word at point
+;; flyspell-buffer to check spelling of entire buffer
+
+;; ------------------------------------------------------------------------
 ;; expand region
 ;; ------------------------------------------------------------------------
-(require 'expand-region)
-(global-set-key (kbd "C-=") 'er/expand-region)
+(use-package expand-region
+  :ensure t
+  :bind ("C-=" . er/expand-region))
 
-;; overwrite currently selected region
-(delete-selection-mode 1)
+;; ------------------------------------------------------------------------
+;; avy settings (jump to char!)
+;; ------------------------------------------------------------------------
+(use-package avy
+  :ensure t
+  :bind ("C-f" . 'avy-goto-char-timer)
+  :config (setq-default avy-timeout-seconds 0.20)
+  (setq-default avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  (setq-default avy-style 'de-bruijn)
+  (setq-default avy-background nil)
+  (set-face-attribute 'avy-lead-face nil :background "red2" :foreground "white")
+  (set-face-attribute 'avy-lead-face-0 nil :background "saddle brown" :foreground "white")
+  (set-face-attribute 'avy-lead-face-1 nil :background "#008b8b" :foreground "black")
+  (set-face-attribute 'avy-lead-face-2 nil :background "saddle brown" :foreground "white"))
+
+;; ------------------------------------------------------------------------
+;; tree sitter syntax highlighting config
+;; ------------------------------------------------------------------------
+(use-package tree-sitter-langs
+  :ensure t)
+
+(use-package tree-sitter
+  :ensure t
+  :after tree-sitter-langs
+  :config (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+;; ------------------------------------------------------------------------
+;; projectile configs
+;; ------------------------------------------------------------------------
+(use-package projectile
+  :ensure t
+  :init (projectile-mode +1)
+  :bind ("C-x p" . projectile-command-map))
+
+;; ------------------------------------------------------------------------
+;; swiper / ivy configs
+;; ------------------------------------------------------------------------
+(use-package swiper
+  :ensure t
+  :bind (("C-s" . swiper-isearch)
+  ("C-r" . swiper-backward)
+  ("C-c C-w" . swiper-isearch-thing-at-point))
+  :config (ivy-mode 1)
+  (setq-default ivy-on-del-error-function #'ignore)
+  (setq-default ivy-display-style 'fancy)
+  (setq-default ivy-height 4)
+  (set-face-attribute 'swiper-background-match-face-2 nil :inherit 'swiper-match-face-1)
+  (set-face-attribute 'swiper-line-face nil :underline nil))
+
+; '(isearch ((t (:background "#515151" :foreground "#ffcc66" :inverse-video t))))
+; '(match ((t (:background "#2d2d2d" :foreground "#6699cc" :inverse-video nil))))
+
+;; ------------------------------------------------------------------------
+;; magit configs
+;; ------------------------------------------------------------------------
+(use-package magit
+  :ensure t
+  :bind ("C-x g" . magit-status)
+  :config
+  (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1))
+
+;; ------------------------------------------------------------------------
+;; lsp configs
+;; ------------------------------------------------------------------------
+(use-package lsp-mode
+  :ensure t
+  :init (setq-default lsp-keymap-prefix "C-c l")
+  :bind (("M-." . lsp-find-definition)
+         ("M-?" . lsp-find-references))
+  :config
+  ;; disable a bunch of unneeded crap
+  (setq-default lsp-log-io nil)
+  (setq-default lsp-lens-enable nil)
+  (setq-default lsp-ui-doc-enable nil)
+  (setq-default lsp-ui-sideline-enable nil)
+  (setq-default lsp-modeline-code-actions-enable nil)
+  (setq-default lsp-modeline-diagnostics-enable nil)
+  (setq-default lsp-modeline-workspace-status-enable nil)
+  (setq-default lsp-signature-render-documentation nil)
+  (setq-default lsp-diagnostics-provider :none)
+  (setq-default lsp-completion-provider :none)
+  (setq-default lsp-completion-show-detail nil)
+  (setq-default lsp-completion-show-kind nil)
+  (setq-default lsp-completion-enable nil)
+  (setq-default lsp-headerline-breadcrumb-enable-diagnostics nil)
+  (define-key lsp-mode-map (kbd "<mouse-3>") nil) ; disable lsp-mode right click menu
+
+  ;; change some font faces
+  (set-face-attribute 'lsp-face-highlight-textual nil :background "SlateBlue3" :foreground "gray90" :underline nil :bold nil)
+  (set-face-attribute 'lsp-face-highlight-read nil :inherit 'lsp-face-highlight-textual :underline nil :bold nil)
+  (set-face-attribute 'lsp-face-highlight-write nil :inherit 'lsp-face-highlight-textual :underline nil :bold nil)
+  :hook ((python-mode . lsp)
+         (go-mode . lsp)))
+
+;(if (eql system-type 'darwin) (setq-default lsp-pyls-server-command "/opt/homebrew/bin/pylsp"))
+
+;; ------------------------------------------------------------------------
+;; vterm configs
+;; https://github.com/akermu/emacs-libvterm
+;; ------------------------------------------------------------------------
+(use-package vterm
+  :ensure t
+  :config
+  (setq-default vterm-copy-exclude-prompt t))
+
+;; ------------------------------------------------------------------------
+;; deadgrep configs
+;; https://github.com/Wilfred/deadgrep#keybindings
+;; ------------------------------------------------------------------------
+(use-package deadgrep
+  :ensure t
+  :bind
+  ("<f5>" . deadgrep))
+
+;; ------------------------------------------------------------------------
+;; org-mode configs
+;; ------------------------------------------------------------------------
+(use-package org
+  :ensure t
+  :config
+  ;; customize emphasis markers
+  (setq-default org-hide-emphasis-markers t)
+  (setq org-emphasis-alist
+        '(("*" (bold :foreground "Orange"))
+          ("/" italic)
+          ("_" underline)
+          ("=" (:background "maroon" :foreground "white"))
+          ("~" (:background "deep sky blue" :foreground "MidnightBlue"))
+          ("+" (:strike-through t))))
+
+  ;; no indents on code block
+  (setq-default org-src-preserve-indentation t)
+
+  ;; babel configuration to load languages
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)))
+
+  ;; set org-babel for desired python executable
+  (setq org-babel-python-command "python3")
+
+  ;; potentially risky: remove confirmation when executing code blocks
+  (setq-default org-confirm-babel-evaluate nil)
+
+  ;; C-c C-o opens link in same buffer rather than new buffer
+  (setq org-link-frame-setup
+        '((vm . vm-visit-folder-other-frame)
+          (vm-imap . vm-visit-imap-folder-other-frame)
+          (gnus . org-gnus-no-new-news)
+          (file . find-file)
+          (wl . wl-other-frame))))
 
 ;; ------------------------------------------------------------------------
 ;; flycheck settings
-;; ------------------------------------------------------------------------
-;; flycheck requires local installation of external programs to work
+;; requires local installation of checking program (flake8 / mypy etc.)
 ;; https://www.flycheck.org/en/latest/languages.html#python
-(global-set-key (kbd "C-c ! !") 'flycheck-mode)
-
-;(add-hook 'python-mode-hook 'flycheck-mode)
-;(add-hook 'go-mode-hook 'flycheck-mode)
-
-(setq-default flycheck-relevant-error-other-file-show nil)
-(setq-default flycheck-check-syntax-automatically '(mode-enabled save))
+;; ------------------------------------------------------------------------
+(use-package flycheck
+  :ensure t
+  :bind
+  ("C-c ! !" . flycheck-mode)
+  :hook ((python-mode . flycheck-mode)
+         (go-mode . flycheck-mode))
+  :config
+  (setq-default flycheck-relevant-error-other-file-show nil)
+  (setq-default flycheck-check-syntax-automatically '(mode-enabled save)))
 
 ;; handy shortcuts:
 ;; C-c ! v = verify setup
 ;; C-c ! l = list of errors in buffer
 
 ;; ------------------------------------------------------------------------
-;; flyspell settings
+;; python configs
 ;; ------------------------------------------------------------------------
-;; ispell needs to be locally installed (not a part of emacs)
-(setq-default flyspell-issue-message-flag nil)
-(global-set-key (kbd "C-c C-4") 'flyspell-mode)
+;; configure location of python interpretter (system dependent)
+(if (eql system-type 'darwin)
+    (setq python-shell-interpreter "/opt/homebrew/bin/python3.10")
+  (setq python-shell-interpreter "/usr/bin/python3"))
 
-;; M-$ = Check and correct spelling of the word at point
-;; flyspell-buffer to check spelling of entire buffer
-
-;; ------------------------------------------------------------------------
-;; hideshow settings - code folding!
-;; ------------------------------------------------------------------------
-(add-hook 'prog-mode-hook #'hs-minor-mode)
-(global-set-key (kbd "<C-tab>") 'hs-toggle-hiding)
-(global-set-key (kbd "<C-M-tab>") 'hs-hide-all)
+(setq python-shell-completion-native-enable nil)
 
 ;; ------------------------------------------------------------------------
-;; golang related settings
+;; golang configs
 ;; ------------------------------------------------------------------------
 ;(if (eql system-type 'darwin) (add-hook 'before-save-hook 'gofmt-before-save))
 
@@ -317,116 +447,12 @@
   )
 
 ;; ------------------------------------------------------------------------
-;; js-mode settings
+;; js-mode configs
 ;; ------------------------------------------------------------------------
 (setq js-indent-level 4)
 
 ;; ------------------------------------------------------------------------
-;; emacs lsp related
-;; ------------------------------------------------------------------------
-(setq-default lsp-keymap-prefix "C-c l")
-
-;; (setq-default lsp-enable-symbol-highlighting nil)
-;; (setq-default lsp-headerline-breadcrumb-enable nil)
-
-(setq-default lsp-log-io nil) ; if set to true can cause a performance hit
-(setq-default lsp-lens-enable nil)
-
-(setq-default lsp-ui-doc-enable nil)
-(setq-default lsp-ui-sideline-enable nil)
-(setq-default lsp-modeline-code-actions-enable nil)
-(setq-default lsp-modeline-diagnostics-enable nil)
-(setq-default lsp-modeline-workspace-status-enable nil)
-(setq-default lsp-signature-render-documentation nil)
-(setq-default lsp-diagnostics-provider :none)
-(setq-default lsp-completion-provider :none)
-(setq-default lsp-completion-show-detail nil)
-(setq-default lsp-completion-show-kind nil)
-(setq-default lsp-completion-enable nil)
-(setq-default lsp-headerline-breadcrumb-enable-diagnostics nil)
-
-;; lsp-mode doesn't seem to respect flycheck-check-syntax-automatically
-;; linting continually occurs while typing, and produces distracting visual artifacts
-(setq-default lsp-pylsp-plugins-flake8-enabled nil)
-(setq-default lsp-pylsp-plugins-mccabe-enabled nil)
-;(if (eql system-type 'darwin) (setq-default lsp-pyls-server-command "/opt/homebrew/bin/pylsp"))
-
-(require 'lsp-mode)
-(add-hook 'python-mode-hook #'lsp)
-(add-hook 'go-mode-hook #'lsp)
-
-(global-set-key (kbd "M-.") 'lsp-find-definition)
-(global-set-key (kbd "M-?") 'lsp-find-references)
-
-;; disable lsp-mode right click menu
-(with-eval-after-load 'lsp-mode
-  (define-key lsp-mode-map (kbd "<mouse-3>") nil))
-
-;; ------------------------------------------------------------------------
-;; projectile related
-;; ------------------------------------------------------------------------
-(projectile-mode +1)
-(global-set-key (kbd "C-x p") 'projectile-command-map)
-
-;; ------------------------------------------------------------------------
-;; magit related
-;; ------------------------------------------------------------------------
-(setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
-(global-set-key (kbd "C-x g") 'magit-status)
-
-;; ------------------------------------------------------------------------
-;; org-mode related settings
-;; ------------------------------------------------------------------------
-(setq-default org-hide-emphasis-markers t)
-
-(setq org-emphasis-alist
-  '(("*" (bold :foreground "Orange"))
-    ("/" italic)
-    ("_" underline)
-    ("=" (:background "maroon" :foreground "white"))
-    ("~" (:background "deep sky blue" :foreground "MidnightBlue"))
-    ("+" (:strike-through t))))
-
-;; no indents on code block
-(setq-default org-src-preserve-indentation t)
-
-;; babel configuration to load languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((python . t)))
-
-;; set org-babel for desired python executable
-(setq org-babel-python-command "python3")
-
-;; potentially risky: remove confirmation when executing code blocks
-(setq-default org-confirm-babel-evaluate nil)
-
-;; C-c C-o opens link in same buffer rather than new buffer
-(setq org-link-frame-setup
-   '((vm . vm-visit-folder-other-frame)
-     (vm-imap . vm-visit-imap-folder-other-frame)
-     (gnus . org-gnus-no-new-news)
-     (file . find-file)
-     (wl . wl-other-frame)))
-
-;; ------------------------------------------------------------------------
-;; python settings
-;; ------------------------------------------------------------------------
-;; configure location of python interpretter (system dependent)
-(if (eql system-type 'darwin)
-    (setq python-shell-interpreter "/opt/homebrew/bin/python3.10")
-  (setq python-shell-interpreter "/usr/bin/python3"))
-
-(setq python-shell-completion-native-enable nil)
-
-;; ------------------------------------------------------------------------
-;; paren mode - highlight matching braces!
-;; ------------------------------------------------------------------------
-(setq-default show-paren-delay 0)
-(show-paren-mode 1)
-
-;; ------------------------------------------------------------------------
-;; protobuf related settings
+;; protobuf configs
 ;; ------------------------------------------------------------------------
 ; 4-space indent
 (defconst my-protobuf-style
@@ -435,32 +461,6 @@
 
 (add-hook 'protobuf-mode-hook
           (lambda () (c-add-style "my-style" my-protobuf-style t)))
-
-; ensure hideshow minor mode for proto files
-(add-hook 'c-mode-common-hook 'hs-minor-mode)
-
-;; ------------------------------------------------------------------------
-;; ivy / swiper settings
-;; ------------------------------------------------------------------------
-(ivy-mode 1)
-(global-set-key (kbd "C-s") 'swiper-isearch)
-(global-set-key (kbd "C-r") 'swiper-backward)
-(global-set-key (kbd "C-c C-w") 'swiper-isearch-thing-at-point)
-(setq-default ivy-on-del-error-function #'ignore)
-(setq-default ivy-display-style 'fancy)
-(setq-default ivy-height 4)
-
-;; ------------------------------------------------------------------------
-;; vterm configuration
-;; https://github.com/akermu/emacs-libvterm
-;; ------------------------------------------------------------------------
-(setq-default vterm-copy-exclude-prompt t)
-
-;; ------------------------------------------------------------------------
-;; deadgrep config
-;; https://github.com/Wilfred/deadgrep#keybindings
-;; ------------------------------------------------------------------------
-(global-set-key (kbd "<f5>") #'deadgrep)
 
 ;; ------------------------------------------------------------------------
 ;; copy file name to clipboard
@@ -481,13 +481,51 @@
 
 (global-set-key (kbd "C-c C-y") #'copy-file-name-to-clipboard)
 
+;; ;; ------------------------------------------------------------------------
+;; ;; additional control for displaying buffers
+;; ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Choosing-Window-Options.html
+;; ;; ------------------------------------------------------------------------
+;; ;; Fix annoying vertical window splitting.
+;; ;; https://lists.gnu.org/archive/html/help-gnu-emacs/2015-08/msg00339.html
+;; (with-eval-after-load "window"
+;;   (defcustom split-window-below nil
+;;     "If non-nil, vertical splits produce new windows below."
+;;     :group 'windows
+;;     :type 'boolean)
+
+;;   (defcustom split-window-right nil
+;;     "If non-nil, horizontal splits produce new windows to the right."
+;;     :group 'windows
+;;     :type 'boolean)
+
+;;   (fmakunbound #'split-window-sensibly)
+
+;;   (defun split-window-sensibly
+;;       (&optional window)
+;;     (setq window (or window (selected-window)))
+;;     (or (and (window-splittable-p window t)
+;;              ;; Split window horizontally.
+;;              (split-window window nil (if split-window-right 'left  'right)))
+;;         (and (window-splittable-p window)
+;;              ;; Split window vertically.
+;;              (split-window window nil (if split-window-below 'above 'below)))
+;;         (and (eq window (frame-root-window (window-frame window)))
+;;              (not (window-minibuffer-p window))
+;;              ;; If WINDOW is the only window on its frame and is not the
+;;              ;; minibuffer window, try to split it horizontally disregarding the
+;;              ;; value of `split-width-threshold'.
+;;              (let ((split-width-threshold 0))
+;;                (when (window-splittable-p window t)
+;;                  (split-window window nil (if split-window-right
+;;                                               'left
+;;                                             'right))))))))
+
+;; (setq-default split-height-threshold  4
+;;               split-width-threshold   160) ; the reasonable limit for horizontal splits
+
 ;; ------------------------------------------------------------------------
 ;; display customization
 ;; ------------------------------------------------------------------------
-;; theme locations
-(add-to-list 'load-path "~/.emacs.d/themes/")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-
 ;; default font face, based on OS
 (if (eql system-type 'darwin)
     (progn
@@ -498,7 +536,6 @@
     (setq-default line-spacing 0.05)))
 
 ;; default frame parameters
-(load-theme 'sanityinc-tomorrow-eighties)
 (setq-default default-frame-alist
               '((width . 100)              ; window width (chars, less line numbers)
                 (height . 50)              ; window height (rows)
@@ -507,20 +544,6 @@
                 ;; (left-fringe . 8)       ; half width left fringe width (def: 8)
                 ;; (right-fringe . 0)      ; effectively disable right fringe
                 ))
-
-(custom-set-faces
- '(avy-lead-face ((t (:background "red2" :foreground "white"))))
- '(avy-lead-face-0 ((t (:background "saddle brown" :foreground "white"))))
- '(avy-lead-face-1 ((t (:background "#008b8b" :foreground "black"))))
- '(avy-lead-face-2 ((t (:background "saddle brown" :foreground "white"))))
- '(isearch ((t (:background "#515151" :foreground "#ffcc66" :inverse-video t))))
- '(lsp-face-highlight-read ((t (:inherit highlight :background "SlateBlue4" :foreground "gray90"))))
- '(lsp-face-highlight-textual ((t (:inherit highlight :background "SlateBlue4" :foreground "gray90"))))
- '(lsp-face-highlight-write ((t (:inherit highlight :background "SlateBlue4" :foreground "gray90"))))
- '(match ((t (:background "#2d2d2d" :foreground "#6699cc" :inverse-video nil))))
- '(show-paren-match ((t (:background "#2d2d2d" :foreground "#00ffff"))))
- '(swiper-background-match-face-2 ((t (:inherit swiper-match-face-1))))
- '(swiper-line-face ((t (:underline nil)))))
 
 ;; -----------------------------------------
 ;; notes for when you forget
