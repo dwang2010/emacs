@@ -16,7 +16,7 @@
  '(custom-safe-themes
    '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))
  '(package-selected-packages
-   '(osx-plist expand-region projectile lsp-mode flycheck markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode avy python magit org))
+   '(deadgrep osx-plist expand-region projectile lsp-mode flycheck markdown-mode tree-sitter-langs tree-sitter cpputils-cmake eldoc-cmake vterm swiper go-mode avy python magit org))
  '(swiper-faces
    '(swiper-match-face-2 swiper-match-face-2 swiper-match-face-2 swiper-match-face-2))
  '(warning-suppress-log-types '((comp))))
@@ -457,6 +457,12 @@
 (setq-default vterm-copy-exclude-prompt t)
 
 ;; ------------------------------------------------------------------------
+;; deadgrep config
+;; https://github.com/Wilfred/deadgrep#keybindings
+;; ------------------------------------------------------------------------
+(global-set-key (kbd "<f5>") #'deadgrep)
+
+;; ------------------------------------------------------------------------
 ;; copy file name to clipboard
 ;; ------------------------------------------------------------------------
 (defun copy-file-name-to-clipboard (do-not-strip-prefix)
@@ -498,8 +504,9 @@
                 (height . 50)              ; window height (rows)
                 (cursor-type . bar)        ; vertical bar cursor
                 (cursor-color . "#ff7f00") ; orange cursor color
-                (left-fringe . 8)          ; half width left fringe width (def: 8)
-                (right-fringe . 0)))       ; effectively disable right fringe
+                ;; (left-fringe . 8)       ; half width left fringe width (def: 8)
+                ;; (right-fringe . 0)      ; effectively disable right fringe
+                ))
 
 (custom-set-faces
  '(avy-lead-face ((t (:background "red2" :foreground "white"))))
