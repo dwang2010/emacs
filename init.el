@@ -42,7 +42,7 @@
 (prefer-coding-system 'utf-8)
 
 ;; enable line numbers
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(global-display-line-numbers-mode)
 
 ;; remove startup screen
 (setq-default inhibit-startup-screen t)
@@ -287,17 +287,22 @@
   :bind ("C-x p" . projectile-command-map))
 
 ;; ------------------------------------------------------------------------
-;; swiper / ivy configs
+;; ivy / swiper configs
 ;; ------------------------------------------------------------------------
-(use-package swiper
+(use-package ivy
   :ensure t
-  :bind (("C-s" . swiper-isearch)
-  ("C-r" . swiper-backward)
-  ("C-c C-w" . swiper-isearch-thing-at-point))
-  :config (ivy-mode 1)
+  :config (ivy-mode)
   (setq-default ivy-on-del-error-function #'ignore)
   (setq-default ivy-display-style 'fancy)
-  (setq-default ivy-height 4)
+  (setq-default ivy-height 4))
+
+(use-package swiper
+  :ensure t
+  :after ivy
+  :bind (("C-s" . swiper-isearch)
+         ("C-r" . swiper-backward)
+         ("C-c C-w" . swiper-isearch-thing-at-point))
+  :config
   (set-face-attribute 'swiper-background-match-face-2 nil :inherit 'swiper-match-face-1)
   (set-face-attribute 'swiper-line-face nil :underline nil))
 
