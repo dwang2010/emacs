@@ -17,8 +17,10 @@
   (setq-default custom-safe-themes t)
   (add-to-list 'load-path "~/.emacs.d/themes/")
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-  (load-theme 'sanityinc-tomorrow-eighties t)
-  )
+  (load-theme 'sanityinc-tomorrow-eighties t))
+
+;; goodbye to custom-set-variable mutations (just don't load)
+(setq-default custom-file "~/.emacs.d/custom.el")
 
 ;; ------------------------------------------------------------------------
 ;; modify default behaviors
@@ -342,16 +344,21 @@
   (setq-default lsp-completion-show-kind nil)
   (setq-default lsp-completion-enable nil)
   (setq-default lsp-headerline-breadcrumb-enable-diagnostics nil)
-  (define-key lsp-mode-map (kbd "<mouse-3>") nil) ; disable lsp-mode right click menu
+  (define-key lsp-mode-map (kbd "<mouse-3>") nil) ;; disable lsp-mode right click menu
 
   ;; change some font faces
-  (set-face-attribute 'lsp-face-highlight-textual nil :background "SlateBlue3" :foreground "gray90" :underline nil :bold nil)
-  (set-face-attribute 'lsp-face-highlight-read nil :inherit 'lsp-face-highlight-textual :underline nil :bold nil)
-  (set-face-attribute 'lsp-face-highlight-write nil :inherit 'lsp-face-highlight-textual :underline nil :bold nil)
+  (set-face-attribute
+   'lsp-face-highlight-textual nil
+   :background "SlateBlue3" :foreground "gray90" :underline nil :bold nil)
+  (set-face-attribute
+   'lsp-face-highlight-read nil
+   :inherit 'lsp-face-highlight-textual :underline nil :bold nil)
+  (set-face-attribute
+   'lsp-face-highlight-write nil
+   :inherit 'lsp-face-highlight-textual :underline nil :bold nil)
+
   :hook ((python-mode . lsp)
          (go-mode . lsp)))
-
-;(if (eql system-type 'darwin) (setq-default lsp-pyls-server-command "/opt/homebrew/bin/pylsp"))
 
 ;; ------------------------------------------------------------------------
 ;; vterm configs
@@ -447,9 +454,7 @@
 (if (eql system-type 'darwin)
     (progn
       (setenv "PATH" (concat (getenv "PATH") ":/opt/homebrew/bin/"))
-      (setq-default exec-path (append exec-path '("/opt/homebrew/bin/")))
-      )
-  )
+      (setq-default exec-path (append exec-path '("/opt/homebrew/bin/")))))
 
 ;; ------------------------------------------------------------------------
 ;; js-mode configs
@@ -485,48 +490,6 @@
     (message "Copied buffer file name '%s' to the clipboard." filename)))
 
 (global-set-key (kbd "C-c C-y") #'copy-file-name-to-clipboard)
-
-;; ;; ------------------------------------------------------------------------
-;; ;; additional control for displaying buffers
-;; ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Choosing-Window-Options.html
-;; ;; ------------------------------------------------------------------------
-;; ;; Fix annoying vertical window splitting.
-;; ;; https://lists.gnu.org/archive/html/help-gnu-emacs/2015-08/msg00339.html
-;; (with-eval-after-load "window"
-;;   (defcustom split-window-below nil
-;;     "If non-nil, vertical splits produce new windows below."
-;;     :group 'windows
-;;     :type 'boolean)
-
-;;   (defcustom split-window-right nil
-;;     "If non-nil, horizontal splits produce new windows to the right."
-;;     :group 'windows
-;;     :type 'boolean)
-
-;;   (fmakunbound #'split-window-sensibly)
-
-;;   (defun split-window-sensibly
-;;       (&optional window)
-;;     (setq window (or window (selected-window)))
-;;     (or (and (window-splittable-p window t)
-;;              ;; Split window horizontally.
-;;              (split-window window nil (if split-window-right 'left  'right)))
-;;         (and (window-splittable-p window)
-;;              ;; Split window vertically.
-;;              (split-window window nil (if split-window-below 'above 'below)))
-;;         (and (eq window (frame-root-window (window-frame window)))
-;;              (not (window-minibuffer-p window))
-;;              ;; If WINDOW is the only window on its frame and is not the
-;;              ;; minibuffer window, try to split it horizontally disregarding the
-;;              ;; value of `split-width-threshold'.
-;;              (let ((split-width-threshold 0))
-;;                (when (window-splittable-p window t)
-;;                  (split-window window nil (if split-window-right
-;;                                               'left
-;;                                             'right))))))))
-
-;; (setq-default split-height-threshold  4
-;;               split-width-threshold   160) ; the reasonable limit for horizontal splits
 
 ;; ------------------------------------------------------------------------
 ;; display customization
