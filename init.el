@@ -12,12 +12,11 @@
 ;; make sure use-package is installed
 (unless (package-installed-p 'use-package) (package-install 'use-package))
 
-;; if in GUI, load base color theme (to modify)
-(when (display-graphic-p)
-  (setq-default custom-safe-themes t)
-  (add-to-list 'load-path "~/.emacs.d/themes/")
-  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-  (load-theme 'sanityinc-tomorrow-eighties t))
+;; load base color theme (to modify)
+(setq-default custom-safe-themes t)
+(add-to-list 'load-path "~/.emacs.d/themes/")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'sanityinc-tomorrow-eighties t)
 
 ;; goodbye to custom-set-variable mutations (just don't load)
 (setq-default custom-file "~/.emacs.d/custom.el")
