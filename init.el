@@ -290,18 +290,6 @@
   (set-face-attribute 'avy-lead-face-2 nil :background "saddle brown" :foreground "white"))
 
 ;; ------------------------------------------------------------------------
-;; tree sitter - syntax highlighting
-;; ------------------------------------------------------------------------
-(use-package tree-sitter-langs
-  :ensure t)
-
-(use-package tree-sitter
-  :ensure t
-  :after tree-sitter-langs
-  :config (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
-
-;; ------------------------------------------------------------------------
 ;; projectile - project based file management, very handy
 ;; ------------------------------------------------------------------------
 (use-package projectile
@@ -339,7 +327,24 @@
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1))
 
 ;; ------------------------------------------------------------------------
-;; lsp - adds some IDE-like features
+;; tree sitter - syntax highlighting (native in emacs >= 29)
+;; ------------------------------------------------------------------------
+;; first install language grammars (run script) and define location
+;; https://github.com/casouri/tree-sitter-module
+(use-package treesit
+  :config
+  (setq-default treesit-extra-load-path '("~/src/tree-sitter-module/dist"))
+  (setq-default treesit-font-lock-level 4))
+
+;; deal with the new major modes
+;; https://github.com/renzmann/treesit-auto
+(use-package treesit-auto
+  :ensure t
+  :config
+  (global-treesit-auto-mode))
+
+;; ------------------------------------------------------------------------
+;; lsp-mode - adds IDE-like features
 ;; ------------------------------------------------------------------------
 (use-package lsp-mode
   :ensure t
