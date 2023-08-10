@@ -24,18 +24,15 @@
 ;; ------------------------------------------------------------------------
 ;; base visual theme, choose one
 ;; ------------------------------------------------------------------------
-;; ;; https://github.com/purcell/color-theme-sanityinc-tomorrow
-;; (use-package color-theme-sanityinc-tomorrow
-;;   :ensure t
-;;   :config
-;;   (setq-default custom-safe-themes t)
-;;   ;; options: day, night, blue, bright, eighties
-;;   (color-theme-sanityinc-tomorrow-eighties))
-
 ;; ;; https://gitlab.com/aimebertrand/timu-macos-theme
 ;; (use-package timu-macos-theme
 ;;   :ensure t
 ;;   :config (load-theme 'timu-macos t))
+
+;; https://github.com/purcell/color-theme-sanityinc-tomorrow
+;; options: day, night, blue, bright, eighties
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t)
 
 ;; https://protesilaos.com/emacs/ef-themes-pictures
 (use-package ef-themes
@@ -382,6 +379,9 @@
    'lsp-face-highlight-write nil
    :inherit 'lsp-face-highlight-textual :underline nil :bold nil)
 
+  ;; suppress warnings when no language server present
+  (setq-default lsp-warn-no-matched-clients nil)
+
   :hook ((prog-mode . lsp)))
 
 ;; ------------------------------------------------------------------------
@@ -450,7 +450,7 @@
   :ensure t
   :bind
   ("C-c ! !" . flycheck-mode)
-  :hook (prog-mode . flycheck-mode)
+  ;; :hook (prog-mode . flycheck-mode) ;; off until desired
   :config
   (setq-default flycheck-relevant-error-other-file-show nil)
   (setq-default flycheck-check-syntax-automatically '(mode-enabled save)))
