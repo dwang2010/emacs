@@ -6,7 +6,7 @@ if (__name__ == '__main__'):
    test = Solution()
 
    cases = [
-      (),
+      ((), ),
    ]
 
    for args, exp in cases:

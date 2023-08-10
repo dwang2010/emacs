@@ -534,7 +534,7 @@
 (if (eql system-type 'darwin)
     (progn
       (set-face-attribute 'default nil :family "Consolas" :height 145)
-      (setq-default line-spacing 0.05))
+      (setq-default line-spacing nil))
   (progn
     (set-face-attribute 'default nil :family "Consolas" :height 120)
     (setq-default line-spacing nil)))
