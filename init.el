@@ -107,9 +107,6 @@
 ;; backups in emacs directory
 (setq-default backup-directory-alist '(("." . "~/.emacs.d/backups")))
 
-;; increase xref highlight fade delay time
-(setq-default pulse-delay 0.09)
-
 ;; exit confirmation (since slippery fingers sometimes)
 (setq-default confirm-kill-emacs #'y-or-n-p)
 
@@ -209,10 +206,6 @@
 (global-set-key (kbd "<home>") 'move-beginning-of-line)
 (global-set-key (kbd "<end>") 'move-end-of-line)
 
-;; use hippie-expand instead of dabbrev (built-in expansion / completion)
-;; https://www.masteringemacs.org/article/text-expansion-hippie-expand
-(global-set-key (kbd "M-/") 'hippie-expand)
-
 ;; mac specific keybinds
 (if (eql system-type 'darwin)
     (progn
@@ -260,6 +253,15 @@
 
 ;; M-$ = Check and correct spelling of the word at point
 ;; flyspell-buffer to check spelling of entire buffer
+
+
+;; ------------------------------------------------------------------------
+;; hippie expand - text completion (native)
+;; ------------------------------------------------------------------------
+;; use hippie-expand instead of dabbrev (built-in expansion / completion)
+;; https://www.masteringemacs.org/article/text-expansion-hippie-expand
+(use-package hippie-expand
+  :bind ("M-/" . hippie-expand))
 
 ;; ------------------------------------------------------------------------
 ;; rainbow-mode - colorize text codes; handy when changing colors
@@ -352,7 +354,7 @@
   :bind (("M-." . lsp-find-definition)
          ("M-?" . lsp-find-references))
   :config
-  ;; disable a bunch of unneeded crap
+  ;; disable a bunch of unneeded stuff
   (setq-default lsp-log-io nil)
   (setq-default lsp-lens-enable nil)
   (setq-default lsp-ui-doc-enable nil)
@@ -367,7 +369,7 @@
   (setq-default lsp-completion-show-kind nil)
   (setq-default lsp-completion-enable nil)
   (setq-default lsp-headerline-breadcrumb-enable-diagnostics nil)
-  (define-key lsp-mode-map (kbd "<mouse-3>") nil) ;; disable lsp-mode right click menu
+  (define-key lsp-mode-map (kbd "<mouse-3>") nil) ;; disables right click menu
 
   ;; change some font faces
   (set-face-attribute
@@ -380,8 +382,7 @@
    'lsp-face-highlight-write nil
    :inherit 'lsp-face-highlight-textual :underline nil :bold nil)
 
-  :hook ((python-mode . lsp)
-         (go-mode . lsp)))
+  :hook ((prog-mode . lsp)))
 
 ;; ------------------------------------------------------------------------
 ;; vterm - better terminal in emacs
@@ -449,8 +450,7 @@
   :ensure t
   :bind
   ("C-c ! !" . flycheck-mode)
-  :hook ((python-mode . flycheck-mode)
-         (go-mode . flycheck-mode))
+  :hook (prog-mode . flycheck-mode)
   :config
   (setq-default flycheck-relevant-error-other-file-show nil)
   (setq-default flycheck-check-syntax-automatically '(mode-enabled save)))
@@ -469,7 +469,7 @@
 
   ;; use yasnippet on per-buffer basis (based on major mode)
   (yas-reload-all)
-  :hook (python-mode . yas-minor-mode))
+  :hook (prog-mode . yas-minor-mode))
 
 ;; ------------------------------------------------------------------------
 ;; python configs
@@ -542,7 +542,7 @@
 ;; default frame parameters
 (setq-default default-frame-alist
               '((width . 100)              ; window width (chars, less line numbers)
-                (height . 70)              ; window height (rows)
+                (height . 60)              ; window height (rows)
                 (cursor-type . bar)        ; vertical bar cursor
                 (cursor-color . "#ff7f00") ; cursor color
                 ;; (left-fringe . 8)       ; half width left fringe width (def: 8)
