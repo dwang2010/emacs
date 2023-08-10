@@ -211,7 +211,7 @@ names to which it refers are bound."
       (highlight (:inverse-video nil :background ,highlight))
       (mode-line (:foreground ,foreground :background ,contrast-bg :weight normal
                               :box (:line-width 1 :color ,contrast-bg)))
-      (mode-line-buffer-id (:foreground ,purple :background nil))
+      (mode-line-buffer-id (:foreground ,purple :background unspecified))
       (mode-line-inactive (:inherit mode-line
                                     :foreground ,comment
                                     :background ,highlight
@@ -222,7 +222,7 @@ names to which it refers are bound."
       (region (:background ,contrast-bg :inverse-video nil :extend t))
       (secondary-selection (:background ,highlight :extend t))
 
-      (header-line (:inherit mode-line-inactive :foreground ,aqua :background nil))
+      (header-line (:inherit mode-line-inactive :foreground ,aqua :background unspecified))
 
       ;; search
       (match (:foreground ,blue :background ,background :inverse-video t))
@@ -230,12 +230,12 @@ names to which it refers are bound."
       (lazy-highlight (:foreground ,aqua :background ,background :inverse-video t))
       (isearch-fail (:background ,background :inherit font-lock-warning-face :inverse-video t))
 
-      (link (:foreground nil :underline t))
+      (link (:foreground unspecified :underline t))
       (widget-button (:underline t))
       (widget-field (:background ,contrast-bg :box (:line-width 1 :color ,foreground)))
 
       ;; ansi-term (built-in)
-      (term (:foreground nil :background nil :inherit default))
+      (term (:foreground unspecified :background unspecified :inherit default))
       (term-color-black (:foreground ,background :background ,background))
       (term-color-red (:foreground ,red :background ,red))
       (term-color-green (:foreground ,green :background ,green))
@@ -280,8 +280,8 @@ names to which it refers are bound."
       (diff-added (:foreground ,green :extend t))
       (diff-changed (:foreground ,blue))
       (diff-removed (:foreground ,orange :extend t))
-      (diff-header (:foreground ,aqua :background nil :extend t))
-      (diff-file-header (:foreground ,blue :background nil :extend t))
+      (diff-header (:foreground ,aqua :background unspecified :extend t))
+      (diff-file-header (:foreground ,blue :background unspecified :extend t))
       (diff-hunk-header (:foreground ,purple))
       (diff-indicator-added (:inherit diff-added))
       (diff-indicator-changed (:inherit diff-changed))
