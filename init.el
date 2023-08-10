@@ -4,22 +4,44 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 ;; reduce frequency of garbage collection; happen on 50MB of allocated data
-(setq gc-cons-threshold 50000000)  ; 50MB
+(setq gc-cons-threshold 50000000) ;; 50MB
 
 ;; increase data which emacs reads (lsp server)
-(setq read-process-output-max (* 1024 1024))  ; 1mb
-
-;; make sure use-package is installed
-(unless (package-installed-p 'use-package) (package-install 'use-package))
-
-;; load base color theme (to modify)
-(setq-default custom-safe-themes t)
-(add-to-list 'load-path "~/.emacs.d/themes/")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'sanityinc-tomorrow-eighties t)
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
 
 ;; goodbye to custom-set-variable mutations (just don't load)
 (setq-default custom-file "~/.emacs.d/custom.el")
+
+;; ------------------------------------------------------------------------
+;; use package configs
+;; ------------------------------------------------------------------------
+;; make sure use-package is installed
+(unless (package-installed-p 'use-package) (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-verbose t)
+
+;; ------------------------------------------------------------------------
+;; base visual theme, choose one
+;; ------------------------------------------------------------------------
+;; ;; https://github.com/purcell/color-theme-sanityinc-tomorrow
+;; (use-package color-theme-sanityinc-tomorrow
+;;   :ensure t
+;;   :config
+;;   (setq-default custom-safe-themes t)
+;;   ;; options: day, night, blue, bright, eighties
+;;   (color-theme-sanityinc-tomorrow-eighties))
+
+;; ;; https://gitlab.com/aimebertrand/timu-macos-theme
+;; (use-package timu-macos-theme
+;;   :ensure t
+;;   :config (load-theme 'timu-macos t))
+
+;; https://protesilaos.com/emacs/ef-themes-pictures
+(use-package ef-themes
+  :ensure t
+  :config
+  (load-theme 'ef-elea-dark :no-confirm))
 
 ;; ------------------------------------------------------------------------
 ;; modify default behaviors
@@ -200,12 +222,6 @@
       (global-set-key [(hyper m)] 'toggle-frame-maximized)))
 
 ;; ------------------------------------------------------------------------
-;; use package configs
-;; ------------------------------------------------------------------------
-(require 'use-package)
-(setq use-package-verbose t)
-
-;; ------------------------------------------------------------------------
 ;; paren mode - highlight matching braces! (native)
 ;; ------------------------------------------------------------------------
 (use-package paren
@@ -370,7 +386,8 @@
 
 ;; ------------------------------------------------------------------------
 ;; deadgrep configs
-;; https://github.com/Wilfred/deadgrep#keybindings
+;; needs ripgrep: https://github.com/BurntSushi/ripgrep#installation
+;; keybindings: https://github.com/Wilfred/deadgrep#keybindings
 ;; ------------------------------------------------------------------------
 (use-package deadgrep
   :ensure t
@@ -511,13 +528,13 @@
       (set-face-attribute 'default nil :family "Consolas" :height 145)
       (setq-default line-spacing 0.05))
   (progn
-    (set-face-attribute 'default nil :family "Consolas" :height 115)
-    (setq-default line-spacing 0.05)))
+    (set-face-attribute 'default nil :family "Consolas" :height 120)
+    (setq-default line-spacing nil)))
 
 ;; default frame parameters
 (setq-default default-frame-alist
               '((width . 100)              ; window width (chars, less line numbers)
-                (height . 50)              ; window height (rows)
+                (height . 70)              ; window height (rows)
                 (cursor-type . bar)        ; vertical bar cursor
                 (cursor-color . "#ff7f00") ; orange cursor color
                 ;; (left-fringe . 8)       ; half width left fringe width (def: 8)
