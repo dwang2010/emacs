@@ -435,6 +435,18 @@
 ;; C-c ! l = list of errors in buffer
 
 ;; ------------------------------------------------------------------------
+;; yasnippet settings
+;; ------------------------------------------------------------------------
+(use-package yasnippet
+  :ensure t
+  :config
+  (setq-default yas-verbosity 1) ;; step above nothing
+
+  ;; use yasnippet on per-buffer basis (based on major mode)
+  (yas-reload-all)
+  :hook (python-mode . yas-minor-mode))
+
+;; ------------------------------------------------------------------------
 ;; python configs
 ;; ------------------------------------------------------------------------
 ;; configure location of python interpretter (system dependent)

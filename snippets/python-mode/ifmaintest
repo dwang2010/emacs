@@ -1,4 +1,3 @@
-# -*- mode: snippet -*-
 # name: ifmaintest
 # key: ifmt
 # --
@@ -6,10 +5,11 @@ if (__name__ == '__main__'):
    print ("test")
    test = Solution()
 
-   t0 = [ (),
+   cases = [
+      (),
    ]
 
-   for ${1:args},res in t0:
-       tmp = test.${2:function}($1)
-       print($1,tmp)
-       assert(tmp == res)
+   for args, exp in cases:
+       res = test.${1:function}(*args)
+       print(args, exp, res)
+       assert exp == res
