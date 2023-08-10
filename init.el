@@ -227,13 +227,13 @@
 (use-package paren
   :config (show-paren-mode 1)
   (setq-default show-paren-delay 0)
-  (set-face-attribute 'show-paren-match nil :background "#2d2d2d" :foreground "#00ffff"))
+  (set-face-attribute 'show-paren-match nil :bold t))
 
 ;; ------------------------------------------------------------------------
 ;; dired - file / directory explorer (native)
 ;; ------------------------------------------------------------------------
 (use-package dired
-  :config (put 'dired-find-alternate-file 'disabled nil) ; reuse current buffer pressing "a"
+  :config (put 'dired-find-alternate-file 'disabled nil) ; "a" reuses current buffer
   (setq-default dired-dwim-target t) ; target operation to other dired window
   (setq-default dired-listing-switches "-laGh --group-directories-first -v"))
 
@@ -260,6 +260,12 @@
 
 ;; M-$ = Check and correct spelling of the word at point
 ;; flyspell-buffer to check spelling of entire buffer
+
+;; ------------------------------------------------------------------------
+;; rainbow-mode - colorize text codes; handy when changing colors
+;; ------------------------------------------------------------------------
+(use-package rainbow-mode
+  :ensure t)
 
 ;; ------------------------------------------------------------------------
 ;; expand region - magic selection
@@ -322,9 +328,6 @@
   :config
   (set-face-attribute 'swiper-background-match-face-2 nil :inherit 'swiper-match-face-1)
   (set-face-attribute 'swiper-line-face nil :underline nil))
-
-; '(isearch ((t (:background "#515151" :foreground "#ffcc66" :inverse-video t))))
-; '(match ((t (:background "#2d2d2d" :foreground "#6699cc" :inverse-video nil))))
 
 ;; ------------------------------------------------------------------------
 ;; magit - better git
@@ -403,7 +406,7 @@
   ;; customize emphasis markers
   (setq-default org-hide-emphasis-markers t)
   (setq org-emphasis-alist
-        '(("*" (bold :foreground "Orange"))
+        '(("*" (bold :foreground "orange"))
           ("/" italic)
           ("_" underline)
           ("=" (:background "maroon" :foreground "white"))
@@ -536,7 +539,7 @@
               '((width . 100)              ; window width (chars, less line numbers)
                 (height . 70)              ; window height (rows)
                 (cursor-type . bar)        ; vertical bar cursor
-                (cursor-color . "#ff7f00") ; orange cursor color
+                (cursor-color . "#ff7f00") ; cursor color
                 ;; (left-fringe . 8)       ; half width left fringe width (def: 8)
                 ;; (right-fringe . 0)      ; effectively disable right fringe
                 ))
