@@ -222,7 +222,7 @@
       (global-set-key [(hyper m)] 'toggle-frame-maximized)))
 
 ;; ------------------------------------------------------------------------
-;; paren mode - highlight matching braces! (native)
+;; paren - highlight matching braces (native)
 ;; ------------------------------------------------------------------------
 (use-package paren
   :config (show-paren-mode 1)
@@ -230,7 +230,7 @@
   (set-face-attribute 'show-paren-match nil :background "#2d2d2d" :foreground "#00ffff"))
 
 ;; ------------------------------------------------------------------------
-;; dired settings (native)
+;; dired - file / directory explorer (native)
 ;; ------------------------------------------------------------------------
 (use-package dired
   :config (put 'dired-find-alternate-file 'disabled nil) ; reuse current buffer pressing "a"
@@ -242,7 +242,7 @@
 (setq-default ls-lisp-dirs-first t)
 
 ;; ------------------------------------------------------------------------
-;; hideshow settings - code folding! (native)
+;; hideshow - code folding (native)
 ;; ------------------------------------------------------------------------
 (use-package hideshow
   :bind (("<C-tab>" . hs-toggle-hiding)
@@ -251,7 +251,7 @@
          (c-mode-common . hs-minor-mode)))
 
 ;; ------------------------------------------------------------------------
-;; flyspell settings (native)
+;; flyspell - spell checking (native)
 ;; ispell needs to be locally installed (not a part of emacs)
 ;; ------------------------------------------------------------------------
 (use-package flyspell
@@ -262,14 +262,14 @@
 ;; flyspell-buffer to check spelling of entire buffer
 
 ;; ------------------------------------------------------------------------
-;; expand region
+;; expand region - magic selection
 ;; ------------------------------------------------------------------------
 (use-package expand-region
   :ensure t
   :bind ("C-=" . er/expand-region))
 
 ;; ------------------------------------------------------------------------
-;; avy settings (jump to char!)
+;; avy - jump to char!
 ;; ------------------------------------------------------------------------
 (use-package avy
   :ensure t
@@ -284,7 +284,7 @@
   (set-face-attribute 'avy-lead-face-2 nil :background "saddle brown" :foreground "white"))
 
 ;; ------------------------------------------------------------------------
-;; tree sitter syntax highlighting config
+;; tree sitter - syntax highlighting
 ;; ------------------------------------------------------------------------
 (use-package tree-sitter-langs
   :ensure t)
@@ -296,7 +296,7 @@
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 ;; ------------------------------------------------------------------------
-;; projectile configs
+;; projectile - project based file management, very handy
 ;; ------------------------------------------------------------------------
 (use-package projectile
   :ensure t
@@ -304,7 +304,7 @@
   :bind ("C-x p" . projectile-command-map))
 
 ;; ------------------------------------------------------------------------
-;; ivy / swiper configs
+;; ivy / swiper - minibuffer improvement & completion / better isearch
 ;; ------------------------------------------------------------------------
 (use-package ivy
   :ensure t
@@ -327,7 +327,7 @@
 ; '(match ((t (:background "#2d2d2d" :foreground "#6699cc" :inverse-video nil))))
 
 ;; ------------------------------------------------------------------------
-;; magit configs
+;; magit - better git
 ;; ------------------------------------------------------------------------
 (use-package magit
   :ensure t
@@ -336,7 +336,7 @@
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1))
 
 ;; ------------------------------------------------------------------------
-;; lsp configs
+;; lsp - adds some IDE-like features
 ;; ------------------------------------------------------------------------
 (use-package lsp-mode
   :ensure t
@@ -376,7 +376,7 @@
          (go-mode . lsp)))
 
 ;; ------------------------------------------------------------------------
-;; vterm configs
+;; vterm - better terminal in emacs
 ;; https://github.com/akermu/emacs-libvterm
 ;; ------------------------------------------------------------------------
 (use-package vterm
@@ -385,7 +385,7 @@
   (setq-default vterm-copy-exclude-prompt t))
 
 ;; ------------------------------------------------------------------------
-;; deadgrep configs
+;; deadgrep - better text search through files
 ;; needs ripgrep: https://github.com/BurntSushi/ripgrep#installation
 ;; keybindings: https://github.com/Wilfred/deadgrep#keybindings
 ;; ------------------------------------------------------------------------
@@ -395,7 +395,7 @@
   ("<f5>" . deadgrep))
 
 ;; ------------------------------------------------------------------------
-;; org-mode configs
+;; org-mode - note taking on steroids
 ;; ------------------------------------------------------------------------
 (use-package org
   :ensure t
@@ -433,7 +433,7 @@
           (wl . wl-other-frame))))
 
 ;; ------------------------------------------------------------------------
-;; flycheck settings
+;; flycheck - code syntax checking
 ;; requires local installation of checking program (flake8 / mypy etc.)
 ;; https://www.flycheck.org/en/latest/languages.html#python
 ;; ------------------------------------------------------------------------
@@ -452,7 +452,7 @@
 ;; C-c ! l = list of errors in buffer
 
 ;; ------------------------------------------------------------------------
-;; yasnippet settings
+;; yasnippet - template system (automate boilerplate stuff)
 ;; ------------------------------------------------------------------------
 (use-package yasnippet
   :ensure t
@@ -501,7 +501,7 @@
           (lambda () (c-add-style "my-style" my-protobuf-style t)))
 
 ;; ------------------------------------------------------------------------
-;; copy file name to clipboard
+;; custom func: copy file name to clipboard
 ;; ------------------------------------------------------------------------
 (defun copy-file-name-to-clipboard (do-not-strip-prefix)
   "Copy the current buffer file name to the clipboard. The path
