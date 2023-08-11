@@ -38,7 +38,7 @@
 (use-package ef-themes
   :ensure t
   :config
-  (load-theme 'ef-elea-dark :no-confirm))
+  (load-theme 'ef-maris-dark :no-confirm))
 
 ;; ------------------------------------------------------------------------
 ;; modify default behaviors
@@ -132,6 +132,9 @@
 ;; only one space after sentence for fill paragraph
 (setq-default sentence-end-double-space nil)
 
+;; simple y or no
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; ------------------------------------------------------------------------
 ;; mouse behavior
 ;; ------------------------------------------------------------------------
@@ -205,6 +208,12 @@
 ;; home / end keys to start / end of line instead of buffer
 (global-set-key (kbd "<home>") 'move-beginning-of-line)
 (global-set-key (kbd "<end>") 'move-end-of-line)
+
+;; bind revert-buffer to F5 ("refresh")
+(global-set-key (kbd "<f5>") 'revert-buffer)
+
+;; bind eval-buffer to F12
+(global-set-key (kbd "<f12>") 'eval-buffer)
 
 ;; mac specific keybinds
 (if (eql system-type 'darwin)
@@ -413,7 +422,7 @@
 (use-package deadgrep
   :ensure t
   :bind
-  ("<f5>" . deadgrep))
+  ("<f3>" . deadgrep))
 
 ;; ------------------------------------------------------------------------
 ;; org-mode - note taking on steroids
