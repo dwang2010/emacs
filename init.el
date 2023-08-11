@@ -129,6 +129,9 @@
 ;; overwrite currently selected region - handy for expand region
 (delete-selection-mode t)
 
+;; only one space after sentence for fill paragraph
+(setq-default sentence-end-double-space nil)
+
 ;; ------------------------------------------------------------------------
 ;; mouse behavior
 ;; ------------------------------------------------------------------------
