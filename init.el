@@ -356,17 +356,26 @@
   (setq-default lsp-lens-enable nil)
   (setq-default lsp-ui-doc-enable nil)
   (setq-default lsp-ui-sideline-enable nil)
+  (setq-default lsp-ui-sideline-show-code-actions nil)
+  (setq-default lsp-ui-sideline-show-hover nil)
+  (setq-default lsp-ui-sideline-show-diagnostics nil)
   (setq-default lsp-modeline-code-actions-enable nil)
   (setq-default lsp-modeline-diagnostics-enable nil)
   (setq-default lsp-modeline-workspace-status-enable nil)
   (setq-default lsp-signature-render-documentation nil)
+  (setq-default lsp-diagnostics-package :none)
   (setq-default lsp-diagnostics-provider :none)
   (setq-default lsp-completion-provider :none)
   (setq-default lsp-completion-show-detail nil)
   (setq-default lsp-completion-show-kind nil)
   (setq-default lsp-completion-enable nil)
   (setq-default lsp-headerline-breadcrumb-enable-diagnostics nil)
+  (setq-default lsp-enable-snippet nil)
   (define-key lsp-mode-map (kbd "<mouse-3>") nil) ;; disables right click menu
+
+  ;; constantly linting despite being off, very annoying
+  (setq-default lsp-pylsp-plugins-flake8-enabled nil)
+  (setq-default lsp-pyls-plugins-flake8-enabled nil)
 
   ;; change some font faces
   (set-face-attribute
