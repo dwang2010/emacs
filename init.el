@@ -430,6 +430,16 @@
 (use-package org
   :ensure t
   :config
+  ;; startup behavior
+  (setq-default org-startup-indented t)
+  (setq-default org-indent-indentation-per-level 1)
+
+  ;; customize heading sizes
+  (set-face-attribute 'org-level-1 nil :height 1.25)
+  (set-face-attribute 'org-level-2 nil :height 1.15)
+  (set-face-attribute 'org-level-3 nil :height 1.05)
+  (set-face-attribute 'org-level-4 nil :height 1.0)
+
   ;; customize emphasis markers
   (setq-default org-hide-emphasis-markers t)
   (setq-default org-emphasis-alist
@@ -439,9 +449,6 @@
           ("=" (:background "maroon" :foreground "white"))
           ("~" (:background "deep sky blue" :foreground "MidnightBlue"))
           ("+" (:strike-through t))))
-
-  ;; no indents on code block
-  (setq-default org-src-preserve-indentation t)
 
   ;; babel configuration to load languages
   (org-babel-do-load-languages
@@ -461,6 +468,12 @@
           (gnus . org-gnus-no-new-news)
           (file . find-file)
           (wl . wl-other-frame))))
+
+;; make org bullets fancy
+(use-package org-superstar
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 
 ;; ------------------------------------------------------------------------
 ;; flycheck - code syntax checking
