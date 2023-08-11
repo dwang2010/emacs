@@ -4,10 +4,10 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 ;; reduce frequency of garbage collection; happen on 50MB of allocated data
-(setq gc-cons-threshold 50000000) ;; 50MB
+(setq-default gc-cons-threshold 50000000) ;; 50MB
 
 ;; increase data which emacs reads (lsp server)
-(setq read-process-output-max (* 1024 1024)) ;; 1mb
+(setq-default read-process-output-max (* 1024 1024)) ;; 1mb
 
 ;; goodbye to custom-set-variable mutations (just don't load)
 (setq-default custom-file "~/.emacs.d/custom.el")
@@ -19,7 +19,7 @@
 (unless (package-installed-p 'use-package) (package-install 'use-package))
 
 (require 'use-package)
-(setq use-package-verbose t)
+(setq-default use-package-verbose t)
 
 ;; ------------------------------------------------------------------------
 ;; base visual theme, choose one
@@ -432,7 +432,7 @@
   :config
   ;; customize emphasis markers
   (setq-default org-hide-emphasis-markers t)
-  (setq org-emphasis-alist
+  (setq-default org-emphasis-alist
         '(("*" (bold :foreground "orange"))
           ("/" italic)
           ("_" underline)
@@ -449,13 +449,13 @@
    '((python . t)))
 
   ;; set org-babel for desired python executable
-  (setq org-babel-python-command "python3")
+  (setq-default org-babel-python-command "python3")
 
   ;; potentially risky: remove confirmation when executing code blocks
   (setq-default org-confirm-babel-evaluate nil)
 
   ;; C-c C-o opens link in same buffer rather than new buffer
-  (setq org-link-frame-setup
+  (setq-default org-link-frame-setup
         '((vm . vm-visit-folder-other-frame)
           (vm-imap . vm-visit-imap-folder-other-frame)
           (gnus . org-gnus-no-new-news)
@@ -497,10 +497,10 @@
 ;; ------------------------------------------------------------------------
 ;; configure location of python interpretter (system dependent)
 (if (eql system-type 'darwin)
-    (setq python-shell-interpreter "/opt/homebrew/bin/python3.10")
-  (setq python-shell-interpreter "/usr/bin/python3"))
+    (setq-default python-shell-interpreter "/opt/homebrew/bin/python3.10")
+  (setq-default python-shell-interpreter "/usr/bin/python3"))
 
-(setq python-shell-completion-native-enable nil)
+(setq-default python-shell-completion-native-enable nil)
 
 ;; ------------------------------------------------------------------------
 ;; golang configs
@@ -516,7 +516,7 @@
 ;; ------------------------------------------------------------------------
 ;; js-mode configs
 ;; ------------------------------------------------------------------------
-(setq js-indent-level 4)
+(setq-default js-indent-level 4)
 
 ;; ------------------------------------------------------------------------
 ;; protobuf configs
