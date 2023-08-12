@@ -278,7 +278,6 @@
 ;; M-$ = Check and correct spelling of the word at point
 ;; flyspell-buffer to check spelling of entire buffer
 
-
 ;; ------------------------------------------------------------------------
 ;; hippie expand - text completion (native)
 ;; ------------------------------------------------------------------------
@@ -583,9 +582,11 @@
 (if (eql system-type 'darwin)
     (progn
       (set-face-attribute 'default nil :height 150)
+      (set-face-attribute 'fixed-pitch nil :family "Menlo" :height 1.0)
       (setq-default line-spacing nil))
   (progn
-    (set-face-attribute 'default nil :family "Consolas" :height 120)
+    (set-face-attribute 'default nil :height 125)
+    (set-face-attribute 'fixed-pitch nil :family "Ubuntu Mono" :height 1.0)
     (setq-default line-spacing nil)))
 
 ;; default frame parameters
