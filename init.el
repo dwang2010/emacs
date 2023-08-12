@@ -24,21 +24,36 @@
 ;; ------------------------------------------------------------------------
 ;; base visual theme, choose one
 ;; ------------------------------------------------------------------------
-;; ;; https://gitlab.com/aimebertrand/timu-macos-theme
-;; (use-package timu-macos-theme
-;;   :ensure t
-;;   :config (load-theme 'timu-macos t))
-
 ;; https://github.com/purcell/color-theme-sanityinc-tomorrow
 ;; options: day, night, blue, bright, eighties
 (use-package color-theme-sanityinc-tomorrow
   :ensure t)
 
 ;; https://protesilaos.com/emacs/ef-themes-pictures
+;; too many options, look at pics
 (use-package ef-themes
   :ensure t
   :config
-  (load-theme 'ef-maris-dark :no-confirm))
+  ;; light themes
+  ;; (load-theme 'ef-light t) ;; white back
+  ;; (load-theme 'ef-elea-light t) ;; green yellow
+  ;; (load-theme 'ef-spring t) ;; pale green
+  ;; (load-theme 'ef-day t) ;; warm yellow
+
+  ;; dark themes
+  (load-theme 'ef-elea-dark t)
+  ;;(load-theme 'ef-maris-dark t)
+  )
+
+;; ;; https://github.com/nordtheme/emacs
+;; (use-package nord-theme
+;;   :ensure t
+;;   :config
+;;   ;; (load-theme 'nord t))
+
+;;   (add-hook 'after-make-frame-functions
+;;     	    (lambda (frame)
+;;     		  (with-selected-frame frame (load-theme 'nord t)))))
 
 ;; ------------------------------------------------------------------------
 ;; modify default behaviors
