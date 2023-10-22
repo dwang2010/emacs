@@ -26,8 +26,11 @@
 ;; ------------------------------------------------------------------------
 ;; https://github.com/purcell/color-theme-sanityinc-tomorrow
 ;; options: day, night, blue, bright, eighties
-(use-package color-theme-sanityinc-tomorrow
-  :ensure t)
+;; (use-package color-theme-sanityinc-tomorrow
+;;   :ensure t
+;;   :config
+;;   (load-theme 'sanityinc-tomorrow-eighties t)
+;;   )
 
 ;; https://protesilaos.com/emacs/ef-themes-pictures
 ;; too many options, look at pics
@@ -43,6 +46,8 @@
   ;; dark themes
   (load-theme 'ef-elea-dark t)
   ;; (load-theme 'ef-maris-dark t)
+  ;; (load-theme 'ef-autumn t)
+  ;; (load-theme 'ef-melissa-dark t)
   )
 
 ;; ;; https://github.com/nordtheme/emacs
@@ -592,7 +597,7 @@
 ;; default frame parameters
 (setq-default default-frame-alist
               '((width . 100)              ; window width (chars, less line numbers)
-                (height . 60)              ; window height (rows)
+                (height . 55)              ; window height (rows)
                 (cursor-type . bar)        ; vertical bar cursor
                 (cursor-color . "#ff7f00") ; cursor color
                 ;; (left-fringe . 8)       ; half width left fringe width (def: 8)
