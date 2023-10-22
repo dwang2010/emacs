@@ -35,14 +35,14 @@
   :ensure t
   :config
   ;; light themes
-  ;; (load-theme 'ef-light t) ;; white back
+  ;; (load-theme 'ef-light t)      ;; white back
   ;; (load-theme 'ef-elea-light t) ;; green yellow
-  ;; (load-theme 'ef-spring t) ;; pale green
-  ;; (load-theme 'ef-day t) ;; warm yellow
+  ;; (load-theme 'ef-spring t)     ;; pale green
+  ;; (load-theme 'ef-day t)        ;; warm yellow
 
   ;; dark themes
   (load-theme 'ef-elea-dark t)
-  ;;(load-theme 'ef-maris-dark t)
+  ;; (load-theme 'ef-maris-dark t)
   )
 
 ;; ;; https://github.com/nordtheme/emacs
