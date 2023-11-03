@@ -406,7 +406,7 @@
 
   ;; constantly linting despite being off, very annoying
   (setq-default lsp-pylsp-plugins-flake8-enabled nil)
-  (setq-default lsp-pyls-plugins-flake8-enabled nil)
+  ;; (setq-default lsp-pyls-plugins-flake8-enabled nil)
 
   ;; change some font faces
   (set-face-attribute
@@ -540,10 +540,10 @@
 ;(if (eql system-type 'darwin) (add-hook 'before-save-hook 'gofmt-before-save))
 
 ; env related workaround
-(if (eql system-type 'darwin)
-    (progn
-      (setenv "PATH" (concat (getenv "PATH") ":/opt/homebrew/bin/"))
-      (setq-default exec-path (append exec-path '("/opt/homebrew/bin/")))))
+;; (if (eql system-type 'darwin)
+;;     (progn
+;;       (setenv "PATH" (concat (getenv "PATH") ":/opt/homebrew/bin/"))
+;;       (setq-default exec-path (append exec-path '("/opt/homebrew/bin/")))))
 
 ;; ------------------------------------------------------------------------
 ;; js-mode configs
