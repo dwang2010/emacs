@@ -91,7 +91,7 @@
 (setq-default column-number-mode t)
 
 ;; default fill mode width
-(setq-default fill-column 100)
+(setq-default fill-column 85)
 
 ;; spaces instead of tabs when indenting
 (setq-default indent-tabs-mode nil)
