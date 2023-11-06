@@ -229,8 +229,12 @@
 (global-set-key (kbd "<home>") 'move-beginning-of-line)
 (global-set-key (kbd "<end>") 'move-end-of-line)
 
-;; bind revert-buffer to F5 ("refresh")
-(global-set-key (kbd "<f5>") 'revert-buffer)
+;; bind revert-buffer to F5 ("refresh") -- note, no confirmation message!
+(defun revert-buffer-no-confirm ()
+  "Revert buffer without confirmation."
+  (interactive) (revert-buffer t t))
+
+(global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
 
 ;; bind eval-buffer to F12
 (global-set-key (kbd "<f12>") 'eval-buffer)
