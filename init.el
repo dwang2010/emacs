@@ -363,11 +363,8 @@
 ;; ------------------------------------------------------------------------
 ;; tree sitter - syntax highlighting (native in emacs >= 29)
 ;; ------------------------------------------------------------------------
-;; first install language grammars (run script) and define location
-;; https://github.com/casouri/tree-sitter-module
 (use-package treesit
   :config
-  (setq-default treesit-extra-load-path '("~/src/tree-sitter-module/dist"))
   (setq-default treesit-font-lock-level 4))
 
 ;; deal with the new major modes
@@ -375,6 +372,7 @@
 (use-package treesit-auto
   :ensure t
   :config
+  (setq-default treesit-auto-install 'prompt)
   (global-treesit-auto-mode))
 
 ;; ------------------------------------------------------------------------
