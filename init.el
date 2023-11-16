@@ -614,16 +614,19 @@
 ;; notes for when you forget
 ;; -----------------------------------------
 ; (from source code)
-; M-. : jump to function definition (xref-find-definitions)
-; M-, : return to last position     (xref-pop-marker-stack)
-; M-? : jump to function invocation (xref-find-references)
+;; M-. : jump to function definition (xref-find-definitions)
+;; M-, : return to last position     (xref-pop-marker-stack)
+;; M-? : jump to function invocation (xref-find-references)
 
-; (in xref buffer)
-; C-o : open file in new pane, but stay in xref buffer (xref-show-location-at-point)
+;; (in xref buffer)
+;; C-o : open file in new pane, but stay in xref buffer (xref-show-location-at-point)
 
-; (helpful commands)
-; list-faces-display : show current font face definition (color / style)
-; list-colors-display : show displayable colors
+;; (helpful commands)
+;; list-faces-display : show current font face definition (color / style)
+;; list-colors-display : show displayable colors
 
-; (misc)
-; M-= : display word / character count
+;; (misc)
+;; M-= : display word / character count
+
+;; (regexp standards)
+;; https://en.wikipedia.org/wiki/Regular_expression#POSIX_basic_and_extended
