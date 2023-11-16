@@ -29,8 +29,7 @@
 ;; (use-package color-theme-sanityinc-tomorrow
 ;;   :ensure t
 ;;   :config
-;;   (load-theme 'sanityinc-tomorrow-eighties t)
-;;   )
+;;   (load-theme 'sanityinc-tomorrow-eighties t))
 
 ;; https://protesilaos.com/emacs/ef-themes-pictures
 ;; too many options, look at pics
@@ -44,18 +43,18 @@
   ;; (load-theme 'ef-day t)        ;; warm yellow
 
   ;; dark themes
-  (load-theme 'ef-elea-dark t)
+  ;; (load-theme 'ef-elea-dark t)
   ;; (load-theme 'ef-maris-dark t)
   ;; (load-theme 'ef-autumn t)
-  ;; (load-theme 'ef-melissa-dark t)
+  (load-theme 'ef-melissa-dark t)
   )
 
-;; ;; https://github.com/nordtheme/emacs
+;; https://github.com/nordtheme/emacs
+;; has some issues running as daemon / client
 ;; (use-package nord-theme
 ;;   :ensure t
 ;;   :config
 ;;   ;; (load-theme 'nord t))
-
 ;;   (add-hook 'after-make-frame-functions
 ;;     	    (lambda (frame)
 ;;     		  (with-selected-frame frame (load-theme 'nord t)))))
