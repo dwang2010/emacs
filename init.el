@@ -137,9 +137,6 @@
                              (horizontal-scroll-bars . nil))))
 (add-hook 'after-make-frame-functions 'rmv-scroll-bars)
 
-;; turn on hl-line
-(global-hl-line-mode 1)
-
 ;; remove window retiling gaps
 (setq-default frame-resize-pixelwise t)
 
@@ -266,6 +263,13 @@
 (require 'ls-lisp)
 (setq-default ls-lisp-use-insert-directory-program nil)
 (setq-default ls-lisp-dirs-first t)
+
+;; ------------------------------------------------------------------------
+;; highlight current line (only in specific modes)
+;; ------------------------------------------------------------------------
+(use-package hl-line
+  :hook ((prog-mode . hl-line-mode)
+         (text-mode . hl-line-mode)))
 
 ;; ------------------------------------------------------------------------
 ;; hideshow - code folding (native)
