@@ -7,6 +7,8 @@ projects
 transient
 emojis
 url
+tree-sitter
+eln-cache
 
 # Temp
 network*
@@ -16,3 +18,8 @@ session*
 .*~
 *~
 tramp
+
+# Files
+custom.el
+projectile-bookmarks.eld
+.lsp-session*
