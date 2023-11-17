@@ -9,6 +9,8 @@ emojis
 url
 tree-sitter
 eln-cache
+eshell
+org-persist
 
 # Temp
 network*
