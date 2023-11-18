@@ -1,40 +1,27 @@
 ;; ------------------------------------------------------------------------
-;; base visual theme, choose one
+;; visual theme
 ;; ------------------------------------------------------------------------
 ;; https://github.com/purcell/color-theme-sanityinc-tomorrow
 ;; options: day, night, blue, bright, eighties
-;; (use-package color-theme-sanityinc-tomorrow
-;;   :ensure t
-;;   :config
-;;   (load-theme 'sanityinc-tomorrow-eighties t))
+(use-package color-theme-sanityinc-tomorrow :ensure t :defer)
 
 ;; https://protesilaos.com/emacs/ef-themes-pictures
-;; too many options, look at pics
-(use-package ef-themes
-  :ensure t
-  :config
-  ;; light themes
-  ;; (load-theme 'ef-light t)      ;; white back
-  ;; (load-theme 'ef-elea-light t) ;; green yellow
-  ;; (load-theme 'ef-spring t)     ;; pale green
-  ;; (load-theme 'ef-day t)        ;; warm yellow
-
-  ;; dark themes
-  (load-theme 'ef-elea-dark t)
-  ;; (load-theme 'ef-maris-dark t)
-  ;; (load-theme 'ef-autumn t)
-  ;; (load-theme 'ef-melissa-dark t)
-  )
+;; light: ef-light / ef-melissa-light
+;; dark: ef-elea-dark / ef-melissa-dark
+(use-package ef-themes :ensure t :defer)
 
 ;; https://github.com/nordtheme/emacs
-;; has some issues running as daemon / client
-;; (use-package nord-theme
-;;   :ensure t
-;;   :config
-;;   ;; (load-theme 'nord t))
-;;   (add-hook 'after-make-frame-functions
-;;     	    (lambda (frame)
-;;     		  (with-selected-frame frame (load-theme 'nord t)))))
+;; has some issues running as daemon / cliente
+(use-package nord-theme :ensure t :defer)
+
+;; change theme based on time of day
+;; https://github.com/guidoschmidt/circadian.el
+(use-package circadian
+  :ensure t
+  :config
+  (setq-default circadian-themes '(("7:00" . ef-melissa-dark)
+                                   ("18:30" . ef-elea-dark)))
+  (circadian-setup))
 
 ;; ------------------------------------------------------------------------
 ;; mode line customization
