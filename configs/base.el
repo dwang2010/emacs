@@ -126,9 +126,6 @@
 (global-unset-key (kbd "C-x C-d"))
 (global-unset-key (kbd "C-x C-c"))
 
-;; also have C-x C-d bound to dired (for lazy hands)
-(global-set-key (kbd "C-x C-d") 'dired)
-
 ;; change C-x s to same as C-x C-s
 (global-set-key (kbd "C-x s") 'save-buffer)
 

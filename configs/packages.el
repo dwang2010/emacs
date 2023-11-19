@@ -10,9 +10,11 @@
 ;; dired - file / directory explorer (native)
 ;; ------------------------------------------------------------------------
 (use-package dired
-  :config (put 'dired-find-alternate-file 'disabled nil) ; "a" reuses current buffer
+  :bind ("C-x C-d" . 'dired) ; double binding for lazy hands
+  :config
   (setq-default dired-dwim-target t) ; target operation to other dired window
-  (setq-default dired-listing-switches "-laGh --group-directories-first -v"))
+  (setq-default dired-listing-switches "-laGh --group-directories-first -v")
+  (setq-default dired-kill-when-opening-new-dired-buffer t))
 
 (require 'ls-lisp)
 (setq-default ls-lisp-use-insert-directory-program nil)
