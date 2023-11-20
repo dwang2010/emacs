@@ -77,3 +77,10 @@
                 ;; (left-fringe . 8)       ; half width left fringe width (def: 8)
                 ;; (right-fringe . 0)      ; effectively disable right fringe
                 ))
+
+;; ensure scrollbars don't appear when creating new frames
+(defun rmv-scroll-bars (frame)
+  (modify-frame-parameters frame
+                           '((vertical-scroll-bars . nil)
+                             (horizontal-scroll-bars . nil))))
+(add-hook 'after-make-frame-functions 'rmv-scroll-bars)
