@@ -10,7 +10,7 @@
 ;; dired - file / directory explorer (native)
 ;; ------------------------------------------------------------------------
 (use-package dired
-  :bind ("C-x C-d" . 'dired) ; double binding for lazy hands
+  :bind ("C-x C-d" . 'dired-jump) ; jump straight to dir of current buffer
   :config
   (setq-default dired-dwim-target t) ; target operation to other dired window
   (setq-default dired-listing-switches "-laGh --group-directories-first -v")

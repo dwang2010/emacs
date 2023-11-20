@@ -103,9 +103,6 @@
 ;; kill currently selected buffer rather than ask
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
-;; dired-jump on C-x C-d for one less keystroke
-(global-set-key (kbd "C-x C-d") 'dired-jump)
-
 ;; change C-x s to same as C-x C-s
 (global-set-key (kbd "C-x s") 'save-buffer)
 
