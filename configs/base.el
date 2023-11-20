@@ -66,6 +66,8 @@
 (setq-default custom-file "~/.emacs.d/custom.el")
 ;; remove newline as well if at start of line
 (setq-default kill-whole-line t)
+;; ibuffer always sort by filename
+(setq-default ibuffer-default-sorting-mode 'filename/process)
 
 ;; ------------------------------------------------------------------------
 ;; mouse behavior
