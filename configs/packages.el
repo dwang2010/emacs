@@ -133,6 +133,7 @@
   :ensure t
   :bind ("C-x g" . magit-status)
   :config
+  (setq-default magit-log-margin '(t "%Y-%m-%d %H:%M " magit-log-margin-width t 12))
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1))
 
 ;; ------------------------------------------------------------------------
