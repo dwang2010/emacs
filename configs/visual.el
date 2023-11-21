@@ -45,8 +45,11 @@
 ;; default font face, based on OS
 (if (eql system-type 'darwin)
     (progn
-      (set-face-attribute 'default nil :height 150)
+      (set-face-attribute 'default nil :family "Menlo" :height 150)
       (set-face-attribute 'fixed-pitch nil :family "Menlo" :height 1.0)
+      ;; different face on mode-line to increase clarity
+      (set-face-attribute `mode-line nil :family "Jetbrains Mono" :height 150)
+      (set-face-attribute `mode-line-inactive nil :family "Jetbrains Mono" :height 150)
       (setq-default line-spacing nil))
   (progn
     ;; ubuntu mono for increased vertical density
