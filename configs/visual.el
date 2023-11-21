@@ -59,12 +59,10 @@
 
 ;; default frame parameters
 (setq-default default-frame-alist
-              '((width . 100)              ; window width (chars, less line numbers)
+              '((width . 100)              ; window width (cols)
                 (height . 55)              ; window height (rows)
                 (cursor-type . bar)        ; vertical bar cursor
                 (cursor-color . "#ff7f00") ; cursor color
-                ;; (left-fringe . 8)       ; half width left fringe width (def: 8)
-                ;; (right-fringe . 0)      ; effectively disable right fringe
                 ))
 
 ;; ensure scrollbars don't appear when creating new frames
