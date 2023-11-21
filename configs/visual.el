@@ -29,6 +29,9 @@
 (use-package mood-line
   :ensure t
   :config (mood-line-mode)
+  (setq-default mood-line-show-encoding-information t)
+  (setq-default mood-line-show-eol-style t)
+  ;; glyph style: ascii / fira-code (get the font)
   (setq-default mood-line-glyph-alist mood-line-glyphs-ascii))
 
 ;; ------------------------------------------------------------------------

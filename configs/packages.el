@@ -92,11 +92,7 @@
   :config (setq-default avy-timeout-seconds 0.20)
   (setq-default avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   (setq-default avy-style 'de-bruijn)
-  (setq-default avy-background nil)
-  (set-face-attribute 'avy-lead-face nil :background "red2" :foreground "white")
-  (set-face-attribute 'avy-lead-face-0 nil :background "saddle brown" :foreground "white")
-  (set-face-attribute 'avy-lead-face-1 nil :background "#008b8b" :foreground "black")
-  (set-face-attribute 'avy-lead-face-2 nil :background "saddle brown" :foreground "white"))
+  (setq-default avy-background nil))
 
 ;; ------------------------------------------------------------------------
 ;; projectile - project based file management, very handy
@@ -107,14 +103,31 @@
   :bind ("C-x p" . projectile-command-map))
 
 ;; ------------------------------------------------------------------------
-;; ivy / swiper - minibuffer improvement & completion / better isearch
+;; ivy / counsel / swiper - minibuffer / completion / search improvement
+;; https://github.com/abo-abo/swiper
 ;; ------------------------------------------------------------------------
 (use-package ivy
   :ensure t
+  :custom
+  (ivy-count-format "(%d/%d) ")
   :config (ivy-mode)
   (setq-default ivy-on-del-error-function #'ignore)
+  ;; swiper style color matching
   (setq-default ivy-display-style 'fancy)
-  (setq-default ivy-height 4))
+  (setq-default ivy-height 8))
+
+(use-package ivy-rich ; UI enhancements
+  :ensure t
+  :after ivy
+  :config
+  (ivy-rich-mode 1)
+  ;; fix to ensure line highlight completely extended
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
+
+(use-package counsel
+  :ensure t
+  :after ivy
+  :config (counsel-mode))
 
 (use-package swiper
   :ensure t
@@ -123,8 +136,10 @@
          ("C-r" . swiper-backward)
          ("C-c C-w" . swiper-isearch-thing-at-point))
   :config
+  ;; color contrast between selected / other options (similar to vanilla)
   (set-face-attribute 'swiper-background-match-face-2 nil :inherit 'swiper-match-face-1)
-  (set-face-attribute 'swiper-line-face nil :underline nil))
+  ;; remove inheritance to avoid theme line highlight color confusion
+  (set-face-attribute 'swiper-line-face nil :inherit nil :underline nil))
 
 ;; ------------------------------------------------------------------------
 ;; magit - better git
