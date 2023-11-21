@@ -32,7 +32,7 @@
   (setq-default mood-line-show-encoding-information t)
   (setq-default mood-line-show-eol-style t)
   ;; glyph style: ascii / fira-code (get the font)
-  (setq-default mood-line-glyph-alist mood-line-glyphs-ascii))
+  (setq-default mood-line-glyph-alist mood-line-glyphs-fira-code))
 
 ;; ------------------------------------------------------------------------
 ;; display customization
