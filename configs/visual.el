@@ -21,7 +21,12 @@
   :config
   (setq-default circadian-themes '(("7:00" . ef-melissa-dark)
                                    ("18:30" . ef-elea-dark)))
-  (circadian-setup))
+  (circadian-setup)
+
+  ;; fix cursor color after theme change
+  (add-hook 'circadian-after-load-theme-hook
+            #'(lambda (theme)
+                (set-cursor-color "#ff7f00"))))
 
 ;; ------------------------------------------------------------------------
 ;; mode line customization
