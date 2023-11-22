@@ -8,25 +8,28 @@
 ;; https://protesilaos.com/emacs/ef-themes-pictures
 ;; light: ef-light / ef-melissa-light
 ;; dark: ef-elea-dark / ef-melissa-dark
-(use-package ef-themes :ensure t :defer)
+(use-package ef-themes
+  :ensure t
+  :config (load-theme 'ef-elea-dark t))
 
 ;; https://github.com/nordtheme/emacs
 ;; has some issues running as daemon / cliente
 (use-package nord-theme :ensure t :defer)
 
 ;; change theme based on time of day
+;; creates weird theme artifacts, not worth debugging
 ;; https://github.com/guidoschmidt/circadian.el
-(use-package circadian
-  :ensure t
-  :config
-  (setq-default circadian-themes '(("7:00" . ef-melissa-dark)
-                                   ("18:30" . ef-elea-dark)))
-  (circadian-setup)
+;; (use-package circadian
+;;   :ensure t
+;;   :config
+;;   (setq-default circadian-themes '(("7:00" . ef-melissa-dark)
+;;                                    ("18:30" . ef-elea-dark)))
+;;   (circadian-setup)
 
-  ;; fix cursor color after theme change
-  (add-hook 'circadian-after-load-theme-hook
-            #'(lambda (theme)
-                (set-cursor-color "#ff7f00"))))
+;;   ;; fix cursor color after theme change
+;;   (add-hook 'circadian-after-load-theme-hook
+;;             #'(lambda (theme)
+;;                 (set-cursor-color "#ff7f00"))))
 
 ;; ------------------------------------------------------------------------
 ;; mode line customization
