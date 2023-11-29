@@ -250,7 +250,8 @@
   ;; babel configuration to load languages
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((python . t)))
+   '((python . t)
+     (lisp . t)))
 
   ;; set org-babel for desired python executable
   (setq-default org-babel-python-command "python3")
