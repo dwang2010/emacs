@@ -11,6 +11,7 @@
 ;; ------------------------------------------------------------------------
 (use-package dired
   :bind ("C-x C-d" . 'dired-jump) ; jump straight to dir of current buffer
+  :hook (dired-mode . dired-hide-details-mode) ; collapsed extra info, show via "("
   :config
   (setq-default dired-dwim-target t) ; target operation to other dired window
   (setq-default dired-listing-switches "-laGh --group-directories-first -v")

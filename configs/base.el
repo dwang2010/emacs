@@ -120,7 +120,6 @@
 (defun revert-buffer-no-confirm ()
   "Revert buffer without confirmation."
   (interactive) (revert-buffer t t))
-
 (global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
 
 ;; bind eval-buffer to F12
