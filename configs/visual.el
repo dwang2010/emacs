@@ -32,6 +32,29 @@
 ;;                 (set-cursor-color "#ff7f00"))))
 
 ;; ------------------------------------------------------------------------
+;; visual icons
+;; ------------------------------------------------------------------------
+;; if rendering incorrectly invoke (nerd-icons-install-fonts)
+(use-package nerd-icons
+  :ensure t)
+
+(use-package nerd-icons-dired
+  :ensure t
+  :hook (dired-mode . nerd-icons-dired-mode))
+
+(use-package nerd-icons-ivy-rich  ; should enable before ivy-rich-mode
+  :ensure t
+  :init
+  (nerd-icons-ivy-rich-mode 1)
+  (ivy-rich-mode 1)
+  :config
+  (setq-default inhibit-compacting-font-caches t))
+
+(use-package nerd-icons-ibuffer
+  :ensure t
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
+
+;; ------------------------------------------------------------------------
 ;; mode line customization
 ;; ------------------------------------------------------------------------
 (use-package mood-line
