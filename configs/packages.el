@@ -303,3 +303,18 @@
   ;; use yasnippet on per-buffer basis (based on major mode)
   (yas-reload-all)
   :hook (prog-mode . yas-minor-mode))
+
+;; ------------------------------------------------------------------------
+;; EAF (Emacs Appliation Framework)
+;; ------------------------------------------------------------------------
+(use-package eaf
+  :load-path "~/.emacs.d/site-lisp/emacs-application-framework"
+  :config
+  ;; See https://github.com/emacs-eaf/emacs-application-framework/wiki/Customization
+  (setq-default eaf-browser-enable-adblocker t)
+  ;; (eaf-bind-key nil "M-q" eaf-browser-keybinding)) ;; unbind, see more in the Wiki
+  )
+
+(use-package eaf-browser)
+(use-package eaf-image-viewer)
+(use-package eaf-pdf-viewer)
