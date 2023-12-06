@@ -113,9 +113,9 @@
   (ivy-count-format "(%d/%d) ")
   :config (ivy-mode)
   (setq-default ivy-on-del-error-function #'ignore)
-  ;; swiper style color matching
-  (setq-default ivy-display-style 'fancy)
-  (setq-default ivy-height 8))
+  (setq-default ivy-display-style 'fancy) ; swiper style color matching
+  (setq-default ivy-extra-directories nil) ; hide "." and ".." dirs
+  (setq-default ivy-height 10))
 
 (use-package ivy-rich ; UI enhancements
   :ensure t

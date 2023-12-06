@@ -46,7 +46,6 @@
   :ensure t
   :init
   (nerd-icons-ivy-rich-mode 1)
-  (ivy-rich-mode 1)
   :config
   (setq-default inhibit-compacting-font-caches t))
 
