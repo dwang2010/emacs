@@ -128,7 +128,7 @@
 (use-package counsel
   :ensure t
   :after ivy
-  :config (counsel-mode))
+  :config (counsel-mode)) ; consumes M-x and other commands
 
 (use-package swiper
   :ensure t
