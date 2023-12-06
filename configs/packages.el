@@ -133,9 +133,9 @@
 (use-package swiper
   :ensure t
   :after ivy
-  :bind (("C-s" . swiper-isearch)
-         ("C-r" . swiper-backward)
-         ("C-c C-w" . swiper-isearch-thing-at-point))
+  :bind
+  (("C-r" . swiper-isearch)
+   ("C-s" . swiper-isearch-thing-at-point))
   :config
   ;; color contrast between selected / other options (similar to vanilla)
   (set-face-attribute 'swiper-background-match-face-2 nil :inherit 'swiper-match-face-1)
