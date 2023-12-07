@@ -189,35 +189,44 @@
 ;; ------------------------------------------------------------------------
 (use-package lsp-mode
   :ensure t
-  :init (setq-default lsp-keymap-prefix "C-c l")
+  :init
+  (setq-default lsp-keymap-prefix "C-c l")
+  ;; allow for substring + subsequence matching
+  ;; https://github.com/minad/corfu/wiki
+  (defun my-lsp-mode-setup-completion ()
+    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+          '(flex))) ;; Configure flex
   :bind (("M-." . lsp-find-definition)
          ("M-?" . lsp-find-references))
   :config
-  ;; disable a bunch of unneeded stuff
+  ;; don't log all message from language server (impacts performance)
   (setq-default lsp-log-io nil)
+  ;; disable code lens overlay
   (setq-default lsp-lens-enable nil)
+  ;; remove doc dialogue on all hover (keyboard / mouse)
   (setq-default lsp-ui-doc-enable nil)
+  ;; remove entire sideline
   (setq-default lsp-ui-sideline-enable nil)
-  (setq-default lsp-ui-sideline-show-code-actions nil)
-  (setq-default lsp-ui-sideline-show-hover nil)
-  (setq-default lsp-ui-sideline-show-diagnostics nil)
+  ;; remove modeline related diagnostics
   (setq-default lsp-modeline-code-actions-enable nil)
   (setq-default lsp-modeline-diagnostics-enable nil)
   (setq-default lsp-modeline-workspace-status-enable nil)
+  ;; remove function signature help docs
   (setq-default lsp-signature-render-documentation nil)
-  (setq-default lsp-diagnostics-package :none)
-  (setq-default lsp-diagnostics-provider :none)
+  ;; configure completion-at-point integration (using corfu)
+  (setq-default lsp-completion-enable t)
   (setq-default lsp-completion-provider :none)
-  (setq-default lsp-completion-show-detail nil)
-  (setq-default lsp-completion-show-kind nil)
-  (setq-default lsp-completion-enable nil)
+  ;; hide breadcrumb (top line) error diagnostic indication
   (setq-default lsp-headerline-breadcrumb-enable-diagnostics nil)
-  (setq-default lsp-enable-snippet nil)
-  (define-key lsp-mode-map (kbd "<mouse-3>") nil) ;; disables right click menu
-
-  ;; constantly linting despite being off, very annoying
+  ;; disable flake8 plugin - constant linting causes visual flickering
   (setq-default lsp-pylsp-plugins-flake8-enabled nil)
-  ;; (setq-default lsp-pyls-plugins-flake8-enabled nil)
+  (setq-default lsp-pyls-plugins-flake8-enabled nil)
+  ;; syntax checking: use neither flymake nor lsp
+  (setq-default lsp-diagnostics-provider :none)
+  ;; suppress warnings when no language server present
+  (setq-default lsp-warn-no-matched-clients nil)
+  ;; disable right click menu
+  (define-key lsp-mode-map (kbd "<mouse-3>") nil)
 
   ;; change some font faces
   (set-face-attribute
@@ -230,10 +239,8 @@
    'lsp-face-highlight-write nil
    :inherit 'lsp-face-highlight-textual :underline nil :bold nil)
 
-  ;; suppress warnings when no language server present
-  (setq-default lsp-warn-no-matched-clients nil)
-
-  :hook ((prog-mode . lsp)))
+  :hook ((prog-mode . lsp)
+         (lsp-completion-mode . my-lsp-mode-setup-completion)))
 
 ;; ------------------------------------------------------------------------
 ;; vterm - better terminal in emacs
