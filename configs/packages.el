@@ -49,14 +49,6 @@
 ;; flyspell-buffer to check spelling of entire buffer
 
 ;; ------------------------------------------------------------------------
-;; hippie expand - text completion (native)
-;; ------------------------------------------------------------------------
-;; use hippie-expand instead of dabbrev (built-in expansion / completion)
-;; https://www.masteringemacs.org/article/text-expansion-hippie-expand
-(use-package hippie-expand
-  :bind ("M-/" . hippie-expand))
-
-;; ------------------------------------------------------------------------
 ;; tree sitter - syntax highlighting (native in emacs >= 29)
 ;; ------------------------------------------------------------------------
 (use-package treesit
@@ -148,6 +140,18 @@
    ;; M-s bindings in `search-map'
    ("M-s g" . consult-grep) ; super efficient regexp across files (with preview)
    ("M-s m" . consult-line-multi))) ; line search across open buffers (with preview)
+
+;; ------------------------------------------------------------------------
+;; corfu - in-buffer completion (not the minibuffer)
+;; ------------------------------------------------------------------------
+(use-package corfu
+  :ensure t
+  :custom
+  (corfu-count 6) ; candidates to show
+  (corfu-auto nil) ; disable auto completion popup
+  (tab-always-indent 'complete) ; tabs both indent and complete
+  :init
+  (global-corfu-mode))
 
 ;; ------------------------------------------------------------------------
 ;; swiper - search improvement
