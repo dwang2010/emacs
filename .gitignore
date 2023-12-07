@@ -11,6 +11,7 @@ tree-sitter
 eln-cache
 eshell
 org-persist
+history
 
 # Temp
 network*
