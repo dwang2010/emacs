@@ -215,6 +215,7 @@
 ;; ------------------------------------------------------------------------
 (use-package vterm
   :ensure t
+  :bind (("C-x C-v" . vterm)) ; override find-alternate-file
   :config
   (setq-default vterm-copy-exclude-prompt t))
 
