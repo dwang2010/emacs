@@ -108,37 +108,53 @@
                 '((project-find-file "Find file" nil)
                   (project-find-dir "Find directory" nil))))
 
+;; ------------------------------------------------------------------------
+;; vertico / marginalia / orderless / consult - completion framework
+;; ------------------------------------------------------------------------
+(use-package vertico ; completion UI based on default completion system
+  :ensure t
+  :config
+  (vertico-mode)
+  ;; add parens around number counts
+  (setq-default vertico-count-format '("%-6s " . "(%s/%s)"))
+  ;; situational display style: new buffer for grep related
+  (vertico-multiform-mode))
+  (setq-default vertico-multiform-commands '((consult-grep buffer)))
 
-;; ------------------------------------------------------------------------
-;; ivy / counsel / swiper - minibuffer / completion / search improvement
-;; https://github.com/abo-abo/swiper
-;; ------------------------------------------------------------------------
-(use-package ivy
+(use-package savehist ; (native) persist minibuffer history
+  :config
+  (savehist-mode)
+  (setq-default history-length 100))
+
+(use-package marginalia ; annotations in minibuffer
+  :ensure t
+  ;; :custom (marginalia-align 'right)
+  :config (marginalia-mode))
+
+(use-package orderless ; fuzzy, unordered completion style
   :ensure t
   :custom
-  (ivy-count-format "(%d/%d) ")
-  :config (ivy-mode)
-  (setq-default ivy-on-del-error-function #'ignore)
-  (setq-default ivy-display-style 'fancy) ; swiper style color matching
-  (setq-default ivy-extra-directories nil) ; hide "." and ".." dirs
-  (setq-default ivy-height 10))
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
 
-(use-package ivy-rich ; UI enhancements
+(use-package consult ; handy search / nav commands built on vertico
   :ensure t
-  :after ivy
-  :config
-  (ivy-rich-mode 1)
-  ;; fix to ensure line highlight completely extended
-  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
+  :bind
+  (("C-x b" . consult-buffer) ; better switch-to-buffer (with preview)
+   ;; M-g bindings in `goto-map'
+   ("M-g o" . consult-outline) ; jump to heading (with preview)
+   ("M-g g" . consult-goto-line) ; replacement of goto-line (with preview)
+   ("M-g M-g" . consult-goto-line)
+   ;; M-s bindings in `search-map'
+   ("M-s g" . consult-grep) ; super efficient regexp across files (with preview)
+   ("M-s m" . consult-line-multi))) ; line search across open buffers (with preview)
 
-(use-package counsel
-  :ensure t
-  :after ivy
-  :config (counsel-mode)) ; consumes M-x and other commands
-
+;; ------------------------------------------------------------------------
+;; swiper - search improvement
+;; retaining since consult-line ordering is disagreeable
+;; ------------------------------------------------------------------------
 (use-package swiper
   :ensure t
-  :after ivy
   :bind
   (("C-r" . swiper-isearch)
    ("C-s" . swiper-isearch-thing-at-point))

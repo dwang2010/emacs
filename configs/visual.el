@@ -42,12 +42,12 @@
   :ensure t
   :hook (dired-mode . nerd-icons-dired-mode))
 
-(use-package nerd-icons-ivy-rich  ; should enable before ivy-rich-mode
+(use-package nerd-icons-completion
   :ensure t
-  :init
-  (nerd-icons-ivy-rich-mode 1)
+  :after marginalia
   :config
-  (setq-default inhibit-compacting-font-caches t))
+  (nerd-icons-completion-mode)
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
 
 (use-package nerd-icons-ibuffer
   :ensure t
