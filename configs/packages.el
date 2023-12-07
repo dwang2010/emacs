@@ -146,10 +146,16 @@
 ;; ------------------------------------------------------------------------
 (use-package corfu
   :ensure t
+  :bind
+  ;; tab only completion (remove enter key)
+  (:map corfu-map ("RET" . nil))
   :custom
-  (corfu-count 6) ; candidates to show
-  (corfu-auto nil) ; disable auto completion popup
-  (tab-always-indent 'complete) ; tabs both indent and complete
+  ;; disable automatic completion popup
+  (corfu-auto nil)
+  ;; max candidates to show in popup
+  (corfu-count 8)
+  ;; tabs both indent and complete
+  (tab-always-indent 'complete)
   :init
   (global-corfu-mode))
 
