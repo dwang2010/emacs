@@ -96,12 +96,18 @@
   (setq-default avy-background nil))
 
 ;; ------------------------------------------------------------------------
-;; projectile - project based file management, very handy
+;; project based file management (native)
 ;; ------------------------------------------------------------------------
-(use-package projectile
-  :ensure t
-  :init (projectile-mode +1)
-  :bind ("C-x p" . projectile-command-map))
+(use-package project ; test native
+  ;; native binds
+  ;; C-x p d == (dired to target dir)
+  ;; C-x p D == (dired to root dir)
+  :config
+  (setq-default project-vc-ignores '()) ; list of stuff to ignore
+  (setq-default project-switch-commands
+                '((project-find-file "Find file" nil)
+                  (project-find-dir "Find directory" nil))))
+
 
 ;; ------------------------------------------------------------------------
 ;; ivy / counsel / swiper - minibuffer / completion / search improvement
