@@ -306,7 +306,12 @@
           (vm-imap . vm-visit-imap-folder-other-frame)
           (gnus . org-gnus-no-new-news)
           (file . find-file)
-          (wl . wl-other-frame))))
+          (wl . wl-other-frame)))
+
+  ;; don't shift around tags with heading changes
+  (setq-default org-auto-align-tags nil)
+  ;; don't display entities as utf-8 characters (special symbols)
+  (setq-default org-pretty-entities nil))
 
 ;; make org bullets fancy
 (use-package org-superstar
