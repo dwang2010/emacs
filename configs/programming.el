@@ -44,3 +44,14 @@
   :ensure t
   :config
   (setq-default inferior-lisp-program "sbcl"))
+
+;; ------------------------------------------------------------------------
+;; devdocs.io lookup
+;; https://github.com/blahgeek/emacs-devdocs-browser
+;; ------------------------------------------------------------------------
+;; devdocs-browser-install-docs = get docs
+;; devdocs-browser-open-in      = open docs in selected language
+;; C-c C-o = opens current page in external browser
+(use-package devdocs-browser
+  :ensure t
+  :bind (("C-h D" . devdocs-browser-open-in)))

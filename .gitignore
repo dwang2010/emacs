@@ -12,6 +12,7 @@ eln-cache
 eshell
 org-persist
 history
+devdocs-browser
 
 # Temp
 network*
