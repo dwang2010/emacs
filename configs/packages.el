@@ -311,6 +311,13 @@
   (setq-default org-tags-column -80)
   (setq-default org-auto-align-tags t)
 
+  ;; automatically add completion time when closing TODO
+  (setq-default org-log-done 'time)
+
+  ;; org-agenda related
+  (setq-default org-agenda-files '("~/notes/capture.org"))
+  (setq-default org-agenda-window-setup 'current-window)
+
   ;; org-capture - allows "capture" of notes at any time, quickly!
   ;; use tags to add additional context for filtering
   ;; e.g. "project" or "attendees" or "meeting_type" etc.
@@ -351,6 +358,21 @@
   :ensure t
   :config
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+
+;; more evident task priority
+(use-package org-fancy-priorities
+  :ensure t
+  :hook (org-mode . org-fancy-priorities-mode)
+  :config
+  (setq-default org-priority-highest 0
+                org-priority-default 1
+                org-priority-lowest 2)
+  (setq-default org-fancy-priorities-list '((?0 . "P0")
+                                            (?1 . "P1")
+                                            (?2 . "P2")))
+  (setq-default org-priority-faces '((?0 :foreground "#ff3030" :background nil)
+                                     (?1 :foreground "#eeb422" :background nil)
+                                     (?2 :foreground "#b3b3b3" :background nil))))
 
 ;; ------------------------------------------------------------------------
 ;; flycheck - code syntax checking
