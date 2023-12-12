@@ -327,12 +327,12 @@
         '(;; task, no reference
           ("t" "Task" entry
            (file+headline org-default-notes-file "Tasks")
-           "* TODO %?" :empty-lines-after 1 :prepend t)
+           "* TODO [#2] %?\nDEADLINE: " :empty-lines-after 1 :prepend t)
 
           ;; task with code reference
           ("c" "Task w/ Code Ref" entry
            (file+headline org-default-notes-file "Tasks w/ Ref")
-           "* TODO %?\n%a" :empty-lines-after 1 :prepend t)
+           "* TODO [#2] %?\nDEADLINE: \n%a" :empty-lines-after 1 :prepend t)
 
           ;; meeting related notes
           ("m" "Meeting Notes" entry
