@@ -274,8 +274,8 @@
   (setq-default org-pretty-entities nil) ;; don't show special utf-8 symbols
 
   ;; customize heading sizes
-  (set-face-attribute 'org-level-1 nil :height 1.25)
-  (set-face-attribute 'org-level-2 nil :height 1.15)
+  (set-face-attribute 'org-level-1 nil :height 1.15)
+  (set-face-attribute 'org-level-2 nil :height 1.10)
   (set-face-attribute 'org-level-3 nil :height 1.05)
   (set-face-attribute 'org-level-4 nil :height 1.0)
 
@@ -294,10 +294,8 @@
    'org-babel-load-languages
    '((python . t)
      (lisp . t)))
-
   ;; set org-babel for desired python executable
   (setq-default org-babel-python-command "python3")
-
   ;; potentially risky: remove confirmation when executing code blocks
   (setq-default org-confirm-babel-evaluate nil)
 
