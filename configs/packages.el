@@ -271,6 +271,7 @@
   ;; startup behavior
   (setq-default org-startup-indented t)
   (setq-default org-indent-indentation-per-level 1)
+  (setq-default org-pretty-entities nil) ;; don't show special utf-8 symbols
 
   ;; customize heading sizes
   (set-face-attribute 'org-level-1 nil :height 1.25)
@@ -308,10 +309,44 @@
           (file . find-file)
           (wl . wl-other-frame)))
 
-  ;; don't shift around tags with heading changes
-  (setq-default org-auto-align-tags nil)
-  ;; don't display entities as utf-8 characters (special symbols)
-  (setq-default org-pretty-entities nil))
+  ;; tags related
+  (setq-default org-tags-column -80)
+  (setq-default org-auto-align-tags t)
+
+  ;; org-capture - allows "capture" of notes at any time, quickly!
+  ;; use tags to add additional context for filtering
+  ;; e.g. "project" or "attendees" or "meeting_type" etc.
+  (global-set-key (kbd "<f2>") 'org-capture)
+  (setq-default org-default-notes-file "~/notes/capture.org")
+  (setq org-capture-templates
+        '(;; task, no reference
+          ("t" "Task" entry
+           (file+headline org-default-notes-file "Tasks")
+           "* TODO %?" :empty-lines-after 1 :prepend t)
+
+          ;; task with code reference
+          ("c" "Task w/ Code Ref" entry
+           (file+headline org-default-notes-file "Tasks w/ Ref")
+           "* TODO %?\n%a" :empty-lines-after 1 :prepend t)
+
+          ;; meeting related notes
+          ("m" "Meeting Notes" entry
+           (file+headline org-default-notes-file "Meeting Notes")
+           "* %t %^{Name}\n%?" :empty-lines-after 1 :prepend t)
+
+          ;; backlog of random thoughts / ideas
+          ("b" "Backlog" entry
+           (file+headline org-default-notes-file "Backlog")
+           "* TODO %?" :prepend t)))
+
+  ;; org-refile - for moving stuff between org files
+  (setq-default org-reverse-note-order t) ; prepend on refile
+  (setq-default org-blank-before-new-entry nil) ; prepend doesn't need another blank
+  (setq-default org-refile-use-outline-path 'file) ; allow refiling to other files
+  (setq-default org-outline-path-complete-in-steps nil) ; show all the options
+
+  ;; specific predefined targets for refiling (add as needed)
+  (setq-default org-refile-targets '(("~/notes/capture.org" :maxlevel . 3))))
 
 ;; make org bullets fancy
 (use-package org-superstar
