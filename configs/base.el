@@ -122,8 +122,10 @@
   (interactive) (revert-buffer t t))
 (global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
 
-;; bind eval-buffer to F12
-(global-set-key (kbd "<f12>") 'eval-buffer)
+;; bind to F12 reload init files
+(defun reload-init-files ()
+  (interactive) (load-file user-init-file))
+(global-set-key (kbd "<f12>") 'reload-init-files)
 
 ;; mac specific keybinds
 (if (eql system-type 'darwin)
