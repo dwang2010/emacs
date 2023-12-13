@@ -265,6 +265,22 @@
 ;; ------------------------------------------------------------------------
 ;; org-mode - note taking on steroids
 ;; ------------------------------------------------------------------------
+;; helper funcs to grab code snippet in referenced org SRC block
+;; modified from: github.com/howardabrams/hamacs/blob/main/ha-capturing-notes.org
+(defun get-fileref-blk-snippet (mode)
+  (let* ((code-snippet (buffer-substring-no-properties (mark) (- (point) 1)))
+         (file-name (buffer-file-name))
+         (file-base (file-name-nondirectory file-name))
+         (line-number (line-number-at-pos (region-beginning)))
+         (initial-txt (format "[[file:%s::%s][%s::%s]]"
+                              file-name line-number file-base line-number)))
+    (format "%s\n#+begin_src %s\n%s\n#+end_src" initial-txt mode code-snippet)))
+
+(defun get-org-blk-code-snippet (file)
+  (with-current-buffer (find-buffer-visiting file)
+    (let ((org-src-mode (replace-regexp-in-string "-mode" "" (format "%s" major-mode))))
+      (get-fileref-blk-snippet org-src-mode))))
+
 (use-package org
   :ensure t
   :config
@@ -332,7 +348,8 @@
           ;; task with code reference
           ("c" "Task w/ Code Ref" entry
            (file+headline org-default-notes-file "Tasks w/ Ref")
-           "* TODO [#2] %?\nDEADLINE: \n%a" :empty-lines-after 1 :prepend t)
+           "* TODO [#2] %?\nDEADLINE: \n\n%(get-org-blk-code-snippet \"%F\")"
+           :empty-lines-after 1 :prepend t)
 
           ;; meeting related notes
           ("m" "Meeting Notes" entry
