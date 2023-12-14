@@ -330,7 +330,7 @@
   ;; automatically add completion time when closing TODO
   (setq-default org-log-done 'time)
 
-  ;; org-agenda
+  ;; org-agenda - dashboard view of tasks
   (global-set-key (kbd "<f1>") (lambda () (interactive) (org-agenda nil "n")))
   (set-face-attribute 'org-agenda-structure nil :foreground "#00bfff" :height 1.25)
   (set-face-attribute 'org-agenda-date-weekend nil :foreground "#4d4d4d")
@@ -354,7 +354,7 @@
             (alltodo "" ((org-agenda-block-separator nil)
                          (org-agenda-overriding-header "\n--- Global TODO ---\n")))))))
 
-  ;; org-capture - allows "capture" of notes at any time, quickly!
+  ;; org-capture - "capture" notes at any time, quickly
   ;; use tags to add additional context for filtering
   ;; e.g. "project" or "attendees" or "meeting_type" etc.
   (global-set-key (kbd "<f2>") 'org-capture)
@@ -381,14 +381,15 @@
                    (file+headline org-default-notes-file "Meeting Notes")
                    "* %t %^{Name}\n%?" :empty-lines-after 1 :prepend t)))
 
-  ;; org-refile - for moving stuff between org files
+  ;; org-refile - moving stuff between org files
   (setq-default org-reverse-note-order t) ; prepend on refile
   (setq-default org-blank-before-new-entry nil) ; prepend doesn't need another blank
-  (setq-default org-refile-use-outline-path 'file) ; allow refiling to other files
-  (setq-default org-outline-path-complete-in-steps nil) ; show all the options
-
-  ;; specific predefined targets for refiling (add as needed)
-  (setq-default org-refile-targets '(("~/notes/ttd.org" :maxlevel . 3))))
+  (setq-default org-refile-use-outline-path 'file) ; allows for granular refile targetting
+  (setq-default org-outline-path-complete-in-steps nil) ; allows for fuzzy find refiling
+  (advice-add 'org-refile :after 'org-save-all-org-buffers) ; save all after refiling
+  (setq-default org-refile-targets
+                '((org-agenda-files :maxlevel . 1)
+                  ("~/notes/archive.org" :maxlevel . 2)))) ; * year / ** month
 
 ;; make org bullets fancy
 (use-package org-superstar
