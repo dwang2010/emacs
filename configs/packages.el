@@ -363,13 +363,13 @@
                 '(;; task, no reference
                   ("t" "Task" entry
                    (file+headline org-default-notes-file "Tasks")
-                   "* TODO [#2] %?\nDEADLINE: " :empty-lines-after 1 :prepend t)
+                   "* TODO [#2] %?\nDEADLINE: " :prepend t)
 
                   ;; task with code reference
                   ("c" "Task w/ Code Ref" entry
-                   (file+headline org-default-notes-file "Tasks w/ Ref")
+                   (file+headline org-default-notes-file "Tasks with Ref")
                    "* TODO [#2] %?\nDEADLINE: \n\n%(get-org-blk-code-snippet \"%F\")"
-                   :empty-lines-after 1 :prepend t)
+                   :prepend t)
 
                   ;; task backlog
                   ("b" "Backlog" entry
