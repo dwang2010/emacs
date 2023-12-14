@@ -339,27 +339,27 @@
   ;; e.g. "project" or "attendees" or "meeting_type" etc.
   (global-set-key (kbd "<f2>") 'org-capture)
   (setq-default org-default-notes-file "~/notes/capture.org")
-  (setq org-capture-templates
-        '(;; task, no reference
-          ("t" "Task" entry
-           (file+headline org-default-notes-file "Tasks")
-           "* TODO [#2] %?\nDEADLINE: " :empty-lines-after 1 :prepend t)
+  (setq-default org-capture-templates
+                '(;; task, no reference
+                  ("t" "Task" entry
+                   (file+headline org-default-notes-file "Tasks")
+                   "* TODO [#2] %?\nDEADLINE: " :empty-lines-after 1 :prepend t)
 
-          ;; task with code reference
-          ("c" "Task w/ Code Ref" entry
-           (file+headline org-default-notes-file "Tasks w/ Ref")
-           "* TODO [#2] %?\nDEADLINE: \n\n%(get-org-blk-code-snippet \"%F\")"
-           :empty-lines-after 1 :prepend t)
+                  ;; task with code reference
+                  ("c" "Task w/ Code Ref" entry
+                   (file+headline org-default-notes-file "Tasks w/ Ref")
+                   "* TODO [#2] %?\nDEADLINE: \n\n%(get-org-blk-code-snippet \"%F\")"
+                   :empty-lines-after 1 :prepend t)
 
-          ;; meeting related notes
-          ("m" "Meeting Notes" entry
-           (file+headline org-default-notes-file "Meeting Notes")
-           "* %t %^{Name}\n%?" :empty-lines-after 1 :prepend t)
+                  ;; meeting related notes
+                  ("m" "Meeting Notes" entry
+                   (file+headline org-default-notes-file "Meeting Notes")
+                   "* %t %^{Name}\n%?" :empty-lines-after 1 :prepend t)
 
-          ;; backlog of random thoughts / ideas
-          ("b" "Backlog" entry
-           (file+headline org-default-notes-file "Backlog")
-           "* TODO %?" :prepend t)))
+                  ;; backlog of random thoughts / ideas
+                  ("b" "Backlog" entry
+                   (file+headline org-default-notes-file "Backlog")
+                   "* TODO [#3] %?" :prepend t)))
 
   ;; org-refile - for moving stuff between org files
   (setq-default org-reverse-note-order t) ; prepend on refile
@@ -383,13 +383,15 @@
   :config
   (setq-default org-priority-highest 0
                 org-priority-default 1
-                org-priority-lowest 2)
+                org-priority-lowest 3)
   (setq-default org-fancy-priorities-list '((?0 . "P0")
                                             (?1 . "P1")
-                                            (?2 . "P2")))
-  (setq-default org-priority-faces '((?0 :foreground "#ff3030" :background nil)
-                                     (?1 :foreground "#eeb422" :background nil)
-                                     (?2 :foreground "#b3b3b3" :background nil))))
+                                            (?2 . "P2")
+                                            (?3 . "P3")))
+  (setq-default org-priority-faces '((?0 :foreground "#ff0000" :weight bold)
+                                     (?1 :foreground "#ff7f00" :weight bold)
+                                     (?2 :foreground "#ffc125" :weight bold)
+                                     (?3 :foreground "#b3b3b3" :weight bold))))
 
 ;; ------------------------------------------------------------------------
 ;; flycheck - code syntax checking
