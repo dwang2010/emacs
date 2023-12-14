@@ -8,28 +8,22 @@
 ;; https://protesilaos.com/emacs/ef-themes-pictures
 ;; light: ef-light / ef-melissa-light
 ;; dark: ef-elea-dark / ef-melissa-dark
-(use-package ef-themes
-  :ensure t
-  :config (load-theme 'ef-elea-dark t))
+(use-package ef-themes :ensure t :defer)
 
 ;; https://github.com/nordtheme/emacs
-;; has some issues running as daemon / cliente
+;; has some issues running as daemon / client
 (use-package nord-theme :ensure t :defer)
 
-;; change theme based on time of day
-;; creates weird theme artifacts, not worth debugging
-;; https://github.com/guidoschmidt/circadian.el
-;; (use-package circadian
-;;   :ensure t
-;;   :config
-;;   (setq-default circadian-themes '(("7:00" . ef-melissa-dark)
-;;                                    ("18:30" . ef-elea-dark)))
-;;   (circadian-setup)
+;; https://github.com/doomemacs/themes
+;; doom-vibrant / doom-one
+(use-package doom-themes
+  :ensure t
+  :config (load-theme 'doom-vibrant t))
 
-;;   ;; fix cursor color after theme change
-;;   (add-hook 'circadian-after-load-theme-hook
-;;             #'(lambda (theme)
-;;                 (set-cursor-color "#ff7f00"))))
+;; different background for specific buffer types
+(use-package solaire-mode
+  :ensure t
+  :config (solaire-global-mode +1))
 
 ;; ------------------------------------------------------------------------
 ;; visual icons
