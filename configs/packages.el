@@ -331,14 +331,15 @@
   (setq-default org-log-done 'time)
 
   ;; org-agenda related
-  (setq-default org-agenda-files '("~/notes/capture.org"))
+  (global-set-key (kbd "<f1>") (lambda () (interactive) (org-agenda nil "n")))
+  (setq-default org-agenda-files '("~/notes/ttd.org"))
   (setq-default org-agenda-window-setup 'current-window)
 
   ;; org-capture - allows "capture" of notes at any time, quickly!
   ;; use tags to add additional context for filtering
   ;; e.g. "project" or "attendees" or "meeting_type" etc.
   (global-set-key (kbd "<f2>") 'org-capture)
-  (setq-default org-default-notes-file "~/notes/capture.org")
+  (setq-default org-default-notes-file "~/notes/ttd.org")
   (setq-default org-capture-templates
                 '(;; task, no reference
                   ("t" "Task" entry
@@ -351,15 +352,15 @@
                    "* TODO [#2] %?\nDEADLINE: \n\n%(get-org-blk-code-snippet \"%F\")"
                    :empty-lines-after 1 :prepend t)
 
+                  ;; task backlog
+                  ("b" "Backlog" entry
+                   (file+headline org-default-notes-file "Backlog")
+                   "* TODO [#3] %?" :prepend t)
+
                   ;; meeting related notes
                   ("m" "Meeting Notes" entry
                    (file+headline org-default-notes-file "Meeting Notes")
-                   "* %t %^{Name}\n%?" :empty-lines-after 1 :prepend t)
-
-                  ;; backlog of random thoughts / ideas
-                  ("b" "Backlog" entry
-                   (file+headline org-default-notes-file "Backlog")
-                   "* TODO [#3] %?" :prepend t)))
+                   "* %t %^{Name}\n%?" :empty-lines-after 1 :prepend t)))
 
   ;; org-refile - for moving stuff between org files
   (setq-default org-reverse-note-order t) ; prepend on refile
@@ -368,7 +369,7 @@
   (setq-default org-outline-path-complete-in-steps nil) ; show all the options
 
   ;; specific predefined targets for refiling (add as needed)
-  (setq-default org-refile-targets '(("~/notes/capture.org" :maxlevel . 3))))
+  (setq-default org-refile-targets '(("~/notes/ttd.org" :maxlevel . 3))))
 
 ;; make org bullets fancy
 (use-package org-superstar
