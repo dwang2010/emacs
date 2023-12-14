@@ -330,10 +330,29 @@
   ;; automatically add completion time when closing TODO
   (setq-default org-log-done 'time)
 
-  ;; org-agenda related
+  ;; org-agenda
   (global-set-key (kbd "<f1>") (lambda () (interactive) (org-agenda nil "n")))
+  (set-face-attribute 'org-agenda-structure nil :foreground "#00bfff" :height 1.25)
+  (set-face-attribute 'org-agenda-date-weekend nil :foreground "#4d4d4d")
+  (set-face-attribute 'org-agenda-date-today nil :foreground "white")
   (setq-default org-agenda-files '("~/notes/ttd.org"))
   (setq-default org-agenda-window-setup 'current-window)
+  (setq org-agenda-custom-commands
+        '(("n" "Main Agenda"
+           (;; 2-week agenda view
+            (agenda "" ((org-agenda-block-separator nil)
+                        (org-agenda-overriding-header "--- Upcoming Deadlines ---\n")
+                        (org-agenda-format-date "%F %a")
+                        (org-agenda-span 25)
+                        (org-agenda-start-day "-5d")
+                        (org-agenda-start-on-weekday 0) ; only works for 7 / 14 day span
+                        (org-deadline-warning-days 0)
+                        (org-agenda-skip-function
+                         '(org-agenda-skip-entry-if 'nottodo '("TODO")))))
+
+            ;; blob of all todo, without date filtering
+            (alltodo "" ((org-agenda-block-separator nil)
+                         (org-agenda-overriding-header "\n--- Global TODO ---\n")))))))
 
   ;; org-capture - allows "capture" of notes at any time, quickly!
   ;; use tags to add additional context for filtering
