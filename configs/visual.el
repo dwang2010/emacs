@@ -23,11 +23,6 @@
   (set-cursor-color "#ff7f00")
   (set-face-attribute 'show-paren-match nil :bold t))
 
-;; different background for specific buffer types
-(use-package solaire-mode
-  :ensure t
-  :config (solaire-global-mode +1))
-
 ;; ------------------------------------------------------------------------
 ;; visual icons
 ;; ------------------------------------------------------------------------
