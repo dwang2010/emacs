@@ -168,10 +168,13 @@
   (("C-s" . swiper-isearch)
    ("C-r" . swiper-isearch-thing-at-point))
   :config
+  ;; don't quit search when backspace on empty query
+  (setq-default ivy-on-del-error-function 'ignore)
   ;; color contrast between selected / other options (similar to vanilla)
-  (set-face-attribute 'swiper-background-match-face-2 nil :inherit 'swiper-match-face-1)
+  (set-face-attribute 'swiper-background-match-face-2 nil :background "#204070")
   ;; remove inheritance to avoid theme line highlight color confusion
-  (set-face-attribute 'swiper-line-face nil :inherit nil :underline nil))
+  (set-face-attribute 'swiper-line-face nil :inherit nil :underline nil
+                      :foreground 'unspecified :background 'unspecified))
 
 ;; ------------------------------------------------------------------------
 ;; magit - better git
