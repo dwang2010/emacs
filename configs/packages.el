@@ -198,6 +198,25 @@
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1))
 
 ;; ------------------------------------------------------------------------
+;; which-key - minibuffer popup to show completions for current input prefix
+;; ------------------------------------------------------------------------
+(use-package which-key
+  :ensure t
+  :init (which-key-mode)
+  :config (setq-default which-key-idle-delay 1))
+
+;; ------------------------------------------------------------------------
+;; helpful - better help command buffers
+;; ------------------------------------------------------------------------
+(use-package helpful
+  :ensure t
+  :bind
+  (("C-h f" . helpful-callable)
+   ("C-h v" . helpful-variable)
+   ("C-h k" . helpful-key)
+   ("C-h x" . helpful-command)))
+
+;; ------------------------------------------------------------------------
 ;; lsp-mode - adds options for IDE-like features
 ;; ------------------------------------------------------------------------
 (use-package lsp-mode
@@ -209,9 +228,15 @@
   (defun my-lsp-mode-setup-completion ()
     (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
           '(flex))) ;; Configure flex
-  :bind (("M-." . lsp-find-definition)
-         ("M-?" . lsp-find-references))
+  :bind
+  ;; use ("," and ".") for navigation to immediately preview xref options
+  ;; unfortunately opens buffers while doing so
+  (("M-." . lsp-find-definition) ; M-, to return to previous point
+   ("M-?" . lsp-find-references))
   :config
+  ;; enable which-key integration
+  (lsp-enable-which-key-integration t)
+
   ;; don't log all message from language server (impacts performance)
   (setq-default lsp-log-io nil)
   ;; disable code lens overlay
