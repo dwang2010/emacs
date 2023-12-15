@@ -170,8 +170,19 @@
   :config
   ;; don't quit search when backspace on empty query
   (setq-default ivy-on-del-error-function 'ignore)
-  ;; color contrast between selected / other options (similar to vanilla)
-  (set-face-attribute 'swiper-background-match-face-2 nil :background "#204070")
+  ;; remove all the swiper color loudness
+  (set-face-attribute 'swiper-background-match-face-1 nil
+                      :foreground 'unspecified :background 'unspecified)
+  (set-face-attribute 'swiper-background-match-face-2 nil :inherit 'default
+                      :background "#0e5e95")
+  (set-face-attribute 'swiper-background-match-face-3 nil :background 'unspecified
+                      :inherit 'swiper-background-match-face-2)
+  (set-face-attribute 'swiper-background-match-face-4 nil :background 'unspecified
+                      :inherit 'swiper-background-match-face-2)
+  (set-face-attribute 'swiper-match-face-3 nil :inherit 'swiper-match-face-2
+                      :background 'unspecified)
+  (set-face-attribute 'swiper-match-face-4 nil :inherit 'swiper-match-face-2
+                      :background 'unspecified)
   ;; remove inheritance to avoid theme line highlight color confusion
   (set-face-attribute 'swiper-line-face nil :inherit nil :underline nil
                       :foreground 'unspecified :background 'unspecified))
