@@ -19,9 +19,12 @@
 (use-package doom-themes
   :ensure t
   :config
+  ;; doom vibrant configs
   (load-theme 'doom-vibrant t)
   (set-cursor-color "#ff7f00")
-  (set-face-attribute 'show-paren-match nil :bold t))
+  (set-face-attribute 'show-paren-match nil :bold t)
+  (set-face-attribute 'font-lock-doc-face nil :foreground "#8a8a93")
+  (set-face-attribute 'font-lock-comment-face nil :foreground "#81868b"))
 
 ;; ------------------------------------------------------------------------
 ;; visual icons
