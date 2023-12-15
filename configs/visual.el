@@ -3,22 +3,25 @@
 ;; ------------------------------------------------------------------------
 ;; https://github.com/purcell/color-theme-sanityinc-tomorrow
 ;; options: day, night, blue, bright, eighties
-(use-package color-theme-sanityinc-tomorrow :ensure t :defer)
+;; (use-package color-theme-sanityinc-tomorrow :ensure t)
 
 ;; https://protesilaos.com/emacs/ef-themes-pictures
 ;; light: ef-light / ef-melissa-light
 ;; dark: ef-elea-dark / ef-melissa-dark
-(use-package ef-themes :ensure t :defer)
+; (use-package ef-themes :ensure t)
 
 ;; https://github.com/nordtheme/emacs
 ;; has some issues running as daemon / client
-(use-package nord-theme :ensure t :defer)
+;; (use-package nord-theme :ensure t)
 
 ;; https://github.com/doomemacs/themes
 ;; doom-vibrant / doom-one
 (use-package doom-themes
   :ensure t
-  :config (load-theme 'doom-vibrant t))
+  :config
+  (load-theme 'doom-vibrant t)
+  (set-cursor-color "#ff7f00")
+  (set-face-attribute 'show-paren-match nil :bold t))
 
 ;; different background for specific buffer types
 (use-package solaire-mode
@@ -81,11 +84,10 @@
 
 ;; default frame parameters
 (setq-default default-frame-alist
-              '((width . 100)              ; window width (cols)
-                (height . 55)              ; window height (rows)
-                (cursor-type . bar)        ; vertical bar cursor
-                (cursor-color . "#ff7f00") ; cursor color
-                ))
+              '((width . 100)                ; window width (cols)
+                (height . 55)                ; window height (rows)
+                (cursor-type . bar)          ; vertical bar cursor
+                (cursor-color . "#ff7f00"))) ; cursor color
 
 ;; ensure scrollbars don't appear when creating new frames
 (defun rmv-scroll-bars (frame)

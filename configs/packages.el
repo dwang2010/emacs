@@ -3,8 +3,7 @@
 ;; ------------------------------------------------------------------------
 (use-package paren
   :config (show-paren-mode 1)
-  (setq-default show-paren-delay 0)
-  (set-face-attribute 'show-paren-match nil :bold t))
+  (setq-default show-paren-delay 0))
 
 ;; ------------------------------------------------------------------------
 ;; dired - file / directory explorer (native)
