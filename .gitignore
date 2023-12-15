@@ -13,6 +13,7 @@ eshell
 org-persist
 history
 devdocs-browser
+.cache
 
 # Temp
 network*
