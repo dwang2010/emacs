@@ -145,18 +145,20 @@
 ;; ------------------------------------------------------------------------
 (use-package corfu
   :ensure t
-  :bind
-  ;; tab only completion (remove enter key)
-  (:map corfu-map ("RET" . nil))
+  :bind (:map corfu-map ("RET" . nil)) ; tab only completion
   :custom
-  ;; disable automatic completion popup
-  (corfu-auto nil)
-  ;; max candidates to show in popup
-  (corfu-count 8)
-  ;; tabs both indent and complete
+  ;; automatic completion
+  (corfu-auto t) ; automatic completion popup
+  (corfu-auto-prefix 4) ; min prefix length for popup to show
+  (corfu-preselect 'first) ; first candidate selected; tab then inserts
+  (corfu-count 8) ; max candidates to show in popup
+
+  ;; default tab behavior
   (tab-always-indent 'complete)
-  :init
-  (global-corfu-mode))
+  :config
+  (set-face-attribute 'corfu-current nil :background "#4d4d4d")
+  (set-face-attribute 'completions-common-part nil :foreground "#00EEEE")
+  :init (global-corfu-mode))
 
 ;; ------------------------------------------------------------------------
 ;; swiper - search improvement
@@ -484,3 +486,15 @@
   ;; use yasnippet on per-buffer basis (based on major mode)
   (yas-reload-all)
   :hook (prog-mode . yas-minor-mode))
+
+;; ------------------------------------------------------------------------
+;; treemacs - tree layout file explorer
+;; ------------------------------------------------------------------------
+;; (use-package treemacs
+;;   :ensure t
+;;   :bind ("<f4>" . treemacs)
+;;   :custom
+;;   (treemacs-is-never-other-window t)
+;;   (treemacs-follow-mode t)
+;;   :hook
+;;   (treemacs-mode . treemacs-project-follow-mode))
