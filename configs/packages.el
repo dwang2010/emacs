@@ -431,7 +431,8 @@
   (setq-default org-outline-path-complete-in-steps nil) ; allows for fuzzy find refiling
   (advice-add 'org-refile :after 'org-save-all-org-buffers) ; save all after refiling
   (setq-default org-refile-targets
-                '((org-agenda-files :maxlevel . 1)
+                '((nil :maxlevel . 3) ; nil equates to "current buffer"
+                  (org-agenda-files :maxlevel . 1)
                   ("~/notes/archive.org" :maxlevel . 2)))) ; * year / ** month
 
 ;; make org bullets fancy
