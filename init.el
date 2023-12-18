@@ -21,3 +21,4 @@
 (load-library "visual")      ; themes / display related
 (load-library "programming") ; language related default settings
 (load-library "packages")    ; blob package customization
+(load-library "org_cfg")     ; org-mode related configs
