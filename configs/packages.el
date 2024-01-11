@@ -343,3 +343,13 @@
 ;;   (treemacs-follow-mode t)
 ;;   :hook
 ;;   (treemacs-mode . treemacs-project-follow-mode))
+
+;; ------------------------------------------------------------------------
+;; ace-window - better window management
+;; ------------------------------------------------------------------------
+(use-package ace-window
+  :ensure t
+  :bind
+  ("M-o" . ace-window)
+  :config
+  (setq-default aw-background nil))
