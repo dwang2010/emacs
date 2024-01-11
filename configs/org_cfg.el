@@ -95,6 +95,8 @@
   ;; org-capture - "capture" notes at any time, quickly
   ;; use tags to add additional context for filtering
   ;; e.g. "project" or "attendees" or "meeting_type" etc.
+  ;; C-c C-d - add deadline
+  ;; C-c C-s - add schedule
   (global-set-key (kbd "<f2>") 'org-capture)
   (setq-default org-default-notes-file "~/notes/ttd.org")
   (setq-default org-capture-templates
