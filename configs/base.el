@@ -106,6 +106,12 @@
 ;; change C-x s to same as C-x C-s
 (global-set-key (kbd "C-x s") 'save-buffer)
 
+;; logical switching between visible window panes
+(global-set-key (kbd "<C-M-left>") 'windmove-left)
+(global-set-key (kbd "<C-M-right>") 'windmove-right)
+(global-set-key (kbd "<C-M-up>") 'windmove-up)
+(global-set-key (kbd "<C-M-down>") 'windmove-down)
+
 ;; home / end keys to start / end of line instead of buffer
 (global-set-key (kbd "<home>") 'move-beginning-of-line)
 (global-set-key (kbd "<end>") 'move-end-of-line)
