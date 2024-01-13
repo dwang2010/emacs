@@ -290,7 +290,8 @@
   :ensure t
   :bind (("C-x C-v" . vterm)) ; override find-alternate-file
   :config
-  (setq-default vterm-copy-exclude-prompt t))
+  (setq-default vterm-copy-exclude-prompt t)
+  (setq-default vterm-max-scrollback 10000))
 
 ;; ------------------------------------------------------------------------
 ;; deadgrep - better text search through files
