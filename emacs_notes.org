@@ -1,0 +1,79 @@
+#+TITLE: GENERAL EMACS NOTES
+
+* Base
+** Useful Bindings
+M-SPC : cycle spacing - just one / remove all / restore original
+M-\   : delete all whitespace around point (ahead / behind)
+M-^   : join two lines (newline removed) separated by space
+C-M-\ : indents each line in region as if hitting tab at beginning
+C-d   : same as delete key
+
+M-=   : display word / character count
+
+** Useful Commands
+list-faces-display  : show current font face definition (color / style)
+list-colors-display : show displayable colors
+
+* Org-Mode
+** Helpful Bindings
+*** General
+C-ret : new heading, at end of subtree
+M-ret : insert new heading / item / row
+
+C-S-ret : new TODO heading at same level, end of subtree
+M-S-ret : new TODO heading at same level
+
+M-left/right   : change CURRENT heading level
+M-S-left/right : change SUBTREE heading level
+
+M-up/down : move subtree order for heading subtree / item + subitems
+
+C-c C-x C-w : remove subtree, save for pasting
+C-c C-x C-y : paste subtree, with modified heading level
+
+C-c C-w : refile entry or region somewhere else
+
+C-c ^ : sort same level entries!
+C-c ' : when in source block, open into major mode, again to close
+
+C-c - : toggle line / region as list
+C-c * : toggle item into subheading of current level
+
+C-u C-c C-c : when at head of list, toggles all to checklist
+
+*** Agenda
+C-c C-d : add deadline date (with DEADLINE preface)
+C-c C-s : add schedule date (with SCHEDULED preface)
+C-c .   : just add date / time
+
+free form syntax for date / time:
+e.g. 12/20 1pm+1 == 1-2pm
+
+in agenda view:
+/ : filter by something
+| : remove all filters
+t : toggle todo state
+
+*** Tags
+C-c C-q : add tags
+C-c /   : filter org file based on query (match == tags)
+C-c C-c : remove sparse tree view + highlighting
+
+* Server Daemon
+Configure to run in daemon mode on startup
+#+begin_src bash
+  emacs --daemon
+  # on mac, do this
+  emacs --fg-daemon
+#+end_src
+
+Alias "emacs" to instead run emacsclient
+#+begin_src bash
+# -c : create new frame instead of using current
+# -a : alternative fall back if server broken / not running
+emacsclient -c -a "emacs"
+#+end_src
+
+* Misc
+regexp standards
+https://en.wikipedia.org/wiki/Regular_expression#POSIX_basic_and_extended
