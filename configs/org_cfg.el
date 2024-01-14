@@ -99,6 +99,7 @@
   ;; C-c C-s - add schedule
   (global-set-key (kbd "<f2>") 'org-capture)
   (setq-default org-default-notes-file "~/notes/ttd.org")
+  (setq-default org-default-meetings-file "~/notes/meetings.org")
   (setq-default org-capture-templates
                 '(;; task, no reference
                   ("t" "Task" entry
@@ -118,7 +119,7 @@
 
                   ;; meeting related notes
                   ("m" "Meeting Notes" entry
-                   (file+headline org-default-notes-file "Meeting Notes")
+                   (file+headline org-default-meetings-file "Meeting Notes")
                    "* %t %^{Name}\n%?" :empty-lines-after 1 :prepend t)))
 
   ;; org-refile - moving stuff between org files
