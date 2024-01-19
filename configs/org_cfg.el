@@ -36,8 +36,8 @@
         '(("*" (bold :foreground "orange"))
           ("/" italic)
           ("_" underline)
-          ("=" (:background "maroon" :foreground "white"))
-          ("~" (:background "deep sky blue" :foreground "MidnightBlue"))
+          ("=" org-verbatim)
+          ("~" org-code)
           ("+" (:strike-through t))))
 
   ;; scale inline images if attr_org present, otherwise use image width
