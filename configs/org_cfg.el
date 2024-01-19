@@ -40,6 +40,10 @@
           ("~" (:background "deep sky blue" :foreground "MidnightBlue"))
           ("+" (:strike-through t))))
 
+  ;; scale inline images if attr_org present, otherwise use image width
+  ;; use C-c C-x C-v to render inline images
+  (setq-default org-image-actual-width nil)
+
   ;; babel configuration to load languages
   (org-babel-do-load-languages
    'org-babel-load-languages
