@@ -41,6 +41,9 @@ C-c * : toggle item into subheading of current level
 
 C-u C-c C-c : when at head of list, toggles all to checklist
 
+C-c C-o : open link
+C-c &   : return to previous location
+
 *** Agenda
 C-c C-d : add deadline date (with DEADLINE preface)
 C-c C-s : add schedule date (with SCHEDULED preface)
