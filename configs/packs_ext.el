@@ -1,26 +1,12 @@
 ;; ------------------------------------------------------------------------
-;; rainbow-mode - colorize text codes; handy when changing colors
+;; magit - better git
 ;; ------------------------------------------------------------------------
-(use-package rainbow-mode
-  :ensure t)
-
-;; ------------------------------------------------------------------------
-;; expand region - magic selection
-;; ------------------------------------------------------------------------
-(use-package expand-region
+(use-package magit
   :ensure t
-  :bind ("C-=" . er/expand-region))
-
-;; ------------------------------------------------------------------------
-;; avy - jump to char!
-;; ------------------------------------------------------------------------
-(use-package avy
-  :ensure t
-  :bind ("C-f" . 'avy-goto-char-timer)
-  :config (setq-default avy-timeout-seconds 0.20)
-  (setq-default avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  (setq-default avy-style 'de-bruijn)
-  (setq-default avy-background nil))
+  :bind ("C-x g" . magit-status)
+  :config
+  (setq-default magit-log-margin '(t "%Y-%m-%d %H:%M " magit-log-margin-width t 12))
+  (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1))
 
 ;; ------------------------------------------------------------------------
 ;; vertico / marginalia / orderless / consult - completion framework
@@ -113,35 +99,6 @@
                       :foreground 'unspecified :background 'unspecified))
 
 ;; ------------------------------------------------------------------------
-;; magit - better git
-;; ------------------------------------------------------------------------
-(use-package magit
-  :ensure t
-  :bind ("C-x g" . magit-status)
-  :config
-  (setq-default magit-log-margin '(t "%Y-%m-%d %H:%M " magit-log-margin-width t 12))
-  (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1))
-
-;; ------------------------------------------------------------------------
-;; which-key - minibuffer popup to show completions for current input prefix
-;; ------------------------------------------------------------------------
-(use-package which-key
-  :ensure t
-  :init (which-key-mode)
-  :config (setq-default which-key-idle-delay 1))
-
-;; ------------------------------------------------------------------------
-;; helpful - better help command buffers
-;; ------------------------------------------------------------------------
-(use-package helpful
-  :ensure t
-  :bind
-  (("C-h f" . helpful-callable)
-   ("C-h v" . helpful-variable)
-   ("C-h k" . helpful-key)
-   ("C-h x" . helpful-command)))
-
-;; ------------------------------------------------------------------------
 ;; lsp-mode - adds options for IDE-like features
 ;; ------------------------------------------------------------------------
 (use-package lsp-mode
@@ -217,6 +174,36 @@
   (setq-default vterm-max-scrollback 10000))
 
 ;; ------------------------------------------------------------------------
+;; avy - jump to char!
+;; ------------------------------------------------------------------------
+(use-package avy
+  :ensure t
+  :bind ("C-f" . 'avy-goto-char-timer)
+  :config (setq-default avy-timeout-seconds 0.20)
+  (setq-default avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  (setq-default avy-style 'de-bruijn)
+  (setq-default avy-background nil))
+
+;; ------------------------------------------------------------------------
+;; which-key - minibuffer popup to show completions for current input prefix
+;; ------------------------------------------------------------------------
+(use-package which-key
+  :ensure t
+  :init (which-key-mode)
+  :config (setq-default which-key-idle-delay 1))
+
+;; ------------------------------------------------------------------------
+;; helpful - better help command buffers
+;; ------------------------------------------------------------------------
+(use-package helpful
+  :ensure t
+  :bind
+  (("C-h f" . helpful-callable)
+   ("C-h v" . helpful-variable)
+   ("C-h k" . helpful-key)
+   ("C-h x" . helpful-command)))
+
+;; ------------------------------------------------------------------------
 ;; deadgrep - better text search through files
 ;; needs ripgrep: https://github.com/BurntSushi/ripgrep#installation
 ;; keybindings: https://github.com/Wilfred/deadgrep#keybindings
@@ -257,6 +244,29 @@
   :hook (prog-mode . yas-minor-mode))
 
 ;; ------------------------------------------------------------------------
+;; ace-window - better window management
+;; ------------------------------------------------------------------------
+(use-package ace-window
+  :ensure t
+  :bind
+  ("M-o" . ace-window)
+  :config
+  (setq-default aw-background nil))
+
+;; ------------------------------------------------------------------------
+;; rainbow-mode - colorize text codes; handy when changing colors
+;; ------------------------------------------------------------------------
+(use-package rainbow-mode
+  :ensure t)
+
+;; ------------------------------------------------------------------------
+;; expand region - magic selection
+;; ------------------------------------------------------------------------
+(use-package expand-region
+  :ensure t
+  :bind ("C-=" . er/expand-region))
+
+;; ------------------------------------------------------------------------
 ;; treemacs - tree layout file explorer
 ;; ------------------------------------------------------------------------
 ;; (use-package treemacs
@@ -267,13 +277,3 @@
 ;;   (treemacs-follow-mode t)
 ;;   :hook
 ;;   (treemacs-mode . treemacs-project-follow-mode))
-
-;; ------------------------------------------------------------------------
-;; ace-window - better window management
-;; ------------------------------------------------------------------------
-(use-package ace-window
-  :ensure t
-  :bind
-  ("M-o" . ace-window)
-  :config
-  (setq-default aw-background nil))
