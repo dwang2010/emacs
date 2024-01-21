@@ -137,6 +137,16 @@
                   (org-agenda-files :maxlevel . 1)
                   ("~/notes/archive.org" :maxlevel . 2)))) ; * year / ** month
 
+;; modify call to org-capture to not hide other buffers
+;; capture popup still random, but can easily move with ace-window
+(defun my-org-capture-place-template-dont-delete-windows (oldfun &rest args)
+  (cl-letf (((symbol-function 'delete-other-windows) 'ignore))
+    (apply oldfun args)))
+
+(with-eval-after-load "org-capture"
+  (advice-add 'org-capture-place-template
+              :around 'my-org-capture-place-template-dont-delete-windows))
+
 ;; make org bullets fancy
 (use-package org-superstar
   :ensure t
