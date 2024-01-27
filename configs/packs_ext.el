@@ -251,7 +251,9 @@
   :bind
   ("M-o" . ace-window)
   :config
-  (setq-default aw-background nil))
+  (setq-default aw-background nil)
+  (setq-default aw-scope 'frame)
+  (setq-default aw-dispatch-always t))
 
 ;; ------------------------------------------------------------------------
 ;; rainbow-mode - colorize text codes; handy when changing colors
