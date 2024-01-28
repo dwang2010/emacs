@@ -137,7 +137,14 @@
   (setq-default org-refile-targets
                 '((nil :maxlevel . 3) ; nil equates to "current buffer"
                   (org-agenda-files :maxlevel . 1)
-                  ("~/notes/archive.org" :maxlevel . 2)))) ; * year / ** month
+                  ("~/notes/archive.org" :maxlevel . 2))) ; * year / ** month
+
+  ;; org export related
+  ;; C-c C-e : open export dispatcher
+  (setq-default org-export-with-toc nil) ; don't export table of contents
+  (setq-default org-ascii-headline-spacing nil) ; remove whitespace around headlines
+  (setq-default org-ascii-text-width 10000) ; hack to unfill paragraphs
+  (setq-default org-ascii-inner-margin 0)) ; remove body indentation when exporting
 
 ;; modify call to org-capture to not hide other buffers
 ;; capture popup still random, but can easily move with ace-window
