@@ -18,6 +18,7 @@
       (get-fileref-blk-snippet org-src-mode))))
 
 (use-package org
+  :hook (org-mode . turn-on-auto-fill)
   :config
   ;; startup behavior
   (setq-default org-startup-indented t)
@@ -42,6 +43,7 @@
 
   ;; scale inline images if attr_org present, otherwise use image width
   ;; use C-c C-x C-v to render inline images
+  ;; alternatively add <#+STARTUP: inlineimages> to individual files
   (setq-default org-image-actual-width nil)
 
   ;; babel configuration to load languages
