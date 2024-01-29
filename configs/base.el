@@ -127,10 +127,14 @@
   (interactive) (load-file user-init-file))
 (global-set-key (kbd "<f12>") 'reload-init-files)
 
-;; mac specific keybinds
+;; system specific keybinds
 (if (eql system-type 'darwin)
     (progn
       (setq-default mac-option-modifier 'meta)
       (setq-default mac-command-modifier 'hyper)
       (global-set-key [(hyper f)] 'toggle-frame-fullscreen)
-      (global-set-key [(hyper m)] 'toggle-frame-maximized)))
+      (global-set-key [(hyper m)] 'toggle-frame-maximized))
+  (progn
+    (global-set-key (kbd "s-f") 'toggle-frame-fullscreen)
+    (global-set-key (kbd "s-m") 'toggle-frame-maximized)
+    ))
