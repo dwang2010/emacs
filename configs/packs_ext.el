@@ -171,7 +171,8 @@
   :bind (("C-x C-v" . vterm)) ; override find-alternate-file
   :config
   (setq-default vterm-copy-exclude-prompt t)
-  (setq-default vterm-max-scrollback 10000))
+  (setq-default vterm-max-scrollback 10000)
+  (setq-default vterm-buffer-name-string "vterm %s"))
 
 ;; ------------------------------------------------------------------------
 ;; avy - jump to char!
