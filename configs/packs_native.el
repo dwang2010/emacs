@@ -42,6 +42,14 @@
 (setq-default ls-lisp-dirs-first t)
 
 ;; ------------------------------------------------------------------------
+;; winner mode - undo / redo window config changes (native)
+;; C-c left (undo) / C-c right (redo)
+;; ------------------------------------------------------------------------
+(use-package winner
+  :config
+  (winner-mode 1))
+
+;; ------------------------------------------------------------------------
 ;; paren - highlight matching braces (native)
 ;; ------------------------------------------------------------------------
 (use-package paren
