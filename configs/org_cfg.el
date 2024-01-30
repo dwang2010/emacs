@@ -126,7 +126,7 @@
                   ;; meeting related notes
                   ("m" "Meeting Notes" entry
                    (file+headline org-default-meetings-file "Meeting Notes")
-                   "* %t %^{Name}\n%?" :empty-lines-after 1 :prepend t)))
+                   "* %t Meeting w/ %?" :empty-lines-after 1 :prepend t)))
 
   ;; org-refile - moving stuff between org files
   (setq-default org-reverse-note-order t) ; prepend on refile
