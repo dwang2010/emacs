@@ -68,6 +68,8 @@
 (setq-default kill-whole-line t)
 ;; ibuffer always sort by filename
 (setq-default ibuffer-default-sorting-mode 'filename/process)
+;; avoid performance issues in files with very long lines
+(global-so-long-mode 1)
 
 ;; ------------------------------------------------------------------------
 ;; mouse behavior
