@@ -70,6 +70,8 @@
 (setq-default ibuffer-default-sorting-mode 'filename/process)
 ;; avoid performance issues in files with very long lines
 (global-so-long-mode 1)
+;; switch to help buffers automatically
+(setq-default help-window-select t)
 
 ;; ------------------------------------------------------------------------
 ;; mouse behavior

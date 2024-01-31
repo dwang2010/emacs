@@ -187,14 +187,6 @@
   (setq-default avy-background nil))
 
 ;; ------------------------------------------------------------------------
-;; which-key - minibuffer popup to show completions for current input prefix
-;; ------------------------------------------------------------------------
-(use-package which-key
-  :ensure t
-  :init (which-key-mode)
-  :config (setq-default which-key-idle-delay 1))
-
-;; ------------------------------------------------------------------------
 ;; helpful - better help command buffers
 ;; ------------------------------------------------------------------------
 (use-package helpful
