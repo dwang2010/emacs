@@ -1,137 +1,82 @@
 ;; ------------------------------------------------------------------------
-;; modify default behaviors
+;; base emacs configuration, use-package style
 ;; ------------------------------------------------------------------------
-;; disable menu bar
-(menu-bar-mode -1)
-;; disable tool bar
-(tool-bar-mode -1)
-;; disable vertical scrollbars
-(scroll-bar-mode -1)
-;; remove trailing whitespace on save
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-;; overwrite currently selected region - handy for expand region
-(delete-selection-mode t)
-;; default coding system
-(prefer-coding-system 'utf-8)
-;; enable line numbers
-(global-display-line-numbers-mode)
-;; allow region uppercase / lowercase
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-;; simple (y or no) on prompts
-(defalias 'yes-or-no-p 'y-or-n-p)
-;; prompts to minibuffer instead of GUI
-(setq-default use-dialog-box nil)
-;; ensure newline at end of file if not present
-(setq-default require-final-newline t)
-;; remove startup screen
-(setq-default inhibit-startup-screen t)
-;; enable column numbers
-(setq-default column-number-mode t)
-;; default fill mode width
-(setq-default fill-column 80)
-;; spaces instead of tabs when indenting
-(setq-default indent-tabs-mode nil)
-;; default number of spaces for tab
-(setq-default tab-width 4)
-;; show filename in title bar
-(setq-default frame-title-format "%b")
-;; startup scratch message
-(setq-default initial-scratch-message "")
-;; startup major mode
-(setq-default initial-major-mode 'text-mode)
-;; major mode for new buffers
-(setq-default major-mode 'text-mode)
-;; remove emacs bell noise
-(setq-default visible-bell 1)
-;; disable visible bell flashing
-(setq-default ring-bell-function 'ignore)
-;; exit confirmation (since slippery fingers sometimes)
-(setq-default confirm-kill-emacs #'y-or-n-p)
-;; have completions minibuffer sort stuff vertically
-(setq-default completions-format 'vertical)
-;; remove window retiling gaps
-(setq-default frame-resize-pixelwise t)
-;; truncate lines (meaning don't wrap lines)
-(setq-default truncate-lines t)
-;; only one space after sentence for fill paragraph
-(setq-default sentence-end-double-space nil)
-;; reduce frequency of garbage collection; happen on 50MB of allocated data
-(setq-default gc-cons-threshold 50000000) ;; 50MB
-;; increase data which emacs reads (needed for lsp server)
-(setq-default read-process-output-max (* 1024 1024)) ;; 1mb
-;; backups in emacs directory
-(setq-default backup-directory-alist '(("." . "~/.emacs.d/backups")))
-;; goodbye to custom-set-variable mutations (just don't load)
-(setq-default custom-file "~/.emacs.d/custom.el")
-;; remove newline as well if at start of line
-(setq-default kill-whole-line t)
-;; ibuffer always sort by filename
-(setq-default ibuffer-default-sorting-mode 'filename/process)
-;; avoid performance issues in files with very long lines
-(global-so-long-mode 1)
-;; switch to help buffers automatically
-(setq-default help-window-select t)
+(use-package emacs
+  :hook
+  (before-save . delete-trailing-whitespace) ; remove trailing whitespace
 
-;; ------------------------------------------------------------------------
-;; mouse behavior
-;; ------------------------------------------------------------------------
-(setq-default mouse-wheel-progressive-speed nil)
-(if (not (eql system-type 'darwin)) (setq-default mouse-wheel-scroll-amount '(5)))
+  :config
+  (menu-bar-mode -1) ; disable menu bar
+  (tool-bar-mode -1) ; disable tool bar
+  (scroll-bar-mode -1) ; disable vertical scrollbars
+  (delete-selection-mode t) ; overwrite currently selected region
+  (prefer-coding-system 'utf-8) ; default coding system
+  (global-display-line-numbers-mode) ; enable line numbers
+  (put 'downcase-region 'disabled nil) ; allow region lowercase
+  (put 'upcase-region 'disabled nil) ; allow region uppercase
+  (global-so-long-mode 1) ; avoid performance issues in long line files
+  (defalias 'yes-or-no-p 'y-or-n-p) ; simple (y or n) on prompts
 
-;; ------------------------------------------------------------------------
-;; adjusted key bindings
-;; ------------------------------------------------------------------------
-;; bind align-regexp
-(global-set-key (kbd "C-c a") 'align-regexp)
+  ;; key un-bindings
+  (keymap-global-unset "C-z") ; suspend frame
+  (keymap-global-unset "C-x C-z") ; suspend frame
+  (keymap-global-unset "C-x k") ; kill buffer
+  (keymap-global-unset "C-x C-d") ; list dirs
+  (keymap-global-unset "C-x C-c") ; close emacs
+  (keymap-global-unset "C-x C-r") ; find file read only
+  (keymap-global-unset "C-<wheel-up>") ; scroll wheel zoom
+  (keymap-global-unset "C-<wheel-down>") ; scroll wheel zoom
 
-;; bind replace-string
-(global-set-key (kbd "C-c s") 'replace-string)
+  :bind
+  (("C-x C-b" . ibuffer) ; bind ibuffer
+   ("C-x k" . kill-this-buffer) ; just kill buffer, don't ask
+   ("C-x s" . save-buffer) ; redundant save for lazy fingers
+   ("C-c a" . align-regexp)
+   ("C-c s" . replace-string)
+   ("<f5>" . revert-buffer-no-confirm)
+   ("<f12>" . reload-init-files)
+   ("<C-M-left>" . windmove-left)
+   ("<C-M-right>" . windmove-right)
+   ("<C-M-up>" . windmove-up)
+   ("<C-M-down>" . windmove-down)
+   ("<home>" . move-beginning-of-line)
+   ("<end>" . move-end-of-line))
 
-;; bind string-rectangle
-(global-set-key (kbd "C-c r") 'string-rectangle)
+  :custom
+  ;; UI config variables
+  (frame-title-format "%b") ; show filename in title bar
+  (frame-resize-pixelwise t) ; remove window retiling gaps
+  (inhibit-startup-screen t) ; remove startup screen
+  (initial-scratch-message "") ; startup scratch message
+  (initial-major-mode 'text-mode) ; startup major mode
+  (ring-bell-function 'ignore) ; disable visible bell flashing
+  (use-dialog-box nil) ; prompts to minibuffer instead of GUI
+  (visible-bell 1) ; remove emacs bell noise
+  (column-number-mode t) ; enable column numbers
+  (help-window-select t) ; switch to help buffers automatically
+  (completions-format 'vertical) ; sort completions minibuffer vertically
+  (ibuffer-default-sorting-mode 'filename/process) ; ibuffer sort by filename
 
-;; bind ibuffer
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+  ;; formatting config variables
+  (major-mode 'org-mode) ; major mode for new buffers
+  (indent-tabs-mode nil) ; spaces instead of tabs when indenting
+  (kill-whole-line t) ; remove newline as well if at start of line
+  (truncate-lines t) ; visually truncate lines (meaning don't wrap)
+  (fill-column 80) ; default fill paragraph width
+  (tab-width 4) ; default number of spaces for tab
+  (require-final-newline t) ; ensure newline at end of file
+  (sentence-end-double-space nil) ; only one space after sentence
 
-;; unbind unused hotkeys
-(global-unset-key (kbd "C-z"))            ; suspend frame
-(global-unset-key (kbd "C-x C-z"))        ; suspend frame
-(global-unset-key (kbd "C-x k"))          ; kill buffer
-(global-unset-key (kbd "C-x C-d"))        ; list dirs
-(global-unset-key (kbd "C-x C-c"))        ; close
-(global-unset-key (kbd "C-x C-r"))        ; find file read only
-(global-unset-key (kbd "<C-wheel-up>"))   ; scroll wheel zoom
-(global-unset-key (kbd "<C-wheel-down>")) ; scroll wheel zoom
+  ;; program config variables
+  (gc-cons-threshold 50000000) ; garbage collection threshold (50MB)
+  (read-process-output-max (* 1024 1024)) ; increase data read chunk size
+  (custom-file "~/.emacs.d/custom.el") ; bye custom-set-variable mutations
+  (backup-directory-alist '(("." . "~/.emacs.d/backups"))) ; central backups
 
-;; kill currently selected buffer rather than ask
-(global-set-key (kbd "C-x k") 'kill-this-buffer)
+  ;; mouse behavior variables
+  (mouse-wheel-progressive-speed nil))
 
-;; change C-x s to same as C-x C-s
-(global-set-key (kbd "C-x s") 'save-buffer)
-
-;; logical switching between visible window panes
-(global-set-key (kbd "<C-M-left>") 'windmove-left)
-(global-set-key (kbd "<C-M-right>") 'windmove-right)
-(global-set-key (kbd "<C-M-up>") 'windmove-up)
-(global-set-key (kbd "<C-M-down>") 'windmove-down)
-
-;; home / end keys to start / end of line instead of buffer
-(global-set-key (kbd "<home>") 'move-beginning-of-line)
-(global-set-key (kbd "<end>") 'move-end-of-line)
-
-;; bind revert-buffer to F5 ("refresh") -- note, no confirmation message!
-(defun revert-buffer-no-confirm ()
-  "Revert buffer without confirmation."
-  (interactive) (revert-buffer t t))
-(global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
-
-;; bind to F12 reload init files
-(defun reload-init-files ()
-  (interactive) (load-file user-init-file))
-(global-set-key (kbd "<f12>") 'reload-init-files)
-
-;; system specific keybinds
+;; system specific customizations
 (if (eql system-type 'darwin)
     (progn
       (setq-default mac-option-modifier 'meta)
@@ -139,6 +84,14 @@
       (global-set-key [(hyper f)] 'toggle-frame-fullscreen)
       (global-set-key [(hyper m)] 'toggle-frame-maximized))
   (progn
+    (setq-default mouse-wheel-scroll-amount '(5))
     (global-set-key (kbd "s-f") 'toggle-frame-fullscreen)
-    (global-set-key (kbd "s-m") 'toggle-frame-maximized)
-    ))
+    (global-set-key (kbd "s-m") 'toggle-frame-maximized)))
+
+;; revert buffer without confirmation
+(defun revert-buffer-no-confirm ()
+  (interactive) (revert-buffer t t))
+
+;; reload all init files
+(defun reload-init-files ()
+  (interactive) (load-file user-init-file))
