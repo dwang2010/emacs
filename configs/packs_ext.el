@@ -117,9 +117,6 @@
   (("M-." . lsp-find-definition) ; M-, to return to previous point
    ("M-?" . lsp-find-references))
   :config
-  ;; enable which-key integration
-  (lsp-enable-which-key-integration t)
-
   ;; don't log all message from language server (impacts performance)
   (setq-default lsp-log-io nil)
   ;; disable code lens overlay
