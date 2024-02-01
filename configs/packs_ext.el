@@ -157,8 +157,11 @@
    'lsp-face-highlight-write nil
    :inherit 'lsp-face-highlight-textual :underline nil :bold nil)
 
-  :hook ((prog-mode . lsp)
-         (lsp-completion-mode . my-lsp-mode-setup-completion)))
+  :hook
+  ((prog-mode . lsp)
+   (lsp-completion-mode . my-lsp-mode-setup-completion)
+   ;; auto-save buffers when post lsp-rename
+   (lsp-after-apply-edits . (lambda (op) (when (eq op 'rename) (save-buffer))))))
 
 ;; ------------------------------------------------------------------------
 ;; vterm - better terminal in emacs
