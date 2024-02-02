@@ -29,3 +29,5 @@ custom.el
 projectile-bookmarks.eld
 .lsp-session*
 recentf
+*.log
+*.sqlite
