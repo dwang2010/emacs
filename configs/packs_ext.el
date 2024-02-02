@@ -11,6 +11,9 @@
 
 ;; https://magit.vc/manual/forge/
 ;; requires sqlite3 + local install of libsqlite3-0 / libsqlite3-dev
+;; token creation: https://magit.vc/manual/forge/Token-Creation.html
+;; C-c C-e : edit "thing" at point
+;; C-c C-n : create new comment in PR
 (use-package sqlite3 :ensure t)
 (use-package forge
   :ensure t
