@@ -72,6 +72,9 @@
   (read-process-output-max (* 1024 1024)) ; increase data read chunk size
   (custom-file "~/.emacs.d/custom.el") ; bye custom-set-variable mutations
   (backup-directory-alist '(("." . "~/.emacs.d/backups"))) ; central backups
+  (bidi-display-reordering 'left-to-right) ; disable bidirectional text scan
+  (bidi-paragraph-direction 'left-to-right) ; text should only go one direction
+  (bidi-inhibit-bpa t) ; not using bidirectional text, so disable this
 
   ;; mouse behavior variables
   (mouse-wheel-progressive-speed nil))
