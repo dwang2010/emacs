@@ -59,12 +59,11 @@
   :custom
   ;; automatic completion
   (corfu-auto t) ; automatic completion popup
-  (corfu-auto-prefix 4) ; min prefix length for popup to show
+  (corfu-auto-prefix 3) ; min prefix length for popup to show
+  (corfu-auto-delay 0.1) ; show completion popup faster when able
   (corfu-preselect 'first) ; first candidate selected; tab then inserts
   (corfu-count 8) ; max candidates to show in popup
 
-  ;; default tab behavior
-  (tab-always-indent 'complete)
   :config
   (set-face-attribute 'corfu-current nil :background "#4d4d4d")
   (set-face-attribute 'completions-common-part nil :foreground "#00EEEE")
