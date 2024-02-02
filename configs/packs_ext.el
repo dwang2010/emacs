@@ -19,9 +19,11 @@
   :ensure t
   :after magit)
 
-;; https://github.com/blahgeek/emacs-pr-review
-(use-package pr-review
-  :ensure t)
+;; main branch currently broken, use unmerged fix
+;; https://github.com/wandersoncferreira/code-review/pull/246
+(use-package code-review
+  :ensure t
+  :after magit forge)
 
 ;; ------------------------------------------------------------------------
 ;; vertico / marginalia / orderless / consult - completion framework
