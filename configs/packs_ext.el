@@ -9,6 +9,10 @@
   (setq-default magit-log-margin '(t "%Y-%m-%d %H:%M " magit-log-margin-width t 12))
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1))
 
+(use-package pr-review
+  :ensure t
+  )
+
 ;; ------------------------------------------------------------------------
 ;; vertico / marginalia / orderless / consult - completion framework
 ;; ------------------------------------------------------------------------
