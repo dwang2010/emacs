@@ -20,10 +20,13 @@
   :after magit)
 
 ;; main branch currently broken, use unmerged fix
+;; sort of wonky, not ready for prime time
 ;; https://github.com/wandersoncferreira/code-review/pull/246
 (use-package code-review
   :ensure t
-  :after magit forge)
+  :after magit forge
+  :hook (code-review-mode . emojify-mode)
+  )
 
 ;; ------------------------------------------------------------------------
 ;; vertico / marginalia / orderless / consult - completion framework
