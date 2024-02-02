@@ -67,11 +67,13 @@
   (require-final-newline t) ; ensure newline at end of file
   (sentence-end-double-space nil) ; only one space after sentence
 
-  ;; program config variables
-  (gc-cons-threshold 50000000) ; garbage collection threshold (50MB)
-  (read-process-output-max (* 1024 1024)) ; increase data read chunk size
+  ;; location variables
   (custom-file "~/.emacs.d/custom.el") ; bye custom-set-variable mutations
   (backup-directory-alist '(("." . "~/.emacs.d/backups"))) ; central backups
+
+  ;; performance improvement variables
+  (gc-cons-threshold 100000000) ; garbage collection threshold (100MB)
+  (read-process-output-max (* 1024 1024)) ; increase data read chunk size
   (bidi-display-reordering 'left-to-right) ; disable bidirectional text scan
   (bidi-paragraph-direction 'left-to-right) ; text should only go one direction
   (bidi-inhibit-bpa t) ; not using bidirectional text, so disable this
