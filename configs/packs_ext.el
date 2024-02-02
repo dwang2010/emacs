@@ -9,6 +9,17 @@
   (setq-default magit-log-margin '(t "%Y-%m-%d %H:%M " magit-log-margin-width t 12))
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1))
 
+;; https://magit.vc/manual/forge/
+;; requires sqlite3 + local install of libsqlite3-0 / libsqlite3-dev
+(use-package sqlite3 :ensure t)
+(use-package forge
+  :ensure t
+  :after magit)
+
+;; https://github.com/blahgeek/emacs-pr-review
+(use-package pr-review
+  :ensure t)
+
 ;; ------------------------------------------------------------------------
 ;; vertico / marginalia / orderless / consult - completion framework
 ;; ------------------------------------------------------------------------
