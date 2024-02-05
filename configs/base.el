@@ -34,6 +34,7 @@
    ("C-x s" . save-buffer) ; redundant save for lazy fingers
    ("C-c a" . align-regexp)
    ("C-c s" . replace-string)
+   ("C-l" . recenter)
    ("<f5>" . revert-buffer-no-confirm)
    ("<f12>" . reload-init-files)
    ("<C-M-left>" . windmove-left)
