@@ -49,6 +49,54 @@
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
 ;; ------------------------------------------------------------------------
+;; pulsar - transiently highlight current line
+;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Defining-Faces.html
+;; ------------------------------------------------------------------------
+(defface my-pulsar-color
+  '((t :extend t :inverse-video t :background "#cd6600"))
+  "custom pulsar face - note changes require restarting emacs")
+
+(use-package pulsar
+  :ensure t
+  :custom
+  (pulsar-face 'my-pulsar-color)
+  (pulsar-delay 0.03) ; fade out time
+  (pulsar-pulse-functions ; functions to trigger on
+   '(recenter-top-bottom
+     move-to-window-line-top-bottom
+     reposition-window
+     bookmark-jump
+     other-window
+     delete-window
+     delete-other-windows
+     forward-page
+     backward-page
+     scroll-up-command
+     scroll-down-command
+     next-buffer
+     previous-buffer
+     windmove-right
+     windmove-left
+     windmove-up
+     windmove-down
+     windmove-swap-states-right
+     windmove-swap-states-left
+     windmove-swap-states-up
+     windmove-swap-states-down
+     org-next-visible-heading
+     org-previous-visible-heading
+     org-forward-heading-same-level
+     org-backward-heading-same-level
+     outline-backward-same-level
+     outline-forward-same-level
+     outline-next-visible-heading
+     outline-previous-visible-heading
+     outline-up-heading
+     ace-window))
+  :config
+  (pulsar-global-mode 1))
+
+;; ------------------------------------------------------------------------
 ;; mode line customization
 ;; ------------------------------------------------------------------------
 (use-package mood-line
