@@ -61,7 +61,8 @@
 ;; ------------------------------------------------------------------------
 (use-package hl-line
   :hook ((prog-mode . hl-line-mode)
-         (text-mode . hl-line-mode)))
+         (text-mode . hl-line-mode)
+         (dired-mode . hl-line-mode)))
 
 ;; ------------------------------------------------------------------------
 ;; hideshow - code folding (native)
