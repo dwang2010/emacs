@@ -9,6 +9,7 @@
   (menu-bar-mode -1) ; disable menu bar
   (tool-bar-mode -1) ; disable tool bar
   (scroll-bar-mode -1) ; disable vertical scrollbars
+  (blink-cursor-mode 0) ; don't blink cursor
   (delete-selection-mode t) ; overwrite currently selected region
   (prefer-coding-system 'utf-8) ; default coding system
   (global-display-line-numbers-mode) ; enable line numbers
