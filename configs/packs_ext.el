@@ -180,7 +180,13 @@
 (use-package avy
   :ensure t
   :bind ("C-f" . 'avy-goto-char-timer)
-  :config (setq-default avy-timeout-seconds 0.25)
+  :custom-face
+  (avy-lead-face ((t (:foreground "#ff7f00" :background "#000000"))))
+  (avy-lead-face-0 ((t (:foreground "gray35" :background "#000000"))))
+  (avy-lead-face-1 ((t (:foreground "gray35" :background "#000000"))))
+  (avy-lead-face-2 ((t (:foreground "gray35" :background "#000000"))))
+  :config
+  (setq-default avy-timeout-seconds 0.25)
   (setq-default avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   (setq-default avy-style 'de-bruijn)
   (setq-default avy-background nil))
