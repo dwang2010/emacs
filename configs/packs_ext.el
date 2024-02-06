@@ -20,7 +20,7 @@
   (setq-default vertico-count-format '("%-6s " . "(%s/%s)"))
   ;; situational display style: new buffer for grep related
   (vertico-multiform-mode))
-  (setq-default vertico-multiform-commands '((consult-grep buffer)))
+  (setq-default vertico-multiform-commands '((consult-ripgrep buffer)))
 
 (use-package savehist ; (native) persist minibuffer history
   :config
@@ -47,7 +47,7 @@
    ("M-g g" . consult-goto-line) ; replacement of goto-line (with preview)
    ("M-g M-g" . consult-goto-line)
    ;; M-s bindings in `search-map'
-   ("M-s g" . consult-grep) ; super efficient regexp across files (with preview)
+   ("M-s g" . consult-ripgrep) ; super efficient regexp across files (with preview)
    ("M-s m" . consult-line-multi))) ; line search across open buffers (with preview)
 
 ;; ------------------------------------------------------------------------
