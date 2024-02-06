@@ -170,6 +170,7 @@
   :ensure t
   :bind (("C-x C-v" . vterm)) ; override find-alternate-file
   :config
+  (setq-default vterm-min-window-width 100) ; avoid line wrapping
   (setq-default vterm-copy-exclude-prompt t)
   (setq-default vterm-max-scrollback 10000)
   (setq-default vterm-buffer-name-string "vterm %s"))
