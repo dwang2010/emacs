@@ -72,8 +72,8 @@
   (setq-default org-log-done 'time)
 
   ;; org-agenda - dashboard view of tasks
-  ;; :       - add tags
-  ;; C-k     - remove todo item
+  ;; :       - add / remove tags
+  ;; t       - change todo state
   ;; C-c C-W - refile
   (global-set-key (kbd "<f1>") (lambda () (interactive) (org-agenda nil "n")))
   (set-face-attribute 'org-agenda-structure nil :foreground "#00bfff" :height 1.25)
