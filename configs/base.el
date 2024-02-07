@@ -60,7 +60,6 @@
   (ibuffer-default-sorting-mode 'filename/process) ; ibuffer sort by filename
 
   ;; formatting config variables
-  (major-mode 'txt-mode) ; major mode for new buffers
   (indent-tabs-mode nil) ; spaces instead of tabs when indenting
   (kill-whole-line t) ; remove newline as well if at start of line
   (truncate-lines t) ; visually truncate lines (meaning don't wrap)
