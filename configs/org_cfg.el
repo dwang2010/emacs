@@ -85,18 +85,22 @@
         '(("n" "Main Agenda"
            (;; 2-week agenda view
             (agenda "" ((org-agenda-block-separator nil)
-                        (org-agenda-overriding-header "--- Upcoming Deadlines ---\n")
+                        (org-agenda-overriding-header "--- Upcoming ---\n")
                         (org-agenda-format-date "%F %a")
-                        (org-agenda-span 25)
-                        (org-agenda-start-day "-5d")
+                        (org-agenda-span 20)
+                        (org-agenda-start-day "0d")
                         (org-agenda-start-on-weekday 0) ; only works for 7 / 14 day span
                         (org-deadline-warning-days 0)
                         (org-agenda-skip-function
                          '(org-agenda-skip-entry-if 'nottodo '("TODO")))))
 
-            ;; blob of all todo, without date filtering
-            (alltodo "" ((org-agenda-block-separator nil)
-                         (org-agenda-overriding-header "\n--- Global TODO ---\n")))))))
+            ;; active tasks without date filtering
+            (tags-todo "-backlog" ((org-agenda-block-separator nil)
+                                   (org-agenda-overriding-header "\n--- Active ---\n")))
+
+            ;; backlog tasks
+            (tags-todo "backlog" ((org-agenda-block-separator nil)
+                                  (org-agenda-overriding-header "\n--- Backlog ---\n")))))))
 
   ;; org-capture - "capture" notes at any time, quickly
   ;; use tags to add additional context for filtering
@@ -107,23 +111,21 @@
   (setq-default org-default-notes-file "~/notes/ttd.org")
   (setq-default org-default-meetings-file "~/notes/meetings.org")
   (setq-default org-capture-templates
-                '(;; task, no reference
-                  ("t" "Task" entry
+                '(("t" "Task" entry
                    (file+headline org-default-notes-file "Tasks")
-                   "* TODO [#2] %?\nDEADLINE: " :prepend t)
+                   "* TODO [#2] %?\n" :prepend t)
 
-                  ;; task with code reference
                   ("c" "Task w/ Code Ref" entry
                    (file+headline org-default-notes-file "Tasks with Ref")
-                   "* TODO [#2] %?\nDEADLINE: \n\n%(get-org-blk-code-snippet \"%F\")"
+                   "* TODO [#2] %?\n\n%(get-org-blk-code-snippet \"%F\")"
                    :prepend t)
 
-                  ;; task backlog
+                  ;; TODO add task with vterm output
+
                   ("b" "Backlog" entry
                    (file+headline org-default-notes-file "Backlog")
-                   "* TODO [#3] %?" :prepend t)
+                   "* TODO [#3] %? %(org-set-tags \"backlog\")" :prepend t)
 
-                  ;; meeting related notes
                   ("m" "Meeting Notes" entry
                    (file+headline org-default-meetings-file "Meeting Notes")
                    "* %t Meeting w/ %?" :empty-lines-after 1 :prepend t)))
