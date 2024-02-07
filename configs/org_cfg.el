@@ -123,7 +123,7 @@
                   ;; TODO add task with vterm output
 
                   ("b" "Backlog" entry
-                   (file+headline org-default-notes-file "Backlog")
+                   (file+headline org-default-notes-file "Tasks")
                    "* TODO [#3] %? %(org-set-tags \"backlog\")" :prepend t)
 
                   ("m" "Meeting Notes" entry
