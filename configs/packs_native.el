@@ -54,7 +54,9 @@
 ;; ------------------------------------------------------------------------
 (use-package paren
   :config (show-paren-mode 1)
-  (setq-default show-paren-delay 0))
+  :custom
+  (show-paren-context-when-offscreen 'overlay) ; popup paren context @ top left (v29.1+)
+  (show-paren-delay 0))
 
 ;; ------------------------------------------------------------------------
 ;; highlight current line only in specific modes (native)
