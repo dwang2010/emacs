@@ -108,27 +108,32 @@
   ;; C-c C-d - add deadline
   ;; C-c C-s - add schedule
   (global-set-key (kbd "<f2>") 'org-capture)
-  (setq-default org-default-notes-file "~/notes/ttd.org")
+  (setq-default org-default-ttd-file "~/notes/ttd.org")
+  (setq-default org-default-random-file "~/notes/random.org")
   (setq-default org-default-meetings-file "~/notes/meetings.org")
   (setq-default org-capture-templates
                 '(("t" "Task" entry
-                   (file+headline org-default-notes-file "Tasks")
+                   (file+headline org-default-ttd-file "Tasks")
                    "* TODO [#2] %?\n" :prepend t)
 
                   ("c" "Task w/ Code Ref" entry
-                   (file+headline org-default-notes-file "Tasks with Ref")
+                   (file+headline org-default-ttd-file "Tasks with Ref")
                    "* TODO [#2] %?\n\n%(get-org-blk-code-snippet \"%F\")"
                    :prepend t)
 
                   ;; TODO add task with vterm output
 
                   ("b" "Backlog" entry
-                   (file+headline org-default-notes-file "Tasks")
+                   (file+headline org-default-ttd-file "Tasks")
                    "* TODO [#3] %? %(org-set-tags \"backlog\")" :prepend t)
 
-                  ("m" "Meeting Notes" entry
+                  ("m" "Meeting" entry
                    (file+headline org-default-meetings-file "Meeting Notes")
-                   "* %t Meeting w/ %?" :empty-lines-after 1 :prepend t)))
+                   "* %t Meeting w/ %?" :empty-lines-after 1 :prepend t)
+
+                  ("r" "Random" entry
+                   (file+headline org-default-random-file "Random Notes")
+                   "* %T\n%?" :empty-lines-after 1 :prepend t)))
 
   ;; org-refile - moving stuff between org files
   (setq-default org-reverse-note-order t) ; prepend on refile
