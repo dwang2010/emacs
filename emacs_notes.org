@@ -54,6 +54,12 @@ in agenda view: (/) filter (|) remove filters (t) toggle todo state
 | C-c /   | filter org file based on query (match == tags) |
 | C-c C-c | remove sparse tree view + highlighting         |
 
+*** Tables
+| C-c C-c   | realign table                      |
+| TAB       | realign table + move to next field |
+| M-S-right | insert column at point             |
+| M-S-down  | insert row at opint                |
+
 * Server Daemon
 Configure to run in daemon mode on startup
 #+begin_src bash
