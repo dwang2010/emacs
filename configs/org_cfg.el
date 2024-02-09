@@ -68,8 +68,8 @@
   (setq-default org-tags-column -80)
   (setq-default org-auto-align-tags t)
 
-  ;; automatically add completion time when closing TODO
-  (setq-default org-log-done 'time)
+  (setq-default org-log-done 'time) ; auto add completion time on TODO close
+  (setq-default org-bookmark-names-plist nil) ; no refile / capture bookmarks
 
   ;; org-agenda - dashboard view of tasks
   ;; :       - add / remove tags
