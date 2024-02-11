@@ -153,6 +153,15 @@
   (setq-default org-ascii-text-width 10000) ; hack to unfill paragraphs
   (setq-default org-ascii-inner-margin 0)) ; remove body indentation when exporting
 
+;; modify call to org-capture to not hide other buffers
+(defun my-org-capture-place-template-dont-delete-windows (oldfun &rest args)
+  (cl-letf (((symbol-function 'delete-other-windows) 'ignore))
+    (apply oldfun args)))
+
+(with-eval-after-load "org-capture"
+  (advice-add 'org-capture-place-template
+              :around 'my-org-capture-place-template-dont-delete-windows))
+
 ;; make org bullets fancy
 (use-package org-superstar
   :ensure t
