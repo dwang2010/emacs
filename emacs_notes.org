@@ -7,7 +7,10 @@
 | M-^     | join two lines (newline removed) separated by space        |
 | C-x C-o | delete blank lines (leaving only one)                      |
 | C-M-\   | indents each line in region as if hitting tab at beginning |
+|---------+------------------------------------------------------------|
 | C-d     | same as delete key                                         |
+| M-d     | delete region (ahead of cursor)                            |
+|---------+------------------------------------------------------------|
 | M-=     | display word / character count                             |
 
 ** Useful Commands
