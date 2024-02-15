@@ -6,10 +6,8 @@
   ;; C-x p d == (dired to target dir)
   ;; C-x p D == (dired to root dir)
   :config
-  (setq-default project-vc-ignores '()) ; list of stuff to ignore
-  (setq-default project-switch-commands
-                '((project-find-file "Find file" nil)
-                  (project-find-dir "Find directory" nil))))
+  ;; always just find file when switching between projects
+  (setq-default project-switch-commands 'project-find-file))
 
 ;; ------------------------------------------------------------------------
 ;; tree sitter - syntax highlighting (native in emacs >= 29)
