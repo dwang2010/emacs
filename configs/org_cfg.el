@@ -70,6 +70,7 @@
 
   (setq-default org-log-done 'time) ; auto add completion time on TODO close
   (setq-default org-bookmark-names-plist nil) ; no refile / capture bookmarks
+  (setq-default org-blank-before-new-entry '((heading . t) (plain-list-item . auto)))
 
   ;; org-agenda - dashboard view of tasks
   ;; :       - add / remove tags
@@ -142,7 +143,6 @@
 
   ;; org-refile - moving stuff between org files
   (setq-default org-reverse-note-order t) ; prepend on refile
-  (setq-default org-blank-before-new-entry nil) ; prepend doesn't need another blank
   (setq-default org-refile-use-outline-path 'file) ; allows for granular refile targetting
   (setq-default org-outline-path-complete-in-steps nil) ; allows for fuzzy find refiling
   (advice-add 'org-refile :after 'org-save-all-org-buffers) ; save all after refiling
