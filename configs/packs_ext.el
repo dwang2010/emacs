@@ -101,6 +101,9 @@
 ;; ------------------------------------------------------------------------
 ;; lsp-mode - adds options for IDE-like features
 ;; ------------------------------------------------------------------------
+(use-package lsp-ui
+  :ensure t)
+
 (use-package lsp-mode
   :ensure t
   :init
@@ -120,16 +123,14 @@
   (setq-default lsp-log-io nil)
   ;; disable code lens overlay
   (setq-default lsp-lens-enable nil)
-  ;; remove doc dialogue on all hover (keyboard / mouse)
-  (setq-default lsp-ui-doc-enable nil)
+  ;; show doc overlay with mouse hover
+  (setq-default lsp-ui-doc-show-with-mouse t)
   ;; remove entire sideline
   (setq-default lsp-ui-sideline-enable nil)
   ;; remove modeline related diagnostics
   (setq-default lsp-modeline-code-actions-enable nil)
   (setq-default lsp-modeline-diagnostics-enable nil)
   (setq-default lsp-modeline-workspace-status-enable nil)
-  ;; remove function signature help docs
-  (setq-default lsp-signature-render-documentation nil)
   ;; configure completion-at-point integration (using corfu)
   (setq-default lsp-completion-enable t)
   (setq-default lsp-completion-provider :none)
