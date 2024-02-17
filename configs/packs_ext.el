@@ -65,6 +65,12 @@
   (corfu-count 8) ; max candidates to show in popup
 
   :config
+  ;; enables secondary popup to completion popup for candidate docs
+  ;; manually invoke via 'M-t' defined in corfu-popupinfo-map
+  ;; similarly, navigate with 'M-<next>' (pageup) and 'M-<prior>' (pagedown)
+  (setq-default corfu-popupinfo-delay nil) ; never auto popup candidate docs
+  (corfu-popupinfo-mode 1)
+
   (set-face-attribute 'corfu-current nil :background "#4d4d4d")
   (set-face-attribute 'completions-common-part nil :foreground "#00EEEE")
   :init (global-corfu-mode))
