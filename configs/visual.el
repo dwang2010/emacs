@@ -100,8 +100,8 @@
       (setq-default line-spacing nil))
   (progn
     ;; ubuntu mono for increased vertical density
-    (set-face-attribute 'default nil :family "Ubuntu Mono" :height 120)
-    (set-face-attribute 'fixed-pitch nil :family "Ubuntu Mono" :height 1.0)
+    (set-face-attribute 'default nil :family "Hack" :height 100)
+    (set-face-attribute 'fixed-pitch nil :family "Hack" :height 1.0)
     ;; different face on mode-line to increase clarity
     (set-face-attribute `mode-line nil :family "Jetbrains Mono" :height 105)
     (set-face-attribute `mode-line-inactive nil :family "Jetbrains Mono" :height 105)
