@@ -73,7 +73,6 @@
   (backup-directory-alist '(("." . "~/.emacs.d/backups"))) ; central backups
 
   ;; performance improvement variables
-  (gc-cons-threshold 100000000) ; garbage collection threshold (100MB)
   (read-process-output-max (* 1024 1024)) ; increase data read chunk size
   (bidi-display-reordering 'left-to-right) ; disable bidirectional text scan
   (bidi-paragraph-direction 'left-to-right) ; text should only go one direction
