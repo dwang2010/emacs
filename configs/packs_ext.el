@@ -232,7 +232,19 @@
   ;; :hook (prog-mode . flycheck-mode) ;; off until desired
   :config
   (setq-default flycheck-relevant-error-other-file-show nil)
-  (setq-default flycheck-check-syntax-automatically '(mode-enabled save)))
+  (setq-default flycheck-check-syntax-automatically '(mode-enabled save))
+
+  (setq-default flycheck-python-mypy-executable "mypy")
+  (setq-default flycheck-python-pylint-executable "pylint")
+  (setq-default flycheck-python-flake8-executable "python3")
+
+  ;; remove visual clutter - indicate errors only
+  (set-face-attribute 'flycheck-info nil :underline nil)
+  (set-face-attribute 'flycheck-warning nil :underline nil)
+  (set-face-attribute 'flycheck-fringe-info nil
+                      :foreground (face-attribute 'fringe :background))
+  (set-face-attribute 'flycheck-fringe-warning nil
+                      :foreground (face-attribute 'fringe :background)))
 
 ;; handy shortcuts:
 ;; C-c ! v = verify setup
