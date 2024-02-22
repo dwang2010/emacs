@@ -231,24 +231,28 @@
 ;; ------------------------------------------------------------------------
 (use-package flycheck
   :ensure t
-  :bind
-  ("C-c ! !" . flycheck-mode)
-  ;; :hook (prog-mode . flycheck-mode) ;; off until desired
+  :bind ("C-c ! !" . flycheck-mode)
+  :hook (prog-mode . flycheck-mode)
   :config
   (setq-default flycheck-relevant-error-other-file-show nil)
   (setq-default flycheck-check-syntax-automatically '(mode-enabled save))
 
+  ;; configure checker order for python
   (setq-default flycheck-python-mypy-executable "mypy")
-  (setq-default flycheck-python-pylint-executable "pylint")
   (setq-default flycheck-python-flake8-executable "python3")
+  (flycheck-add-next-checker 'python-flake8 'python-mypy)
 
   ;; remove visual clutter - indicate errors only
   (set-face-attribute 'flycheck-info nil :underline nil)
   (set-face-attribute 'flycheck-warning nil :underline nil)
-  (set-face-attribute 'flycheck-fringe-info nil
-                      :foreground (face-attribute 'fringe :background))
-  (set-face-attribute 'flycheck-fringe-warning nil
-                      :foreground (face-attribute 'fringe :background)))
+  (set-face-attribute 'flycheck-fringe-info nil :foreground "gray20")
+  (set-face-attribute 'flycheck-fringe-warning nil :foreground "gray30")
+
+  ;; configure error list popup behavior
+  (add-to-list 'display-buffer-alist
+               '("*Flycheck errors*"
+                 (display-buffer-reuse-window display-buffer-below-selected)
+                 (window-height . 0.3))))
 
 ;; handy shortcuts:
 ;; C-c ! v = verify setup
