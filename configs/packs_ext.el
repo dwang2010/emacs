@@ -151,6 +151,10 @@
   (setq-default lsp-warn-no-matched-clients nil)
   ;; disable right click menu
   (define-key lsp-mode-map (kbd "<mouse-3>") nil)
+  ;; disable function signature minibuffer popup (distracting)
+  (setq-default lsp-signature-auto-activate nil)
+  (setq-default lsp-signature-render-documentation nil)
+  (setq-default lsp-eldoc-enable-hover nil)
 
   ;; change some font faces
   (set-face-attribute
