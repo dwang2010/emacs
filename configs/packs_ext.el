@@ -145,6 +145,8 @@
   ;; disable flake8 plugin - constant linting causes visual flickering
   (setq-default lsp-pylsp-plugins-flake8-enabled nil)
   (setq-default lsp-pyls-plugins-flake8-enabled nil)
+  (setq-default lsp-pylsp-plugins-mccabe-enabled nil)
+  (setq-default lsp-pyls-plugins-mccabe-enabled nil)
   ;; syntax checking: use neither flymake nor lsp
   (setq-default lsp-diagnostics-provider :none)
   ;; suppress warnings when no language server present
