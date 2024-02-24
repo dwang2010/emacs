@@ -196,9 +196,9 @@
   :bind ("C-f" . 'avy-goto-char-timer)
   :custom-face
   (avy-lead-face ((t (:foreground "#ff7f00" :background "#000000"))))
-  (avy-lead-face-0 ((t (:foreground "gray35" :background "#000000"))))
-  (avy-lead-face-1 ((t (:foreground "gray35" :background "#000000"))))
-  (avy-lead-face-2 ((t (:foreground "gray35" :background "#000000"))))
+  (avy-lead-face-0 ((t (:foreground "gray75" :background "#000000"))))
+  (avy-lead-face-1 ((t (:foreground "gray65" :background "#000000"))))
+  (avy-lead-face-2 ((t (:foreground "gray55" :background "#000000"))))
   :config
   (setq-default avy-timeout-seconds 0.25)
   (setq-default avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
