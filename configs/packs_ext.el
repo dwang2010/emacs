@@ -206,27 +206,6 @@
   (setq-default avy-background nil))
 
 ;; ------------------------------------------------------------------------
-;; helpful - better help command buffers
-;; ------------------------------------------------------------------------
-(use-package helpful
-  :ensure t
-  :bind
-  (("C-h f" . helpful-callable)
-   ("C-h v" . helpful-variable)
-   ("C-h k" . helpful-key)
-   ("C-h x" . helpful-command)))
-
-;; ------------------------------------------------------------------------
-;; deadgrep - better text search through files
-;; needs ripgrep: https://github.com/BurntSushi/ripgrep#installation
-;; keybindings: https://github.com/Wilfred/deadgrep#keybindings
-;; ------------------------------------------------------------------------
-(use-package deadgrep
-  :ensure t
-  :bind
-  ("<f3>" . deadgrep))
-
-;; ------------------------------------------------------------------------
 ;; flycheck - code syntax checking
 ;; requires local installation of checking program (flake8 / mypy etc.)
 ;; https://www.flycheck.org/en/latest/languages.html#python
@@ -261,18 +240,6 @@
 ;; C-c ! l = list of errors in buffer
 
 ;; ------------------------------------------------------------------------
-;; yasnippet - template system (automate boilerplate stuff)
-;; ------------------------------------------------------------------------
-(use-package yasnippet
-  :ensure t
-  :config
-  (setq-default yas-verbosity 1) ;; step above nothing
-
-  ;; use yasnippet on per-buffer basis (based on major mode)
-  (yas-reload-all)
-  :hook (prog-mode . yas-minor-mode))
-
-;; ------------------------------------------------------------------------
 ;; ace-window - better window management
 ;; ------------------------------------------------------------------------
 (use-package ace-window
@@ -283,12 +250,6 @@
   (setq-default aw-background nil)
   (setq-default aw-scope 'frame)
   (setq-default aw-dispatch-always t))
-
-;; ------------------------------------------------------------------------
-;; rainbow-mode - colorize text codes; handy when changing colors
-;; ------------------------------------------------------------------------
-(use-package rainbow-mode
-  :ensure t)
 
 ;; ------------------------------------------------------------------------
 ;; expand region - magic selection
@@ -308,3 +269,42 @@
   ("C-<" . mc/mark-previous-like-this) ; prev if active region, else just next line
   ("C-c C->" . mc/mark-all-like-this) ; all matches of active region
   )
+
+;; ------------------------------------------------------------------------
+;; yasnippet - template system (automate boilerplate stuff)
+;; ------------------------------------------------------------------------
+(use-package yasnippet
+  :ensure t
+  :config
+  (setq-default yas-verbosity 1) ;; step above nothing
+
+  ;; use yasnippet on per-buffer basis (based on major mode)
+  (yas-reload-all)
+  :hook (prog-mode . yas-minor-mode))
+
+;; ------------------------------------------------------------------------
+;; helpful - better help command buffers
+;; ------------------------------------------------------------------------
+(use-package helpful
+  :ensure t
+  :bind
+  (("C-h f" . helpful-callable)
+   ("C-h v" . helpful-variable)
+   ("C-h k" . helpful-key)
+   ("C-h x" . helpful-command)))
+
+;; ------------------------------------------------------------------------
+;; deadgrep - better text search through files
+;; needs ripgrep: https://github.com/BurntSushi/ripgrep#installation
+;; keybindings: https://github.com/Wilfred/deadgrep#keybindings
+;; ------------------------------------------------------------------------
+(use-package deadgrep
+  :ensure t
+  :bind
+  ("<f3>" . deadgrep))
+
+;; ------------------------------------------------------------------------
+;; rainbow-mode - colorize text codes; handy when changing colors
+;; ------------------------------------------------------------------------
+(use-package rainbow-mode
+  :ensure t)
