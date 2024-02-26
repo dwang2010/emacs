@@ -263,6 +263,8 @@
 ;; ------------------------------------------------------------------------
 (use-package multiple-cursors
   :ensure t
+  :custom
+  (mc/match-cursor-style nil) ; disable fake cursor matching, shifts text
   :bind
   ;; adds cursors for:
   ("C->" . mc/mark-next-like-this) ; next if active region, or just next line
