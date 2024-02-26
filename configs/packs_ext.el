@@ -298,13 +298,13 @@
   :bind ("C-=" . er/expand-region))
 
 ;; ------------------------------------------------------------------------
-;; treemacs - tree layout file explorer
+;; multiple cursors
 ;; ------------------------------------------------------------------------
-;; (use-package treemacs
-;;   :ensure t
-;;   :bind ("<f4>" . treemacs)
-;;   :custom
-;;   (treemacs-is-never-other-window t)
-;;   (treemacs-follow-mode t)
-;;   :hook
-;;   (treemacs-mode . treemacs-project-follow-mode))
+(use-package multiple-cursors
+  :ensure t
+  :bind
+  ;; adds cursors for:
+  ("C->" . mc/mark-next-like-this) ; next if active region, or just next line
+  ("C-<" . mc/mark-previous-like-this) ; prev if active region, else just next line
+  ("C-c C->" . mc/mark-all-like-this) ; all matches of active region
+  )
