@@ -107,12 +107,10 @@
     (set-face-attribute `mode-line-inactive nil :family "Jetbrains Mono" :height 105)
     (setq-default line-spacing nil)))
 
-;; default frame parameters
+;; ;; default frame parameters
 (setq-default default-frame-alist
-              '((width . 100)                ; window width (cols)
-                (height . 55)                ; window height (rows)
-                (cursor-type . bar)          ; vertical bar cursor
-                (cursor-color . "#ff7f00"))) ; cursor color
+              '((width . 100)   ; window width (cols)
+                (height . 55))) ; window height (rows)
 
 ;; ensure scrollbars don't appear when creating new frames
 (defun rmv-scroll-bars (frame)

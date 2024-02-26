@@ -59,6 +59,7 @@
   (help-window-select t) ; switch to help buffers automatically
   (completions-format 'vertical) ; sort completions minibuffer vertically
   (ibuffer-default-sorting-mode 'filename/process) ; ibuffer sort by filename
+  (cursor-type 'bar) ; set default cursor type to vertical bar
 
   ;; formatting config variables
   (indent-tabs-mode nil) ; spaces instead of tabs when indenting
