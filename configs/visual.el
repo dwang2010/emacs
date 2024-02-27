@@ -21,7 +21,7 @@
   :config
   ;; doom vibrant configs
   (load-theme 'doom-vibrant t)
-  (set-cursor-color "#ff7f00")
+  (set-cursor-color "#ff7f00") ; needed for init reload
   (set-face-attribute 'show-paren-match nil :bold t)
   (set-face-attribute 'font-lock-doc-face nil :foreground "#8a8a93")
   (set-face-attribute 'font-lock-comment-face nil :foreground "#81868b"))
@@ -109,8 +109,9 @@
 
 ;; ;; default frame parameters
 (setq-default default-frame-alist
-              '((width . 100)   ; window width (cols)
-                (height . 55))) ; window height (rows)
+              '((width . 100) ; window width (cols)
+                (height . 55) ; window height (rows)
+                (cursor-color . "#ff7f00"))) ; needed for emacsclient startup
 
 ;; ensure scrollbars don't appear when creating new frames
 (defun rmv-scroll-bars (frame)
