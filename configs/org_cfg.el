@@ -136,6 +136,15 @@
                    (file+headline org-default-random-file "Random Notes")
                    "* %T\n%?" :empty-lines-after 1 :prepend t)))
 
+  ;; configure capture popup behavior
+  (add-to-list 'display-buffer-alist
+               ;; ( BUFFER-MATCHER
+               ;;   LIST-OF-DISPLAY-FUNCTIONS
+               ;;   &optional PARAMETERS )
+               '("\\(\\*Capture\\*\\|CAPTURE-.*\\|\\*Org Select\\*\\)"
+                 (display-buffer-same-window display-buffer-below-selected)
+                 (window-height . 0.4)))
+
   ;; org-refile - moving stuff between org files
   (setq-default org-reverse-note-order t) ; prepend on refile
   (setq-default org-refile-use-outline-path 'file) ; allows for granular refile targetting

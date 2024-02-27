@@ -82,17 +82,7 @@
   (bidi-inhibit-bpa t) ; not using bidirectional text, so disable this
 
   ;; mouse behavior variables
-  (mouse-wheel-progressive-speed nil)
-
-  ;; buffer display control
-  (display-buffer-alist
-   '(
-     ;; ( BUFFER-MATCHER
-     ;;   LIST-OF-DISPLAY-FUNCTIONS
-     ;;   &optional PARAMETERS )
-     ("\\(\\*Capture\\*\\|CAPTURE-.*\\|\\*Org Select\\*\\)"
-      (display-buffer-same-window display-buffer-below-selected))))
-  )
+  (mouse-wheel-progressive-speed nil))
 
 ;; system specific customizations
 (if (eql system-type 'darwin)
