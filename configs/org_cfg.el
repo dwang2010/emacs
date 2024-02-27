@@ -112,7 +112,6 @@
   (setq-default org-default-ttd-file "~/notes/ttd.org")
   (setq-default org-default-random-file "~/notes/random.org")
   (setq-default org-default-meetings-file "~/notes/meetings.org")
-  (setq-default org-default-transactions-file "~/notes/transactions.org")
   (setq-default org-capture-templates
                 '(("t" "Task" entry
                    (file+headline org-default-ttd-file "Tasks")
@@ -135,11 +134,7 @@
 
                   ("r" "Random" entry
                    (file+headline org-default-random-file "Random Notes")
-                   "* %T\n%?" :empty-lines-after 1 :prepend t)
-
-                  ("$" "Transaction" entry
-                   (file+headline org-default-transactions-file "Transactions")
-                   "* %T %?" :prepend t)))
+                   "* %T\n%?" :empty-lines-after 1 :prepend t)))
 
   ;; org-refile - moving stuff between org files
   (setq-default org-reverse-note-order t) ; prepend on refile
