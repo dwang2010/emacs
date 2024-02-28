@@ -31,6 +31,10 @@
   (set-face-attribute 'org-level-3 nil :height 1.05)
   (set-face-attribute 'org-level-4 nil :height 1.0)
 
+  ;; customize some faces (linked to theme)
+  (set-face-attribute 'org-table nil :foreground "#a991f1")
+  (set-face-attribute 'org-code nil :bold t :foreground "#e69055")
+
   ;; customize emphasis markers
   (setq-default org-hide-emphasis-markers t)
   (setq-default org-emphasis-alist

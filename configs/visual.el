@@ -16,15 +16,28 @@
 
 ;; https://github.com/doomemacs/themes
 ;; doom-vibrant / doom-one
-(use-package doom-themes
+;; (use-package doom-themes
+;;   :ensure t
+;;   :config
+;;   ;; doom vibrant configs
+;;   (load-theme 'doom-vibrant t)
+;;   (set-face-attribute 'show-paren-match nil :bold t))
+
+;; https://github.com/catppuccin/emacs
+;; descending dark: mocha / macchiato / frappe
+;; light: latte
+(use-package catppuccin-theme
   :ensure t
   :config
-  ;; doom vibrant configs
-  (load-theme 'doom-vibrant t)
-  (set-cursor-color "#ff7f00") ; needed for init reload
-  (set-face-attribute 'show-paren-match nil :bold t)
-  (set-face-attribute 'font-lock-doc-face nil :foreground "#8a8a93")
-  (set-face-attribute 'font-lock-comment-face nil :foreground "#81868b"))
+  (load-theme 'catppuccin :no-confirm)
+  (setq-default catppuccin-flavor 'mocha)
+  (setq-default catppuccin-enlarge-headings nil)
+  (setq-default catppuccin-italic-blockquotes nil)
+  (catppuccin-reload))
+
+(set-cursor-color "#ff7f00") ; needed for init reload
+(set-face-attribute 'font-lock-doc-face nil :foreground "#8a8a93")
+(set-face-attribute 'font-lock-comment-face nil :foreground "#81868b")
 
 ;; ------------------------------------------------------------------------
 ;; visual icons
