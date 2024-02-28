@@ -2,6 +2,7 @@
 
 * Base
 ** Useful Bindings
+|---------+------------------------------------------------------------|
 | M-SPC   | cycle spacing - just one / remove all / restore original   |
 | M-\     | delete all whitespace around point (ahead / behind)        |
 | M-^     | join two lines (newline removed) separated by space        |
@@ -12,14 +13,18 @@
 | M-d     | delete region (ahead of cursor)                            |
 |---------+------------------------------------------------------------|
 | M-=     | display word / character count                             |
+|---------+------------------------------------------------------------|
 
 ** Useful Commands
+|---------------------+---------------------------------------------------|
 | list-faces-display  | show current font face definition (color / style) |
 | list-colors-display | show displayable colors                           |
+|---------------------+---------------------------------------------------|
 
 * Org-Mode
 ** Helpful Bindings
 *** General
+|----------------+------------------------------------------------------------|
 | C-ret          | new heading, at end of subtree                             |
 | M-ret          | insert new heading / item / row (next line)                |
 |----------------+------------------------------------------------------------|
@@ -42,26 +47,41 @@
 |----------------+------------------------------------------------------------|
 | C-c C-o        | open link                                                  |
 | C-c &          | return to previous location                                |
+|----------------+------------------------------------------------------------|
 
 *** Agenda
+|---------+--------------------------------------------|
 | C-c C-d | add deadline date (with DEADLINE preface)  |
 | C-c C-s | add schedule date (with SCHEDULED preface) |
 | C-c .   | just add date / time                       |
+|---------+--------------------------------------------|
 
 free form syntax for date / time: e.g. 12/20 1pm+1 == 1-2pm
 
 in agenda view: (/) filter (|) remove filters (t) toggle todo state
 
 *** Tags
+|---------+------------------------------------------------|
 | C-c C-q | add tags                                       |
 | C-c /   | filter org file based on query (match == tags) |
 | C-c C-c | remove sparse tree view + highlighting         |
+|---------+------------------------------------------------|
 
 *** Tables
+|-----------+------------------------------------|
 | C-c C-c   | realign table                      |
 | TAB       | realign table + move to next field |
 | M-S-right | insert column at point             |
 | M-S-down  | insert row at opint                |
+|-----------+------------------------------------|
+
+*** Visual Emphasis
+*bold* (*)
+/italic/ (/)
+_underline_ (_)
+=verbatim= (=)
+~code~ (~)
++strike+ (+)
 
 * Server Daemon
 Configure to run in daemon mode on startup
