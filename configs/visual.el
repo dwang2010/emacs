@@ -30,10 +30,13 @@
   :ensure t
   :config
   (load-theme 'catppuccin :no-confirm)
-  (setq-default catppuccin-flavor 'mocha)
+  (setq-default catppuccin-flavor 'macchiato)
   (setq-default catppuccin-enlarge-headings nil)
   (setq-default catppuccin-italic-blockquotes nil)
-  (catppuccin-reload))
+  (catppuccin-reload)
+  ;; increase contrast of selected buffer
+  (set-face-attribute 'mode-line-active nil :background "#1e2030")
+  (set-face-attribute 'mode-line-inactive nil :background "#363a4f"))
 
 (set-cursor-color "#ff7f00") ; needed for init reload
 (set-face-attribute 'font-lock-doc-face nil :foreground "#8a8a93")
@@ -102,21 +105,19 @@
 ;; ------------------------------------------------------------------------
 ;; display customization
 ;; ------------------------------------------------------------------------
-;; default font face, based on OS
+;; default font + height, OS dependent
+;; uses different face on mode-line for visual contrast
 (if (eql system-type 'darwin)
     (progn
       (set-face-attribute 'default nil :family "Menlo" :height 150)
       (set-face-attribute 'fixed-pitch nil :family "Menlo" :height 1.0)
-      ;; different face on mode-line to increase clarity
-      (set-face-attribute `mode-line nil :family "Jetbrains Mono" :height 150)
+      (set-face-attribute `mode-line-active nil :family "Jetbrains Mono" :height 150)
       (set-face-attribute `mode-line-inactive nil :family "Jetbrains Mono" :height 150)
       (setq-default line-spacing nil))
   (progn
-    ;; ubuntu mono for increased vertical density
     (set-face-attribute 'default nil :family "Hack" :height 100)
     (set-face-attribute 'fixed-pitch nil :family "Hack" :height 1.0)
-    ;; different face on mode-line to increase clarity
-    (set-face-attribute `mode-line nil :family "Jetbrains Mono" :height 105)
+    (set-face-attribute `mode-line-active nil :family "Jetbrains Mono" :height 105)
     (set-face-attribute `mode-line-inactive nil :family "Jetbrains Mono" :height 105)
     (setq-default line-spacing nil)))
 
