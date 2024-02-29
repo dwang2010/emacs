@@ -1,5 +1,6 @@
 ;; ------------------------------------------------------------------------
 ;; python configs
+;; LSP: https://github.com/python-lsp/python-lsp-server
 ;; ------------------------------------------------------------------------
 ;; configure location of python interpreter (system dependent)
 (if (eql system-type 'darwin)
@@ -11,10 +12,24 @@
 
 ;; ------------------------------------------------------------------------
 ;; golang configs
+;; ensure PATH / GOPATH properly set externally!
+;; LSP: https://github.com/golang/tools/blob/master/gopls/doc/emacs.md
 ;; ------------------------------------------------------------------------
-;(if (eql system-type 'darwin) (add-hook 'before-save-hook 'gofmt-before-save))
+(use-package go-mode
+  :ensure t
+  :hook (go-ts-mode . my-go-cfg-hook)
+  :config
+  ;; goimports acts as superior replacement for gofmt
+  ;; https://pkg.go.dev/golang.org/x/tools/cmd/goimports
+  (setq-default gofmt-command "goimports"))
 
-; env related workaround
+(defun my-go-cfg-hook ()
+  ;; hack: ensure go-mode load when opening in go-ts-mode
+  (gofmt-before-save)
+  ;; hack: gofmt-before-save hard-coded to only work on go-mode
+  (add-hook 'before-save-hook 'gofmt nil t))
+
+;; env related workaround
 ;; (if (eql system-type 'darwin)
 ;;     (progn
 ;;       (setenv "PATH" (concat (getenv "PATH") ":/opt/homebrew/bin/"))
