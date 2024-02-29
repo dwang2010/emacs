@@ -173,7 +173,9 @@
   ((prog-mode . lsp)
    (lsp-completion-mode . my-lsp-mode-setup-completion)
    ;; auto-save buffers when post lsp-rename
-   (lsp-after-apply-edits . (lambda (op) (when (eq op 'rename) (save-buffer))))))
+   (lsp-after-apply-edits . (lambda (op) (when (eq op 'rename) (save-buffer))))
+   ;; ensure doc popup has line numbers disabled
+   (lsp-ui-doc-frame-mode . (lambda () (display-line-numbers-mode -1)))))
 
 ;; ------------------------------------------------------------------------
 ;; vterm - better terminal in emacs
