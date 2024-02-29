@@ -10,6 +10,9 @@
 ;; single indent for multi-line function signature
 (setq-default python-indent-def-block-scale 1)
 
+;; silence warnings around indent guess
+(setq-default python-indent-guess-indent-offset-verbose nil)
+
 ;; ------------------------------------------------------------------------
 ;; golang configs
 ;; ensure PATH / GOPATH properly set externally!
