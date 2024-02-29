@@ -21,7 +21,9 @@
   :config
   ;; goimports acts as superior replacement for gofmt
   ;; https://pkg.go.dev/golang.org/x/tools/cmd/goimports
-  (setq-default gofmt-command "goimports"))
+  (setq-default gofmt-command "goimports")
+  ;; fix dumb default indent settings
+  (setq-default go-ts-mode-indent-offset 4))
 
 (defun my-go-cfg-hook ()
   ;; hack: ensure go-mode load when opening in go-ts-mode
