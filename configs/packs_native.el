@@ -71,7 +71,9 @@
   :bind (("<C-tab>" . hs-toggle-hiding)
          ("<C-M-tab>" . 'hs-hide-all))
   :hook ((prog-mode . hs-minor-mode)
-         (c-mode-common . hs-minor-mode)))
+         (c-mode-common . hs-minor-mode))
+  :custom
+  (hs-hide-comments-when-hiding-all nil))
 
 ;; ------------------------------------------------------------------------
 ;; flyspell - spell checking (native)

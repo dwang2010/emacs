@@ -19,8 +19,8 @@
   ;; add parens around number counts
   (setq-default vertico-count-format '("%-6s " . "(%s/%s)"))
   ;; situational display style: new buffer for grep related
-  (vertico-multiform-mode))
-  (setq-default vertico-multiform-commands '((consult-ripgrep buffer)))
+  (vertico-multiform-mode)
+  (setq-default vertico-multiform-commands '((consult-ripgrep buffer))))
 
 (use-package savehist ; (native) persist minibuffer history
   :config
