@@ -31,6 +31,13 @@
   ;; hack: gofmt-before-save hard-coded to only work on go-mode
   (add-hook 'before-save-hook 'gofmt nil t))
 
+;; org babel support for golang
+(use-package ob-go :ensure t)
+
+;; invoke gofmt after editing org src block via (C-c ')
+(define-advice org-edit-src-exit (:before (&rest _args))
+  (when (eq major-mode 'go-mode) (gofmt)))
+
 ;; env related workaround
 ;; (if (eql system-type 'darwin)
 ;;     (progn

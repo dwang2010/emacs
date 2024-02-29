@@ -24,6 +24,8 @@
   (setq-default org-startup-indented t)
   (setq-default org-indent-indentation-per-level 1)
   (setq-default org-pretty-entities nil) ;; don't show special utf-8 symbols
+  (setq-default org-src-preserve-indentation nil)
+  (setq-default org-edit-src-content-indentation 0) ; don't indent src blk contents
 
   ;; customize heading sizes
   (set-face-attribute 'org-level-1 nil :height 1.15)
@@ -54,7 +56,8 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
-     (lisp . t)))
+     (lisp . t)
+     (go . t)))
   ;; set org-babel for desired python executable
   (setq-default org-babel-python-command "python3")
   ;; potentially risky: remove confirmation when executing code blocks
