@@ -39,7 +39,7 @@
 
 ;; invoke gofmt after editing org src block via (C-c ')
 (define-advice org-edit-src-exit (:before (&rest _args))
-  (when (eq major-mode 'go-mode) (gofmt)))
+  (when (memq major-mode '(go-mode go-ts-mode)) (gofmt)))
 
 ;; env related workaround
 ;; (if (eql system-type 'darwin)
