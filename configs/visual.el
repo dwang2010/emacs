@@ -1,6 +1,8 @@
 ;; ------------------------------------------------------------------------
 ;; visual theme
 ;; ------------------------------------------------------------------------
+;; (mapc #'disable-theme custom-enabled-themes)
+
 ;; https://github.com/purcell/color-theme-sanityinc-tomorrow
 ;; options: day, night, blue, bright, eighties
 ;; (use-package color-theme-sanityinc-tomorrow :ensure t)
@@ -25,7 +27,6 @@
 
 ;; https://github.com/catppuccin/emacs
 ;; descending dark: mocha / macchiato / frappe
-;; light: latte
 (use-package catppuccin-theme
   :ensure t
   :config
@@ -34,9 +35,10 @@
   (setq-default catppuccin-enlarge-headings nil)
   (setq-default catppuccin-italic-blockquotes nil)
   (catppuccin-reload)
-  ;; increase contrast of selected buffer
+  ;; increase color contrast: mode-line / selected region
   (set-face-attribute 'mode-line-active nil :background "#1e2030")
-  (set-face-attribute 'mode-line-inactive nil :background "#363a4f"))
+  (set-face-attribute 'mode-line-inactive nil :background "#363a4f")
+  (set-face-attribute 'region nil :background "#455c74"))
 
 (set-cursor-color "#ff7f00") ; needed for init reload
 (set-face-attribute 'font-lock-doc-face nil :foreground "#8a8a93")
