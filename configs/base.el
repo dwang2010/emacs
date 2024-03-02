@@ -80,6 +80,7 @@
   (bidi-display-reordering 'left-to-right) ; disable bidirectional text scan
   (bidi-paragraph-direction 'left-to-right) ; text should only go one direction
   (bidi-inhibit-bpa t) ; not using bidirectional text, so disable this
+  (frame-inhibit-implied-resize t) ; don't try to preserve rows / cols
 
   ;; mouse behavior variables
   (mouse-wheel-progressive-speed nil))
