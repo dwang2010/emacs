@@ -129,7 +129,7 @@
     (set-face-attribute `mode-line-inactive nil :family "Jetbrains Mono" :height 105)
     (setq-default line-spacing nil)))
 
-;; ;; default frame parameters
+;; default frame parameters
 (setq-default default-frame-alist
               '((width . 100) ; window width (cols)
                 (height . 55) ; window height (rows)
@@ -141,3 +141,8 @@
                            '((vertical-scroll-bars . nil)
                              (horizontal-scroll-bars . nil))))
 (add-hook 'after-make-frame-functions 'rmv-scroll-bars)
+
+;; frame chrome
+(if (eql system-type 'darwin)
+    ;; dark themed title bar
+    (add-to-list 'default-frame-alist '(ns-appearance . dark)))
