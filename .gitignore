@@ -31,3 +31,4 @@ projectile-bookmarks.eld
 recentf
 *.log
 *.sqlite
+.mc-lists.el
