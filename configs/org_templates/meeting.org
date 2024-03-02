@@ -1,0 +1,8 @@
+** %T
+_Attendees_: %?
+
+*** Purpose
+*** Discussion Topics
+*** Outcome
+**** Decisions
+**** Action Items

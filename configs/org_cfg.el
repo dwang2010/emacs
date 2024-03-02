@@ -135,9 +135,10 @@
                    (file+headline org-default-ttd-file "Tasks")
                    "* TODO [#3] %? %(org-set-tags \"backlog\")" :prepend t)
 
-                  ("m" "Meeting" entry
+                  ("m" "Meeting" plain
                    (file+headline org-default-meetings-file "Meeting Notes")
-                   "* %t Meeting w/ %?" :empty-lines-after 1 :prepend t)
+                   (file "~/.emacs.d/configs/org_templates/meeting.org")
+                   :empty-lines-after 1 :prepend t)
 
                   ("r" "Random" entry
                    (file+headline org-default-random-file "Random Notes")
