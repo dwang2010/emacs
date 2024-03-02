@@ -67,10 +67,10 @@
 ;; slime - Superior Lisp Interaction Mode for Emacs
 ;; assumes prior installation of common lisp compiler (here sbcl)
 ;; ------------------------------------------------------------------------
-(use-package slime
-  :ensure t
-  :config
-  (setq-default inferior-lisp-program "sbcl"))
+;; (use-package slime
+;;   :ensure t
+;;   :config
+;;   (setq-default inferior-lisp-program "sbcl"))
 
 ;; ------------------------------------------------------------------------
 ;; devdocs.io lookup
