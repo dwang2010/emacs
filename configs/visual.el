@@ -92,12 +92,11 @@
   (pulsar-global-mode 1))
 
 ;; ------------------------------------------------------------------------
-;; highlight current line only in specific modes (native)
+;; highlight current line - only in specific modes (native)
 ;; ------------------------------------------------------------------------
-;; (use-package hl-line
-;;   :hook ((prog-mode . hl-line-mode)
-;;          (text-mode . hl-line-mode)
-;;          (dired-mode . hl-line-mode)))
+(use-package hl-line
+  :hook ((prog-mode . hl-line-mode)
+         (dired-mode . hl-line-mode)))
 
 ;; ------------------------------------------------------------------------
 ;; mode line customization
