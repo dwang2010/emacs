@@ -120,7 +120,8 @@
   (setq-default org-default-random-file "~/notes/random.org")
   (setq-default org-default-meetings-file "~/notes/meetings.org")
   (setq-default org-capture-templates
-                '(("t" "Task" entry
+                '(;; code related tasks
+                  ("t" "Task" entry
                    (file+headline org-default-ttd-file "Tasks")
                    "* TODO [#2] %?\n" :prepend t)
 
@@ -129,17 +130,25 @@
                    "* TODO [#2] %?\n\n%(get-org-blk-code-snippet \"%F\")"
                    :prepend t)
 
-                  ;; TODO add task with vterm output
-
                   ("b" "Backlog" entry
                    (file+headline org-default-ttd-file "Tasks")
                    "* TODO [#3] %? %(org-set-tags \"backlog\")" :prepend t)
 
-                  ("m" "Meeting" plain
-                   (file+headline org-default-meetings-file "Meeting Notes")
+                  ;; meeting related notes
+                  ("g" "Group Meeting" plain
+                   (file+headline org-default-meetings-file "Group")
                    (file "~/.emacs.d/configs/org_templates/meeting.org")
-                   :empty-lines-after 1 :prepend t)
+                   :prepend t)
 
+                  ("1" "1:1 Meeting" entry
+                   (file+headline org-default-meetings-file "1:1")
+                   "* %T w/ %?" :empty-lines-after 1 :prepend t)
+
+                  ("p" "Personal Call" entry
+                   (file+headline org-default-meetings-file "Personal Call")
+                   "* %T w/ %?" :empty-lines-after 1 :prepend t)
+
+                  ;; completely arbitrary, diary style notes
                   ("r" "Random" entry
                    (file+headline org-default-random-file "Random Notes")
                    "* %T\n%?" :empty-lines-after 1 :prepend t)))

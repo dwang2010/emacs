@@ -1,8 +1,5 @@
-** %T
-_Attendees_: %?
+** %T %?
+_Attendees_:
 
-*** Purpose
 *** Discussion Topics
-*** Outcome
-**** Decisions
-**** Action Items
+*** Outcome (Decisions / Actions)
