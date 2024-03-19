@@ -80,7 +80,7 @@
   (pulsar-face 'my-pulsar-color)
   (pulsar-delay 0.03) ; fade out time
   (pulsar-pulse-functions ; functions to trigger on
-   '(recenter
+   '(recenter-top-bottom
      windmove-right
      windmove-left
      windmove-up

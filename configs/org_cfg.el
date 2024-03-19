@@ -91,7 +91,7 @@
   (setq-default org-agenda-window-setup 'current-window)
   (setq org-agenda-custom-commands
         '(("n" "Main Agenda"
-           (;; 2-week agenda view
+           (;; 20 day agenda view
             (agenda "" ((org-agenda-block-separator nil)
                         (org-agenda-overriding-header "--- Upcoming ---\n")
                         (org-agenda-format-date "%F %a")
