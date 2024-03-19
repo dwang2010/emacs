@@ -295,7 +295,8 @@
   (("C-h f" . helpful-callable)
    ("C-h v" . helpful-variable)
    ("C-h k" . helpful-key)
-   ("C-h x" . helpful-command)))
+   ("C-h x" . helpful-command)
+   ("C-h h" . helpful-at-point)))
 
 ;; ------------------------------------------------------------------------
 ;; deadgrep - better text search through files
