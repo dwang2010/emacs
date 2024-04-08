@@ -210,3 +210,8 @@
                                      (?1 :foreground "#ff7f00" :weight bold)
                                      (?2 :foreground "#ffc125" :weight bold)
                                      (?3 :foreground "#b3b3b3" :weight bold))))
+
+;; sidebar of headings in org mode
+;; invoke with 'org-side-tree'
+(use-package org-side-tree
+  :ensure t)
