@@ -130,7 +130,7 @@
   ;; disable code lens overlay
   (setq-default lsp-lens-enable nil)
   ;; show doc overlay with mouse hover
-  (setq-default lsp-ui-doc-show-with-mouse t)
+  (setq-default lsp-ui-doc-show-with-mouse nil)
   ;; remove entire sideline
   (setq-default lsp-ui-sideline-enable nil)
   ;; remove modeline related diagnostics
