@@ -36,6 +36,7 @@
   ;; customize some faces (linked to theme)
   (set-face-attribute 'org-table nil :foreground "#a991f1")
   (set-face-attribute 'org-code nil :foreground "#e69055")
+  (set-face-attribute 'org-todo nil :foreground "white smoke")
 
   ;; customize emphasis markers
   (setq-default org-hide-emphasis-markers t)
