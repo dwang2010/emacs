@@ -87,6 +87,8 @@
   :config
   ;; don't quit search when backspace on empty query
   (setq-default ivy-on-del-error-function 'ignore)
+  ;; default ivy frontend height
+  (setq-default ivy-height 1)
   ;; remove all the swiper color loudness
   (set-face-attribute 'swiper-background-match-face-1 nil :foreground 'unspecified :background 'unspecified)
   (set-face-attribute 'swiper-background-match-face-2 nil :inherit 'default :background "#0e5e95")
