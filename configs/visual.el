@@ -1,7 +1,7 @@
 ;; ------------------------------------------------------------------------
 ;; visual theme
 ;; ------------------------------------------------------------------------
-;; (mapc #'disable-theme custom-enabled-themes)
+(mapc #'disable-theme custom-enabled-themes)
 
 ;; https://github.com/purcell/color-theme-sanityinc-tomorrow
 ;; options: day, night, blue, bright, eighties
@@ -18,27 +18,27 @@
 
 ;; https://github.com/doomemacs/themes
 ;; doom-vibrant / doom-one
-;; (use-package doom-themes
-;;   :ensure t
-;;   :config
-;;   ;; doom vibrant configs
-;;   (load-theme 'doom-vibrant t)
-;;   (set-face-attribute 'show-paren-match nil :bold t))
+(use-package doom-themes
+  :ensure t
+  :config
+  ;; doom vibrant configs
+  (load-theme 'doom-vibrant t)
+  (set-face-attribute 'show-paren-match nil :bold t))
 
 ;; https://github.com/catppuccin/emacs
 ;; descending dark: mocha / macchiato / frappe
-(use-package catppuccin-theme
-  :ensure t
-  :config
-  (load-theme 'catppuccin :no-confirm)
-  (setq-default catppuccin-flavor 'macchiato)
-  (setq-default catppuccin-enlarge-headings nil)
-  (setq-default catppuccin-italic-blockquotes nil)
-  (catppuccin-reload)
-  ;; increase color contrast: mode-line / selected region
-  (set-face-attribute 'mode-line-active nil :background "#1e2030")
-  (set-face-attribute 'mode-line-inactive nil :background "#363a4f")
-  (set-face-attribute 'region nil :background "#455c74"))
+;; (use-package catppuccin-theme
+;;   :ensure t
+;;   :config
+;;   (load-theme 'catppuccin :no-confirm)
+;;   (setq-default catppuccin-flavor 'macchiato)
+;;   (setq-default catppuccin-enlarge-headings nil)
+;;   (setq-default catppuccin-italic-blockquotes nil)
+;;   (catppuccin-reload)
+;;   ;; increase color contrast: mode-line / selected region
+;;   (set-face-attribute 'mode-line-active nil :background "#1e2030")
+;;   (set-face-attribute 'mode-line-inactive nil :background "#363a4f")
+;;   (set-face-attribute 'region nil :background "#455c74"))
 
 (set-cursor-color "#ff7f00") ; needed for init reload
 (set-face-attribute 'font-lock-doc-face nil :foreground "#8a8a93")
