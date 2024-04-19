@@ -35,7 +35,7 @@
   (add-hook 'before-save-hook 'gofmt nil t))
 
 ;; org babel support for golang
-(use-package ob-go :ensure t)
+;; (use-package ob-go :ensure t)
 
 ;; invoke gofmt after editing org src block via (C-c ')
 (define-advice org-edit-src-exit (:before (&rest _args))
