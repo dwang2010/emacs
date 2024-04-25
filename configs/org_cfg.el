@@ -118,38 +118,28 @@
   ;; C-c C-s - add schedule
   (global-set-key (kbd "<f2>") 'org-capture)
   (setq-default org-default-ttd-file "~/notes/ttd.org")
-  (setq-default org-default-random-file "~/notes/random.org")
   (setq-default org-default-meetings-file "~/notes/meetings.org")
+  (setq-default org-default-random-file "~/notes/random.org")
   (setq-default org-capture-templates
-                '(;; code related tasks
+                '(;; --- work related tasks ---
                   ("t" "Task" entry
-                   (file+headline org-default-ttd-file "Tasks")
+                   (file+headline org-default-ttd-file "Inbox: Tag + Refile")
                    "* TODO [#2] %?\n" :prepend t)
 
-                  ("c" "Task w/ Code Ref" entry
-                   (file+headline org-default-ttd-file "Tasks with Ref")
-                   "* TODO [#2] %?\n\n%(get-org-blk-code-snippet \"%F\")"
-                   :prepend t)
+                  ("c" "Task w/ Code Link" entry
+                   (file+headline org-default-ttd-file "Inbox: Tag + Refile")
+                   "* TODO [#2] %?\n\n%(get-org-blk-code-snippet \"%F\")" :prepend t)
 
-                  ("b" "Backlog" entry
-                   (file+headline org-default-ttd-file "Tasks")
-                   "* TODO [#3] %? %(org-set-tags \"backlog\")" :prepend t)
+                  ;; --- meeting related notes ---
+                  ("m" "Meeting" plain
+                   (file+headline org-default-meetings-file "Inbox: Tag + Refile")
+                   (file "~/.emacs.d/configs/org_templates/meeting.org") :prepend t)
 
-                  ;; meeting related notes
-                  ("g" "Group Meeting" plain
-                   (file+headline org-default-meetings-file "Group")
-                   (file "~/.emacs.d/configs/org_templates/meeting.org")
-                   :prepend t)
+                  ("1" "1:1" entry
+                   (file+headline org-default-meetings-file "Inbox: Tag + Refile")
+                   "* %T 1:1 w/ %?" :prepend t)
 
-                  ("1" "1:1 Meeting" entry
-                   (file+headline org-default-meetings-file "1:1")
-                   "* %T w/ %?" :empty-lines-after 1 :prepend t)
-
-                  ("p" "Personal Call" entry
-                   (file+headline org-default-meetings-file "Personal Call")
-                   "* %T w/ %?" :empty-lines-after 1 :prepend t)
-
-                  ;; completely arbitrary, diary style notes
+                  ;; --- completely arbitrary, diary style notes ---
                   ("r" "Random" entry
                    (file+headline org-default-random-file "Random Notes")
                    "* %T\n%?" :empty-lines-after 1 :prepend t)))
