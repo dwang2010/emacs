@@ -82,6 +82,7 @@ _underline_ (_)
 =verbatim= (=)
 ~code~ (~)
 +strike+ (+)
+: leading colon for "small examples" other markings are *off*
 
 * Server Daemon
 Configure to run in daemon mode on startup
