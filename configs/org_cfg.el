@@ -165,6 +165,7 @@
 
   ;; org export related
   ;; C-c C-e : open export dispatcher
+  (setq-default org-export-backends '(ascii md))
   (setq-default org-export-with-toc nil) ; don't export table of contents
   (setq-default org-ascii-headline-spacing nil) ; remove whitespace around headlines
   (setq-default org-ascii-text-width 10000) ; hack to unfill paragraphs
