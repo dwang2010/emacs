@@ -3,29 +3,34 @@
 ;; ------------------------------------------------------------------------
 (mapc #'disable-theme custom-enabled-themes)
 
-;; https://github.com/purcell/color-theme-sanityinc-tomorrow
-;; options: day, night, blue, bright, eighties
-;; (use-package color-theme-sanityinc-tomorrow
+(defvar dcw-dark-theme-flag t
+  "Flag indicating whether current theme background is 'dark'")
+
+;; https://protesilaos.com/emacs/modus-themes-pictures
+;; (use-package modus-themes
 ;;   :ensure t
 ;;   :config
-;;   (load-theme `sanityinc-tomorrow-eighties t)
-
-;;   ;; TODO - change line number face color
-;;   ;; TODO - change paren highlighting (yuck)
-;;   )
+;;   (load-theme 'modus-operandi-tinted t)
+;;   (set-face-attribute 'hl-line nil :background "gray91")
+;;   :custom
+;;   (dcw-dark-theme-flag nil)
+;;   (modus-themes-bold-constructs nil)
+;;   (modus-themes-common-palette-overrides '((bg-region bg-lavender) (fg-region unspecified))))
 
 ;; https://protesilaos.com/emacs/ef-themes-pictures
-;; light: ef-light / ef-melissa-light
-;; dark: ef-elea-dark / ef-melissa-dark
-; (use-package ef-themes :ensure t)
+;; (use-package ef-themes
+;;   :ensure t
+;;   :config
+;;   (load-theme 'ef-melissa-dark t)
+;;   (set-face-attribute 'line-number nil :foreground "grey27"))
 
 ;; https://github.com/doomemacs/themes
-;; doom-vibrant / doom-one
 (use-package doom-themes
   :ensure t
   :config
   ;; doom vibrant configs
   (load-theme 'doom-vibrant t)
+  (setq-default dcw-dark-theme-flag t)
   (set-face-attribute 'show-paren-match nil :bold t))
 
 (set-cursor-color "#ff7f00") ; needed for init reload

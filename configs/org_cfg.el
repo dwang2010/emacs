@@ -33,10 +33,16 @@
   (set-face-attribute 'org-level-3 nil :height 1.05)
   (set-face-attribute 'org-level-4 nil :height 1.0)
 
-  ;; customize some faces (linked to theme)
+  ;; customize some faces
   (set-face-attribute 'org-table nil :foreground "#a991f1")
   (set-face-attribute 'org-code nil :foreground "#e69055")
-  (set-face-attribute 'org-todo nil :foreground "white smoke")
+  (set-face-attribute 'org-agenda-structure nil :foreground "#00bfff" :height 1.2)
+  (if (eql dcw-dark-theme-flag t)
+      (progn
+        (set-face-attribute 'org-todo nil :foreground "white smoke")
+        (set-face-attribute 'org-agenda-date-weekend nil :foreground "#4d4d4d")
+        (set-face-attribute 'org-agenda-date-today nil :foreground "white"))
+    (set-face-attribute 'org-agenda-date-weekend nil :foreground "gray82"))
 
   ;; customize emphasis markers
   (setq-default org-hide-emphasis-markers t)
@@ -85,9 +91,6 @@
   ;; t       - change todo state
   ;; C-c C-W - refile
   (global-set-key (kbd "<f1>") (lambda () (interactive) (org-agenda nil "n")))
-  (set-face-attribute 'org-agenda-structure nil :foreground "#00bfff" :height 1.25)
-  (set-face-attribute 'org-agenda-date-weekend nil :foreground "#4d4d4d")
-  (set-face-attribute 'org-agenda-date-today nil :foreground "white")
   (setq-default org-agenda-files '("~/notes/ttd.org"))
   (setq-default org-agenda-window-setup 'current-window)
   (setq org-agenda-custom-commands

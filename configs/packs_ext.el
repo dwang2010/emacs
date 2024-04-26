@@ -70,8 +70,9 @@
   ;; similarly, navigate with 'M-<next>' (pageup) and 'M-<prior>' (pagedown)
   (setq-default corfu-popupinfo-delay nil) ; never auto popup candidate docs
   (corfu-popupinfo-mode 1)
-
-  (set-face-attribute 'corfu-current nil :background "#4d4d4d")
+  (if (eql dcw-dark-theme-flag t)
+      (set-face-attribute 'corfu-current nil :background "#4d4d4d")
+    (set-face-attribute 'corfu-current nil :background "gray80"))
   (set-face-attribute 'completions-common-part nil :foreground "#00EEEE")
   :init (global-corfu-mode))
 
@@ -90,11 +91,13 @@
   ;; default ivy frontend height
   (setq-default ivy-height 1)
   ;; remove all the swiper color loudness
+  (if (eql dcw-dark-theme-flag t)
+      (set-face-attribute 'swiper-background-match-face-2 nil :inherit 'default :background "#0e5e95")
+    (set-face-attribute 'swiper-background-match-face-2 nil :inherit 'default :background "light blue"))
+  (set-face-attribute 'swiper-match-face-2 nil :background "#fab387")
   (set-face-attribute 'swiper-background-match-face-1 nil :foreground 'unspecified :background 'unspecified)
-  (set-face-attribute 'swiper-background-match-face-2 nil :inherit 'default :background "#0e5e95")
   (set-face-attribute 'swiper-background-match-face-3 nil :background 'unspecified :inherit 'swiper-background-match-face-2)
   (set-face-attribute 'swiper-background-match-face-4 nil :background 'unspecified :inherit 'swiper-background-match-face-2)
-  (set-face-attribute 'swiper-match-face-2 nil :background "#fab387")
   (set-face-attribute 'swiper-match-face-3 nil :inherit 'swiper-match-face-2 :background 'unspecified)
   (set-face-attribute 'swiper-match-face-4 nil :inherit 'swiper-match-face-2 :background 'unspecified)
 
@@ -156,9 +159,13 @@
   (setq-default lsp-eldoc-enable-hover nil)
 
   ;; change some font faces
-  (set-face-attribute
-   'lsp-face-highlight-textual nil
-   :background "SlateBlue3" :foreground "gray90" :underline nil :bold nil)
+  (if (eql dcw-dark-theme-flag t)
+      (set-face-attribute
+       'lsp-face-highlight-textual nil
+       :background "SlateBlue3" :foreground "gray90" :underline nil :bold nil)
+    (set-face-attribute
+     'lsp-face-highlight-textual nil
+     :background "cyan2" :foreground "black" :underline nil :bold nil))
   (set-face-attribute
    'lsp-face-highlight-read nil
    :inherit 'lsp-face-highlight-textual :underline nil :bold nil)
