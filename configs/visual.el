@@ -5,16 +5,19 @@
 
 ;; https://github.com/purcell/color-theme-sanityinc-tomorrow
 ;; options: day, night, blue, bright, eighties
-;; (use-package color-theme-sanityinc-tomorrow :ensure t)
+;; (use-package color-theme-sanityinc-tomorrow
+;;   :ensure t
+;;   :config
+;;   (load-theme `sanityinc-tomorrow-eighties t)
+
+;;   ;; TODO - change line number face color
+;;   ;; TODO - change paren highlighting (yuck)
+;;   )
 
 ;; https://protesilaos.com/emacs/ef-themes-pictures
 ;; light: ef-light / ef-melissa-light
 ;; dark: ef-elea-dark / ef-melissa-dark
 ; (use-package ef-themes :ensure t)
-
-;; https://github.com/nordtheme/emacs
-;; has some issues running as daemon / client
-;; (use-package nord-theme :ensure t)
 
 ;; https://github.com/doomemacs/themes
 ;; doom-vibrant / doom-one
@@ -24,21 +27,6 @@
   ;; doom vibrant configs
   (load-theme 'doom-vibrant t)
   (set-face-attribute 'show-paren-match nil :bold t))
-
-;; https://github.com/catppuccin/emacs
-;; descending dark: mocha / macchiato / frappe
-;; (use-package catppuccin-theme
-;;   :ensure t
-;;   :config
-;;   (load-theme 'catppuccin :no-confirm)
-;;   (setq-default catppuccin-flavor 'macchiato)
-;;   (setq-default catppuccin-enlarge-headings nil)
-;;   (setq-default catppuccin-italic-blockquotes nil)
-;;   (catppuccin-reload)
-;;   ;; increase color contrast: mode-line / selected region
-;;   (set-face-attribute 'mode-line-active nil :background "#1e2030")
-;;   (set-face-attribute 'mode-line-inactive nil :background "#363a4f")
-;;   (set-face-attribute 'region nil :background "#455c74"))
 
 (set-cursor-color "#ff7f00") ; needed for init reload
 (set-face-attribute 'font-lock-doc-face nil :foreground "#8a8a93")
