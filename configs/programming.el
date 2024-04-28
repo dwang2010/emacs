@@ -14,6 +14,27 @@
 (setq-default python-indent-guess-indent-offset-verbose nil)
 
 ;; ------------------------------------------------------------------------
+;; rust configs
+;; LSP: https://github.com/rust-lang/rust-analyzer
+;; ------------------------------------------------------------------------
+;; https://github.com/brotzeit/rustic
+(use-package rustic :ensure t)
+
+;; add rust related components to exec path
+(add-to-list 'exec-path "~/.cargo/bin")
+
+;; use rust-ts-mode as major mode for correct treesitter font locking
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
+
+(use-package rust-ts-mode
+  :bind (("C-c C-p" . rustic-popup))
+  :hook (rust-ts-mode . my-rust-fmt-hook))
+
+(defun my-rust-fmt-hook ()
+  "Add local hook to format rust buffer prior to saving"
+  (add-hook 'before-save-hook 'rust-format-buffer nil t))
+
+;; ------------------------------------------------------------------------
 ;; golang configs
 ;; ensure PATH / GOPATH properly set externally!
 ;; LSP: https://github.com/golang/tools/blob/master/gopls/doc/emacs.md

@@ -113,17 +113,26 @@
 (use-package lsp-mode
   :ensure t
   :init
-  (setq-default lsp-keymap-prefix "C-c l")
   ;; allow for substring + subsequence matching
   ;; https://github.com/minad/corfu/wiki
   (defun my-lsp-mode-setup-completion ()
     (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
           '(flex))) ;; Configure flex
   :bind
+  ;; default keymap prefix: 'meta-l'
   ;; use ("," and ".") for navigation to immediately preview xref options
   ;; unfortunately opens buffers while doing so
   (("M-." . lsp-find-definition) ; M-, to return to previous point
    ("M-?" . lsp-find-references))
+
+  :hook
+  ((prog-mode . lsp)
+   (lsp-completion-mode . my-lsp-mode-setup-completion)
+   ;; auto-save buffers when post lsp-rename
+   (lsp-after-apply-edits . (lambda (op) (when (eq op 'rename) (save-buffer))))
+   ;; ensure doc popup has line numbers disabled
+   (lsp-ui-doc-frame-mode . (lambda () (display-line-numbers-mode -1))))
+
   :config
   ;; don't log all message from language server (impacts performance)
   (setq-default lsp-log-io nil)
@@ -142,11 +151,6 @@
   (setq-default lsp-completion-provider :none)
   ;; hide breadcrumb (top line) error diagnostic indication
   (setq-default lsp-headerline-breadcrumb-enable-diagnostics nil)
-  ;; disable flake8 plugin - constant linting causes visual flickering
-  (setq-default lsp-pylsp-plugins-flake8-enabled nil)
-  (setq-default lsp-pyls-plugins-flake8-enabled nil)
-  (setq-default lsp-pylsp-plugins-mccabe-enabled nil)
-  (setq-default lsp-pyls-plugins-mccabe-enabled nil)
   ;; syntax checking: use neither flymake nor lsp
   (setq-default lsp-diagnostics-provider :none)
   ;; suppress warnings when no language server present
@@ -157,6 +161,12 @@
   (setq-default lsp-signature-auto-activate nil)
   (setq-default lsp-signature-render-documentation nil)
   (setq-default lsp-eldoc-enable-hover nil)
+
+  ;; python - constant linting causes visual flickering (so disable)
+  (setq-default lsp-pylsp-plugins-flake8-enabled nil)
+  (setq-default lsp-pyls-plugins-flake8-enabled nil)
+  (setq-default lsp-pylsp-plugins-mccabe-enabled nil)
+  (setq-default lsp-pyls-plugins-mccabe-enabled nil)
 
   ;; change some font faces
   (if (eql dcw-dark-theme-flag t)
@@ -171,15 +181,7 @@
    :inherit 'lsp-face-highlight-textual :underline nil :bold nil)
   (set-face-attribute
    'lsp-face-highlight-write nil
-   :inherit 'lsp-face-highlight-textual :underline nil :bold nil)
-
-  :hook
-  ((prog-mode . lsp)
-   (lsp-completion-mode . my-lsp-mode-setup-completion)
-   ;; auto-save buffers when post lsp-rename
-   (lsp-after-apply-edits . (lambda (op) (when (eq op 'rename) (save-buffer))))
-   ;; ensure doc popup has line numbers disabled
-   (lsp-ui-doc-frame-mode . (lambda () (display-line-numbers-mode -1)))))
+   :inherit 'lsp-face-highlight-textual :underline nil :bold nil))
 
 ;; ------------------------------------------------------------------------
 ;; vterm - better terminal in emacs
