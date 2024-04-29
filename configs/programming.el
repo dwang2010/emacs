@@ -17,8 +17,8 @@
 ;; rust configs
 ;; LSP: https://github.com/rust-lang/rust-analyzer
 ;; ------------------------------------------------------------------------
-;; https://github.com/brotzeit/rustic
-(use-package rustic :ensure t)
+(use-package rust-mode :ensure t)
+(use-package rustic :ensure t :after (rust-mode))
 
 ;; add rust related components to exec path
 (add-to-list 'exec-path "~/.cargo/bin")
