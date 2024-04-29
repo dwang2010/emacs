@@ -89,13 +89,11 @@
 (if (eql system-type 'darwin)
     (progn
       (setq-default mac-option-modifier 'meta)
-      (setq-default mac-command-modifier 'hyper)
-      (global-set-key [(hyper f)] 'toggle-frame-fullscreen)
-      (global-set-key [(hyper m)] 'toggle-frame-maximized))
+      (setq-default mac-command-modifier 'super))
   (progn
-    (setq-default mouse-wheel-scroll-amount '(5))
-    (global-set-key (kbd "s-f") 'toggle-frame-fullscreen)
-    (global-set-key (kbd "s-m") 'toggle-frame-maximized)))
+    (setq-default mouse-wheel-scroll-amount '(5))))
+(global-set-key (kbd "s-f") 'toggle-frame-fullscreen)
+(global-set-key (kbd "s-m") 'toggle-frame-maximized)
 
 ;; revert buffer without confirmation
 (defun revert-buffer-no-confirm ()

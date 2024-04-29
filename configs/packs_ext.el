@@ -119,7 +119,7 @@
     (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
           '(flex))) ;; Configure flex
   :bind
-  ;; default keymap prefix: 'meta-l'
+  ;; default keymap prefix: 'super-l'
   ;; use ("," and ".") for navigation to immediately preview xref options
   ;; unfortunately opens buffers while doing so
   (("M-." . lsp-find-definition) ; M-, to return to previous point
