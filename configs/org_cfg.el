@@ -26,6 +26,7 @@
   (setq-default org-pretty-entities nil) ;; don't show special utf-8 symbols
   (setq-default org-src-preserve-indentation nil)
   (setq-default org-edit-src-content-indentation 0) ; don't indent src blk contents
+  (setq-default org-fold-core-style 'overlays) ; fix issues with subtree folding
 
   ;; customize heading sizes
   (set-face-attribute 'org-level-1 nil :height 1.15)
