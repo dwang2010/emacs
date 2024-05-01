@@ -65,6 +65,7 @@
    'org-babel-load-languages
    '((python . t)
      (lisp . t)
+     (C . t) ; includes C / C++
      (go . t)))
   ;; set org-babel for desired python executable
   (setq-default org-babel-python-command "python3")
