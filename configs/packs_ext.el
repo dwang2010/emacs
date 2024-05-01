@@ -235,7 +235,6 @@
   (set-face-attribute 'flycheck-info nil :underline nil)
   (set-face-attribute 'flycheck-warning nil :underline nil)
   (set-face-attribute 'flycheck-fringe-info nil :foreground "gray20")
-  (set-face-attribute 'flycheck-fringe-warning nil :foreground "gray30")
 
   ;; configure error list popup behavior
   (add-to-list 'display-buffer-alist
