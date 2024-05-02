@@ -35,6 +35,45 @@
   (add-hook 'before-save-hook 'rust-format-buffer nil t))
 
 ;; ------------------------------------------------------------------------
+;; c++ configs
+;; LSP: https://clangd.llvm.org/installation.html
+;; ------------------------------------------------------------------------
+(use-package c-ts-mode
+  :preface
+  (defvar my-cpp-func-sig-arg-indent 4
+    "Number of spaces to indent for multi-line function signature arguments")
+  ;; https://google.github.io/styleguide/cppguide.html#Function_Declarations_and_Definitions
+
+  (defun my-cpp-indent-style()
+    `(;; fix indent for multi-line function signature
+      ((match nil "parameter_list" nil 1 1) standalone-parent my-cpp-func-sig-arg-indent)
+      ((match ")" "parameter_list" nil nil nil) standalone-parent 0)
+      ((match nil "parameter_list" nil 2 nil) (nth-sibling 1) 0)
+      ((and no-node (parent-is "parameter_list")) (nth-sibling 1) 0)
+
+      ;; fix indent for multi-line function invocation
+      ((match nil "argument_list" nil 1 1) standalone-parent my-cpp-func-sig-arg-indent)
+      ((match ")" "parameter_list" nil nil nil) standalone-parent 0)
+      ((match nil "parameter_list" nil 2 nil) (nth-sibling 1) 0)
+      ((and no-node (parent-is "parameter_list")) (nth-sibling 1) 0)
+
+      ;; append custom rules to indent style serving as base
+      ,@(alist-get 'linux (c-ts-mode--indent-styles 'cpp))))
+
+  :config
+  (setq-default c-ts-mode-indent-offset 2)
+  (setq-default c-ts-mode-indent-style #'my-cpp-indent-style)
+  (setq-default indent-tabs-mode nil))
+
+(defun my-cpp-config-hook ()
+  "fallback c++-mode basic configs (sans treesitter)"
+  (setq-default c-basic-offset 2)
+  ;; customized indentation
+  (c-set-offset 'substatement-open 0)
+  (c-set-offset 'arglist-intro 4))
+(add-hook 'c++-mode-hook 'my-cpp-config-hook)
+
+;; ------------------------------------------------------------------------
 ;; golang configs
 ;; ensure PATH / GOPATH properly set externally!
 ;; LSP: https://github.com/golang/tools/blob/master/gopls/doc/emacs.md
