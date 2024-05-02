@@ -101,12 +101,6 @@
 (define-advice org-edit-src-exit (:before (&rest _args))
   (when (memq major-mode '(go-mode go-ts-mode)) (gofmt)))
 
-;; env related workaround
-;; (if (eql system-type 'darwin)
-;;     (progn
-;;       (setenv "PATH" (concat (getenv "PATH") ":/opt/homebrew/bin/"))
-;;       (setq-default exec-path (append exec-path '("/opt/homebrew/bin/")))))
-
 ;; ------------------------------------------------------------------------
 ;; js-mode configs
 ;; ------------------------------------------------------------------------
@@ -122,15 +116,6 @@
 
 (add-hook 'protobuf-mode-hook
           (lambda () (c-add-style "my-style" my-protobuf-style t)))
-
-;; ------------------------------------------------------------------------
-;; slime - Superior Lisp Interaction Mode for Emacs
-;; assumes prior installation of common lisp compiler (here sbcl)
-;; ------------------------------------------------------------------------
-;; (use-package slime
-;;   :ensure t
-;;   :config
-;;   (setq-default inferior-lisp-program "sbcl"))
 
 ;; ------------------------------------------------------------------------
 ;; devdocs.io lookup
