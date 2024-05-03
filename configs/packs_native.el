@@ -40,6 +40,24 @@
 (setq-default ls-lisp-dirs-first t)
 
 ;; ------------------------------------------------------------------------
+;; tramp config
+;; lsp-mode only possible if language server present on remote
+;; try sshx if having issues with ssh
+;; https://www.gnu.org/software/emacs/manual/html_node/tramp/Inline-methods.html
+;; ------------------------------------------------------------------------
+(setq-default tramp-default-method "rsync")
+(setq-default tramp-terminal-type "tramp")
+
+;; connecting via multiple hops
+;; https://www.gnu.org/software/emacs/manual/html_node/tramp/Multi_002dhops.html
+
+;; for debugging
+;; (setq-default tramp-default-user "")
+;; (setq-default tramp-default-host "")
+;; (setq-default tramp-chunksize 500)
+;; (setq-default tramp-verbose 10)
+
+;; ------------------------------------------------------------------------
 ;; winner mode - undo / redo window config changes (native)
 ;; C-c left (undo) / C-c right (redo)
 ;; ------------------------------------------------------------------------
