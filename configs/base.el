@@ -95,10 +95,17 @@
 (global-set-key (kbd "s-f") 'toggle-frame-fullscreen)
 (global-set-key (kbd "s-m") 'toggle-frame-maximized)
 
-;; revert buffer without confirmation
 (defun revert-buffer-no-confirm ()
+  "Revert buffer without confirmation"
   (interactive) (revert-buffer t t))
 
-;; reload all init files
 (defun reload-init-files ()
+  "Reload all init files"
   (interactive) (load-file user-init-file))
+
+(defun edit-current-file-as-root ()
+  "Edit the file that is associated with the current buffer as root"
+  (interactive)
+  (let ((filep (buffer-file-name)))
+    (if filep (find-file (concat "/sudo::" filep))
+      (message "Current buffer does not have an associated file."))))
