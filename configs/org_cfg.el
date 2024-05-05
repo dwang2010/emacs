@@ -29,10 +29,9 @@
   (setq-default org-fold-core-style 'overlays) ; fix issues with subtree folding
 
   ;; customize heading sizes
-  (set-face-attribute 'org-level-1 nil :height 1.15)
-  (set-face-attribute 'org-level-2 nil :height 1.10)
-  (set-face-attribute 'org-level-3 nil :height 1.05)
-  (set-face-attribute 'org-level-4 nil :height 1.0)
+  (set-face-attribute 'org-level-1 nil :height 1.10)
+  (set-face-attribute 'org-level-2 nil :height 1.05)
+  (set-face-attribute 'org-level-3 nil :height 1.00)
 
   ;; customize some faces
   (set-face-attribute 'org-table nil :foreground "#a991f1")
