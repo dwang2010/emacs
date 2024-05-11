@@ -184,13 +184,17 @@
   (advice-add 'org-capture-place-template
               :around 'my-org-capture-place-template-dont-delete-windows))
 
+;; ---------------------------------------------------------
 ;; make org bullets fancy
+;; ---------------------------------------------------------
 (use-package org-superstar
   :ensure t
   :config
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 
+;; ---------------------------------------------------------
 ;; more evident task priority
+;; ---------------------------------------------------------
 (use-package org-fancy-priorities
   :ensure t
   :hook (org-mode . org-fancy-priorities-mode)
@@ -206,3 +210,42 @@
                                      (?1 :foreground "#ff7f00" :weight bold)
                                      (?2 :foreground "#ffc125" :weight bold)
                                      (?3 :foreground "#b3b3b3" :weight bold))))
+
+;; ---------------------------------------------------------
+;; presentation mode
+;; ---------------------------------------------------------
+(use-package visual-fill-column
+  :ensure t
+  :config
+  (setq-default visual-fill-column-width 100)
+  (setq-default visual-fill-column-center-text t))
+
+(defun my-org-present-start-hook ()
+  "Buffer configs to configure when starting presentation mode"
+  (visual-fill-column-mode 1)
+  (visual-line-mode 1)
+  (display-line-numbers-mode -1)
+  (setq header-line-format " ")
+  (setq face-remapping-alist
+        '(; body scaling
+          (default (:height 1.4) fixed-pitch)
+          ; padding from top
+          (header-line (:height 3.0) fixed-pitch)
+          ; top line title face
+          (org-document-title (:height 3.0) org-document-title))))
+
+(defun my-org-present-end-hook ()
+  "Buffer configs to revert when exiting presentation mode"
+  (visual-fill-column-mode 0)
+  (visual-line-mode 0)
+  (display-line-numbers-mode 1)
+  (setq header-line-format nil)
+  (setq face-remapping-alist '((default fixed-pitch default))))
+
+(use-package org-present
+  ;; init with 'org-present' command
+  ;; left / right keys for slide movement
+  ;; C-c C-q to exit
+  :ensure t
+  :hook ((org-present-mode . my-org-present-start-hook)
+         (org-present-mode-quit . my-org-present-end-hook)))
