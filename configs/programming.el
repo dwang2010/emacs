@@ -27,7 +27,7 @@
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
 
 (use-package rust-ts-mode
-  :bind (("C-c C-p" . rustic-popup))
+  ;; :bind (("C-c C-p" . rustic-popup))
   :hook (rust-ts-mode . my-rust-fmt-hook))
 
 (defun my-rust-fmt-hook ()
@@ -100,6 +100,26 @@
 ;; invoke gofmt after editing org src block via (C-c ')
 (define-advice org-edit-src-exit (:before (&rest _args))
   (when (memq major-mode '(go-mode go-ts-mode)) (gofmt)))
+
+;; ------------------------------------------------------------------------
+;; javascript / typescript configs
+;; LSP: https://github.com/typescript-language-server/typescript-language-server
+;; syntax highlighting is pretty bad in js-mode / js2-mode / js-ts-mode
+;; also, why so many modes???
+;; ------------------------------------------------------------------------
+(use-package web-mode :ensure t)
+
+;; auto-enable for .js/.jsx files
+(add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+
+;; enable jsx highlighting in .js / .jsx files
+(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+
+(defun web-mode-init-hook ()
+  "Indent configuration for web mode buffers"
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-markup-indent-offset 2))
+(add-hook 'web-mode-hook  'web-mode-init-hook)
 
 ;; ------------------------------------------------------------------------
 ;; js-mode configs
