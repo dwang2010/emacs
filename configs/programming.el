@@ -17,8 +17,8 @@
 ;; rust configs
 ;; LSP: https://github.com/rust-lang/rust-analyzer
 ;; ------------------------------------------------------------------------
-(use-package rust-mode :ensure t)
-(use-package rustic :ensure t :after (rust-mode))
+(use-package rust-mode :ensure t :defer t)
+(use-package rustic :ensure t :after (rust-mode) :defer t)
 
 ;; add rust related components to exec path
 (add-to-list 'exec-path "~/.cargo/bin")
@@ -27,11 +27,11 @@
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
 
 (use-package rust-ts-mode
-  ;; :bind (("C-c C-p" . rustic-popup))
-  :hook (rust-ts-mode . my-rust-fmt-hook))
+  :defer t
+  :hook (rust-ts-mode . my-rust-cfg-hook))
 
-(defun my-rust-fmt-hook ()
-  "Add local hook to format rust buffer prior to saving"
+(defun my-rust-cfg-hook ()
+  (local-set-key (kbd "C-c C-p") #'rustic-popup)
   (add-hook 'before-save-hook 'rust-format-buffer nil t))
 
 ;; ------------------------------------------------------------------------
@@ -39,6 +39,7 @@
 ;; LSP: https://clangd.llvm.org/installation.html
 ;; ------------------------------------------------------------------------
 (use-package c-ts-mode
+  :defer t
   :preface
   (defvar my-cpp-func-sig-arg-indent 4
     "Number of spaces to indent for multi-line function signature arguments")
@@ -80,6 +81,7 @@
 ;; ------------------------------------------------------------------------
 (use-package go-mode
   :ensure t
+  :defer t
   :hook (go-ts-mode . my-go-cfg-hook)
   :config
   ;; goimports acts as superior replacement for gofmt
