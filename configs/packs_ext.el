@@ -232,7 +232,7 @@
   (setq-default flycheck-relevant-error-other-file-show nil)
   (setq-default flycheck-check-syntax-automatically '(mode-enabled save))
 
-  ;; configure checker for javascript
+  ;; configure checker for javascript in web-mode
   (flycheck-add-mode 'javascript-eslint 'web-mode)
 
   ;; configure checker order for python
@@ -249,10 +249,7 @@
   (add-to-list 'display-buffer-alist
                '("*Flycheck errors*"
                  (display-buffer-reuse-window display-buffer-below-selected)
-                 (window-height . 0.3)))
-
-  ;; improve performance (else very slow)
-  ;; (advice-add 'flycheck-eslint-config-exists-p :override (lambda() t)))
+                 (window-height . 0.3))))
 
 ;; handy shortcuts:
 ;; C-c ! v = verify setup

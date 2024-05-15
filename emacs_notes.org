@@ -102,3 +102,7 @@ emacsclient -c -a "emacs"
 * Misc
 regexp standards
 https://en.wikipedia.org/wiki/Regular_expression#POSIX_basic_and_extended
+
+** Warnings
+treesit related
+- manually install grammars via ~treesit-install-language-grammar~
