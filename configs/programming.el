@@ -104,39 +104,56 @@
   (when (memq major-mode '(go-mode go-ts-mode)) (gofmt)))
 
 ;; ------------------------------------------------------------------------
-;; javascript / typescript configs
+;; javascript configs
 ;; LSP: https://github.com/typescript-language-server/typescript-language-server
-;; syntax highlighting is pretty bad in js-mode / js2-mode / js-ts-mode
-;; also, why so many modes???
 ;; ------------------------------------------------------------------------
-(use-package web-mode :ensure t)
+(use-package js2-mode :ensure t) ; for linting
+(use-package flow-js2-mode :ensure t) ; supports js2 (needed for flow)
 
-;; auto-enable for .js/.jsx files
-(add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+;; convenience mode for flow server interaction
+;; C-c C-c [(s)tatus, (c)overage, (t)ype-at-point]
+(use-package flow-minor-mode
+  :ensure t
+  :hook (flow-minor-mode . my-flow-save-check-hook)
+  :bind (:map flow-minor-mode-map ("M-," . nil) ("M-." . nil)))
 
-;; enable jsx highlighting in .js / .jsx files
-(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+;; main configs for js editing (js-ts-mode as base)
+(defun my-js-cfg-hook ()
+  (local-unset-key (kbd "M-."))
+  (setq-default js-indent-level 2)
+  (set-face-attribute 'font-lock-operator-face nil :foreground "turquoise3")
+  (flow-minor-mode)
+  (eldoc-mode -1) ; disables constant "type at point" check in minibuffer
+  (flow-js2-mode)
+  (js2-minor-mode))
+(add-hook 'js-ts-mode-hook #'my-js-cfg-hook)
 
+;; web-mode included as fallback
+(use-package web-mode :ensure t :defer t)
 (defun web-mode-init-hook ()
-  "Indent configuration for web mode buffers"
   (setq web-mode-code-indent-offset 2)
-  (setq web-mode-markup-indent-offset 2))
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 (add-hook 'web-mode-hook  'web-mode-init-hook)
-
-(set-face-attribute 'font-lock-operator-face nil :foreground "turquoise3")
 
 ;; look for locally installed eslint for use in flycheck
 (defun my/use-eslint-from-node-modules ()
-  (let* ((root (locate-dominating-file (or (buffer-file-name) default-directory) "node_modules"))
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory) "node_modules"))
          (eslint (and root (expand-file-name "node_modules/.bin/eslint" root))))
     (when (and eslint (file-executable-p eslint))
       (setq-local flycheck-javascript-eslint-executable eslint))))
 (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
-;; ------------------------------------------------------------------------
-;; js-mode configs
-;; ------------------------------------------------------------------------
-(setq-default js-indent-level 2)
+;; automated flow checks (if present) during save
+(defun my-flow-save-check-hook ()
+  (add-hook 'after-save-hook 'flow-status nil t))
+
+;; configure flow output popup behavior
+(add-to-list 'display-buffer-alist
+             '("*compilation*"
+               (display-buffer-reuse-window display-buffer-below-selected)
+               (window-height . 0.15)))
 
 ;; ------------------------------------------------------------------------
 ;; protobuf configs
