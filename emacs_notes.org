@@ -1,4 +1,5 @@
 #+TITLE: GENERAL EMACS NOTES
+#+STARTUP: content
 
 * Base
 ** Useful Bindings
@@ -83,6 +84,30 @@ _underline_ (_)
 ~code~ (~)
 +strike+ (+)
 : leading colon for "small examples" other markings are *off*
+
+* TRAMP
+** local to server
+basic syntax
+: /ssh:user@server:/path/to/file
+- try =sshx= if =ssh= isn't working correctly
+
+** local to jump to server
+some extra config required (needs validation)
+
+: ~/.ssh/config
+# ProxyCommand
+# ProxyJump
+
+#+begin_src sh
+Host server  # server is the target goal
+  Hostname server
+  User real.user
+
+  # either
+  ProxyJump jump.server
+  # or
+  ProxyCommand ssh jump.server -W %h:%p # whatever options needed
+#+end_src
 
 * Server Daemon
 Configure to run in daemon mode on startup
