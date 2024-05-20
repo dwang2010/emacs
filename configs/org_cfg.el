@@ -17,8 +17,13 @@
     (let ((org-src-mode (replace-regexp-in-string "-mode" "" (format "%s" major-mode))))
       (get-fileref-blk-snippet org-src-mode))))
 
+(defun my-org-remove-key-bindings ()
+  ; cycle org agenda files
+  (local-unset-key (kbd "C-,")))
+
 (use-package org
-  :hook (org-mode . turn-on-auto-fill)
+  :hook ((org-mode . turn-on-auto-fill)
+         (org-mode . my-org-remove-key-bindings))
   :config
   ;; startup behavior
   (setq-default org-startup-indented t)
