@@ -15,6 +15,7 @@
   (global-display-line-numbers-mode) ; enable line numbers
   (put 'downcase-region 'disabled nil) ; allow region lowercase
   (put 'upcase-region 'disabled nil) ; allow region uppercase
+  (put 'narrow-to-region 'disabled nil) ; allow narrow-to-region
   (global-so-long-mode 1) ; avoid performance issues in long line files
   (global-eldoc-mode -1) ; disable eldoc mode globally
   (defalias 'yes-or-no-p 'y-or-n-p) ; simple (y or n) on prompts

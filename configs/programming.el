@@ -128,6 +128,16 @@
   (js2-minor-mode))
 (add-hook 'js-ts-mode-hook #'my-js-cfg-hook)
 
+;; test config for js2-mode editing
+(defun my-js2-cfg-hook ()
+  (local-unset-key (kbd "M-."))
+  (setq-default js-indent-level 2)
+  (set-face-attribute 'font-lock-operator-face nil :foreground "turquoise3")
+  (flow-minor-mode)
+  (eldoc-mode -1) ; disables constant "type at point" check in minibuffer
+  (flow-js2-mode))
+(add-hook 'js2-mode-hook #'my-js2-cfg-hook)
+
 ;; web-mode included as fallback
 (use-package web-mode :ensure t :defer t)
 (defun web-mode-init-hook ()
@@ -151,7 +161,7 @@
 
 ;; configure flow output popup behavior
 (add-to-list 'display-buffer-alist
-             '("*compilation*"
+             '("\\(\\*compilation\\*\\|\\*Flow Output\\*\\)"
                (display-buffer-reuse-window display-buffer-below-selected)
                (window-height . 0.15)))
 

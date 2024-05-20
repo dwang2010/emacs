@@ -12,6 +12,11 @@
 (require 'use-package)
 (setq-default use-package-verbose t)
 
+;; make sure some paths are set
+;; TODO: clean this up later
+(if (eql system-type 'darwin)
+    (add-to-list 'exec-path "/opt/homebrew/bin/"))
+
 ;; ------------------------------------------------------------------------
 ;; load all the things
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Lisp-Libraries.html
