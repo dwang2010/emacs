@@ -209,7 +209,7 @@
   :ensure t
   :bind ("C-f" . 'avy-goto-char-timer)
   :custom-face
-  (avy-lead-face ((t (:foreground "#ff7f00" :background "#000000"))))
+  (avy-lead-face ((t (:foreground "#00ffff" :background "#000000"))))
   (avy-lead-face-0 ((t (:foreground "gray75" :background "#000000"))))
   (avy-lead-face-1 ((t (:foreground "gray65" :background "#000000"))))
   (avy-lead-face-2 ((t (:foreground "gray55" :background "#000000"))))
@@ -276,6 +276,7 @@
 
 ;; ------------------------------------------------------------------------
 ;; multiple cursors
+;; active region == select stuff
 ;; ------------------------------------------------------------------------
 (use-package multiple-cursors
   :ensure t
@@ -286,6 +287,16 @@
   ("C->" . mc/mark-next-like-this) ; next if active region, or just next line
   ("C-<" . mc/mark-previous-like-this) ; prev if active region, else just next line
   ("C-c C->" . mc/mark-all-like-this) ; all matches of active region
+  )
+
+;; ------------------------------------------------------------------------
+;; crux - https://github.com/bbatsov/crux
+;; ------------------------------------------------------------------------
+(use-package crux
+  :ensure t
+  :bind
+  ("C-a" . crux-move-beginning-of-line) ; move to first char, repeat to gutter
+  ("M-k" . crux-kill-line-backwards) ; kill from point towards gutter
   )
 
 ;; ------------------------------------------------------------------------
