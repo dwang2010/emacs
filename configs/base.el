@@ -29,6 +29,7 @@
   (keymap-global-unset "C-x C-r") ; find file read only
   (keymap-global-unset "C-<wheel-up>") ; scroll wheel zoom
   (keymap-global-unset "C-<wheel-down>") ; scroll wheel zoom
+  (keymap-global-unset "s-q") ; save-buffers-kill-emacs
 
   :bind
   (("C-x C-b" . ibuffer) ; bind ibuffer
