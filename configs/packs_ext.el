@@ -1,6 +1,7 @@
 ;; ------------------------------------------------------------------------
-;; magit - better git
+;; version control front-ends
 ;; ------------------------------------------------------------------------
+;; git
 (use-package magit
   :ensure t
   :bind ("C-x g" . magit-status)
@@ -8,6 +9,21 @@
   (setq-default magit-diff-refine-hunk t)
   (setq-default magit-log-margin '(t "%Y-%m-%d %H:%M " magit-log-margin-width t 12))
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1))
+
+;; mercurial
+;; currently doesn't support staging individual hunks (bla)
+;; https://github.com/ananthakumaran/monky/issues/104
+;; instead resort to 'hg commit -i' and manual selection (ouch)
+(use-package monky
+  :ensure t
+  :bind ("C-x m" . monky-status)
+  :config
+  (setq monky-process-type 'cmdserver))
+
+;; configure monky popup behavior
+(add-to-list 'display-buffer-alist
+             '("\\*monky"
+               (display-buffer-same-window display-buffer-reuse-window)))
 
 ;; ------------------------------------------------------------------------
 ;; vertico / marginalia / orderless / consult - completion framework

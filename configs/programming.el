@@ -170,7 +170,12 @@
 ;; LSP: https://docs.hhvm.com/hhvm/installation/introduction ...
 ;; ------------------------------------------------------------------------
 (use-package hack-mode
-  :ensure t)
+  :ensure t
+  :hook  (hack-mode . my-hack-cfg-hook))
+
+;; main configs for hack editing
+(defun my-hack-cfg-hook ()
+  (add-hook 'hack-mode-hook #'hack-enable-format-on-save nil t))
 
 ;; ------------------------------------------------------------------------
 ;; protobuf configs
