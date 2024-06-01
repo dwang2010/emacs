@@ -216,7 +216,9 @@
 (defun my-darkmode-vterm-faces()
   ;; make dark colored faces legible when using dark mode themes"
   (if (eql dcw-dark-theme-flag t)
-      (set-face-attribute 'ansi-color-bright-black nil :foreground "#eee8cd")))
+      (progn
+        (set-face-attribute 'ansi-color-bright-black nil :foreground "#eee8cd")
+        (set-face-attribute 'vterm-color-black nil :foreground "#7f7f7f"))))
 
 ;; ------------------------------------------------------------------------
 ;; avy - jump to char!
