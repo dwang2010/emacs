@@ -44,10 +44,10 @@
   (set-face-attribute 'org-agenda-structure nil :foreground "#00bfff" :height 1.2)
   (if (eql dcw-dark-theme-flag t)
       (progn
-        (set-face-attribute 'org-todo nil :foreground "white smoke")
+        (set-face-attribute 'org-todo nil :foreground "#cd5555")
+        (set-face-attribute 'org-checkbox nil :foreground "#f5f5f5")
         (set-face-attribute 'org-agenda-date-weekend nil :foreground "#4d4d4d")
-        (set-face-attribute 'org-agenda-date-today nil :foreground "white"))
-    (set-face-attribute 'org-agenda-date-weekend nil :foreground "gray82"))
+        (set-face-attribute 'org-agenda-date-today nil :foreground "white")))
 
   ;; customize emphasis markers
   (setq-default org-hide-emphasis-markers t)
@@ -101,7 +101,7 @@
   (setq-default org-agenda-window-setup 'current-window)
   (setq org-agenda-custom-commands
         '(("n" "Main Agenda"
-           (;; 20 day agenda view
+           (;; agenda view
             (agenda "" ((org-agenda-block-separator nil)
                         (org-agenda-overriding-header "--- Upcoming ---\n")
                         (org-agenda-format-date "%F %a")
