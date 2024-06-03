@@ -95,3 +95,21 @@
 
 ;; M-$ = Check and correct spelling of the word at point
 ;; flyspell-buffer to check spelling of entire buffer
+
+;; ------------------------------------------------------------------------
+;; calendar
+;; . : goto today
+;; < : shift month left
+;; > : shift month right
+;; ------------------------------------------------------------------------
+(use-package calendar
+  :bind ("C-c d" . 'calendar)
+  :config
+  ;; mark today's date on calendar
+  (set-face-attribute 'calendar-today nil :underline nil :foreground "#cd5555")
+  (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
+
+  ;; config calendar window popup behavior
+  (add-to-list 'display-buffer-alist
+               '("*Calendar*"
+                 (display-buffer-reuse-window display-buffer-below-selected))))
