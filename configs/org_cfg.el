@@ -83,9 +83,9 @@
         '(("n" "Main Agenda"
            (;; agenda view
             (agenda "" ((org-agenda-block-separator nil)
-                        (org-agenda-overriding-header "--- Upcoming ---\n")
+                        (org-agenda-overriding-header "UPCOMING\n")
                         (org-agenda-format-date "%F %a")
-                        (org-agenda-span 20)
+                        (org-agenda-span 14)
                         (org-agenda-start-day "0d")
                         (org-agenda-start-on-weekday 0) ; only works for 7 / 14 day span
                         (org-deadline-warning-days 0)
@@ -94,11 +94,22 @@
 
             ;; active tasks without date filtering
             (tags-todo "-backlog" ((org-agenda-block-separator nil)
-                                   (org-agenda-overriding-header "\n--- Active ---\n")))
+                                   (org-agenda-overriding-header "\nACTIVE\n")))
 
             ;; backlog tasks
             (tags-todo "backlog" ((org-agenda-block-separator nil)
-                                  (org-agenda-overriding-header "\n--- Backlog ---\n")))))))
+                                  (org-agenda-overriding-header "\nBACKLOG\n")))
+
+            ;; closed this week
+            (tags (concat "CLOSED>=\"" (my-get-target-week-sunday 0) "\"")
+                  (;(org-agenda-block-separator nil)
+                   (org-agenda-overriding-header "\nCLOSED THIS WEEK\n")))
+
+            ;; closed last week
+            (tags (concat "CLOSED<=\"" (my-get-target-week-sunday 0) "\""
+                          "+CLOSED>=\"" (my-get-target-week-sunday 1) "\"")
+                  ((org-agenda-block-separator nil)
+                   (org-agenda-overriding-header "\nCLOSED LAST WEEK\n")))))))
 
   ;; org-capture - "capture" notes at any time, quickly
   ;; use tags to add additional context for filtering
@@ -114,10 +125,6 @@
                   ("t" "Task" entry
                    (file+headline org-default-ttd-file "Inbox: Tag + Refile")
                    "* TODO [#2] %?\n" :prepend t)
-
-                  ("c" "Task w/ Code Link" entry
-                   (file+headline org-default-ttd-file "Inbox: Tag + Refile")
-                   "* TODO [#2] %?\n\n%(get-org-blk-code-snippet \"%F\")" :prepend t)
 
                   ;; --- meeting related notes ---
                   ("m" "Meeting" plain
