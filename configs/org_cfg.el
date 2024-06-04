@@ -1,26 +1,6 @@
 ;; ------------------------------------------------------------------------
 ;; org-mode - note taking on steroids
 ;; ------------------------------------------------------------------------
-;; helper funcs to grab code snippet in referenced org SRC block
-;; modified from: github.com/howardabrams/hamacs/blob/main/ha-capturing-notes.org
-(defun get-fileref-blk-snippet (mode)
-  (let* ((code-snippet (buffer-substring-no-properties (mark) (- (point) 1)))
-         (file-name (buffer-file-name))
-         (file-base (file-name-nondirectory file-name))
-         (line-number (line-number-at-pos (region-beginning)))
-         (initial-txt (format "[[file:%s::%s][%s::%s]]"
-                              file-name line-number file-base line-number)))
-    (format "%s\n#+begin_src %s\n%s\n#+end_src" initial-txt mode code-snippet)))
-
-(defun get-org-blk-code-snippet (file)
-  (with-current-buffer (find-buffer-visiting file)
-    (let ((org-src-mode (replace-regexp-in-string "-mode" "" (format "%s" major-mode))))
-      (get-fileref-blk-snippet org-src-mode))))
-
-(defun my-org-remove-key-bindings ()
-  ; cycle org agenda files
-  (local-unset-key (kbd "C-,")))
-
 (use-package org
   :hook ((org-mode . turn-on-auto-fill)
          (org-mode . my-org-remove-key-bindings))
@@ -254,3 +234,39 @@
   :ensure t
   :hook ((org-present-mode . my-org-present-start-hook)
          (org-present-mode-quit . my-org-present-end-hook)))
+
+;; ---------------------------------------------------------
+;; helper functions
+;; ---------------------------------------------------------
+;; helper funcs to grab code snippet in referenced org SRC block
+;; modified from: github.com/howardabrams/hamacs/blob/main/ha-capturing-notes.org
+(defun get-fileref-blk-snippet (mode)
+  (let* ((code-snippet (buffer-substring-no-properties (mark) (- (point) 1)))
+         (file-name (buffer-file-name))
+         (file-base (file-name-nondirectory file-name))
+         (line-number (line-number-at-pos (region-beginning)))
+         (initial-txt (format "[[file:%s::%s][%s::%s]]"
+                              file-name line-number file-base line-number)))
+    (format "%s\n#+begin_src %s\n%s\n#+end_src" initial-txt mode code-snippet)))
+
+(defun get-org-blk-code-snippet (file)
+  (with-current-buffer (find-buffer-visiting file)
+    (let ((org-src-mode (replace-regexp-in-string "-mode" "" (format "%s" major-mode))))
+      (get-fileref-blk-snippet org-src-mode))))
+
+(defun my-org-remove-key-bindings ()
+  ; cycle org agenda files
+  (local-unset-key (kbd "C-,")))
+
+(defun my-get-next-sunday ()
+  "Find decoded date of the next Sunday"
+  (let ((d (decode-time)))
+    (decoded-time-add d (make-decoded-time :day (% (- 7 (decoded-time-weekday d)) 7)))))
+
+(defun my-get-target-week-sunday (weeks-before)
+  "Find datestring (YYYY-MM-DD) of Sunday with integral 'weeks-before' current"
+  (let ((weeks (+ 1 weeks-before)))
+    (format-time-string "[%Y-%m-%d]"
+                        (time-subtract
+                         (encode-time (my-get-next-sunday))
+                         (days-to-time (* 7 weeks))))))
