@@ -65,7 +65,7 @@
           (wl . wl-other-frame)))
 
   ;; tags related
-  (setq-default org-tags-column -80)
+  (setq-default org-tags-column -75)
   (setq-default org-auto-align-tags t)
 
   (setq-default org-log-done 'time) ; auto add completion time on TODO close
