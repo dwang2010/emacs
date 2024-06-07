@@ -93,23 +93,31 @@
                          '(org-agenda-skip-entry-if 'nottodo '("TODO")))))
 
             ;; active tasks without date filtering
-            (tags-todo "-backlog" ((org-agenda-block-separator nil)
+            (tags-todo "-backlog-personal-emacs" ((org-agenda-block-separator nil)
                                    (org-agenda-overriding-header "\nACTIVE\n")))
 
             ;; backlog tasks
             (tags-todo "backlog" ((org-agenda-block-separator nil)
                                   (org-agenda-overriding-header "\nBACKLOG\n")))
 
+            ;; personal tasks
+            (tags-todo "personal" ((org-agenda-block-separator nil)
+                                  (org-agenda-overriding-header "\nPERSONAL\n")))
+
+            ;; emacs tasks
+            (tags-todo "emacs" ((org-agenda-block-separator nil)
+                                  (org-agenda-overriding-header "\nEMACS\n")))
+
             ;; closed this week
             (tags (concat "CLOSED>=\"" (my-get-target-week-sunday 0) "\"")
                   (;(org-agenda-block-separator nil)
-                   (org-agenda-overriding-header "\nCLOSED THIS WEEK\n")))
+                   (org-agenda-overriding-header "\nCLOSED: THIS WEEK\n")))
 
             ;; closed last week
             (tags (concat "CLOSED<=\"" (my-get-target-week-sunday 0) "\""
                           "+CLOSED>=\"" (my-get-target-week-sunday 1) "\"")
                   ((org-agenda-block-separator nil)
-                   (org-agenda-overriding-header "\nCLOSED LAST WEEK\n")))))))
+                   (org-agenda-overriding-header "\nCLOSED: LAST WEEK\n")))))))
 
   ;; org-capture - "capture" notes at any time, quickly
   ;; use tags to add additional context for filtering
