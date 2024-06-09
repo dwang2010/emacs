@@ -295,17 +295,24 @@
 ;; ------------------------------------------------------------------------
 ;; multiple cursors
 ;; active region == select stuff
+;; exit with 'C-g' to trigger mode disabled hook (return inconsistent)
 ;; ------------------------------------------------------------------------
 (use-package multiple-cursors
   :ensure t
+  :hook ((multiple-cursors-mode . my-mc-config-start-hook)
+         (multiple-cursors-mode-disabled . my-mc-config-end-hook))
   :custom
   (mc/match-cursor-style nil) ; disable fake cursor matching, shifts text
   :bind
   ;; adds cursors for:
-  ("C->" . mc/mark-next-like-this) ; next if active region, or just next line
-  ("C-<" . mc/mark-previous-like-this) ; prev if active region, else just next line
-  ("C-c C->" . mc/mark-all-like-this) ; all matches of active region
-  )
+  ("C->" . mc/edit-beginnings-of-lines) ; drops cursor on all region lines
+  ("C-c C->" . mc/mark-all-like-this)) ; all matches of active region
+
+;; superword treats "some_words" as single logical symbol
+(defun my-mc-config-start-hook ()
+  (superword-mode 1))
+(defun my-mc-config-end-hook ()
+  (superword-mode -1))
 
 ;; ------------------------------------------------------------------------
 ;; crux - https://github.com/bbatsov/crux
@@ -314,8 +321,7 @@
   :ensure t
   :bind
   ("C-a" . crux-move-beginning-of-line) ; move to first char, repeat to gutter
-  ("M-k" . crux-kill-line-backwards) ; kill from point towards gutter
-  )
+  ("M-k" . crux-kill-line-backwards)) ; kill from point towards gutter
 
 ;; ------------------------------------------------------------------------
 ;; yasnippet - template system (automate boilerplate stuff)
