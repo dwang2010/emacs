@@ -22,6 +22,7 @@
   (set-face-attribute 'org-table nil :foreground "#a991f1")
   (set-face-attribute 'org-code nil :foreground "#e69055")
   (set-face-attribute 'org-agenda-structure nil :foreground "#00bfff" :height 1.2)
+  (set-face-attribute 'org-link nil :foreground "#79bac4" :bold nil)
   (if (eql dcw-dark-theme-flag t)
       (progn
         (set-face-attribute 'org-todo nil :foreground "#cd5555")
