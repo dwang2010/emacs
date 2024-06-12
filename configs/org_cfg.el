@@ -88,31 +88,34 @@
                         (org-agenda-format-date "%F %a")
                         (org-agenda-span 14)
                         (org-agenda-start-day "0d")
-                        (org-agenda-start-on-weekday 0) ; only works for 7 / 14 day span
+                        (org-agenda-start-on-weekday 0) ; only on 7 / 14 day span
                         (org-deadline-warning-days 0)
                         (org-agenda-skip-function
                          '(org-agenda-skip-entry-if 'nottodo '("TODO")))))
 
             ;; active tasks without date filtering
-            (tags-todo "-backlog-personal-emacs" ((org-agenda-block-separator nil)
-                                   (org-agenda-overriding-header "\nACTIVE\n")))
+            (tags-todo "-backlog-personal-emacs"
+                       ((org-agenda-block-separator nil)
+                        (org-agenda-overriding-header "\nACTIVE\n")))
 
             ;; backlog tasks
-            (tags-todo "backlog" ((org-agenda-block-separator nil)
-                                  (org-agenda-overriding-header "\nBACKLOG\n")))
+            (tags-todo "backlog"
+                       ((org-agenda-block-separator nil)
+                        (org-agenda-overriding-header "\nBACKLOG\n")))
 
             ;; personal tasks
-            (tags-todo "personal" ((org-agenda-block-separator nil)
-                                  (org-agenda-overriding-header "\nPERSONAL\n")))
+            (tags-todo "personal"
+                       ((org-agenda-block-separator nil)
+                        (org-agenda-overriding-header "\nPERSONAL\n")))
 
             ;; emacs tasks
-            (tags-todo "emacs" ((org-agenda-block-separator nil)
-                                  (org-agenda-overriding-header "\nEMACS\n")))
+            (tags-todo "emacs"
+                       ((org-agenda-block-separator nil)
+                        (org-agenda-overriding-header "\nEMACS\n")))
 
             ;; closed this week
             (tags (concat "CLOSED>=\"" (my-get-target-week-sunday 0) "\"")
-                  (;(org-agenda-block-separator nil)
-                   (org-agenda-overriding-header "\nCLOSED: THIS WEEK\n")))
+                  ((org-agenda-overriding-header "\nCLOSED: THIS WEEK\n")))
 
             ;; closed last week
             (tags (concat "CLOSED<=\"" (my-get-target-week-sunday 0) "\""
