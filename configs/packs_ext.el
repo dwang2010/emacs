@@ -299,14 +299,16 @@
 ;; ------------------------------------------------------------------------
 (use-package multiple-cursors
   :ensure t
-  :hook ((multiple-cursors-mode . my-mc-config-start-hook)
-         (multiple-cursors-mode-disabled . my-mc-config-end-hook))
+  :hook
+  ((multiple-cursors-mode . my-mc-config-start-hook)
+   (multiple-cursors-mode-disabled . my-mc-config-end-hook))
   :custom
   (mc/match-cursor-style nil) ; disable fake cursor matching, shifts text
   :bind
-  ;; adds cursors for:
-  ("C->" . mc/edit-beginnings-of-lines) ; drops cursor on all region lines
-  ("C-c C->" . mc/mark-all-like-this)) ; all matches of active region
+  (("C->" . mc/edit-beginnings-of-lines) ; drops cursor on all region lines
+   ("C-c C->" . mc/mark-all-like-this) ; all matches of active region
+   ;; ensure same behavior when exiting with 'return' / 'C-g'
+   :map mc/keymap ("<return>" . 'mc/keyboard-quit)))
 
 ;; superword treats "some_words" as single logical symbol
 (defun my-mc-config-start-hook ()
