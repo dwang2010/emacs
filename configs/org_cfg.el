@@ -2,6 +2,7 @@
 ;; org-mode - note taking on steroids
 ;; ------------------------------------------------------------------------
 (use-package org
+  :bind ("C-c C-o" . org-open-at-point-global)
   :hook ((org-mode . turn-on-auto-fill)
          (org-mode . my-org-remove-key-bindings))
   :config
