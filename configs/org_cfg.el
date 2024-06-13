@@ -1,10 +1,14 @@
 ;; ------------------------------------------------------------------------
 ;; org-mode - note taking on steroids
 ;; ------------------------------------------------------------------------
+(defun my-org-binding-configs ()
+  (local-unset-key (kbd "C-,")) ;; cycle org agenda files
+  (local-set-key (kbd "C-c b") 'my-quick-add-code-emphasis)) ;; quick emphasis
+
 (use-package org
   :bind ("C-c C-o" . org-open-at-point-global)
   :hook ((org-mode . turn-on-auto-fill)
-         (org-mode . my-org-remove-key-bindings))
+         (org-mode . my-org-binding-configs))
   :config
   ;; startup behavior
   (setq-default org-startup-indented t)
@@ -274,10 +278,6 @@
     (let ((org-src-mode (replace-regexp-in-string "-mode" "" (format "%s" major-mode))))
       (get-fileref-blk-snippet org-src-mode))))
 
-(defun my-org-remove-key-bindings ()
-  ; cycle org agenda files
-  (local-unset-key (kbd "C-,")))
-
 (defun my-get-next-sunday ()
   "Find decoded date of the next Sunday"
   (let ((d (decode-time)))
@@ -290,3 +290,8 @@
                         (time-subtract
                          (encode-time (my-get-next-sunday))
                          (days-to-time (* 7 weeks))))))
+
+(defun my-quick-add-code-emphasis ()
+  "Enclose symbol with '~' for org code emphasis"
+  (require 'expand-region)
+  (interactive) (er/mark-symbol) (org-emphasize ?\~))
