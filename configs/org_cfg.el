@@ -3,7 +3,8 @@
 ;; ------------------------------------------------------------------------
 (defun my-org-binding-configs ()
   (local-unset-key (kbd "C-,")) ;; cycle org agenda files
-  (local-set-key (kbd "C-c b") 'my-quick-add-code-emphasis)) ;; quick emphasis
+  (local-set-key (kbd "C-c b") 'my-quick-add-code-emphasis)
+  (local-set-key (kbd "C-c C-,") 'my-quick-add-src-blk))
 
 (use-package org
   :bind ("C-c C-o" . org-open-at-point-global)
@@ -295,3 +296,7 @@
   "Enclose symbol with '~' for org code emphasis"
   (require 'expand-region)
   (interactive) (er/mark-symbol) (org-emphasize ?\~))
+
+(defun my-quick-add-src-blk ()
+  "Auto add source block without prompting"
+  (interactive) (org-insert-structure-template "src"))
