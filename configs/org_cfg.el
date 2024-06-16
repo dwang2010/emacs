@@ -292,11 +292,6 @@
                          (encode-time (my-get-next-sunday))
                          (days-to-time (* 7 weeks))))))
 
-(defun my-quick-add-code-emphasis ()
-  "Enclose symbol with '~' for org code emphasis"
-  (require 'expand-region)
-  (interactive) (er/mark-symbol) (org-emphasize ?\~))
-
 (defun my-quick-add-src-blk ()
   "Auto add source block without prompting"
   (interactive) (org-insert-structure-template "src"))
