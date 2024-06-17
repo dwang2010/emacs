@@ -57,6 +57,8 @@
 ;; (setq-default tramp-chunksize 500)
 ;; (setq-default tramp-verbose 10)
 
+;; check tramp manual 5.6.9 on performance
+
 ;; ------------------------------------------------------------------------
 ;; winner mode - undo / redo window config changes (native)
 ;; C-c left (undo) / C-c right (redo)
