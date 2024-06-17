@@ -20,6 +20,7 @@
 |---------------------+---------------------------------------------------|
 | list-faces-display  | show current font face definition (color / style) |
 | list-colors-display | show displayable colors                           |
+| info-apropos        | good for searching through emacs manuals          |
 |---------------------+---------------------------------------------------|
 
 * Org-Mode
@@ -131,3 +132,38 @@ https://en.wikipedia.org/wiki/Regular_expression#POSIX_basic_and_extended
 ** Warnings
 treesit related
 - manually install grammars via ~treesit-install-language-grammar~
+
+* Compile from Source
+https://www.rahuljuliato.com/posts/compiling_emacs_29_2
+
+** Install
+#+begin_src bash
+# download
+# unpack
+tar xvfz emacs-VERS.tar.gz
+
+# install build deps
+sudo apt-get build-dep emacs
+
+# configure for install
+# see: ./configure --help
+./configure --with-native-compilation\
+            --with-tree-sitter\
+            --with-json\
+            --with-mailutils
+
+# clean old and build
+make clean
+make -j 8
+make install
+
+# verify
+emacs --version
+#+end_src
+
+** Removal
+#+begin_src bash
+sudo make uninstall
+make clean
+make distclean
+#+end_src
