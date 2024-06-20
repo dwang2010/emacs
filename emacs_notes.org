@@ -23,6 +23,79 @@
 | info-apropos        | good for searching through emacs manuals          |
 |---------------------+---------------------------------------------------|
 
+** TRAMP
+*** local to server
+basic syntax
+: /ssh:user@server:/path/to/file
+- try =sshx= if =ssh= isn't working correctly
+
+*** local to jump to server
+some extra config required (needs validation)
+
+: ~/.ssh/config
+# ProxyCommand
+# ProxyJump
+
+#+begin_src sh
+Host server  # server is the target goal
+  Hostname server
+  User real.user
+
+  # either
+  ProxyJump jump.server
+  # or
+  ProxyCommand ssh jump.server -W %h:%p # whatever options needed
+#+end_src
+
+** Server Daemon
+Configure to run in daemon mode on startup
+#+begin_src bash
+  emacs --daemon
+  # on mac, do this
+  emacs --fg-daemon
+#+end_src
+
+Alias "emacs" to instead run emacsclient
+#+begin_src bash
+# -c : create new frame instead of using current
+# -a : alternative fall back if server broken / not running
+emacsclient -c -a "emacs"
+#+end_src
+
+** Installation from Source
+https://www.rahuljuliato.com/posts/compiling_emacs_29_2
+
+*** Install
+#+begin_src bash
+# download
+# unpack
+tar xvfz emacs-VERS.tar.gz
+
+# install build deps
+sudo apt-get build-dep emacs
+
+# configure for install
+# see: ./configure --help
+./configure --with-native-compilation\
+            --with-tree-sitter\
+            --with-json\
+            --with-mailutils
+
+# clean old and build
+make clean
+make -j 8
+make install
+
+# verify
+emacs --version
+#+end_src
+
+*** Remove
+#+begin_src bash
+sudo make uninstall
+make clean
+make distclean
+#+end_src
 * Org-Mode
 ** Helpful Bindings
 *** General
@@ -86,84 +159,16 @@ _underline_ (_)
 +strike+ (+)
 : leading colon for "small examples" other markings are *off*
 
-* TRAMP
-** local to server
-basic syntax
-: /ssh:user@server:/path/to/file
-- try =sshx= if =ssh= isn't working correctly
+* Misc Notes
+** early packages of interest
+org-sliced-images: https://github.com/jcfk/org-sliced-images
+- display images as horizontal slices for better scrolling
+- noticeable impact to performance
 
-** local to jump to server
-some extra config required (needs validation)
-
-: ~/.ssh/config
-# ProxyCommand
-# ProxyJump
-
-#+begin_src sh
-Host server  # server is the target goal
-  Hostname server
-  User real.user
-
-  # either
-  ProxyJump jump.server
-  # or
-  ProxyCommand ssh jump.server -W %h:%p # whatever options needed
-#+end_src
-
-* Server Daemon
-Configure to run in daemon mode on startup
-#+begin_src bash
-  emacs --daemon
-  # on mac, do this
-  emacs --fg-daemon
-#+end_src
-
-Alias "emacs" to instead run emacsclient
-#+begin_src bash
-# -c : create new frame instead of using current
-# -a : alternative fall back if server broken / not running
-emacsclient -c -a "emacs"
-#+end_src
-
-* Misc
+** regular expressions
 regexp standards
 https://en.wikipedia.org/wiki/Regular_expression#POSIX_basic_and_extended
 
-** Warnings
+** warnings
 treesit related
 - manually install grammars via ~treesit-install-language-grammar~
-
-* Compile from Source
-https://www.rahuljuliato.com/posts/compiling_emacs_29_2
-
-** Install
-#+begin_src bash
-# download
-# unpack
-tar xvfz emacs-VERS.tar.gz
-
-# install build deps
-sudo apt-get build-dep emacs
-
-# configure for install
-# see: ./configure --help
-./configure --with-native-compilation\
-            --with-tree-sitter\
-            --with-json\
-            --with-mailutils
-
-# clean old and build
-make clean
-make -j 8
-make install
-
-# verify
-emacs --version
-#+end_src
-
-** Removal
-#+begin_src bash
-sudo make uninstall
-make clean
-make distclean
-#+end_src
