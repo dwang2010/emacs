@@ -292,7 +292,7 @@
 ;; ------------------------------------------------------------------------
 (use-package expand-region
   :ensure t
-  :bind ("C-=" . er/expand-region))
+  :bind ("C-=" . er/mark-symbol-with-prefix)) ;; er/expand-region can be slow
 
 ;; ------------------------------------------------------------------------
 ;; multiple cursors
