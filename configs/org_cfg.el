@@ -87,6 +87,7 @@
   (global-set-key (kbd "<f1>") (lambda () (interactive) (org-agenda nil "n")))
   (setq-default org-agenda-files '("~/notes/ttd.org"))
   (setq-default org-agenda-window-setup 'current-window)
+  (setq-default org-agenda-sorting-strategy '(priority-down alpha-up))
   (setq org-agenda-custom-commands
         '(("n" "Main Agenda"
            (;; agenda view
