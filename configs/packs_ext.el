@@ -102,6 +102,9 @@
   (("C-s" . swiper-isearch)
    ("C-r" . swiper-isearch-thing-at-point))
   :config
+  (setq-default swiper-goto-start-of-match t)
+  (setq-default swiper-verbose nil)
+
   ;; don't quit search when backspace on empty query
   (setq-default ivy-on-del-error-function 'ignore)
   ;; default ivy frontend height
@@ -110,12 +113,11 @@
   (if (eql dcw-dark-theme-flag t)
       (set-face-attribute 'swiper-background-match-face-2 nil :inherit 'default :background "#0e5e95")
     (set-face-attribute 'swiper-background-match-face-2 nil :inherit 'default :background "light blue"))
-  (set-face-attribute 'swiper-match-face-2 nil :background "#fab387")
+
+  (set-face-attribute 'ivy-cursor nil :foreground "black" :background "#ff8c00")
   (set-face-attribute 'swiper-background-match-face-1 nil :foreground 'unspecified :background 'unspecified)
   (set-face-attribute 'swiper-background-match-face-3 nil :background 'unspecified :inherit 'swiper-background-match-face-2)
   (set-face-attribute 'swiper-background-match-face-4 nil :background 'unspecified :inherit 'swiper-background-match-face-2)
-  (set-face-attribute 'swiper-match-face-3 nil :inherit 'swiper-match-face-2 :background 'unspecified)
-  (set-face-attribute 'swiper-match-face-4 nil :inherit 'swiper-match-face-2 :background 'unspecified)
 
   ;; remove inheritance to avoid theme line highlight color confusion
   (set-face-attribute 'swiper-line-face nil :inherit nil :underline nil :foreground 'unspecified :background 'unspecified))
