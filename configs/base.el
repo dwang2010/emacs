@@ -45,7 +45,9 @@
    ("<C-M-up>" . windmove-up)
    ("<C-M-down>" . windmove-down)
    ("<home>" . move-beginning-of-line)
-   ("<end>" . move-end-of-line))
+   ("<end>" . move-end-of-line)
+   ("s-f" . toggle-frame-fullscreen)
+   ("s-m" . toggle-frame-maximized))
 
   :custom
   ;; UI config variables
@@ -94,9 +96,10 @@
       (setq-default mac-command-modifier 'super))
   (progn
     (setq-default mouse-wheel-scroll-amount '(5))))
-(global-set-key (kbd "s-f") 'toggle-frame-fullscreen)
-(global-set-key (kbd "s-m") 'toggle-frame-maximized)
 
+;; ------------------------------------------------------------------------
+;; helper functions
+;; ------------------------------------------------------------------------
 (defun revert-buffer-no-confirm ()
   "Revert buffer without confirmation"
   (interactive) (revert-buffer t t))
