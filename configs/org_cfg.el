@@ -1,6 +1,9 @@
 ;; ------------------------------------------------------------------------
 ;; org-mode - note taking on steroids
 ;; ------------------------------------------------------------------------
+;; ensure org version >= 9.7.4
+(my-ensure-package-version 'org "9.7.4")
+
 (defun my-org-binding-configs ()
   (local-unset-key (kbd "C-,")) ;; cycle org agenda files
   (local-set-key (kbd "C-c b") 'my-quick-add-code-emphasis)
