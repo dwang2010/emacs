@@ -31,7 +31,7 @@
 ;; fix env related paths
 ;; ------------------------------------------------------------------------
 (if (eql system-type 'darwin)
-    (add-to-list 'exec-path "/opt/homebrew/bin/"))
+    (add-to-list 'exec-path "~/homebrew/bin/"))
 
 ;; ------------------------------------------------------------------------
 ;; load all the things
