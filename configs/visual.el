@@ -111,7 +111,7 @@
 ;; uses different face on mode-line for visual contrast
 (if (eql system-type 'darwin)
     (progn
-      (set-face-attribute 'default nil :family "Menlo" :height 150)
+      (set-face-attribute 'default nil :family "Menlo" :height 140)
       (set-face-attribute 'fixed-pitch nil :family "Menlo" :height 1.0)
       (set-face-attribute `mode-line-active nil :family "Jetbrains Mono" :height 150)
       (set-face-attribute `mode-line-inactive nil :family "Jetbrains Mono" :height 150)
@@ -125,8 +125,8 @@
 
 ;; default frame parameters
 (setq-default default-frame-alist
-              '((width . 100) ; window width (cols)
-                (height . 55) ; window height (rows)
+              '((width . 90) ; window width (cols)
+                (height . 50) ; window height (rows)
                 (cursor-color . "#ff7f00"))) ; needed for emacsclient startup
 
 ;; ensure scrollbars don't appear when creating new frames
