@@ -4,6 +4,7 @@
 (use-package emacs
   :hook
   (before-save . delete-trailing-whitespace) ; remove trailing whitespace
+  (prog-mode . display-line-numbers-mode) ; line numbers only in prog mode
 
   :config
   (menu-bar-mode -1) ; disable menu bar
@@ -12,7 +13,6 @@
   (blink-cursor-mode 0) ; don't blink cursor
   (delete-selection-mode t) ; overwrite currently selected region
   (prefer-coding-system 'utf-8) ; default coding system
-  (global-display-line-numbers-mode) ; enable line numbers
   (put 'downcase-region 'disabled nil) ; allow region lowercase
   (put 'upcase-region 'disabled nil) ; allow region uppercase
   (put 'narrow-to-region 'disabled nil) ; allow narrow-to-region
