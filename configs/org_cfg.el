@@ -59,9 +59,7 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((python . t)
-     (lisp . t)
-     (C . t) ; includes C / C++
-     (go . t)))
+     (lisp . t)))
   ;; set org-babel for desired python executable
   (setq-default org-babel-python-command "python3")
   ;; potentially risky: remove confirmation when executing code blocks
@@ -91,6 +89,8 @@
   (setq-default org-agenda-files '("~/notes/ttd.org"))
   (setq-default org-agenda-window-setup 'current-window)
   (setq-default org-agenda-sorting-strategy '(priority-down alpha-up))
+  (setq-default org-agenda-inhibit-startup t) ; attempt to speedup agenda
+  (setq-default org-agenda-ignore-properties '(stats)) ; attempt to speedup agenda
   (setq org-agenda-custom-commands
         '(("n" "Main Agenda"
            (;; agenda view
@@ -192,10 +192,10 @@
 ;; ---------------------------------------------------------
 ;; make org bullets fancy
 ;; ---------------------------------------------------------
-(use-package org-superstar
-  :ensure t
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+;; (use-package org-superstar
+;;   :ensure t
+;;   :config
+;;   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 
 ;; ---------------------------------------------------------
 ;; more evident task priority
