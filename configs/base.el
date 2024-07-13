@@ -79,7 +79,7 @@
   (backup-directory-alist '(("." . "~/.emacs.d/backups"))) ; central backups
 
   ;; performance improvement variables
-  (gc-cons-threshold 1600000) ; too high, memory hog; too small, some slowdown
+  (gc-cons-threshold 20000000) ; too high, memory hog; too small, some slowdown
   (read-process-output-max (* 1024 1024)) ; increase data read chunk size
   (bidi-display-reordering 'left-to-right) ; disable bidirectional text scan
   (bidi-paragraph-direction 'left-to-right) ; text should only go one direction
