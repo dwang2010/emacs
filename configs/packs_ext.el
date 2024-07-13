@@ -69,28 +69,28 @@
 ;; ------------------------------------------------------------------------
 ;; corfu - in-buffer completion (not the minibuffer)
 ;; ------------------------------------------------------------------------
-(use-package corfu
-  :ensure t
-  :bind (:map corfu-map ("RET" . nil)) ; tab only completion
-  :custom
-  ;; automatic completion
-  (corfu-auto t) ; automatic completion popup
-  (corfu-auto-prefix 3) ; min prefix length for popup to show
-  (corfu-auto-delay 0.1) ; show completion popup faster when able
-  (corfu-preselect 'first) ; first candidate selected; tab then inserts
-  (corfu-count 8) ; max candidates to show in popup
+;; (use-package corfu
+;;   :ensure t
+;;   :bind (:map corfu-map ("RET" . nil)) ; tab only completion
+;;   :custom
+;;   ;; automatic completion
+;;   (corfu-auto t) ; automatic completion popup
+;;   (corfu-auto-prefix 3) ; min prefix length for popup to show
+;;   (corfu-auto-delay 0.1) ; show completion popup faster when able
+;;   (corfu-preselect 'first) ; first candidate selected; tab then inserts
+;;   (corfu-count 8) ; max candidates to show in popup
 
-  :config
-  ;; enables secondary popup to completion popup for candidate docs
-  ;; manually invoke via 'M-t' defined in corfu-popupinfo-map
-  ;; similarly, navigate with 'M-<next>' (pageup) and 'M-<prior>' (pagedown)
-  (setq-default corfu-popupinfo-delay nil) ; never auto popup candidate docs
-  (corfu-popupinfo-mode 1)
-  (if (eql dcw-dark-theme-flag t)
-      (set-face-attribute 'corfu-current nil :background "#4d4d4d")
-    (set-face-attribute 'corfu-current nil :background "gray80"))
-  (set-face-attribute 'completions-common-part nil :foreground "#00EEEE")
-  :init (global-corfu-mode))
+;;   :config
+;;   ;; enables secondary popup to completion popup for candidate docs
+;;   ;; manually invoke via 'M-t' defined in corfu-popupinfo-map
+;;   ;; similarly, navigate with 'M-<next>' (pageup) and 'M-<prior>' (pagedown)
+;;   (setq-default corfu-popupinfo-delay nil) ; never auto popup candidate docs
+;;   (corfu-popupinfo-mode 1)
+;;   (if (eql dcw-dark-theme-flag t)
+;;       (set-face-attribute 'corfu-current nil :background "#4d4d4d")
+;;     (set-face-attribute 'corfu-current nil :background "gray80"))
+;;   (set-face-attribute 'completions-common-part nil :foreground "#00EEEE")
+;;   :init (global-corfu-mode))
 
 ;; ------------------------------------------------------------------------
 ;; swiper - search improvement
