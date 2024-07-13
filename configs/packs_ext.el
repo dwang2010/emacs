@@ -247,7 +247,7 @@
 (use-package flycheck
   :ensure t
   :bind ("C-c ! !" . flycheck-mode)
-  :hook (prog-mode . flycheck-mode)
+  ;; :hook (prog-mode . flycheck-mode)
   :config
   (setq-default flycheck-relevant-error-other-file-show nil)
   (setq-default flycheck-check-syntax-automatically '(mode-enabled save))
@@ -337,14 +337,14 @@
 ;; ------------------------------------------------------------------------
 ;; yasnippet - template system (automate boilerplate stuff)
 ;; ------------------------------------------------------------------------
-(use-package yasnippet
-  :ensure t
-  :config
-  (setq-default yas-verbosity 1) ;; step above nothing
+;; (use-package yasnippet
+;;   :ensure t
+;;   :config
+;;   (setq-default yas-verbosity 1) ;; step above nothing
 
-  ;; use yasnippet on per-buffer basis (based on major mode)
-  (yas-reload-all)
-  :hook (prog-mode . yas-minor-mode))
+;;   ;; use yasnippet on per-buffer basis (based on major mode)
+;;   (yas-reload-all)
+;;   :hook (prog-mode . yas-minor-mode))
 
 ;; ------------------------------------------------------------------------
 ;; helpful - better help command buffers
