@@ -3,9 +3,10 @@
 ;; LSP: https://github.com/python-lsp/python-lsp-server
 ;; ------------------------------------------------------------------------
 ;; configure location of python interpreter (system dependent)
-(if (eql system-type 'darwin)
-    (setq-default python-shell-interpreter "/opt/homebrew/bin/python3.10")
-  (setq-default python-shell-interpreter "/usr/bin/python3"))
+;; (if (eql system-type 'darwin)
+;;     (setq-default python-shell-interpreter "/opt/homebrew/bin/python3.10")
+;;   (setq-default python-shell-interpreter "/usr/bin/python3"))
+(setq-default python-shell-interpreter "/usr/bin/python3")
 
 ;; single indent for multi-line function signature
 (setq-default python-indent-def-block-scale 1)

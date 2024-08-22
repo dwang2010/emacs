@@ -123,6 +123,9 @@ make distclean
 | C-c C-o        | open link                                                  |
 | C-c &          | return to previous location                                |
 |----------------+------------------------------------------------------------|
+| C-c C-f        | move forward to next heading at same level                 |
+| C-c C-b        | move backward to previous heading at same level            |
+|----------------+------------------------------------------------------------|
 
 *** Agenda
 |---------+--------------------------------------------|
