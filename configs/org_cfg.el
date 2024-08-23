@@ -189,6 +189,15 @@
   (setq-default org-ascii-text-width 10000) ; hack to unfill paragraphs
   (setq-default org-ascii-inner-margin 0)) ; remove body indentation when exporting
 
+;; remove mouse highlighting in agenda
+(add-hook 'org-agenda-finalize-hook
+          (lambda ()
+            (make-local-variable 'mouse-highlight)
+            (setq mouse-highlight nil)))
+
+;; suppress 'org-element-at-point' warning for current org version
+(setq-default warning-suppress-log-types '((org-element org-element-parser)))
+
 ;; ---------------------------------------------------------
 ;; make org bullets fancy
 ;; ---------------------------------------------------------
