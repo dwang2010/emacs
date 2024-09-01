@@ -80,6 +80,7 @@
   (setq-default org-log-done 'time) ; auto add completion time on TODO close
   (setq-default org-bookmark-names-plist nil) ; no refile / capture bookmarks
   (setq-default org-blank-before-new-entry '((heading . t) (plain-list-item . auto)))
+  (setq-default org-todo-keywords '((sequence "TODO" "PEND" "|" "DONE")))
 
   ;; org-agenda - dashboard view of tasks
   ;; :       - add / remove tags
