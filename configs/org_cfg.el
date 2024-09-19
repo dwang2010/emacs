@@ -74,7 +74,7 @@
           (wl . wl-other-frame)))
 
   ;; tags related
-  (setq-default org-tags-column -75)
+  (setq-default org-tags-column -78)
   (setq-default org-auto-align-tags t)
 
   (setq-default org-log-done 'time) ; auto add completion time on TODO close
@@ -87,7 +87,7 @@
   ;; t       - change todo state
   ;; C-c C-W - refile
   (global-set-key (kbd "<f1>") (lambda () (interactive) (org-agenda nil "n")))
-  (setq-default org-agenda-files '("~/notes/ttd.org"))
+  (setq-default org-agenda-files '("~/notes/ttd.org" "~/notes/work/proj"))
   (setq-default org-agenda-window-setup 'current-window)
   (setq-default org-agenda-sorting-strategy '(priority-down alpha-up))
   (setq-default org-agenda-inhibit-startup t) ; attempt to speedup agenda
@@ -216,15 +216,17 @@
   :config
   (setq-default org-priority-highest 0
                 org-priority-default 1
-                org-priority-lowest 3)
+                org-priority-lowest 4)
   (setq-default org-fancy-priorities-list '((?0 . "P0")
                                             (?1 . "P1")
                                             (?2 . "P2")
-                                            (?3 . "P3")))
+                                            (?3 . "P3")
+                                            (?4 . "P4")))
   (setq-default org-priority-faces '((?0 :foreground "#ff0000" :weight bold)
                                      (?1 :foreground "#ff7f00" :weight bold)
                                      (?2 :foreground "#ffc125" :weight bold)
-                                     (?3 :foreground "#b3b3b3" :weight bold))))
+                                     (?3 :foreground "#b3b3b3" :weight bold)
+                                     (?4 :foreground "#b3b3b3" :weight bold))))
 
 ;; ---------------------------------------------------------
 ;; presentation mode
