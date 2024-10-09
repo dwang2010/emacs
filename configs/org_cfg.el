@@ -87,7 +87,7 @@
   ;; t       - change todo state
   ;; C-c C-W - refile
   (global-set-key (kbd "<f1>") (lambda () (interactive) (org-agenda nil "n")))
-  (setq-default org-agenda-files '("~/notes/ttd.org" "~/notes/work/proj"))
+  (setq-default org-agenda-files '("~/notes/ttd.org" "~/notes/work/proj" "~/notes/meetings.org"))
   (setq-default org-agenda-window-setup 'current-window)
   (setq-default org-agenda-sorting-strategy '(priority-down alpha-up))
   (setq-default org-agenda-inhibit-startup t) ; attempt to speedup agenda

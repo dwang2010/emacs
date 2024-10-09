@@ -19,6 +19,7 @@
   (global-so-long-mode 1) ; avoid performance issues in long line files
   (global-eldoc-mode -1) ; disable eldoc mode globally
   (defalias 'yes-or-no-p 'y-or-n-p) ; simple (y or n) on prompts
+  (global-superword-mode t) ; treat 'this_is_symbol' as one word
 
   ;; key un-bindings
   (keymap-global-unset "C-z") ; suspend frame
