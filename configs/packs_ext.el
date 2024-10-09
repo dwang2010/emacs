@@ -102,7 +102,7 @@
   (("C-s" . swiper-isearch)
    ("C-r" . swiper-isearch-thing-at-point))
   :config
-  (setq-default swiper-goto-start-of-match t)
+  (setq-default swiper-goto-start-of-match nil)
   (setq-default swiper-verbose nil)
 
   ;; don't quit search when backspace on empty query
