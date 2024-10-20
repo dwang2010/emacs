@@ -99,8 +99,7 @@
 (use-package swiper
   :ensure t
   :bind
-  (("C-s" . swiper-isearch)
-   ("C-r" . swiper-isearch-thing-at-point))
+  (("C-s" . swiper-isearch-thing-at-point))
   :config
   (setq-default swiper-goto-start-of-match nil)
   (setq-default swiper-verbose nil)
