@@ -26,7 +26,6 @@
   (keymap-global-unset "C-x C-z") ; suspend frame
   (keymap-global-unset "C-x k") ; kill buffer
   (keymap-global-unset "C-x C-d") ; list dirs
-  (keymap-global-unset "C-x C-c") ; close emacs
   (keymap-global-unset "C-x C-r") ; find file read only
   (keymap-global-unset "C-<wheel-up>") ; scroll wheel zoom
   (keymap-global-unset "C-<wheel-down>") ; scroll wheel zoom
@@ -65,6 +64,7 @@
   (completions-format 'vertical) ; sort completions minibuffer vertically
   (ibuffer-default-sorting-mode 'filename/process) ; ibuffer sort by filename
   (cursor-type 'bar) ; set default cursor type to vertical bar
+  (confirm-kill-emacs #'my-confirm-kill-daemon) ; confirm before exiting
 
   ;; formatting config variables
   (indent-tabs-mode nil) ; spaces instead of tabs when indenting
@@ -115,3 +115,9 @@
   (let ((filep (buffer-file-name)))
     (if filep (find-file (concat "/sudo::" filep))
       (message "Current buffer does not have an associated file."))))
+
+(defun my-confirm-kill-daemon (prompt)
+  "Ask whether to kill daemon Emacs with PROMPT.
+Intended as a predicate for `confirm-kill-emacs'."
+  (or (not (daemonp))
+      (y-or-no-p prompt)))
