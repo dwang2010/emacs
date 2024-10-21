@@ -162,6 +162,19 @@ _underline_ (_)
 +strike+ (+)
 : leading colon for "small examples" other markings are *off*
 
+* LSP Mode
+** Javascript
+1) Install NVM - https://github.com/nvm-sh/nvm
+- just run some cURL command ...
+- ensure that ENV export commands get to the right profile file
+
+2) Install node
+: nvm install node
+
+3) install javascript / typescript language server
+- https://github.com/typescript-language-server/typescript-language-server
+: npm install -g typescript-language-server typescript
+
 * Misc Notes
 ** early packages of interest
 org-sliced-images: https://github.com/jcfk/org-sliced-images
