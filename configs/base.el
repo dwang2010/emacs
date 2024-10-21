@@ -23,6 +23,7 @@
 
   ;; key un-bindings
   (keymap-global-unset "C-z") ; suspend frame
+  (keymap-global-unset "C-r") ; isearch reverse
   (keymap-global-unset "C-x C-z") ; suspend frame
   (keymap-global-unset "C-x k") ; kill buffer
   (keymap-global-unset "C-x C-d") ; list dirs
