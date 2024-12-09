@@ -81,6 +81,10 @@
   (setq-default org-bookmark-names-plist nil) ; no refile / capture bookmarks
   (setq-default org-blank-before-new-entry '((heading . t) (plain-list-item . auto)))
   (setq-default org-todo-keywords '((sequence "TODO" "PEND" "|" "DONE")))
+  (setq-default org-todo-keyword-faces
+                '(("TODO" . (:foreground "#cd5555" :weight bold))
+                  ("PEND" . (:foreground "#8b6914"))
+                  ("DONE" . (:foreground "#62686E"))))
 
   ;; org-agenda - dashboard view of tasks
   ;; :       - add / remove tags
@@ -249,7 +253,7 @@
           ; padding from top
           (header-line (:height 3.0) fixed-pitch)
           ; top line title face
-          (org-document-title (:height 3.0) org-document-title))))
+          (org-document-title (:height 2.0) org-document-title))))
 
 (defun my-org-present-end-hook ()
   "Buffer configs to revert when exiting presentation mode"
