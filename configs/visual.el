@@ -21,8 +21,8 @@
 ;; (use-package ef-themes
 ;;   :ensure t
 ;;   :config
-;;   (load-theme 'ef-melissa-dark t)
-;;   (set-face-attribute 'line-number nil :foreground "grey27"))
+;;   (load-theme 'ef-owl t)
+;;   (set-face-attribute 'line-number nil :foreground "grey35"))
 
 ;; https://github.com/doomemacs/themes
 (use-package doom-themes
@@ -84,7 +84,24 @@
      org-backward-heading-same-level
      ace-window))
   :config
-  (pulsar-global-mode 1))
+  (pulsar-global-mode 0))
+
+;; ------------------------------------------------------------------------
+;; spacious padding
+;; https://protesilaos.com/emacs/spacious-padding
+;; ------------------------------------------------------------------------
+(use-package spacious-padding
+  :ensure t
+  :config
+  (setq spacious-padding-widths
+        '( :internal-border-width 15 ; padding to main window borders
+           :header-line-width 4 ; breadcrumb top line
+           :right-divider-width 15
+           :mode-line-width 3 ))
+  ;; unclear why this needs setting twice
+  ;; spacious padding adds some kind of outline around the mode-line
+  (set-face-attribute 'mode-line nil :background "RoyalBlue4")
+  (spacious-padding-mode 1))
 
 ;; ------------------------------------------------------------------------
 ;; highlight current line - only in specific modes (native)
@@ -140,3 +157,6 @@
 (if (eql system-type 'darwin)
     ;; dark themed title bar
     (add-to-list 'default-frame-alist '(ns-appearance . dark)))
+
+;; override active buffer modeline background color
+(set-face-attribute 'mode-line nil :background "RoyalBlue4")
