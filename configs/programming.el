@@ -108,44 +108,38 @@
 ;; javascript configs
 ;; LSP: https://github.com/typescript-language-server/typescript-language-server
 ;; ------------------------------------------------------------------------
-(use-package js2-mode :ensure t) ; for linting
-(use-package flow-js2-mode :ensure t) ; supports js2 (needed for flow)
+;; auto format buffer with prettier
+;; https://github.com/radian-software/apheleia
+;; saving on remote files kinda sucks, so invoke manually with keybinding
+(use-package apheleia
+  :ensure t
+  :config
+  (setf (alist-get 'prettier-json apheleia-formatters)
+        '("prettier" "--stdin-filepath" filepath)))
+
+;; additional configs for JS editing
+(defun my-js/ts-cfg-hook ()
+  (local-set-key (kbd "C-c C-a") #'apheleia-format-buffer)
+  (setq-default js-indent-level 2))
+(add-hook 'typescript-ts-mode-hook #'my-js/ts-cfg-hook)
+
+;; (use-package js2-mode :ensure t) ; for linting
+;; (use-package flow-js2-mode :ensure t) ; supports js2 (needed for flow)
 
 ;; convenience mode for flow server interaction
 ;; C-c C-c [(s)tatus, (c)overage, (t)ype-at-point]
-(use-package flow-minor-mode
-  :ensure t
-  :hook (flow-minor-mode . my-flow-save-check-hook)
-  :bind (:map flow-minor-mode-map ("M-," . nil) ("M-." . nil)))
+;; (use-package flow-minor-mode
+;;   :ensure t
+;;   :hook (flow-minor-mode . my-flow-save-check-hook)
+;;   :bind (:map flow-minor-mode-map ("M-," . nil) ("M-." . nil)))
 
 ;; main configs for js editing (js-ts-mode as base)
-(defun my-js-cfg-hook ()
-  (local-unset-key (kbd "M-."))
-  (setq-default js-indent-level 2)
-  (set-face-attribute 'font-lock-operator-face nil :foreground "turquoise3")
-  (flow-minor-mode)
-  (eldoc-mode -1) ; disables constant "type at point" check in minibuffer
-  (flow-js2-mode)
-  (js2-minor-mode))
-(add-hook 'js-ts-mode-hook #'my-js-cfg-hook)
-
-;; test config for js2-mode editing
-(defun my-js2-cfg-hook ()
-  (local-unset-key (kbd "M-."))
-  (setq-default js-indent-level 2)
-  (set-face-attribute 'font-lock-operator-face nil :foreground "turquoise3")
-  (flow-minor-mode)
-  (eldoc-mode -1) ; disables constant "type at point" check in minibuffer
-  (flow-js2-mode))
-(add-hook 'js2-mode-hook #'my-js2-cfg-hook)
-
-;; ;; web-mode included as fallback
-;; (use-package web-mode :ensure t :defer t)
-;; (defun web-mode-init-hook ()
-;;   (setq web-mode-code-indent-offset 2)
-;;   (setq web-mode-markup-indent-offset 2)
-;;   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
-;; (add-hook 'web-mode-hook  'web-mode-init-hook)
+;; (defun my-js-cfg-hook ()
+;;   (local-unset-key (kbd "M-."))
+;;   (flow-minor-mode)
+;;   (flow-js2-mode)
+;;   (js2-minor-mode))
+;; (add-hook 'js-ts-mode-hook #'my-js-cfg-hook)
 
 ;; ;; look for locally installed eslint for use in flycheck
 ;; (defun my/use-eslint-from-node-modules ()

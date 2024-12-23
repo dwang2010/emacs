@@ -157,6 +157,3 @@
 (if (eql system-type 'darwin)
     ;; dark themed title bar
     (add-to-list 'default-frame-alist '(ns-appearance . dark)))
-
-;; override active buffer modeline background color
-(set-face-attribute 'mode-line nil :background "RoyalBlue4")
