@@ -67,6 +67,7 @@
   (ibuffer-default-sorting-mode 'filename/process) ; ibuffer sort by filename
   (cursor-type 'bar) ; set default cursor type to vertical bar
   (confirm-kill-emacs #'my-confirm-kill-daemon) ; confirm before exiting
+  (window-combination-resize t) ; always balance frame on splits
 
   ;; formatting config variables
   (indent-tabs-mode nil) ; spaces instead of tabs when indenting
