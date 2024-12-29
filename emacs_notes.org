@@ -81,6 +81,9 @@ sudo apt-get build-dep emacs
 ./configure --with-native-compilation\
             --with-tree-sitter\
             --with-json\
+            --with-png\
+            --with-jpeg\
+            --with-gif\
             --with-mailutils
 
 # clean old and build
