@@ -33,9 +33,15 @@
   (setq-default dcw-dark-theme-flag t)
   (set-face-attribute 'show-paren-match nil :bold t))
 
-(set-cursor-color "#ff7f00") ; needed for init reload
 (set-face-attribute 'font-lock-doc-face nil :foreground "#8a8a93")
 (set-face-attribute 'font-lock-comment-face nil :foreground "#81868b")
+
+;; slightly ugly but ensures consistent cursor color across:
+;; opening new daemon frames / init file reload
+(set-face-attribute 'cursor nil :background "#ff7f00")
+(defun my-cursor-color-hook (frame)
+  (modify-frame-parameters frame '((cursor-color . "#ff7f00"))))
+(add-hook 'after-make-frame-functions 'my-cursor-color-hook)
 
 ;; ------------------------------------------------------------------------
 ;; visual icons
@@ -143,8 +149,7 @@
 ;; default frame parameters
 (setq-default default-frame-alist
               '((width . 90) ; window width (cols)
-                (height . 50) ; window height (rows)
-                (cursor-color . "#ff7f00"))) ; needed for emacsclient startup
+                (height . 50))) ; window height (rows)
 
 ;; ensure scrollbars don't appear when creating new frames
 (defun rmv-scroll-bars (frame)
