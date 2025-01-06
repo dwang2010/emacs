@@ -151,7 +151,7 @@
   (setq-default org-capture-templates
                 '(;; --- work related tasks ---
                   ("t" "Task" entry
-                   (file+headline org-default-ttd-file "Inbox: Tag + Refile")
+                   (file+headline org-default-ttd-file "Inbox")
                    "* TODO [#2] %?\n" :prepend t)
 
                   ;; --- meeting related notes ---
