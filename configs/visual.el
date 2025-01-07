@@ -109,6 +109,9 @@
   (set-face-attribute 'mode-line nil :background "RoyalBlue4")
   (spacious-padding-mode 1))
 
+;; removing this line result in only mode-line border receiving color setting
+(set-face-attribute 'mode-line nil :background "RoyalBlue4")
+
 ;; ------------------------------------------------------------------------
 ;; highlight current line - only in specific modes (native)
 ;; ------------------------------------------------------------------------
