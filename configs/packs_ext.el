@@ -379,3 +379,28 @@
 (use-package diredfl
   :ensure t
   :hook (dired-mode . diredfl-mode))
+
+;; ------------------------------------------------------------------------
+;; unfill
+;; ------------------------------------------------------------------------
+(use-package unfill
+  :ensure t
+  :bind
+  (("C-c e" . my-copy-unfilled-for-export)))
+
+(defun my-copy-unfilled-for-export ()
+  "Copy unfilled region to clipboard and leave buffer in initial state"
+  (interactive)
+  (if (use-region-p)
+      (let ((region-start (region-beginning)) (region-end (region-end)))
+        (let ((original-text (buffer-substring-no-properties region-start region-end)))
+          (with-temp-buffer
+            (org-mode) ; set temp buffer major mode
+            (insert original-text)
+            ;; unfill-region / copy to clipboard
+            (let ((start (point-min)) (end (point-max))) (unfill-region start end))
+            ;; Copy the processed text to the clipboard
+            (kill-new (buffer-string))))
+        (message "Unfilled region copied to clipboard.")
+        (deactivate-mark))
+    (message "No region selected")))
