@@ -26,8 +26,8 @@
   ;; customize heading sizes
   (set-face-attribute 'org-document-info-keyword nil :foreground 'unspecified :inherit 'font-lock-comment-face)
   (set-face-attribute 'org-document-title nil :height 1.00)
-  (set-face-attribute 'org-level-1 nil :height 1.00 :bold nil :foreground "#d4c5a0")
-  (set-face-attribute 'org-level-2 nil :height 1.00 :foreground "#51afef")
+  (set-face-attribute 'org-level-1 nil :height 1.00 :bold nil :foreground "#51afef")
+  (set-face-attribute 'org-level-2 nil :height 1.00 :foreground "#d4c5a0")
   (set-face-attribute 'org-level-3 nil :height 1.00 :foreground "#cc99cc")
   (set-face-attribute 'org-level-4 nil :height 1.00 :foreground "#66cccc")
   (set-face-attribute 'org-level-5 nil :height 1.00 :inherit 'org-level-3)
