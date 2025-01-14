@@ -202,5 +202,3 @@ treesit related
 ****** Sixth Level Org Heading Color Test
 ******* Seventh Level Org Heading Color Test
 ******** Eight Level Org Heading Color Test
-********* Ninth Level Org Heading Color Test
-********** Tenth Level Org Heading Color Test

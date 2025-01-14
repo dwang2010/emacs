@@ -19,14 +19,14 @@
 ;;   (modus-themes-common-palette-overrides '((bg-region bg-lavender) (fg-region unspecified))))
 
 ;; https://protesilaos.com/emacs/ef-themes-pictures
-(use-package ef-themes
-  :ensure t
-  :config
-  (ef-themes-select 'ef-owl)
-  ;; customize line number face
-  (custom-theme-set-faces
-   (or (car custom-enabled-themes) 'user) ; get current theme to target
-   '(line-number ((t (:foreground "grey35"))))))
+;; (use-package ef-themes
+;;   :ensure t
+;;   :config
+;;   (ef-themes-select 'ef-owl)
+;;   ;; customize line number face
+;;   (custom-theme-set-faces
+;;    (or (car custom-enabled-themes) 'user) ; get current theme to target
+;;    '(line-number ((t (:foreground "grey35"))))))
 
 ;; https://github.com/doomemacs/themes
 ;; (use-package doom-themes
@@ -36,6 +36,15 @@
 ;;   (load-theme 'doom-vibrant t)
 ;;   (setq-default dcw-dark-theme-flag t)
 ;;   (set-face-attribute 'show-paren-match nil :bold t))
+
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t
+  :config
+  (load-theme 'sanityinc-tomorrow-eighties t)
+  (set-face-attribute 'show-paren-match nil :bold nil :foreground "cyan" :background 'unspecified)
+  (custom-theme-set-faces
+   (or (car custom-enabled-themes) 'user) ; get current theme to target
+   '(line-number ((t (:foreground "grey35"))))))
 
 (set-face-attribute 'font-lock-doc-face nil :foreground "#8a8a93")
 (set-face-attribute 'font-lock-comment-face nil :foreground "#81868b")

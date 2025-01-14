@@ -24,17 +24,19 @@
   (setq-default org-fold-core-style 'overlays) ; fix issues with subtree folding
 
   ;; customize heading sizes
-  (set-face-attribute 'org-level-1 nil :height 1.00)
-  (set-face-attribute 'org-level-2 nil :height 1.00)
-  (set-face-attribute 'org-level-3 nil :height 1.00)
-  (set-face-attribute 'org-level-4 nil :height 1.00)
-  (set-face-attribute 'org-level-5 nil :height 1.00)
-  (set-face-attribute 'org-level-6 nil :height 1.00)
-  (set-face-attribute 'org-level-7 nil :height 1.00)
-  (set-face-attribute 'org-level-8 nil :height 1.00)
+  (set-face-attribute 'org-document-info-keyword nil :foreground 'unspecified :inherit 'font-lock-comment-face)
+  (set-face-attribute 'org-document-title nil :height 1.00)
+  (set-face-attribute 'org-level-1 nil :height 1.00 :bold nil :foreground "#d4c5a0")
+  (set-face-attribute 'org-level-2 nil :height 1.00 :foreground "#51afef")
+  (set-face-attribute 'org-level-3 nil :height 1.00 :foreground "#cc99cc")
+  (set-face-attribute 'org-level-4 nil :height 1.00 :foreground "#66cccc")
+  (set-face-attribute 'org-level-5 nil :height 1.00 :inherit 'org-level-3)
+  (set-face-attribute 'org-level-6 nil :height 1.00 :inherit 'org-level-4)
+  (set-face-attribute 'org-level-7 nil :height 1.00 :inherit 'org-level-3)
+  (set-face-attribute 'org-level-8 nil :height 1.00 :inherit 'org-level-4)
 
   ;; customize some faces
-  (set-face-attribute 'org-headline-done nil :foreground "grey40")
+  (set-face-attribute 'org-headline-done nil :foreground "grey40" :strike-through nil)
   (set-face-attribute 'org-tag nil :foreground "grey35")
   (set-face-attribute 'org-table nil :foreground "#a991f1")
   (set-face-attribute 'org-code nil :foreground "#e69055")
@@ -50,10 +52,10 @@
   ;; customize emphasis markers
   (setq-default org-hide-emphasis-markers t)
   (setq-default org-emphasis-alist
-        '(("*" (:weight bold :foreground "#bcaf8e"))
+        '(("*" (:weight bold :foreground "grey95"))
           ("/" italic)
           ("_" underline)
-          ("=" org-verbatim)
+          ("=" (:weight nil :foreground "darkolivegreen3"))
           ("~" org-code)
           ("+" (:strike-through t))))
 
@@ -313,7 +315,7 @@
 (defun my-quick-add-emphasis ()
   "Enclose symbol with '=' for org emphasis"
   (require 'expand-region)
-  (interactive) (er/mark-symbol) (org-emphasize ?\=))
+  (interactive) (er/mark-symbol) (org-emphasize ?\*))
 
 (defun my-quick-add-src-blk ()
   "Auto add source block without prompting"
