@@ -1,5 +1,6 @@
 ;; ------------------------------------------------------------------------
 ;; visual theme
+;; TODO: look into #ebdbb2 as default font color
 ;; ------------------------------------------------------------------------
 (mapc #'disable-theme custom-enabled-themes)
 
@@ -18,20 +19,23 @@
 ;;   (modus-themes-common-palette-overrides '((bg-region bg-lavender) (fg-region unspecified))))
 
 ;; https://protesilaos.com/emacs/ef-themes-pictures
-;; (use-package ef-themes
-;;   :ensure t
-;;   :config
-;;   (load-theme 'ef-owl t)
-;;   (set-face-attribute 'line-number nil :foreground "grey35"))
-
-;; https://github.com/doomemacs/themes
-(use-package doom-themes
+(use-package ef-themes
   :ensure t
   :config
-  ;; doom vibrant configs
-  (load-theme 'doom-vibrant t)
-  (setq-default dcw-dark-theme-flag t)
-  (set-face-attribute 'show-paren-match nil :bold t))
+  (ef-themes-select 'ef-owl)
+  ;; customize line number face
+  (custom-theme-set-faces
+   (or (car custom-enabled-themes) 'user) ; get current theme to target
+   '(line-number ((t (:foreground "grey35"))))))
+
+;; https://github.com/doomemacs/themes
+;; (use-package doom-themes
+;;   :ensure t
+;;   :config
+;;   ;; doom vibrant configs
+;;   (load-theme 'doom-vibrant t)
+;;   (setq-default dcw-dark-theme-flag t)
+;;   (set-face-attribute 'show-paren-match nil :bold t))
 
 (set-face-attribute 'font-lock-doc-face nil :foreground "#8a8a93")
 (set-face-attribute 'font-lock-comment-face nil :foreground "#81868b")
@@ -104,13 +108,7 @@
            :header-line-width 4 ; breadcrumb top line
            :right-divider-width 15
            :mode-line-width 3 ))
-  ;; unclear why this needs setting twice
-  ;; spacious padding adds some kind of outline around the mode-line
-  (set-face-attribute 'mode-line nil :background "RoyalBlue4")
   (spacious-padding-mode 1))
-
-;; removing this line result in only mode-line border receiving color setting
-(set-face-attribute 'mode-line nil :background "RoyalBlue4")
 
 ;; ------------------------------------------------------------------------
 ;; highlight current line - only in specific modes (native)

@@ -1,5 +1,5 @@
 #+TITLE: GENERAL EMACS NOTES
-#+STARTUP: content
+#+STARTUP: fold
 
 * Base
 ** Useful Bindings
@@ -165,7 +165,7 @@ _underline_ (_)
 =verbatim= (=)
 ~code~ (~)
 +strike+ (+)
-: leading colon for "small examples" other markings are *off*
+: leading colon for "small examples" _other_ /markings/ also *work*
 
 * LSP Mode
 ** Javascript
@@ -193,3 +193,14 @@ https://en.wikipedia.org/wiki/Regular_expression#POSIX_basic_and_extended
 ** warnings
 treesit related
 - manually install grammars via ~treesit-install-language-grammar~
+
+* First Level Org Heading Color Test
+** Second Level Org Heading Color Test
+*** Third Level Org Heading Color Test
+**** Fourth Level Org Heading Color Test
+***** Fifth Level Org Heading Color Test
+****** Sixth Level Org Heading Color Test
+******* Seventh Level Org Heading Color Test
+******** Eight Level Org Heading Color Test
+********* Ninth Level Org Heading Color Test
+********** Tenth Level Org Heading Color Test
