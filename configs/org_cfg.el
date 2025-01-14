@@ -24,14 +24,14 @@
   (setq-default org-fold-core-style 'overlays) ; fix issues with subtree folding
 
   ;; customize heading sizes
-  (set-face-attribute 'org-level-1 nil :height 1.00 :foreground "#80a4e0") ; blue
-  (set-face-attribute 'org-level-2 nil :height 1.00 :foreground "#aab2df") ; blue faint
-  (set-face-attribute 'org-level-3 nil :height 1.00 :foreground "#99bfd0") ; cyan warmer
-  (set-face-attribute 'org-level-4 nil :height 1.00 :foreground "#cbb0a0") ; yellow faint
-  (set-face-attribute 'org-level-5 nil :height 1.00 :inherit 'org-level-1)
-  (set-face-attribute 'org-level-6 nil :height 1.00 :inherit 'org-level-2)
-  (set-face-attribute 'org-level-7 nil :height 1.00 :inherit 'org-level-3)
-  (set-face-attribute 'org-level-8 nil :height 1.00 :inherit 'org-level-4)
+  (set-face-attribute 'org-level-1 nil :height 1.00)
+  (set-face-attribute 'org-level-2 nil :height 1.00)
+  (set-face-attribute 'org-level-3 nil :height 1.00)
+  (set-face-attribute 'org-level-4 nil :height 1.00)
+  (set-face-attribute 'org-level-5 nil :height 1.00)
+  (set-face-attribute 'org-level-6 nil :height 1.00)
+  (set-face-attribute 'org-level-7 nil :height 1.00)
+  (set-face-attribute 'org-level-8 nil :height 1.00)
 
   ;; customize some faces
   (set-face-attribute 'org-headline-done nil :foreground "grey40")
