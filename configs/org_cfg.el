@@ -36,7 +36,7 @@
   (set-face-attribute 'org-level-8 nil :height 1.00 :inherit 'org-level-4)
 
   ;; customize some faces
-  (set-face-attribute 'org-headline-done nil :foreground "grey40" :strike-through nil)
+  (set-face-attribute 'org-headline-done nil :foreground "grey35" :strike-through nil)
   (set-face-attribute 'org-tag nil :foreground "grey35")
   (set-face-attribute 'org-table nil :foreground "#a991f1")
   (set-face-attribute 'org-code nil :foreground "#e69055")
@@ -88,7 +88,7 @@
 
   (setq-default org-log-done 'time) ; auto add completion time on TODO close
   (setq-default org-bookmark-names-plist nil) ; no refile / capture bookmarks
-  (setq-default org-blank-before-new-entry '((heading . t) (plain-list-item . auto)))
+  (setq-default org-blank-before-new-entry '((heading . nil) (plain-list-item . auto)))
   (setq-default org-todo-keywords '((sequence "TODO" "PEND" "|" "DONE")))
   (setq-default org-todo-keyword-faces
                 '(("TODO" . (:foreground "#cd5555" :weight bold))
