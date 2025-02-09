@@ -327,13 +327,6 @@
   ("M-k" . crux-kill-line-backwards)) ; kill from point towards gutter
 
 ;; ------------------------------------------------------------------------
-;; google this
-;; ------------------------------------------------------------------------
-(use-package google-this
-  :ensure t
-  :bind ("M-z" . google-this-noconfirm))
-
-;; ------------------------------------------------------------------------
 ;; yasnippet - template system (automate boilerplate stuff)
 ;; ------------------------------------------------------------------------
 ;; (use-package yasnippet

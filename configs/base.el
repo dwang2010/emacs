@@ -49,7 +49,8 @@
    ("<end>" . move-end-of-line)
    ("s-f" . toggle-frame-fullscreen)
    ("s-m" . toggle-frame-maximized)
-   ("C-g" . prot/keyboard-quit-dwim))
+   ("C-g" . prot/keyboard-quit-dwim)
+   ("M-z" . my/open-thing-at-point-in-browser))
 
   :custom
   ;; UI config variables
@@ -124,6 +125,24 @@
 Intended as a predicate for `confirm-kill-emacs'."
   (or (not (daemonp))
       (y-or-no-p prompt)))
+
+(defun my/open-thing-at-point-in-browser ()
+  "Open selected region or thing-at-point in browser with selected base URL"
+  (interactive)
+  (let* ((thing (if (use-region-p) ; get region if active, or just word at point
+                    (buffer-substring-no-properties (region-beginning) (region-end))
+                  (thing-at-point 'word t)))
+
+         ;; completing-read user input to select base-url
+         (base-urls '(("Google" . "https://www.google.com/search?q=")
+                      ("FB Internal" . "https://www.internalfb.com/")))
+         (selection (completing-read "Select base URL: " (mapcar #'car base-urls) nil t))
+         (base-url (cdr (assoc selection base-urls))))
+
+    ;; concat base-url + selection and open in browser
+    (if (and thing base-url)
+        (browse-url (concat base-url (url-hexify-string thing)))
+      (message "No valid selection or text at point!"))))
 
 (defun prot/keyboard-quit-dwim ()
   "Do-What-I-Mean behaviour for a general `keyboard-quit'.
