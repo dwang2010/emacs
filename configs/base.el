@@ -34,7 +34,7 @@
 
   :bind
   (("C-x C-b" . ibuffer) ; bind ibuffer
-   ("C-x k" . kill-this-buffer) ; just kill buffer, don't ask
+   ("C-x k" . kill-current-buffer) ; just kill buffer, don't ask
    ("C-x s" . save-buffer) ; redundant save for lazy fingers
    ("C-c a" . align-regexp)
    ("C-c s" . replace-string)
@@ -135,7 +135,8 @@ Intended as a predicate for `confirm-kill-emacs'."
 
          ;; completing-read user input to select base-url
          (base-urls '(("Google" . "https://www.google.com/search?q=")
-                      ("FB Internal" . "https://www.internalfb.com/")))
+                      ("FB Internal" . "https://www.internalfb.com/")
+                      ("FB ID" . "https://www.internalfb.com/id3/id/")))
          (selection (completing-read "Select base URL: " (mapcar #'car base-urls) nil t))
          (base-url (cdr (assoc selection base-urls))))
 
