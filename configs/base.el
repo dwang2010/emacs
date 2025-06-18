@@ -135,7 +135,7 @@ Intended as a predicate for `confirm-kill-emacs'."
 
          ;; completing-read user input to select base-url
          (base-urls '(("Google" . "https://www.google.com/search?q=")
-                      ("FB Internal" . "https://www.internalfb.com/")
+                      ("FB Internal" . "https://www.internalfb.com/intern/bunny/?q=")
                       ("FB ID" . "https://www.internalfb.com/id3/id/")))
          (selection (completing-read "Select base URL: " (mapcar #'car base-urls) nil t))
          (base-url (cdr (assoc selection base-urls))))
