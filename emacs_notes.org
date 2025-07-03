@@ -64,43 +64,6 @@ Alias "emacs" to instead run emacsclient
 emacsclient -c -a "emacs"
 #+end_src
 
-** Installation from Source
-https://www.rahuljuliato.com/posts/compiling_emacs_29_2
-
-*** Install
-#+begin_src bash
-# download
-# unpack
-tar xvfz emacs-VERS.tar.gz
-
-# install build deps
-sudo apt-get build-dep emacs
-
-# configure for install
-# see: ./configure --help
-./configure --with-native-compilation\
-            --with-tree-sitter\
-            --with-json\
-            --with-png\
-            --with-jpeg\
-            --with-gif\
-            --with-mailutils
-
-# clean old and build
-make clean
-make -j 8
-make install
-
-# verify
-emacs --version
-#+end_src
-
-*** Remove
-#+begin_src bash
-sudo make uninstall
-make clean
-make distclean
-#+end_src
 * Org-Mode
 ** Helpful Bindings
 *** General
@@ -194,11 +157,39 @@ https://en.wikipedia.org/wiki/Regular_expression#POSIX_basic_and_extended
 treesit related
 - manually install grammars via ~treesit-install-language-grammar~
 
-* First Level Org Heading Color Test
-** Second Level Org Heading Color Test
-*** Third Level Org Heading Color Test
-**** Fourth Level Org Heading Color Test
-***** Fifth Level Org Heading Color Test
-****** Sixth Level Org Heading Color Test
-******* Seventh Level Org Heading Color Test
-******** Eight Level Org Heading Color Test
+* Source Install
+** Installation
+https://www.gnu.org/software/emacs/manual/html_node/efaq/Installing-Emacs.html
+
+#+begin_src bash
+# unpack
+tar -xvzf emacs-VERS.tar.gz
+
+# install build deps
+sudo apt-get build-dep emacs
+
+# configure for install
+# see: ./configure --help
+./configure --with-native-compilation\
+            --with-tree-sitter\
+            --with-json\
+            --with-png\
+            --with-jpeg\
+            --with-gif\
+            --with-mailutils
+
+# clean old and build
+make clean
+make
+make install
+
+# verify
+emacs --version
+#+end_src
+
+** Removal
+#+begin_src bash
+sudo make uninstall
+make clean
+make distclean
+#+end_src
