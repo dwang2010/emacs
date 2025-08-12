@@ -24,6 +24,24 @@
 | list-colors-display | show displayable colors                           |
 | info-apropos        | good for searching through emacs manuals          |
 |---------------------+---------------------------------------------------|
+** Timers
+Once started, tracks time in modeline
+- handy for inserting timestamped list items (interview notes?!?!)
+
+|-----------+--------------------+------------------------------|
+| Binding   | Command            | Description                  |
+|-----------+--------------------+------------------------------|
+| C-c C-x 0 | org-timer-start    | start / reset relative timer |
+| C-c C-x _ | org-timer-stop     | stops the timer              |
+|-----------+--------------------+------------------------------|
+| C-c C-x - | org-timer-item     | insert list item with time   |
+| M-RET     | org-insert-heading | insert new list timer item   |
+|-----------+--------------------+------------------------------|
+
+: process flow
+1) start the timer
+2) insert list item
+3) M-RET for new items, ad naueseum
 
 ** TRAMP
 *** local to server
@@ -114,12 +132,15 @@ in agenda view: (/) filter (|) remove filters (t) toggle todo state
 |---------+------------------------------------------------|
 
 *** Tables
-|-----------+------------------------------------|
-| C-c C-c   | realign table                      |
-| TAB       | realign table + move to next field |
-| M-S-right | insert column at point             |
-| M-S-down  | insert row at opint                |
-|-----------+------------------------------------|
+|-----------+------------------------------------------|
+| C-c C-c   | realign table                            |
+|-----------+------------------------------------------|
+| S-TAB     | cycle to prev table cell                 |
+| TAB       | cycle to next table cell / realign table |
+|-----------+------------------------------------------|
+| M-S-right | insert column at point                   |
+| M-S-down  | insert row at point                      |
+|-----------+------------------------------------------|
 
 *** Visual Emphasis
 *bold* (*)
