@@ -307,8 +307,8 @@
   :custom
   (mc/match-cursor-style nil) ; disable fake cursor matching, shifts text
   :bind
-  (("C->" . mc/edit-beginnings-of-lines) ; drops cursor on all region lines
-   ("C-c C->" . mc/mark-all-like-this) ; all matches of active region
+  (("C->" . mc/mark-next-like-this) ; adds cursor next line (no active region)
+   ("C-c C->" . mc/edit-beginnings-of-lines) ; drops cursor on all lines
    ;; ensure same behavior when exiting with 'return' / 'C-g'
    :map mc/keymap ("<return>" . 'mc/keyboard-quit)))
 
