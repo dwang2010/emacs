@@ -36,7 +36,7 @@
   (("C-x C-b" . ibuffer) ; bind ibuffer
    ("C-x k" . kill-current-buffer) ; just kill buffer, don't ask
    ("C-x s" . save-buffer) ; redundant save for lazy fingers
-   ("C-c a" . align-regexp)
+   ;; ("C-c a" . align-regexp)
    ("C-c s" . replace-string)
    ("C-l" . recenter-top-bottom)
    ("<f5>" . revert-buffer-no-confirm)
