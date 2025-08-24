@@ -6,6 +6,7 @@
 
 (defun my-org-binding-configs ()
   (local-unset-key (kbd "C-,")) ;; cycle org agenda files
+  (local-unset-key (kbd "M-h")) ;; org-mark-element
   (local-set-key (kbd "C-c b") 'my-quick-add-emphasis)
   (local-set-key (kbd "C-c ,") 'my-quick-add-src-blk)
   (local-set-key (kbd "C-c C-,") 'my-quick-add-src-blk))

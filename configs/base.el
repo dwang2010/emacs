@@ -21,7 +21,7 @@
   (defalias 'yes-or-no-p 'y-or-n-p) ; simple (y or n) on prompts
   (global-superword-mode t) ; treat 'this_is_symbol' as one word
 
-  ;; key un-bindings
+  ;; key bind / unbind
   (keymap-global-unset "C-z") ; suspend frame
   (keymap-global-unset "C-r") ; isearch reverse
   (keymap-global-unset "C-x C-z") ; suspend frame
@@ -31,6 +31,7 @@
   (keymap-global-unset "C-<wheel-up>") ; scroll wheel zoom
   (keymap-global-unset "C-<wheel-down>") ; scroll wheel zoom
   (keymap-global-unset "s-q") ; save-buffers-kill-emacs
+  (global-set-key (kbd "M-h") 'my/mark-block)
 
   :bind
   (("C-x C-b" . ibuffer) ; bind ibuffer
@@ -144,6 +145,20 @@ Intended as a predicate for `confirm-kill-emacs'."
     (if (and thing base-url)
         (browse-url (concat base-url (url-hexify-string thing)))
       (message "No valid selection or text at point!"))))
+
+(defun my/mark-block ()
+  "Select text in the current block delimited by blank lines."
+  (interactive)
+  (let ((beg (save-excursion
+               (if (re-search-backward "^[ \t]*$" nil t)
+                   (forward-line 1))
+               (point)))
+        (end (save-excursion
+               (if (re-search-forward "^[ \t]*$" nil t)
+                   (beginning-of-line))
+               (point))))
+    (goto-char beg)
+    (push-mark end nil t)))
 
 (defun prot/keyboard-quit-dwim ()
   "Do-What-I-Mean behaviour for a general `keyboard-quit'.
