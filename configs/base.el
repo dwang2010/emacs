@@ -150,11 +150,11 @@ Intended as a predicate for `confirm-kill-emacs'."
   "Select text in the current block delimited by blank lines."
   (interactive)
   (let ((beg (save-excursion
-               (if (re-search-backward "^[ \t]*$" nil t)
+               (if (re-search-backward "^\\([ \\t]*\\*\\|[ \\t]*$\\)" nil t)
                    (forward-line 1))
                (point)))
         (end (save-excursion
-               (if (re-search-forward "^[ \t]*$" nil t)
+               (if (re-search-forward "^\\([ \\t]*\\*\\|[ \\t]*$\\)" nil t)
                    (beginning-of-line))
                (point))))
     (goto-char beg)

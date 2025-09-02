@@ -385,6 +385,9 @@
 (defun my-copy-unfilled-for-export ()
   "Copy unfilled region to clipboard and leave buffer in initial state"
   (interactive)
+  ;; if no active region, select blank line / heading delimited text block at point
+  (unless (use-region-p)
+    (my/mark-block))
   (if (use-region-p)
       (let ((region-start (region-beginning)) (region-end (region-end)))
         (let ((original-text (buffer-substring-no-properties region-start region-end)))
