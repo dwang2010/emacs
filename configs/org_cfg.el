@@ -318,7 +318,7 @@
   "Enclose symbol with '=' for org emphasis"
   (interactive)
   (require 'expand-region)
-  (er/mark-symbol) (org-emphasize ?\*))
+  (er/mark-symbol) (org-emphasize))
 
 (defun my-quick-add-src-blk ()
   "Auto add source block without prompting"
