@@ -147,16 +147,21 @@ Intended as a predicate for `confirm-kill-emacs'."
       (message "No valid selection or text at point!"))))
 
 (defun my/mark-block ()
-  "Select text in the current block delimited by blank lines."
+  "Select all text between relative level headings"
   (interactive)
-  (let ((beg (save-excursion
-               (if (re-search-backward "^\\([ \\t]*\\*\\|[ \\t]*$\\)" nil t)
-                   (forward-line 1))
-               (point)))
-        (end (save-excursion
-               (if (re-search-forward "^\\([ \\t]*\\*\\|[ \\t]*$\\)" nil t)
-                   (beginning-of-line))
-               (point))))
+  (let* ((heading-level (save-excursion
+                          (if (re-search-backward "^\\*+ " nil t)
+                              (- (match-end 0) (match-beginning 0) 1)
+                            1)))
+         (heading-regex (concat "^\\*\\{1," (number-to-string heading-level) "\\} "))
+         (beg (save-excursion
+                (if (re-search-backward "^\\*+ " nil t)
+                    (forward-line 1))
+                (point)))
+         (end (save-excursion
+                (if (re-search-forward heading-regex nil t)
+                    (beginning-of-line))
+                (point))))
     (goto-char beg)
     (push-mark end nil t)))
 
