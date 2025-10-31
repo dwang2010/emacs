@@ -160,7 +160,8 @@ Intended as a predicate for `confirm-kill-emacs'."
                 (point)))
          (end (save-excursion
                 (if (re-search-forward heading-regex nil t)
-                    (beginning-of-line))
+                    (beginning-of-line)
+                  (goto-char (point-max)))
                 (point))))
     (goto-char beg)
     (push-mark end nil t)))
