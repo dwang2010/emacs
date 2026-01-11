@@ -9,7 +9,7 @@
   (local-unset-key (kbd "M-h")) ;; org-mark-element
   (local-set-key (kbd "C-c ,") 'my-quick-add-src-blk)
   (local-set-key (kbd "C-c C-,") 'my-quick-add-src-blk)
-  (local-set-key (kbd "C-b") 'org-emphasize))
+  (local-set-key (kbd "C-c b") 'my-emphasize-symbol-at-point))
 
 (use-package org
   :bind ("C-c C-o" . org-open-at-point-global)
@@ -317,3 +317,15 @@
 (defun my-quick-add-src-blk ()
   "Auto add source block without prompting"
   (interactive) (org-insert-structure-template "src"))
+
+(defun my-emphasize-symbol-at-point ()
+  "Emphasize symbol at point"
+  (interactive)
+  (let ((bounds (bounds-of-thing-at-point 'symbol)))
+    (if bounds
+        (progn
+          (goto-char (car bounds))
+          (set-mark (cdr bounds))
+          (activate-mark)
+          (call-interactively #'org-emphasize))
+      (message "No symbol at point."))))
