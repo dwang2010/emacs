@@ -117,7 +117,14 @@
            :header-line-width 4 ; breadcrumb top line
            :right-divider-width 15
            :mode-line-width 3 ))
-  (spacious-padding-mode 1))
+  (spacious-padding-mode 1)
+  (set-face-foreground 'window-divider "#2a2a2a")) ; color between buffers
+
+;; workaround to ensure consistent divider color
+;; case: opening magit window updates the divider color (undesired)
+(defun my-ensure-divider-color ()
+  (set-face-foreground 'window-divider "#2a2a2a"))
+(add-hook 'window-configuration-change-hook #'my-ensure-divider-color)
 
 ;; ------------------------------------------------------------------------
 ;; highlight current line - only in specific modes (native)
