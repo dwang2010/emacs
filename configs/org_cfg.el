@@ -199,8 +199,15 @@
 
   ;; org export related
   ;; C-c C-e : open export dispatcher
-  (setq-default org-export-backends '(ascii md))
-  (setq-default org-export-with-toc nil) ; don't export table of contents
+  (setq-default org-export-backends '(md))
+  (setq-default org-export-with-toc nil)
+  (setq-default org-export-with-section-numbers nil)
+
+  (setq-default org-html-head-include-default-style nil)
+  (setq-default org-html-head-include-scripts nil)
+  (setq-default org-html-htmlize-output-type 'nil)
+  (setq-default org-html-postamble nil) ; remove stuff at bottom
+
   (setq-default org-ascii-headline-spacing nil) ; remove whitespace around headlines
   (setq-default org-ascii-text-width 10000) ; hack to unfill paragraphs
   (setq-default org-ascii-inner-margin 0)) ; remove body indentation when exporting
