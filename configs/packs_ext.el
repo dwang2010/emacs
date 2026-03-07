@@ -173,8 +173,9 @@
   (setq-default lsp-diagnostics-provider :none)
   ;; suppress warnings when no language server present
   (setq-default lsp-warn-no-matched-clients nil)
-  ;; disable right click menu
-  (define-key lsp-mode-map (kbd "<mouse-3>") nil)
+  ;; disable right click menu (GUI only)
+  (when (display-graphic-p)
+    (define-key lsp-mode-map (kbd "<mouse-3>") nil))
   ;; disable function signature minibuffer popup (distracting)
   (setq-default lsp-signature-auto-activate nil)
   (setq-default lsp-signature-render-documentation nil)

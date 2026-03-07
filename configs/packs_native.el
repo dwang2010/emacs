@@ -120,8 +120,11 @@
 ;; hideshow - code folding (native)
 ;; ------------------------------------------------------------------------
 (use-package hideshow
-  :bind (("<C-tab>" . hs-toggle-hiding)
-         ("<C-M-tab>" . 'hs-hide-all))
+  :bind (("<C-tab>" . hs-toggle-hiding)    ; GUI
+         ("<C-M-tab>" . 'hs-hide-all)      ; GUI
+         ("C-c h h" . hs-toggle-hiding)    ; terminal-safe
+         ("C-c h a" . hs-hide-all)         ; terminal-safe
+         ("C-c h s" . hs-show-all))        ; terminal-safe
   :hook ((prog-mode . hs-minor-mode)
          (c-mode-common . hs-minor-mode))
   :custom

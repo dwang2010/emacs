@@ -49,12 +49,7 @@
 (set-face-attribute 'font-lock-doc-face nil :foreground "#8a8a93")
 (set-face-attribute 'font-lock-comment-face nil :foreground "#81868b")
 
-;; slightly ugly but ensures consistent cursor color across:
-;; opening new daemon frames / init file reload
-(set-face-attribute 'cursor nil :background "#ff7f00")
-(defun my-cursor-color-hook (frame)
-  (modify-frame-parameters frame '((cursor-color . "#ff7f00"))))
-(add-hook 'after-make-frame-functions 'my-cursor-color-hook)
+;; cursor color setup consolidated in my-frame-display-setup below
 
 ;; ------------------------------------------------------------------------
 ;; visual icons
@@ -116,14 +111,14 @@
         '( :internal-border-width 15 ; padding to main window borders
            :header-line-width 4 ; breadcrumb top line
            :right-divider-width 15
-           :mode-line-width 3 ))
-  (spacious-padding-mode 1)
-  (set-face-foreground 'window-divider "#2a2a2a")) ; color between buffers
+           :mode-line-width 3 )))
+;; activation deferred to my-frame-display-setup (GUI only)
 
 ;; workaround to ensure consistent divider color
 ;; case: opening magit window updates the divider color (undesired)
 (defun my-ensure-divider-color ()
-  (set-face-foreground 'window-divider "#2a2a2a"))
+  (when (display-graphic-p)
+    (set-face-foreground 'window-divider "#2a2a2a")))
 (add-hook 'window-configuration-change-hook #'my-ensure-divider-color)
 
 ;; ------------------------------------------------------------------------
@@ -140,9 +135,8 @@
   :ensure t
   :config (mood-line-mode)
   (setq-default mood-line-show-encoding-information t)
-  (setq-default mood-line-show-eol-style t)
-  ;; glyph style: ascii / fira-code (get the font)
-  (setq-default mood-line-glyph-alist mood-line-glyphs-fira-code))
+  (setq-default mood-line-show-eol-style t))
+;; glyph style set by my-frame-display-setup (GUI: fira-code / terminal: ascii)
 
 ;; ------------------------------------------------------------------------
 ;; display customization
@@ -170,12 +164,31 @@
 
 ;; ensure scrollbars don't appear when creating new frames
 (defun rmv-scroll-bars (frame)
-  (modify-frame-parameters frame
-                           '((vertical-scroll-bars . nil)
-                             (horizontal-scroll-bars . nil))))
+  (when (display-graphic-p frame)
+    (modify-frame-parameters frame
+                             '((vertical-scroll-bars . nil)
+                               (horizontal-scroll-bars . nil)))))
 (add-hook 'after-make-frame-functions 'rmv-scroll-bars)
 
 ;; frame chrome
 (if (eql system-type 'darwin)
     ;; dark themed title bar
     (add-to-list 'default-frame-alist '(ns-appearance . dark)))
+
+;; ------------------------------------------------------------------------
+;; frame-aware display setup (GUI vs terminal)
+;; consolidates cursor, spacious-padding, mood-line glyphs per frame type
+;; ------------------------------------------------------------------------
+(defun my-frame-display-setup (&optional frame)
+  "Configure display settings based on GUI vs terminal frame."
+  (with-selected-frame (or frame (selected-frame))
+    (if (display-graphic-p)
+        (progn
+          (modify-frame-parameters (selected-frame) '((cursor-color . "#ff7f00")))
+          (spacious-padding-mode 1)
+          (set-face-foreground 'window-divider "#2a2a2a")
+          (setq-default mood-line-glyph-alist mood-line-glyphs-fira-code))
+      (setq-default mood-line-glyph-alist mood-line-glyphs-ascii))))
+
+(add-hook 'after-make-frame-functions #'my-frame-display-setup)
+(my-frame-display-setup)
