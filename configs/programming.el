@@ -106,7 +106,7 @@
 
 ;; ------------------------------------------------------------------------
 ;; javascript configs
-;; LSP: https://github.com/typescript-language-server/typescript-language-server
+;; LSP: flow lsp (for fbsource/xplat/js)
 ;; ------------------------------------------------------------------------
 ;; auto format buffer with prettier
 ;; https://github.com/radian-software/apheleia
@@ -120,45 +120,21 @@
 ;; additional configs for JS editing
 (defun my-js/ts-cfg-hook ()
   (local-set-key (kbd "C-c C-a") #'apheleia-format-buffer)
-  (setq-default js-indent-level 2))
+  (setq-local js-indent-level 2))
 (add-hook 'typescript-ts-mode-hook #'my-js/ts-cfg-hook)
+(add-hook 'js-ts-mode-hook #'my-js/ts-cfg-hook)
+(add-hook 'js-mode-hook #'my-js/ts-cfg-hook)
 
-;; (use-package js2-mode :ensure t) ; for linting
-;; (use-package flow-js2-mode :ensure t) ; supports js2 (needed for flow)
-
-;; convenience mode for flow server interaction
-;; C-c C-c [(s)tatus, (c)overage, (t)ype-at-point]
-;; (use-package flow-minor-mode
-;;   :ensure t
-;;   :hook (flow-minor-mode . my-flow-save-check-hook)
-;;   :bind (:map flow-minor-mode-map ("M-," . nil) ("M-." . nil)))
-
-;; main configs for js editing (js-ts-mode as base)
-;; (defun my-js-cfg-hook ()
-;;   (local-unset-key (kbd "M-."))
-;;   (flow-minor-mode)
-;;   (flow-js2-mode)
-;;   (js2-minor-mode))
-;; (add-hook 'js-ts-mode-hook #'my-js-cfg-hook)
-
-;; ;; look for locally installed eslint for use in flycheck
-;; (defun my/use-eslint-from-node-modules ()
-;;   (let* ((root (locate-dominating-file
-;;                 (or (buffer-file-name) default-directory) "node_modules"))
-;;          (eslint (and root (expand-file-name "node_modules/.bin/eslint" root))))
-;;     (when (and eslint (file-executable-p eslint))
-;;       (setq-local flycheck-javascript-eslint-executable eslint))))
-;; (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
-
-;; ;; automated flow checks (if present) during save
-;; (defun my-flow-save-check-hook ()
-;;   (add-hook 'after-save-hook 'flow-status nil t))
-
-;; ;; configure flow output popup behavior
-;; (add-to-list 'display-buffer-alist
-;;              '("\\(\\*compilation\\*\\|\\*Flow Output\\*\\)"
-;;                (display-buffer-reuse-window display-buffer-below-selected)
-;;                (window-height . 0.15)))
+;; register Flow as LSP client for JS
+(with-eval-after-load 'lsp-mode
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection '("flow" "lsp" "--from" "emacs"))
+                    :major-modes '(js-mode js-ts-mode)
+                    :priority 1
+                    :server-id 'flow-ls
+                    :activation-fn (lambda (_file-name _mode)
+                                     (derived-mode-p 'js-mode 'js-ts-mode))
+                    :notification-handlers (lsp-ht ("telemetry/event" 'ignore)))))
 
 ;; ------------------------------------------------------------------------
 ;; hack configs
@@ -203,11 +179,15 @@
     (when client
       (puthash "textDocument/publishDiagnostics" 'ignore
                (lsp--client-notification-handlers client)))))
+
 ;; this ensures lsp-mode starts hh_client in www/ not fbsource/
+;; and flow lsp in xplat/js/ not fbsource/
 (defun my-hack-project-root (dir)
-  "Return www/ as project root when .hhconfig is found."
-  (when-let ((root (locate-dominating-file dir ".hhconfig")))
-    (cons 'transient root)))
+  "Return nearest .hhconfig or .flowconfig root as project root."
+  (or (when-let ((root (locate-dominating-file dir ".hhconfig")))
+        (cons 'transient root))
+      (when-let ((root (locate-dominating-file dir ".flowconfig")))
+        (cons 'transient root))))
 (add-hook 'project-find-functions #'my-hack-project-root -10)
 
 ;; ------------------------------------------------------------------------

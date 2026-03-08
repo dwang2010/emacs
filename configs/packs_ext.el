@@ -146,6 +146,7 @@
   :hook
   ((typescript-ts-mode . lsp)
    (js-ts-mode . lsp)
+   (js-mode . lsp)
    (python-mode . lsp)
    (python-ts-mode . lsp)
    (lsp-completion-mode . my-lsp-mode-setup-completion)
@@ -157,6 +158,8 @@
   :config
   ;; auto-detect project root via project.el (don't prompt)
   (setq-default lsp-auto-guess-root t)
+  ;; reduce idle delay for faster symbol highlighting (default 0.5)
+  (setq-default lsp-idle-delay 0.2)
   ;; disable file watchers (www/ has millions of files)
   (setq-default lsp-enable-file-watchers nil)
   ;; don't log all message from language server (impacts performance)
