@@ -132,6 +132,19 @@
 ;; ------------------------------------------------------------------------
 ;; helper functions
 ;; ------------------------------------------------------------------------
+(defun my/find-file-myles ()
+  "Find file in fbsource using myles."
+  (interactive)
+  (let* ((default-directory (expand-file-name "~/fbsource/"))
+         (query (read-string "myles: "))
+         (results (split-string
+                   (shell-command-to-string
+                    (format "myles '%s' --list --limit 50" query))
+                   "\n" t))
+         (selection (completing-read "Open: " results nil t)))
+    (find-file (expand-file-name selection default-directory))))
+(global-set-key (kbd "C-c f") #'my/find-file-myles)
+
 (defun revert-buffer-no-confirm ()
   "Revert buffer without confirmation"
   (interactive) (revert-buffer t t))

@@ -69,28 +69,28 @@
 ;; ------------------------------------------------------------------------
 ;; corfu - in-buffer completion (not the minibuffer)
 ;; ------------------------------------------------------------------------
-;; (use-package corfu
-;;   :ensure t
-;;   :bind (:map corfu-map ("RET" . nil)) ; tab only completion
-;;   :custom
-;;   ;; automatic completion
-;;   (corfu-auto t) ; automatic completion popup
-;;   (corfu-auto-prefix 3) ; min prefix length for popup to show
-;;   (corfu-auto-delay 0.1) ; show completion popup faster when able
-;;   (corfu-preselect 'first) ; first candidate selected; tab then inserts
-;;   (corfu-count 8) ; max candidates to show in popup
+(use-package corfu
+  :ensure t
+  :bind (:map corfu-map ("RET" . nil)) ; tab only completion
+  :custom
+  ;; automatic completion
+  (corfu-auto t) ; automatic completion popup
+  (corfu-auto-prefix 3) ; min prefix length for popup to show
+  (corfu-auto-delay 0.1) ; show completion popup faster when able
+  (corfu-preselect 'first) ; first candidate selected; tab then inserts
+  (corfu-count 8) ; max candidates to show in popup
 
-;;   :config
-;;   ;; enables secondary popup to completion popup for candidate docs
-;;   ;; manually invoke via 'M-t' defined in corfu-popupinfo-map
-;;   ;; similarly, navigate with 'M-<next>' (pageup) and 'M-<prior>' (pagedown)
-;;   (setq-default corfu-popupinfo-delay nil) ; never auto popup candidate docs
-;;   (corfu-popupinfo-mode 1)
-;;   (if (eql dcw-dark-theme-flag t)
-;;       (set-face-attribute 'corfu-current nil :background "#4d4d4d")
-;;     (set-face-attribute 'corfu-current nil :background "gray80"))
-;;   (set-face-attribute 'completions-common-part nil :foreground "#00EEEE")
-;;   :init (global-corfu-mode))
+  :config
+  ;; enables secondary popup to completion popup for candidate docs
+  ;; manually invoke via 'M-t' defined in corfu-popupinfo-map
+  ;; similarly, navigate with 'M-<next>' (pageup) and 'M-<prior>' (pagedown)
+  (setq-default corfu-popupinfo-delay nil) ; never auto popup candidate docs
+  (corfu-popupinfo-mode 1)
+  (if (eql dcw-dark-theme-flag t)
+      (set-face-attribute 'corfu-current nil :background "#4d4d4d")
+    (set-face-attribute 'corfu-current nil :background "gray80"))
+  (set-face-attribute 'completions-common-part nil :foreground "#00EEEE")
+  :init (global-corfu-mode))
 
 ;; ------------------------------------------------------------------------
 ;; swiper - search improvement
@@ -144,7 +144,10 @@
    ("M-?" . lsp-find-references))
 
   :hook
-  ((prog-mode . lsp)
+  ((typescript-ts-mode . lsp)
+   (js-ts-mode . lsp)
+   (python-mode . lsp)
+   (python-ts-mode . lsp)
    (lsp-completion-mode . my-lsp-mode-setup-completion)
    ;; auto-save buffers when post lsp-rename
    (lsp-after-apply-edits . (lambda (op) (when (eq op 'rename) (save-buffer))))
@@ -152,6 +155,10 @@
    (lsp-ui-doc-frame-mode . (lambda () (display-line-numbers-mode -1))))
 
   :config
+  ;; auto-detect project root via project.el (don't prompt)
+  (setq-default lsp-auto-guess-root t)
+  ;; disable file watchers (www/ has millions of files)
+  (setq-default lsp-enable-file-watchers nil)
   ;; don't log all message from language server (impacts performance)
   (setq-default lsp-log-io nil)
   ;; disable code lens overlay
@@ -171,6 +178,7 @@
   (setq-default lsp-headerline-breadcrumb-enable-diagnostics nil)
   ;; syntax checking: use neither flymake nor lsp
   (setq-default lsp-diagnostics-provider :none)
+  (setq-default lsp-diagnostic-clean-after-change nil)
   ;; suppress warnings when no language server present
   (setq-default lsp-warn-no-matched-clients nil)
   ;; disable right click menu (GUI only)

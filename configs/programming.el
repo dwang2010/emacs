@@ -166,11 +166,49 @@
 ;; ------------------------------------------------------------------------
 (use-package hack-mode
   :ensure t
-  :hook  (hack-mode . my-hack-cfg-hook))
+  :hook  (hack-mode . my-hack-cfg-hook)
+  :init
+  ;; fb-master adds a lambda to hack-mode-hook that calls (lsp), which
+  ;; hangs emacs while hh_server indexes www/. Clear it and keep only ours.
+  (with-eval-after-load 'fb-master
+    (setq hack-mode-hook nil)))
 
 ;; main configs for hack editing
+;; auto-start LSP if hh_server is ready, otherwise C-c C-l to start manually
 (defun my-hack-cfg-hook ()
-  (add-hook 'hack-mode-hook #'hack-enable-format-on-save nil t))
+  (setq-local compile-command
+              (concat hack-client-program-name " --from emacs --error-format plain"))
+  (hack-enable-format-on-save)
+  (local-set-key (kbd "C-c C-l") #'my-hack-lsp-start)
+  (my-hack-lsp-start-silent))
+
+(defun my-hack-lsp-start ()
+  "Start LSP for Hack only if hh_server is ready."
+  (interactive)
+  (if (zerop (call-process "hh_client" nil nil nil "check" "--autostart-server" "false" "--from" "emacs"))
+      (lsp)
+    (message "hh_server not ready — run 'hh_client status' in a terminal first")))
+
+(defun my-hack-lsp-start-silent ()
+  "Auto-start LSP for Hack if hh_server is ready, silently skip otherwise."
+  (when (zerop (call-process "hh_client" nil nil nil "check" "--autostart-server" "false" "--from" "emacs"))
+    (lsp)))
+
+;; hh_client lsp command (--disable-format-on-save since we use hackfmt directly)
+;; drop diagnostics at protocol level to prevent www/ flood from hanging emacs
+(with-eval-after-load 'lsp-hack
+  (setq lsp-clients-hack-command
+        '("hh_client" "lsp" "--from" "emacs" "--disable-format-on-save"))
+  (let ((client (gethash 'hack lsp-clients)))
+    (when client
+      (puthash "textDocument/publishDiagnostics" 'ignore
+               (lsp--client-notification-handlers client)))))
+;; this ensures lsp-mode starts hh_client in www/ not fbsource/
+(defun my-hack-project-root (dir)
+  "Return www/ as project root when .hhconfig is found."
+  (when-let ((root (locate-dominating-file dir ".hhconfig")))
+    (cons 'transient root)))
+(add-hook 'project-find-functions #'my-hack-project-root -10)
 
 ;; ------------------------------------------------------------------------
 ;; protobuf configs
