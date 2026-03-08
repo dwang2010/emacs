@@ -63,6 +63,7 @@
   (ring-bell-function 'ignore) ; disable visible bell flashing
   (use-dialog-box nil) ; prompts to minibuffer instead of GUI
   (visible-bell 1) ; remove emacs bell noise
+  (copy-region-blink-delay 0) ; no delay on M-w
   (column-number-mode t) ; enable column numbers
   (help-window-select t) ; switch to help buffers automatically
   (completions-format 'vertical) ; sort completions minibuffer vertically
@@ -102,6 +103,31 @@
       (setq-default mac-command-modifier 'super))
   (progn
     (setq-default mouse-wheel-scroll-amount '(5))))
+
+;; ------------------------------------------------------------------------
+;; tmux clipboard integration
+;; ------------------------------------------------------------------------
+(defun my/copy-to-tmux-buffer (string &optional _replace)
+  "Copy STRING to tmux paste buffer and system clipboard via OSC 52."
+  (when (and (getenv "TMUX") (> (length string) 0))
+    ;; tmux paste buffer
+    (let ((process-connection-type nil))
+      (let ((proc (start-process "tmux-copy" nil "tmux" "load-buffer" "-")))
+        (process-send-string proc string)
+        (process-send-eof proc)))
+    ;; OSC 52 → system clipboard (iTerm2 picks this up)
+    (let ((b64 (base64-encode-string (encode-coding-string string 'utf-8) t)))
+      (send-string-to-terminal
+       (format "\ePtmux;\e\e]52;c;%s\a\e\\" b64)))))
+
+(advice-add 'kill-new :after #'my/copy-to-tmux-buffer)
+
+;; in tmux requires the following settings
+;; set -g set-clipboard on
+;; set -g allow-passthrough on
+
+;; in iterm2 requires the following setting:
+;; settings => general => selection => applications in terminal may access clipboard
 
 ;; ------------------------------------------------------------------------
 ;; helper functions
