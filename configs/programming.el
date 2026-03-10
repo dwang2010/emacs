@@ -180,16 +180,6 @@
       (puthash "textDocument/publishDiagnostics" 'ignore
                (lsp--client-notification-handlers client)))))
 
-;; this ensures lsp-mode starts hh_client in www/ not fbsource/
-;; and flow lsp in xplat/js/ not fbsource/
-(defun my-hack-project-root (dir)
-  "Return nearest .hhconfig or .flowconfig root as project root."
-  (or (when-let ((root (locate-dominating-file dir ".hhconfig")))
-        (cons 'transient root))
-      (when-let ((root (locate-dominating-file dir ".flowconfig")))
-        (cons 'transient root))))
-(add-hook 'project-find-functions #'my-hack-project-root -10)
-
 ;; ------------------------------------------------------------------------
 ;; protobuf configs
 ;; ------------------------------------------------------------------------
