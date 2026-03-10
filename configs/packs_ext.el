@@ -90,7 +90,7 @@
       (set-face-attribute 'corfu-current nil :background "#4d4d4d")
     (set-face-attribute 'corfu-current nil :background "gray80"))
   (set-face-attribute 'completions-common-part nil :foreground "#00EEEE")
-  :init (global-corfu-mode))
+  :hook (prog-mode . corfu-mode))
 
 ;; ------------------------------------------------------------------------
 ;; swiper - search improvement
