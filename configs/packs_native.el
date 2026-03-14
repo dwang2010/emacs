@@ -12,15 +12,15 @@
 ;; custom project root detection
 ;; ensures lsp-mode starts hh_client in www/ not fbsource/
 ;; and flow lsp in xplat/js/ not fbsource/
-(defun my-hack-project-root (dir)
-  "Return nearest .hhconfig, .flowconfig, or .git root as project root."
-  (or (when-let ((root (locate-dominating-file dir ".hhconfig")))
-        (cons 'transient root))
-      (when-let ((root (locate-dominating-file dir ".flowconfig")))
-        (cons 'transient root))
-      (when-let ((root (locate-dominating-file dir ".git")))
-        (cons 'transient root))))
-(add-hook 'project-find-functions #'my-hack-project-root -10)
+;; (defun my-hack-project-root (dir)
+;;   "Return nearest .hhconfig, .flowconfig, or .git root as project root."
+;;   (or (when-let ((root (locate-dominating-file dir ".git")))
+;;         (cons 'transient root))
+;;       (when-let ((root (locate-dominating-file dir ".hhconfig")))
+;;         (cons 'transient root))
+;;       (when-let ((root (locate-dominating-file dir ".flowconfig")))
+;;         (cons 'transient root))))
+;; (add-hook 'project-find-functions #'my-hack-project-root -10)
 
 ;; ------------------------------------------------------------------------
 ;; tree sitter - syntax highlighting (native in emacs >= 29)

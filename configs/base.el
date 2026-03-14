@@ -51,7 +51,8 @@
    ("s-f" . toggle-frame-fullscreen)
    ("s-m" . toggle-frame-maximized)
    ("C-g" . prot/keyboard-quit-dwim)
-   ("M-z" . my/open-thing-at-point-in-browser))
+   ("M-z" . my/open-thing-at-point-in-browser)
+   ("C-x f" . my/copy-buffer-file-path))
 
   :custom
   ;; UI config variables
@@ -144,6 +145,15 @@
          (selection (completing-read "Open: " results nil t)))
     (find-file (expand-file-name selection default-directory))))
 (global-set-key (kbd "C-c f") #'my/find-file-myles)
+
+(defun my/copy-buffer-file-path ()
+  "Copy the current buffer's file path to the kill ring."
+  (interactive)
+  (if-let ((path (buffer-file-name)))
+      (progn
+        (kill-new path)
+        (message "Copied: %s" path))
+    (message "Buffer has no file.")))
 
 (defun revert-buffer-no-confirm ()
   "Revert buffer without confirmation"
