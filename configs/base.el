@@ -20,6 +20,7 @@
   (global-eldoc-mode -1) ; disable eldoc mode globally
   (defalias 'yes-or-no-p 'y-or-n-p) ; simple (y or n) on prompts
   (global-superword-mode t) ; treat 'this_is_symbol' as one word
+  (global-auto-revert-mode 1) ; reload files when changed externally
 
   ;; key bind / unbind
   (keymap-global-unset "C-z") ; suspend frame

@@ -225,7 +225,9 @@
   (setq-default vterm-min-window-width 100) ; avoid line wrapping
   (setq-default vterm-copy-exclude-prompt t)
   (setq-default vterm-max-scrollback 10000)
-  (setq-default vterm-buffer-name-string "vterm %s"))
+  ;; renaming term causes issues with claude-code-ide
+  ;; (setq-default vterm-buffer-name-string "vterm %s")
+  (setq-default vterm-timer-delay 0.01))
 
 (defun my-darkmode-vterm-faces()
   ;; make dark colored faces legible when using dark mode themes"
@@ -233,6 +235,67 @@
       (progn
         (set-face-attribute 'ansi-color-bright-black nil :foreground "#eee8cd")
         (set-face-attribute 'vterm-color-black nil :foreground "#7f7f7f"))))
+
+;; ------------------------------------------------------------------------
+;; claude code related
+;; ------------------------------------------------------------------------
+;; https://github.com/stevemolitor/claude-code.el
+;; ;; required inheritenv dependency
+;; (use-package inheritenv
+;;   :vc (:url "https://github.com/purcell/inheritenv" :rev :newest))
+
+;; ;; install claude-code.el
+;; (when (eq system-type 'darwin)
+;;   (use-package claude-code :ensure t
+;;     :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
+;;     :config
+;;     (claude-code-mode)
+;;     (setq-default claude-code-terminal-backend 'vterm)
+;;     (setq claude-code-display-window-fn #'display-buffer)
+
+;;     ;; system fonts as fallbacks
+;;     (setq use-default-font-for-symbols nil)
+;;     (set-fontset-font t 'symbol "Menlo" nil 'prepend)
+
+;;     ;; default prefix chord
+;;     :bind-keymap ("C-c c" . claude-code-command-map)
+
+;;     ;; Optionally define repeat map so "M" will cycle thru Claude auto-accept /
+;;     ;; plan / confirm modes after invoking claude-code-cycle-mode / C-c  M
+;;     :bind
+;;     (:repeat-map my-claude-code-map ("M" . claude-code-cycle-mode))))
+
+;; ;; always display in a side window on the right
+;; (defun my-claude-display-right (buffer)
+;;   "Display Claude buffer in right side window."
+;;   (display-buffer buffer '((display-buffer-in-side-window)
+;;                            (side . right)
+;;                            (window-width . 90))))
+;; (setq claude-code-display-window-fn #'my-claude-display-right)
+
+;; https://github.com/manzaltu/claude-code-ide.el
+(when (eq system-type 'darwin)
+  (use-package claude-code-ide
+    :vc (:url "https://github.com/manzaltu/claude-code-ide.el" :rev :newest)
+    :bind ("C-c C-a" . claude-code-ide-menu)
+
+    :config
+    (setq-default claude-code-ide-window-side 'right)
+    (setq-default claude-code-ide-use-side-window nil)
+
+    ;; flow intent: operate from buffer, send stuff to claude
+    ;; prefix + i : insert region (as filename + line numbers)
+    ;; prefix + p : send prompt and execute
+    (setq-default claude-code-ide-focus-on-open nil)
+
+    ;; rebind newline insertion: M-RET instead of S-RET
+    (advice-add 'claude-code-ide--setup-terminal-keybindings :after
+                (lambda ()
+                  (local-unset-key (kbd "S-<return>"))
+                  (local-set-key (kbd "M-<return>") #'claude-code-ide-insert-newline)))
+
+    ;; (claude-code-ide-emacs-tools-setup)) ; enables Emacs MCP tools
+    ))
 
 ;; ------------------------------------------------------------------------
 ;; avy - jump to char!
