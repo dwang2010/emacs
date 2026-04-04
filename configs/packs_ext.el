@@ -220,7 +220,8 @@
 (use-package vterm
   :ensure t
   :bind (("C-x C-v" . vterm)) ; override find-alternate-file
-  :hook (vterm-mode . my-darkmode-vterm-faces)
+  :hook ((vterm-mode . my-darkmode-vterm-faces)
+         (vterm-mode . goto-address-mode))
   :config
   (setq-default vterm-min-window-width 100) ; avoid line wrapping
   (setq-default vterm-copy-exclude-prompt t)
