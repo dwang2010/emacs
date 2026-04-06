@@ -278,7 +278,7 @@
 (when (eq system-type 'darwin)
   (use-package claude-code-ide
     :vc (:url "https://github.com/manzaltu/claude-code-ide.el" :rev :newest)
-    :bind ("C-c C-a" . claude-code-ide-menu)
+    :bind ("C-c c" . claude-code-ide-menu) ;; needs to not conflict with orgmode
 
     :config
     (setq-default claude-code-ide-window-side 'right)
@@ -288,6 +288,8 @@
     ;; prefix + i : insert region (as filename + line numbers)
     ;; prefix + p : send prompt and execute
     (setq-default claude-code-ide-focus-on-open nil)
+
+    (setq-default claude-code-ide-cli-extra-flags "--dangerously-skip-permissions")
 
     ;; rebind newline insertion: M-RET instead of S-RET
     (advice-add 'claude-code-ide--setup-terminal-keybindings :after
