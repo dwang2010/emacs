@@ -7,18 +7,18 @@ VP, Viewpoints | Hack, React, GraphQL, Ent, Relay, Python | www/, fbcode/
 Direct, technical, skip basics. Tables over prose. Criticize flawed ideas.
 
 ## NEVER
-| Don't                                         | Do Instead                          |
-|-----------------------------------------------|-------------------------------------|
-| Create files without asking                   | Ask first, or only when essential   |
-| Use `any`/`mixed` types                       | Fix types properly                  |
-| Refactor adjacent code                        | Only touch what's needed            |
-| Comment unchanged code                        | Comment only what you changed       |
-| Over-engineer                                 | Solve current problem simply        |
-| Submit without running all test plan commands | Run every command, confirm all pass |
-| Submit without completed summary + test plan  | Finish both before `jf submit`      |
-| Submit as non-draft                           | Always use `jf submit --draft`      |
-| Submit without project `anna` as reviewer     | Always add project `anna`           |
-| Use `jf get` to pull diffs                    | Use `sl pull` + `sl goto <commit>`  |
+| Don't                                                    | Do Instead                          |
+|----------------------------------------------------------|-------------------------------------|
+| Create files without asking                              | Ask first, or only when essential   |
+| Use `any`/`mixed` types                                  | Fix types properly                  |
+| Refactor adjacent code                                   | Only touch what's needed            |
+| Comment unchanged code                                   | Comment only what you changed       |
+| Over-engineer                                            | Solve current problem simply        |
+| Submit without completed summary + test plan + reviewers | Add all before submitting           |
+| Submit without running all test plan commands            | Run every command, confirm all pass |
+| Submit as non-draft                                      | Always submit as draft              |
+| Use `jf get` to pull diffs                               | Use `sl pull` + `sl goto <commit>`  |
+| Suggest user do something or ask user to run commands    | Do it yourself; only escalate on strict blockers (e.g. sandbox, auth) |
 
 ## ASK FIRST
 - Schema/Ent changes
@@ -39,7 +39,7 @@ Direct, technical, skip basics. Tables over prose. Criticize flawed ideas.
 3. `code-reviewer` agent → address issues
 4. `arc unit` / `buck test` → fix test failures
 5. `/ready` → verify gates
-6. `jf submit --draft`
+6. `jf submit --draft --update-fields`
 
 ## Commits
 **Format:** `[VP][Workstream] Verb phrase`
@@ -49,7 +49,8 @@ Direct, technical, skip basics. Tables over prose. Criticize flawed ideas.
 **Summary:** High-level what + why. No granular per-line details. If the "why"
 isn't clear from conversation context, ask the user directly before committing.
 
-**Reviewers:** Always add project `anna`.
+**Reviewers:** Always include `Reviewers: #anna` in the commit message body,
+and use `jf submit --draft --update-fields` to sync to Phabricator.
 
 **Split when:** Server vs client code in separate diffs. Keep diffs <500 lines.
 Split by logical grouping (what's being done), not by file count.
@@ -90,12 +91,12 @@ Skip for infra/config issues — just diagnose and fix directly.
 | Passing incomplete context to subagents   | Verify all required context is forwarded |
 
 ## Quick Reference
-| Task               | Command                    |
-|--------------------|----------------------------|
-| Type check Hack    | `hh` or `hh --single path` |
-| Type check JS      | `flow path`                |
-| Lint & fix         | `arc lint -a`              |
-| Run tests (www)    | `arc unit path`            |
-| Run tests (fbcode) | `buck test path`           |
-| Submit draft       | `jf submit --draft`        |
-| Rebuild enums      | `arc rebuild www`          |
+| Task               | Command                             |
+|--------------------|-------------------------------------|
+| Type check Hack    | `hh` or `hh --single path`          |
+| Type check JS      | `flow path`                         |
+| Lint & fix         | `arc lint -a`                       |
+| Run tests (www)    | `arc unit path`                     |
+| Run tests (fbcode) | `buck test path`                    |
+| Submit draft       | `jf submit --draft --update-fields` |
+| Rebuild enums      | `arc rebuild www`                   |
