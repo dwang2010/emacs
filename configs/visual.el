@@ -107,6 +107,9 @@
 (use-package spacious-padding
   :ensure t
   :config
+  ;; default divider color between window panes (for spacious padding)
+  (setq my-window-divider-color "gray16")
+  (set-face-attribute 'window-divider nil :foreground my-window-divider-color)
   (setq spacious-padding-widths
         '( :internal-border-width 15 ; padding to main window borders
            :header-line-width 4 ; breadcrumb top line
@@ -118,7 +121,7 @@
 ;; case: opening magit window updates the divider color (undesired)
 (defun my-ensure-divider-color ()
   (when (display-graphic-p)
-    (set-face-foreground 'window-divider "#2a2a2a")))
+    (set-face-foreground 'window-divider my-window-divider-color)))
 (add-hook 'window-configuration-change-hook #'my-ensure-divider-color)
 
 ;; ------------------------------------------------------------------------

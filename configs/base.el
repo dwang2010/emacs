@@ -162,7 +162,9 @@
 
 (defun reload-init-files ()
   "Reload all init files"
-  (interactive) (load-file user-init-file))
+  (interactive)
+  (load-file user-init-file)
+  (my-ensure-divider-color))
 
 (defun edit-current-file-as-root ()
   "Edit the file that is associated with the current buffer as root"
