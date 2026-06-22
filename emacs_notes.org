@@ -83,6 +83,14 @@ emacsclient -c -a "emacs"
 #+end_src
 
 * Org-Mode
+** Level Indent Color Testing
+*** Level 3
+**** Level 4
+***** Level 5
+****** Level 6
+******* Level 7
+******** Level 8
+
 ** Helpful Bindings
 *** General
 |----------------+------------------------------------------------------------|

@@ -31,10 +31,10 @@
   (set-face-attribute 'org-level-2 nil :height 1.00 :foreground "#d4c5a0")
   (set-face-attribute 'org-level-3 nil :height 1.00 :foreground "#cc99cc")
   (set-face-attribute 'org-level-4 nil :height 1.00 :foreground "#66cccc")
-  (set-face-attribute 'org-level-5 nil :height 1.00 :inherit 'org-level-3)
-  (set-face-attribute 'org-level-6 nil :height 1.00 :inherit 'org-level-4)
-  (set-face-attribute 'org-level-7 nil :height 1.00 :inherit 'org-level-3)
-  (set-face-attribute 'org-level-8 nil :height 1.00 :inherit 'org-level-4)
+  (set-face-attribute 'org-level-5 nil :height 1.00 :foreground "#7ec8a0")
+  (set-face-attribute 'org-level-6 nil :height 1.00 :foreground "#f2a8c5")
+  (set-face-attribute 'org-level-7 nil :height 1.00 :foreground "#f0c674")
+  (set-face-attribute 'org-level-8 nil :height 1.00 :foreground "#a9dc76")
 
   ;; customize some faces
   (set-face-attribute 'org-headline-done nil :foreground "grey35" :strike-through nil)
