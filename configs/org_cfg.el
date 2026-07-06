@@ -7,6 +7,8 @@
 (defun my-org-binding-configs ()
   (local-unset-key (kbd "C-,")) ;; cycle org agenda files
   (local-unset-key (kbd "M-h")) ;; org-mark-element
+  (local-unset-key (kbd "C-c C-x C-s")) ;; org-archive-subtree (avoid stray .org_archive files)
+  (local-unset-key (kbd "C-c C-x C-a")) ;; org-archive-subtree-default (avoid stray .org_archive files)
   (local-set-key (kbd "C-c ,") 'my-quick-add-src-blk)
   (local-set-key (kbd "C-c C-,") 'my-quick-add-src-blk)
   (local-set-key (kbd "C-c b") 'my-emphasize-symbol-at-point))
