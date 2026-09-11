@@ -105,11 +105,13 @@
 ;; spacious padding
 ;; https://protesilaos.com/emacs/spacious-padding
 ;; ------------------------------------------------------------------------
+;; default divider color between window panes (for spacious padding)
+(defvar my-window-divider-color "gray16"
+  "Foreground color for the `window-divider' face.")
+
 (use-package spacious-padding
   :ensure t
   :config
-  ;; default divider color between window panes (for spacious padding)
-  (setq my-window-divider-color "gray16")
   (set-face-attribute 'window-divider nil :foreground my-window-divider-color)
   (setq spacious-padding-widths
         '( :internal-border-width 15 ; padding to main window borders
