@@ -261,11 +261,14 @@
                                             (?2 . "P2")
                                             (?3 . "P3")
                                             (?4 . "P4")))
-  (setq-default org-priority-faces '((?0 :foreground "#ff2d55" :weight bold)
-                                     (?1 :foreground "#eeb422" :weight bold)
-                                     (?2 :foreground "#ff7f00" :weight bold)
-                                     (?3 :foreground "grey70" :weight bold)
-                                     (?4 :foreground "grey50" :weight bold))))
+  ;; keys are plain integers, not ?0 chars: with numeric priorities org 9.8+
+  ;; looks these up by value.  org-fancy-priorities-list above still keys on
+  ;; characters -- the two lists use different conventions.
+  (setq-default org-priority-faces '((0 :foreground "#ff2d55" :weight bold)
+                                     (1 :foreground "#eeb422" :weight bold)
+                                     (2 :foreground "#ff7f00" :weight bold)
+                                     (3 :foreground "grey70" :weight bold)
+                                     (4 :foreground "grey50" :weight bold))))
 
 ;; ---------------------------------------------------------
 ;; presentation mode
