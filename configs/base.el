@@ -159,7 +159,7 @@ pasteboard, so nothing is lost."
 (defun my/copy-buffer-file-path ()
   "Copy the current buffer's file path to the kill ring."
   (interactive)
-  (if-let ((path (buffer-file-name)))
+  (if-let* ((path (buffer-file-name)))
       (progn
         (kill-new path)
         (message "Copied: %s" path))
