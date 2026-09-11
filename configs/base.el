@@ -111,17 +111,25 @@
 ;; tmux clipboard integration
 ;; ------------------------------------------------------------------------
 (defun my/copy-to-tmux-buffer (string &optional _replace)
-  "Copy STRING to tmux paste buffer and system clipboard via OSC 52."
-  (when (and (getenv "TMUX") (> (length string) 0))
-    ;; tmux paste buffer
-    (let ((process-connection-type nil))
-      (let ((proc (start-process "tmux-copy" nil "tmux" "load-buffer" "-")))
-        (process-send-string proc string)
-        (process-send-eof proc)))
-    ;; OSC 52 → system clipboard (iTerm2 picks this up)
-    (let ((b64 (base64-encode-string (encode-coding-string string 'utf-8) t)))
-      (send-string-to-terminal
-       (format "\ePtmux;\e\e]52;c;%s\a\e\\" b64)))))
+  "Copy STRING to tmux paste buffer and system clipboard via OSC 52.
+No-op outside a text terminal: under the daemon TMUX is inherited by GUI
+frames too, and OSC 52 on a graphical terminal signals \"not a termcap
+terminal device\".  GUI frames already sync the kill ring to the macOS
+pasteboard, so nothing is lost."
+  (let ((terminal (frame-terminal)))
+    (when (and (not (display-graphic-p))
+               (getenv "TMUX" (selected-frame))
+               (> (length string) 0))
+      ;; tmux paste buffer
+      (let ((process-connection-type nil))
+        (let ((proc (start-process "tmux-copy" nil "tmux" "load-buffer" "-")))
+          (process-send-string proc string)
+          (process-send-eof proc)))
+      ;; OSC 52 → system clipboard (iTerm2 picks this up)
+      (let ((b64 (base64-encode-string (encode-coding-string string 'utf-8) t)))
+        (send-string-to-terminal
+         (format "\ePtmux;\e\e]52;c;%s\a\e\\" b64)
+         terminal)))))
 
 (advice-add 'kill-new :after #'my/copy-to-tmux-buffer)
 
