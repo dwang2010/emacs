@@ -14,10 +14,20 @@
   (local-set-key (kbd "C-c C-,") 'my-quick-add-src-blk)
   (local-set-key (kbd "C-c b") 'my-emphasize-symbol-at-point))
 
+(defface my-org-todo-face
+  '((t :foreground "#D64545" :weight bold))
+  "Face for TODO: strings in org-mode.")
+
+(defun my-org-todo-fontlock ()
+  "Add font-lock for TODO: in org-mode."
+  (font-lock-add-keywords nil
+    '(("\\<TODO:" 0 'my-org-todo-face t))))
+
 (use-package org
   :bind ("C-c C-o" . org-open-at-point-global)
   :hook ((org-mode . turn-on-auto-fill)
-         (org-mode . my-org-binding-configs))
+         (org-mode . my-org-binding-configs)
+         (org-mode . my-org-todo-fontlock))
   :config
   ;; startup behavior
   (setq-default org-startup-indented t)
@@ -104,7 +114,11 @@
   ;; t       - change todo state
   ;; C-c C-W - refile
   (global-set-key (kbd "<f1>") (lambda () (interactive) (org-agenda nil "n")))
-  (setq-default org-agenda-files '("~/notes/ttd.org" "~/notes/work/proj" "~/notes/meetings.org"))
+  (setq-default org-agenda-files
+                '("~/notes/ttd.org"
+                  "~/notes/work/proj"
+                  "~/notes/meetings.org"
+                  "~/notes/work/oncall.org"))
   (setq-default org-agenda-window-setup 'current-window)
   ;; https://orgmode.org/worg/doc.html#org-agenda-sorting-strategy
   (setq-default org-agenda-sorting-strategy '(time-up priority-down alpha-up))
