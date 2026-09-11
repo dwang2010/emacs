@@ -1,3 +1,4 @@
+;;; programming.el --- language related default settings  -*- lexical-binding: t; -*-
 ;; ------------------------------------------------------------------------
 ;; python configs
 ;; LSP: https://github.com/python-lsp/python-lsp-server

@@ -1,4 +1,4 @@
-;;; main emacs configuration
+;;; init.el --- main emacs configuration  -*- lexical-binding: t; -*-
 
 ;; ------------------------------------------------------------------------
 ;; package management

@@ -1,3 +1,4 @@
+;;; visual.el --- themes / display related  -*- lexical-binding: t; -*-
 ;; ------------------------------------------------------------------------
 ;; visual theme
 ;; TODO: look into #ebdbb2 as default font color

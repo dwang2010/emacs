@@ -1,3 +1,4 @@
+;;; packs_native.el --- native package configs  -*- lexical-binding: t; -*-
 ;; ------------------------------------------------------------------------
 ;; project based file management (native)
 ;; ------------------------------------------------------------------------

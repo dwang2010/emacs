@@ -1,3 +1,4 @@
+;;; base.el --- basic settings + keybindings  -*- lexical-binding: t; -*-
 ;; ------------------------------------------------------------------------
 ;; base emacs configuration, use-package style
 ;; ------------------------------------------------------------------------
